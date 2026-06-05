@@ -42,7 +42,7 @@ export const Route = createFileRoute("/asset/$id")({
 });
 
 function AssetDetail() {
-  const asset = Route.useLoaderData();
+  const asset = Route.useLoaderData() as (typeof assets)[number];
   const [active, setActive] = useState(0);
   const gallery = asset.gallery.length ? asset.gallery : [asset.image];
 
