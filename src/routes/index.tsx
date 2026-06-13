@@ -2,6 +2,7 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import {
   ArrowRight, Bitcoin, ShieldCheck, Zap, LineChart, Lock, Wallet,
   Globe, Layers, Sparkles, Cpu, FileCheck, Network, Coins, Check,
+  Gem, Crown, Diamond, BadgeCheck, Award, Building2,
 } from "lucide-react";
 import { SiteLayout } from "@/components/SiteLayout";
 import { assets, formatUsd } from "@/data/mock";
@@ -9,6 +10,9 @@ import hero from "@/assets/hero-villa.jpg";
 import penthouse from "@/assets/asset-penthouse.jpg";
 import villa from "@/assets/asset-villa.jpg";
 import aspen from "@/assets/asset-aspen.jpg";
+import bombardier from "@/assets/asset-bombardier.jpg";
+import yacht from "@/assets/asset-yacht.jpg";
+import hamptons from "@/assets/asset-hamptons.jpg";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -35,79 +39,75 @@ function Home() {
   return (
     <SiteLayout>
       {/* ============ HERO ============ */}
-      <section className="relative -mt-20 pt-32 pb-20 overflow-hidden">
+      <section className="relative -mt-20 min-h-[92vh] flex items-center overflow-hidden">
         <img src={hero} alt="Luxury American oceanfront estate" className="absolute inset-0 h-full w-full object-cover" />
-        <div className="absolute inset-0 bg-gradient-to-r from-background via-background/85 to-background/20" />
-        <div className="absolute inset-0 bg-gradient-to-b from-background/40 via-transparent to-background" />
-        <div className="absolute -top-40 -right-40 h-[600px] w-[600px] rounded-full" style={{ background: "radial-gradient(circle, var(--gold) 0%, transparent 70%)", opacity: 0.18 }} />
-        <div className="relative mx-auto max-w-7xl px-6 lg:px-10 grid lg:grid-cols-2 gap-12 items-center">
-          <div>
-            <div className="inline-flex items-center gap-2 border border-gold/40 px-4 py-2 text-[10px] tracking-luxury uppercase text-gold">
-              <Sparkles size={12} /> America's Luxury Wealth Platform
+        <div className="absolute inset-0 bg-gradient-to-r from-background/95 via-background/65 to-background/30" />
+        <div className="absolute inset-0 bg-gradient-to-b from-background/30 via-transparent to-background" />
+        <div className="absolute -top-40 -right-40 h-[600px] w-[600px] rounded-full" style={{ background: "radial-gradient(circle, var(--gold) 0%, transparent 70%)", opacity: 0.20 }} />
+        <div className="relative mx-auto max-w-7xl px-6 lg:px-10 w-full pt-28 pb-20">
+          <div className="max-w-2xl">
+            <div className="inline-flex items-center gap-2 border border-gold/40 bg-background/40 backdrop-blur-sm px-4 py-2 text-[10px] tracking-luxury uppercase text-gold">
+              <Gem size={12} /> America's Luxury Wealth Platform
             </div>
             <h1 className="mt-8 font-serif text-5xl md:text-6xl lg:text-7xl text-foreground leading-[1.05]">
               The Fortune Way of <br />
               <span className="gradient-gold-text italic">Buying, Selling</span> Luxury Real Estate
             </h1>
-            <p className="mt-8 max-w-xl text-base md:text-lg text-muted-foreground leading-relaxed">
+            <p className="mt-8 max-w-xl text-base md:text-lg text-foreground/80 leading-relaxed">
               Where digital wealth meets physical luxury. Trade premium American properties and manage Bitcoin holdings in one private platform.
             </p>
 
-            <div className="mt-10 grid grid-cols-3 gap-px bg-border/40 border border-border/40">
-              {[
-                ["5,000+", "Luxury Homes"],
-                ["24/7", "Bitcoin Trading"],
-                ["$2.5B+", "Assets Managed"],
-              ].map(([v, l]) => (
-                <div key={l} className="bg-background/80 backdrop-blur-sm px-4 py-5 text-center">
-                  <div className="font-serif text-2xl md:text-3xl gradient-gold-text">{v}</div>
+            <div className="mt-10 grid grid-cols-3 gap-px bg-gold/20 border border-gold/30 max-w-xl">
+              {([
+                { Icon: Crown, v: "5,000+", l: "Luxury Homes" },
+                { Icon: Bitcoin, v: "24/7", l: "Bitcoin Trading" },
+                { Icon: Diamond, v: "$2.5B+", l: "Assets Managed" },
+              ]).map(({ Icon, v, l }) => (
+                <div key={l} className="bg-background/60 backdrop-blur-md px-4 py-5 text-center">
+                  <Icon size={14} className="mx-auto text-gold" />
+                  <div className="mt-2 font-serif text-2xl md:text-3xl gradient-gold-text">{v}</div>
                   <div className="mt-1 text-[9px] tracking-luxury uppercase text-muted-foreground">{l}</div>
                 </div>
               ))}
             </div>
 
             <div className="mt-10 flex flex-col sm:flex-row gap-4">
-              <Link to="/marketplace" className="group inline-flex items-center justify-center gap-3 bg-gold text-primary-foreground px-8 py-4 text-xs tracking-luxury uppercase hover:bg-gold-soft transition-colors">
+              <Link to="/marketplace" className="group inline-flex items-center justify-center gap-3 bg-gold text-primary-foreground px-8 py-4 text-xs tracking-luxury uppercase hover:bg-gold-soft transition-colors gold-shadow">
                 Explore Properties <ArrowRight size={16} className="transition-transform group-hover:translate-x-1" />
               </Link>
-              <Link to="/auth" className="inline-flex items-center justify-center gap-3 border border-foreground/30 text-foreground px-8 py-4 text-xs tracking-luxury uppercase hover:border-gold hover:text-gold transition-colors">
+              <Link to="/auth" className="inline-flex items-center justify-center gap-3 border border-gold/50 bg-background/40 backdrop-blur-sm text-foreground px-8 py-4 text-xs tracking-luxury uppercase hover:border-gold hover:text-gold transition-colors">
                 <Wallet size={14} /> Connect Wallet
               </Link>
             </div>
 
-            <div className="mt-8 flex flex-wrap items-center gap-x-6 gap-y-2 text-[10px] tracking-luxury uppercase text-muted-foreground">
-              <span className="inline-flex items-center gap-2"><Check size={12} className="text-gold" /> Verified Listings</span>
-              <span className="inline-flex items-center gap-2"><Check size={12} className="text-gold" /> Licensed Brokers</span>
-              <span className="inline-flex items-center gap-2"><Check size={12} className="text-gold" /> Bitcoin Custody</span>
-            </div>
-          </div>
-
-          <div className="relative h-[500px] lg:h-[620px] hidden lg:block">
-            <img src={penthouse} alt="Manhattan skyline penthouse" className="absolute inset-0 h-full w-full object-cover border border-gold/30" />
-            <div className="absolute inset-0 bg-gradient-to-tr from-background/70 via-transparent to-transparent" />
-            <div className="absolute bottom-6 right-6 border border-gold/40 bg-background/85 backdrop-blur-md px-5 py-4">
-              <div className="text-[9px] tracking-luxury uppercase text-gold">Featured Listing</div>
-              <div className="font-serif text-xl text-foreground mt-1">Manhattan Skyline Penthouse</div>
-              <div className="text-xs text-muted-foreground mt-1">$68M · 432 Park, NY</div>
+            <div className="mt-8 flex flex-wrap items-center gap-x-6 gap-y-2 text-[10px] tracking-luxury uppercase text-foreground/70">
+              <span className="inline-flex items-center gap-2"><BadgeCheck size={14} className="text-gold" /> Verified Listings</span>
+              <span className="inline-flex items-center gap-2"><Award size={14} className="text-gold" /> Licensed Brokers</span>
+              <span className="inline-flex items-center gap-2"><Bitcoin size={14} className="text-gold" /> Bitcoin Custody</span>
             </div>
           </div>
         </div>
       </section>
 
+
       {/* ============ FEATURED COLLECTION ============ */}
-      <section className="mx-auto max-w-7xl px-6 lg:px-10 mt-24">
+      <section className="relative mt-24 py-24 overflow-hidden">
+        <img src={hamptons} alt="" aria-hidden className="absolute inset-0 h-full w-full object-cover opacity-30" />
+        <div className="absolute inset-0 bg-gradient-to-b from-background via-background/70 to-background" />
+        <div className="relative mx-auto max-w-7xl px-6 lg:px-10">
         <div className="text-center">
-          <div className="text-[10px] tracking-luxury uppercase text-gold">Featured Properties</div>
-          <h2 className="mt-4 font-serif text-4xl md:text-5xl text-foreground">
+          <div className="inline-flex items-center gap-2 border border-gold/40 bg-background/40 backdrop-blur-sm px-4 py-2 text-[10px] tracking-luxury uppercase text-gold">
+            <Building2 size={12} /> Featured Properties
+          </div>
+          <h2 className="mt-6 font-serif text-4xl md:text-5xl text-foreground">
             Fortune <span className="italic gradient-gold-text">Luxury Collection</span>
           </h2>
-          <p className="mt-4 text-muted-foreground max-w-2xl mx-auto">
+          <p className="mt-4 text-foreground/75 max-w-2xl mx-auto">
             Explore our curated selection of America's most prestigious estates — available in USD or Bitcoin, settled with private-banking discretion.
           </p>
         </div>
 
         <div className="mt-16 grid gap-6 lg:grid-cols-2">
-          {/* Big card */}
           <FeaturedCard asset={featured[0]} large />
           <div className="grid gap-6">
             <FeaturedCard asset={featured[1]} />
@@ -120,13 +120,14 @@ function Home() {
             View All Properties <ArrowRight size={14} />
           </Link>
         </div>
+        </div>
       </section>
 
       {/* ============ DIGITAL WEALTH / FORTUNE VAULT ============ */}
-      <section className="mt-32 relative overflow-hidden py-20">
-        <img src={villa} alt="" aria-hidden className="absolute inset-0 h-full w-full object-cover opacity-20" />
-        <div className="absolute inset-0 bg-gradient-to-b from-background via-background/90 to-background" />
-        <div className="absolute inset-0" style={{ background: "radial-gradient(60% 60% at 80% 50%, var(--gold) 0%, transparent 70%)", opacity: 0.10 }} />
+      <section className="mt-0 relative overflow-hidden py-24">
+        <img src={villa} alt="" aria-hidden className="absolute inset-0 h-full w-full object-cover opacity-35" />
+        <div className="absolute inset-0 bg-gradient-to-b from-background via-background/75 to-background" />
+        <div className="absolute inset-0" style={{ background: "radial-gradient(60% 60% at 80% 50%, var(--gold) 0%, transparent 70%)", opacity: 0.12 }} />
         <div className="relative mx-auto max-w-7xl px-6 lg:px-10">
           <div className="text-center">
             <div className="inline-flex items-center gap-2 border border-gold/40 px-4 py-2 text-[10px] tracking-luxury uppercase text-gold">
@@ -216,75 +217,88 @@ function Home() {
       </section>
 
       {/* ============ PLATFORM TECHNOLOGY ============ */}
-      <section className="mt-32 mx-auto max-w-7xl px-6 lg:px-10">
+      <section className="relative mt-0 py-24 overflow-hidden">
+        <img src={bombardier} alt="" aria-hidden className="absolute inset-0 h-full w-full object-cover opacity-25" />
+        <div className="absolute inset-0 bg-gradient-to-b from-background via-background/80 to-background" />
+        <div className="relative mx-auto max-w-7xl px-6 lg:px-10">
         <div className="text-center">
-          <div className="text-[10px] tracking-luxury uppercase text-gold">Platform Features</div>
-          <h2 className="mt-4 font-serif text-4xl md:text-5xl text-foreground">
+          <div className="inline-flex items-center gap-2 border border-gold/40 bg-background/40 backdrop-blur-sm px-4 py-2 text-[10px] tracking-luxury uppercase text-gold">
+            <Cpu size={12} /> Platform Features
+          </div>
+          <h2 className="mt-6 font-serif text-4xl md:text-5xl text-foreground">
             Fortune <span className="italic gradient-gold-text">Technology</span> Meets Luxury Commerce
           </h2>
-          <p className="mt-4 text-muted-foreground max-w-2xl mx-auto">
+          <p className="mt-4 text-foreground/75 max-w-2xl mx-auto">
             Built with cutting-edge blockchain technology and traditional luxury real estate expertise — engineered for American private wealth.
           </p>
         </div>
 
-        <div className="mt-14 grid gap-px sm:grid-cols-2 lg:grid-cols-4 bg-border/40 border border-border/40">
+        <div className="mt-14 grid gap-px sm:grid-cols-2 lg:grid-cols-4 bg-gold/15 border border-gold/20">
           {[
-            { icon: Globe, t: "National Marketplace", d: "Access exclusive American estates from Hamptons to Hollywood." },
+            { icon: Building2, t: "National Marketplace", d: "Access exclusive American estates from Hamptons to Hollywood." },
             { icon: Layers, t: "Property Tokenization", d: "Fractional ownership of trophy assets through compliant tokenization." },
             { icon: Sparkles, t: "Immersive 3D Tours", d: "Step inside every listing with photoreal volumetric walkthroughs." },
             { icon: Cpu, t: "Fortune AI Concierge", d: "AI-curated property matches and 24/7 transaction support." },
             { icon: ShieldCheck, t: "Smart Contract Security", d: "Audited Solidity escrow with multi-sig and revocation guards." },
-            { icon: FileCheck, t: "Licensed Network", d: "Every broker and seller is licensed, vetted, and verifiable on-chain." },
+            { icon: BadgeCheck, t: "Licensed Network", d: "Every broker and seller is licensed, vetted, and verifiable on-chain." },
             { icon: Network, t: "Multi-Platform Access", d: "Web, iOS, and Android with seamless wallet pairing." },
             { icon: Coins, t: "Flexible Financing", d: "Bitcoin-collateralized lending and traditional wires — your choice." },
           ].map(({ icon: Icon, t, d }) => (
-            <div key={t} className="bg-background/80 backdrop-blur-sm p-7">
-              <div className="h-10 w-10 grid place-items-center border border-gold/40 text-gold"><Icon size={18} /></div>
+            <div key={t} className="bg-background/70 backdrop-blur-md p-7 hover:bg-background/90 transition-colors">
+              <div className="h-11 w-11 grid place-items-center border border-gold/50 bg-gold/5 text-gold"><Icon size={18} /></div>
               <h4 className="mt-5 font-serif text-lg text-foreground">{t}</h4>
               <p className="mt-2 text-xs text-muted-foreground leading-relaxed">{d}</p>
             </div>
           ))}
         </div>
 
-        <div className="mt-14 grid grid-cols-2 md:grid-cols-4 gap-px bg-border/40 border border-border/40">
-          {[
-            ["$2.5B+", "Total Asset Value"],
-            ["70+", "U.S. Markets"],
-            ["5,000+", "Properties"],
-            ["24/7", "Concierge"],
-          ].map(([v, l]) => (
-            <div key={l} className="bg-background/80 backdrop-blur-sm py-10 text-center">
-              <div className="font-serif text-3xl md:text-4xl gradient-gold-text">{v}</div>
+        <div className="mt-10 grid grid-cols-2 md:grid-cols-4 gap-px bg-gold/15 border border-gold/20">
+          {([
+            { Icon: Diamond, v: "$2.5B+", l: "Total Asset Value" },
+            { Icon: Globe, v: "70+", l: "U.S. Markets" },
+            { Icon: Building2, v: "5,000+", l: "Properties" },
+            { Icon: Crown, v: "24/7", l: "Concierge" },
+          ]).map(({ Icon, v, l }) => (
+            <div key={l} className="bg-background/70 backdrop-blur-md py-10 text-center">
+              <Icon size={18} className="mx-auto text-gold" />
+              <div className="mt-3 font-serif text-3xl md:text-4xl gradient-gold-text">{v}</div>
               <div className="mt-2 text-[10px] tracking-luxury uppercase text-muted-foreground">{l}</div>
             </div>
           ))}
         </div>
+        </div>
       </section>
 
       {/* ============ MISSION / INNOVATION / FUTURE ============ */}
-      <section className="mt-32 mx-auto max-w-7xl px-6 lg:px-10">
+      <section className="relative mt-0 py-24 overflow-hidden">
+        <img src={yacht} alt="" aria-hidden className="absolute inset-0 h-full w-full object-cover opacity-30" />
+        <div className="absolute inset-0 bg-gradient-to-b from-background via-background/75 to-background" />
+        <div className="relative mx-auto max-w-7xl px-6 lg:px-10">
         <div className="text-center">
-          <div className="text-[10px] tracking-luxury uppercase text-gold">Our Vision</div>
-          <h2 className="mt-4 font-serif text-4xl md:text-5xl text-foreground">
+          <div className="inline-flex items-center gap-2 border border-gold/40 bg-background/40 backdrop-blur-sm px-4 py-2 text-[10px] tracking-luxury uppercase text-gold">
+            <Gem size={12} /> Our Vision
+          </div>
+          <h2 className="mt-6 font-serif text-4xl md:text-5xl text-foreground">
             Redefining <span className="italic gradient-gold-text">Luxury Real Estate</span> for the Digital Age
           </h2>
-          <p className="mt-4 text-muted-foreground max-w-2xl mx-auto">
+          <p className="mt-4 text-foreground/75 max-w-2xl mx-auto">
             Fortune Coastal merges digital wealth, blockchain trust, and immersive American property experiences. Our mission is to make ownership of luxury assets seamless, transparent, and intelligent.
           </p>
         </div>
 
         <div className="mt-14 grid gap-6 md:grid-cols-3">
-          {[
-            { icon: ShieldCheck, t: "Mission", d: "To democratize access to American luxury real estate through blockchain technology, making fractional ownership and seamless transactions a reality." },
-            { icon: Sparkles, t: "Innovation", d: "Pioneering Bitcoin-native property transactions, AI-driven matching, and 3D property experiences across all 50 U.S. states." },
-            { icon: Cpu, t: "Future", d: "Building the infrastructure for tomorrow's luxury assets — borderless, digitized, and intelligent across the American market." },
-          ].map(({ icon: Icon, t, d }) => (
-            <div key={t} className="border border-border/40 bg-charcoal/40 backdrop-blur-sm p-8 text-center">
-              <div className="mx-auto h-12 w-12 grid place-items-center border border-gold/40 text-gold"><Icon size={20} /></div>
+          {([
+            { Icon: Crown, t: "Mission", d: "To democratize access to American luxury real estate through blockchain technology, making fractional ownership and seamless transactions a reality." },
+            { Icon: Diamond, t: "Innovation", d: "Pioneering Bitcoin-native property transactions, AI-driven matching, and 3D property experiences across all 50 U.S. states." },
+            { Icon: Gem, t: "Future", d: "Building the infrastructure for tomorrow's luxury assets — borderless, digitized, and intelligent across the American market." },
+          ]).map(({ Icon, t, d }) => (
+            <div key={t} className="border border-gold/30 bg-background/60 backdrop-blur-md p-8 text-center hover:border-gold/60 transition-colors">
+              <div className="mx-auto h-14 w-14 grid place-items-center border border-gold/50 bg-gold/5 text-gold"><Icon size={22} /></div>
               <h3 className="mt-6 font-serif text-2xl text-foreground">{t}</h3>
               <p className="mt-3 text-sm text-muted-foreground leading-relaxed">{d}</p>
             </div>
           ))}
+        </div>
         </div>
       </section>
 
