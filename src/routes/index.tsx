@@ -290,7 +290,10 @@ function Home() {
 
       {/* ============ ROADMAP ============ */}
       <section className="mt-32 mx-auto max-w-6xl px-6 lg:px-10">
-        <div className="border border-border/40 bg-charcoal/40 backdrop-blur-sm p-10 lg:p-14">
+        <div className="relative overflow-hidden border border-border/40 p-10 lg:p-14">
+          <img src={aspen} alt="" aria-hidden className="absolute inset-0 h-full w-full object-cover opacity-25" />
+          <div className="absolute inset-0 bg-gradient-to-b from-background/90 via-background/85 to-background/95" />
+          <div className="relative">
           <div className="text-center">
             <div className="text-[10px] tracking-luxury uppercase text-gold">Strategy</div>
             <h2 className="mt-4 font-serif text-4xl md:text-5xl text-foreground">
