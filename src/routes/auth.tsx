@@ -88,15 +88,22 @@ function AuthPage() {
 
   return (
     <div className="min-h-screen bg-background grid lg:grid-cols-2">
-      <div className="hidden lg:block relative bg-charcoal">
+      <div className="hidden lg:block relative bg-charcoal overflow-hidden">
+        <img src={authBg} alt="Luxury oceanfront estate at golden hour" className="absolute inset-0 h-full w-full object-cover" />
+        <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-black/60" />
         <div className="absolute inset-0" style={{ background: "radial-gradient(60% 50% at 30% 40%, oklch(0.74 0.09 78 / 0.18), transparent 70%)" }} />
         <div className="relative h-full flex flex-col justify-between p-12">
-          <Link to="/" className="flex items-center gap-3">
-            <img src={logo} alt="FCG" className="h-10 w-10" />
-            <div className="text-[10px] tracking-luxury uppercase text-gold">Fortune Coastal Group</div>
-          </Link>
+          <div className="flex items-center justify-between">
+            <Link to="/" className="flex items-center gap-3">
+              <img src={logo} alt="FCG" className="h-10 w-10" />
+              <div className="text-[10px] tracking-luxury uppercase text-gold">Fortune Coastal Group</div>
+            </Link>
+            <Link to="/" className="text-[10px] tracking-luxury uppercase text-foreground/80 hover:text-gold transition-colors">
+              ← Back to site
+            </Link>
+          </div>
           <div>
-            <div className="font-serif text-4xl text-foreground italic">"Wealth, made borderless."</div>
+            <div className="font-serif text-4xl text-foreground italic drop-shadow-lg">"Wealth, made borderless."</div>
             <div className="mt-4 text-xs tracking-luxury uppercase text-gold">FCG · Private Members</div>
           </div>
         </div>
