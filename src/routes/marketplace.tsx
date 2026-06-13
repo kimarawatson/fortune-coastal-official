@@ -3,6 +3,7 @@ import { useMemo, useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { useServerFn } from "@tanstack/react-start";
 import { SiteLayout } from "@/components/SiteLayout";
+import { BackToSiteLink } from "@/components/BackToSiteLink";
 import { listPublicListings } from "@/lib/listings.functions";
 import { supabase } from "@/integrations/supabase/client";
 import { formatBtc, formatUsd } from "@/lib/format";
@@ -45,6 +46,7 @@ function Marketplace() {
   return (
     <SiteLayout>
       <section className="mx-auto max-w-7xl px-6 lg:px-10 pt-16 pb-12">
+        <BackToSiteLink className="mb-8" />
         <div className="text-[10px] tracking-luxury uppercase text-gold">The Marketplace</div>
         <h1 className="mt-4 font-serif text-5xl md:text-6xl text-foreground">A Curated <span className="italic gradient-gold-text">World</span> of Assets</h1>
         <p className="mt-5 max-w-xl text-muted-foreground">Every listing is verified by our in-house specialists. Filter to begin.</p>
