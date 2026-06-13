@@ -110,6 +110,9 @@ function AuthPage() {
       </div>
       <div className="flex items-center justify-center p-8 lg:p-16">
         <form onSubmit={handleEmail} className="w-full max-w-sm">
+          <Link to="/" className="inline-flex items-center gap-2 text-[10px] tracking-luxury uppercase text-muted-foreground hover:text-gold transition-colors mb-8">
+            ← Back to Home
+          </Link>
           <div className="text-[10px] tracking-luxury uppercase text-gold">
             {mode === "signin" ? "Member Access" : mode === "signup" ? "Apply" : "Reset Password"}
           </div>
