@@ -218,48 +218,55 @@ function Home() {
       </section>
 
       {/* ============ PLATFORM TECHNOLOGY ============ */}
-      <section className="mt-32 mx-auto max-w-7xl px-6 lg:px-10">
+      <section className="relative mt-0 py-24 overflow-hidden">
+        <img src={bombardier} alt="" aria-hidden className="absolute inset-0 h-full w-full object-cover opacity-25" />
+        <div className="absolute inset-0 bg-gradient-to-b from-background via-background/80 to-background" />
+        <div className="relative mx-auto max-w-7xl px-6 lg:px-10">
         <div className="text-center">
-          <div className="text-[10px] tracking-luxury uppercase text-gold">Platform Features</div>
-          <h2 className="mt-4 font-serif text-4xl md:text-5xl text-foreground">
+          <div className="inline-flex items-center gap-2 border border-gold/40 bg-background/40 backdrop-blur-sm px-4 py-2 text-[10px] tracking-luxury uppercase text-gold">
+            <Cpu size={12} /> Platform Features
+          </div>
+          <h2 className="mt-6 font-serif text-4xl md:text-5xl text-foreground">
             Fortune <span className="italic gradient-gold-text">Technology</span> Meets Luxury Commerce
           </h2>
-          <p className="mt-4 text-muted-foreground max-w-2xl mx-auto">
+          <p className="mt-4 text-foreground/75 max-w-2xl mx-auto">
             Built with cutting-edge blockchain technology and traditional luxury real estate expertise — engineered for American private wealth.
           </p>
         </div>
 
-        <div className="mt-14 grid gap-px sm:grid-cols-2 lg:grid-cols-4 bg-border/40 border border-border/40">
+        <div className="mt-14 grid gap-px sm:grid-cols-2 lg:grid-cols-4 bg-gold/15 border border-gold/20">
           {[
-            { icon: Globe, t: "National Marketplace", d: "Access exclusive American estates from Hamptons to Hollywood." },
+            { icon: Building2, t: "National Marketplace", d: "Access exclusive American estates from Hamptons to Hollywood." },
             { icon: Layers, t: "Property Tokenization", d: "Fractional ownership of trophy assets through compliant tokenization." },
             { icon: Sparkles, t: "Immersive 3D Tours", d: "Step inside every listing with photoreal volumetric walkthroughs." },
             { icon: Cpu, t: "Fortune AI Concierge", d: "AI-curated property matches and 24/7 transaction support." },
             { icon: ShieldCheck, t: "Smart Contract Security", d: "Audited Solidity escrow with multi-sig and revocation guards." },
-            { icon: FileCheck, t: "Licensed Network", d: "Every broker and seller is licensed, vetted, and verifiable on-chain." },
+            { icon: BadgeCheck, t: "Licensed Network", d: "Every broker and seller is licensed, vetted, and verifiable on-chain." },
             { icon: Network, t: "Multi-Platform Access", d: "Web, iOS, and Android with seamless wallet pairing." },
             { icon: Coins, t: "Flexible Financing", d: "Bitcoin-collateralized lending and traditional wires — your choice." },
           ].map(({ icon: Icon, t, d }) => (
-            <div key={t} className="bg-background/80 backdrop-blur-sm p-7">
-              <div className="h-10 w-10 grid place-items-center border border-gold/40 text-gold"><Icon size={18} /></div>
+            <div key={t} className="bg-background/70 backdrop-blur-md p-7 hover:bg-background/90 transition-colors">
+              <div className="h-11 w-11 grid place-items-center border border-gold/50 bg-gold/5 text-gold"><Icon size={18} /></div>
               <h4 className="mt-5 font-serif text-lg text-foreground">{t}</h4>
               <p className="mt-2 text-xs text-muted-foreground leading-relaxed">{d}</p>
             </div>
           ))}
         </div>
 
-        <div className="mt-14 grid grid-cols-2 md:grid-cols-4 gap-px bg-border/40 border border-border/40">
-          {[
-            ["$2.5B+", "Total Asset Value"],
-            ["70+", "U.S. Markets"],
-            ["5,000+", "Properties"],
-            ["24/7", "Concierge"],
-          ].map(([v, l]) => (
-            <div key={l} className="bg-background/80 backdrop-blur-sm py-10 text-center">
-              <div className="font-serif text-3xl md:text-4xl gradient-gold-text">{v}</div>
+        <div className="mt-10 grid grid-cols-2 md:grid-cols-4 gap-px bg-gold/15 border border-gold/20">
+          {([
+            { Icon: Diamond, v: "$2.5B+", l: "Total Asset Value" },
+            { Icon: Globe, v: "70+", l: "U.S. Markets" },
+            { Icon: Building2, v: "5,000+", l: "Properties" },
+            { Icon: Crown, v: "24/7", l: "Concierge" },
+          ]).map(({ Icon, v, l }) => (
+            <div key={l} className="bg-background/70 backdrop-blur-md py-10 text-center">
+              <Icon size={18} className="mx-auto text-gold" />
+              <div className="mt-3 font-serif text-3xl md:text-4xl gradient-gold-text">{v}</div>
               <div className="mt-2 text-[10px] tracking-luxury uppercase text-muted-foreground">{l}</div>
             </div>
           ))}
+        </div>
         </div>
       </section>
 
