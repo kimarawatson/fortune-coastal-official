@@ -82,13 +82,13 @@ function Home() {
             </div>
           </div>
 
-          <div className="relative h-[500px] lg:h-[620px]">
-            <img src={hero} alt="Luxury American estate" className="absolute inset-0 h-full w-full object-cover" />
-            <div className="absolute inset-0 bg-gradient-to-tr from-background/80 via-background/10 to-transparent" />
+          <div className="relative h-[500px] lg:h-[620px] hidden lg:block">
+            <img src={penthouse} alt="Manhattan skyline penthouse" className="absolute inset-0 h-full w-full object-cover border border-gold/30" />
+            <div className="absolute inset-0 bg-gradient-to-tr from-background/70 via-transparent to-transparent" />
             <div className="absolute bottom-6 right-6 border border-gold/40 bg-background/85 backdrop-blur-md px-5 py-4">
               <div className="text-[9px] tracking-luxury uppercase text-gold">Featured Listing</div>
-              <div className="font-serif text-xl text-foreground mt-1">East Hampton Estate</div>
-              <div className="text-xs text-muted-foreground mt-1">$49.5M · 4.2 acres oceanfront</div>
+              <div className="font-serif text-xl text-foreground mt-1">Manhattan Skyline Penthouse</div>
+              <div className="text-xs text-muted-foreground mt-1">$68M · 432 Park, NY</div>
             </div>
           </div>
         </div>
