@@ -10,6 +10,10 @@ import hero from "@/assets/hero-villa.jpg";
 import penthouse from "@/assets/asset-penthouse.jpg";
 import villa from "@/assets/asset-villa.jpg";
 import aspen from "@/assets/asset-aspen.jpg";
+import bombardier from "@/assets/asset-bombardier.jpg";
+import yacht from "@/assets/asset-yacht.jpg";
+import hamptons from "@/assets/asset-hamptons.jpg";
+import bgTexture from "@/assets/bg-texture.jpg";
 
 export const Route = createFileRoute("/")({
   head: () => ({
