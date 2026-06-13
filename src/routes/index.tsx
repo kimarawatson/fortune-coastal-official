@@ -2,6 +2,7 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import {
   ArrowRight, Bitcoin, ShieldCheck, Zap, LineChart, Lock, Wallet,
   Globe, Layers, Sparkles, Cpu, FileCheck, Network, Coins, Check,
+  Gem, Crown, Diamond, BadgeCheck, Award, Anchor, Plane, Building2,
 } from "lucide-react";
 import { SiteLayout } from "@/components/SiteLayout";
 import { assets, formatUsd } from "@/data/mock";
