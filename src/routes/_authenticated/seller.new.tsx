@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { toast } from "sonner";
 import { SiteLayout } from "@/components/SiteLayout";
+import { BackToSiteLink } from "@/components/BackToSiteLink";
 import { useAuth } from "@/hooks/use-auth";
 import { supabase } from "@/integrations/supabase/client";
 
@@ -39,6 +40,7 @@ export function ListingForm({ mode, initial }: { mode: "create" | "edit"; initia
     return (
       <SiteLayout>
         <div className="mx-auto max-w-3xl px-6 py-32 text-center">
+          <BackToSiteLink className="mb-8" />
           <h1 className="font-serif text-3xl text-foreground">Seller access required</h1>
           <p className="mt-3 text-muted-foreground">Apply for seller access first.</p>
         </div>
@@ -110,6 +112,7 @@ export function ListingForm({ mode, initial }: { mode: "create" | "edit"; initia
   return (
     <SiteLayout>
       <section className="mx-auto max-w-3xl px-6 lg:px-10 py-16">
+        <BackToSiteLink className="mb-8" />
         <div className="text-[10px] tracking-luxury uppercase text-gold">Seller</div>
         <h1 className="mt-3 font-serif text-5xl text-foreground">{mode === "create" ? "New Listing" : "Edit Listing"}</h1>
         <p className="mt-3 text-muted-foreground text-sm">Submissions are reviewed by our in-house specialists before going live.</p>
