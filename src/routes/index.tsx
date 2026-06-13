@@ -92,19 +92,23 @@ function Home() {
 
 
       {/* ============ FEATURED COLLECTION ============ */}
-      <section className="mx-auto max-w-7xl px-6 lg:px-10 mt-24">
+      <section className="relative mt-24 py-24 overflow-hidden">
+        <img src={hamptons} alt="" aria-hidden className="absolute inset-0 h-full w-full object-cover opacity-30" />
+        <div className="absolute inset-0 bg-gradient-to-b from-background via-background/70 to-background" />
+        <div className="relative mx-auto max-w-7xl px-6 lg:px-10">
         <div className="text-center">
-          <div className="text-[10px] tracking-luxury uppercase text-gold">Featured Properties</div>
-          <h2 className="mt-4 font-serif text-4xl md:text-5xl text-foreground">
+          <div className="inline-flex items-center gap-2 border border-gold/40 bg-background/40 backdrop-blur-sm px-4 py-2 text-[10px] tracking-luxury uppercase text-gold">
+            <Building2 size={12} /> Featured Properties
+          </div>
+          <h2 className="mt-6 font-serif text-4xl md:text-5xl text-foreground">
             Fortune <span className="italic gradient-gold-text">Luxury Collection</span>
           </h2>
-          <p className="mt-4 text-muted-foreground max-w-2xl mx-auto">
+          <p className="mt-4 text-foreground/75 max-w-2xl mx-auto">
             Explore our curated selection of America's most prestigious estates — available in USD or Bitcoin, settled with private-banking discretion.
           </p>
         </div>
 
         <div className="mt-16 grid gap-6 lg:grid-cols-2">
-          {/* Big card */}
           <FeaturedCard asset={featured[0]} large />
           <div className="grid gap-6">
             <FeaturedCard asset={featured[1]} />
@@ -117,13 +121,14 @@ function Home() {
             View All Properties <ArrowRight size={14} />
           </Link>
         </div>
+        </div>
       </section>
 
       {/* ============ DIGITAL WEALTH / FORTUNE VAULT ============ */}
-      <section className="mt-32 relative overflow-hidden py-20">
-        <img src={villa} alt="" aria-hidden className="absolute inset-0 h-full w-full object-cover opacity-20" />
-        <div className="absolute inset-0 bg-gradient-to-b from-background via-background/90 to-background" />
-        <div className="absolute inset-0" style={{ background: "radial-gradient(60% 60% at 80% 50%, var(--gold) 0%, transparent 70%)", opacity: 0.10 }} />
+      <section className="mt-0 relative overflow-hidden py-24">
+        <img src={villa} alt="" aria-hidden className="absolute inset-0 h-full w-full object-cover opacity-35" />
+        <div className="absolute inset-0 bg-gradient-to-b from-background via-background/75 to-background" />
+        <div className="absolute inset-0" style={{ background: "radial-gradient(60% 60% at 80% 50%, var(--gold) 0%, transparent 70%)", opacity: 0.12 }} />
         <div className="relative mx-auto max-w-7xl px-6 lg:px-10">
           <div className="text-center">
             <div className="inline-flex items-center gap-2 border border-gold/40 px-4 py-2 text-[10px] tracking-luxury uppercase text-gold">
