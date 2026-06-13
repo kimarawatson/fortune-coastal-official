@@ -35,64 +35,59 @@ function Home() {
   return (
     <SiteLayout>
       {/* ============ HERO ============ */}
-      <section className="relative -mt-20 pt-32 pb-20 overflow-hidden">
+      <section className="relative -mt-20 min-h-[92vh] flex items-center overflow-hidden">
         <img src={hero} alt="Luxury American oceanfront estate" className="absolute inset-0 h-full w-full object-cover" />
-        <div className="absolute inset-0 bg-gradient-to-r from-background via-background/85 to-background/20" />
-        <div className="absolute inset-0 bg-gradient-to-b from-background/40 via-transparent to-background" />
-        <div className="absolute -top-40 -right-40 h-[600px] w-[600px] rounded-full" style={{ background: "radial-gradient(circle, var(--gold) 0%, transparent 70%)", opacity: 0.18 }} />
-        <div className="relative mx-auto max-w-7xl px-6 lg:px-10 grid lg:grid-cols-2 gap-12 items-center">
-          <div>
-            <div className="inline-flex items-center gap-2 border border-gold/40 px-4 py-2 text-[10px] tracking-luxury uppercase text-gold">
-              <Sparkles size={12} /> America's Luxury Wealth Platform
+        <div className="absolute inset-0 bg-gradient-to-r from-background/95 via-background/65 to-background/30" />
+        <div className="absolute inset-0 bg-gradient-to-b from-background/30 via-transparent to-background" />
+        <div className="absolute -top-40 -right-40 h-[600px] w-[600px] rounded-full" style={{ background: "radial-gradient(circle, var(--gold) 0%, transparent 70%)", opacity: 0.20 }} />
+        <div className="relative mx-auto max-w-7xl px-6 lg:px-10 w-full pt-28 pb-20">
+          <div className="max-w-2xl">
+            <div className="inline-flex items-center gap-2 border border-gold/40 bg-background/40 backdrop-blur-sm px-4 py-2 text-[10px] tracking-luxury uppercase text-gold">
+              <Gem size={12} /> America's Luxury Wealth Platform
             </div>
             <h1 className="mt-8 font-serif text-5xl md:text-6xl lg:text-7xl text-foreground leading-[1.05]">
               The Fortune Way of <br />
               <span className="gradient-gold-text italic">Buying, Selling</span> Luxury Real Estate
             </h1>
-            <p className="mt-8 max-w-xl text-base md:text-lg text-muted-foreground leading-relaxed">
+            <p className="mt-8 max-w-xl text-base md:text-lg text-foreground/80 leading-relaxed">
               Where digital wealth meets physical luxury. Trade premium American properties and manage Bitcoin holdings in one private platform.
             </p>
 
-            <div className="mt-10 grid grid-cols-3 gap-px bg-border/40 border border-border/40">
+            <div className="mt-10 grid grid-cols-3 gap-px bg-gold/20 border border-gold/30 max-w-xl">
               {[
-                ["5,000+", "Luxury Homes"],
-                ["24/7", "Bitcoin Trading"],
-                ["$2.5B+", "Assets Managed"],
-              ].map(([v, l]) => (
-                <div key={l} className="bg-background/80 backdrop-blur-sm px-4 py-5 text-center">
-                  <div className="font-serif text-2xl md:text-3xl gradient-gold-text">{v}</div>
-                  <div className="mt-1 text-[9px] tracking-luxury uppercase text-muted-foreground">{l}</div>
-                </div>
-              ))}
+                [Crown, "5,000+", "Luxury Homes"],
+                [Bitcoin, "24/7", "Bitcoin Trading"],
+                [Diamond, "$2.5B+", "Assets Managed"],
+              ].map(([Icon, v, l]) => {
+                const I = Icon as typeof Crown;
+                return (
+                  <div key={l as string} className="bg-background/60 backdrop-blur-md px-4 py-5 text-center">
+                    <I size={14} className="mx-auto text-gold" />
+                    <div className="mt-2 font-serif text-2xl md:text-3xl gradient-gold-text">{v}</div>
+                    <div className="mt-1 text-[9px] tracking-luxury uppercase text-muted-foreground">{l}</div>
+                  </div>
+                );
+              })}
             </div>
 
             <div className="mt-10 flex flex-col sm:flex-row gap-4">
-              <Link to="/marketplace" className="group inline-flex items-center justify-center gap-3 bg-gold text-primary-foreground px-8 py-4 text-xs tracking-luxury uppercase hover:bg-gold-soft transition-colors">
+              <Link to="/marketplace" className="group inline-flex items-center justify-center gap-3 bg-gold text-primary-foreground px-8 py-4 text-xs tracking-luxury uppercase hover:bg-gold-soft transition-colors gold-shadow">
                 Explore Properties <ArrowRight size={16} className="transition-transform group-hover:translate-x-1" />
               </Link>
-              <Link to="/auth" className="inline-flex items-center justify-center gap-3 border border-foreground/30 text-foreground px-8 py-4 text-xs tracking-luxury uppercase hover:border-gold hover:text-gold transition-colors">
+              <Link to="/auth" className="inline-flex items-center justify-center gap-3 border border-gold/50 bg-background/40 backdrop-blur-sm text-foreground px-8 py-4 text-xs tracking-luxury uppercase hover:border-gold hover:text-gold transition-colors">
                 <Wallet size={14} /> Connect Wallet
               </Link>
             </div>
 
-            <div className="mt-8 flex flex-wrap items-center gap-x-6 gap-y-2 text-[10px] tracking-luxury uppercase text-muted-foreground">
-              <span className="inline-flex items-center gap-2"><Check size={12} className="text-gold" /> Verified Listings</span>
-              <span className="inline-flex items-center gap-2"><Check size={12} className="text-gold" /> Licensed Brokers</span>
-              <span className="inline-flex items-center gap-2"><Check size={12} className="text-gold" /> Bitcoin Custody</span>
-            </div>
-          </div>
-
-          <div className="relative h-[500px] lg:h-[620px] hidden lg:block">
-            <img src={penthouse} alt="Manhattan skyline penthouse" className="absolute inset-0 h-full w-full object-cover border border-gold/30" />
-            <div className="absolute inset-0 bg-gradient-to-tr from-background/70 via-transparent to-transparent" />
-            <div className="absolute bottom-6 right-6 border border-gold/40 bg-background/85 backdrop-blur-md px-5 py-4">
-              <div className="text-[9px] tracking-luxury uppercase text-gold">Featured Listing</div>
-              <div className="font-serif text-xl text-foreground mt-1">Manhattan Skyline Penthouse</div>
-              <div className="text-xs text-muted-foreground mt-1">$68M · 432 Park, NY</div>
+            <div className="mt-8 flex flex-wrap items-center gap-x-6 gap-y-2 text-[10px] tracking-luxury uppercase text-foreground/70">
+              <span className="inline-flex items-center gap-2"><BadgeCheck size={14} className="text-gold" /> Verified Listings</span>
+              <span className="inline-flex items-center gap-2"><Award size={14} className="text-gold" /> Licensed Brokers</span>
+              <span className="inline-flex items-center gap-2"><Bitcoin size={14} className="text-gold" /> Bitcoin Custody</span>
             </div>
           </div>
         </div>
       </section>
+
 
       {/* ============ FEATURED COLLECTION ============ */}
       <section className="mx-auto max-w-7xl px-6 lg:px-10 mt-24">
