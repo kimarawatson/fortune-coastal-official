@@ -1,8 +1,8 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import {
   ArrowRight, Bitcoin, ShieldCheck, Zap, LineChart, Lock, Wallet,
-  Globe, Layers, Sparkles, Cpu, FileCheck, Network, Coins, Check,
-  Gem, Crown, Diamond, BadgeCheck, Award, Anchor, Plane, Building2,
+  Globe, Layers, Sparkles, Cpu, Network, Coins,
+  Gem, Crown, Diamond, BadgeCheck, Award, Building2,
 } from "lucide-react";
 import { SiteLayout } from "@/components/SiteLayout";
 import { assets, formatUsd } from "@/data/mock";
@@ -13,7 +13,6 @@ import aspen from "@/assets/asset-aspen.jpg";
 import bombardier from "@/assets/asset-bombardier.jpg";
 import yacht from "@/assets/asset-yacht.jpg";
 import hamptons from "@/assets/asset-hamptons.jpg";
-import bgTexture from "@/assets/bg-texture.jpg";
 
 export const Route = createFileRoute("/")({
   head: () => ({
