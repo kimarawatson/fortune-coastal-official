@@ -3,6 +3,7 @@ import { useState } from "react";
 import { Mail, MapPin, Phone } from "lucide-react";
 import { SiteLayout } from "@/components/SiteLayout";
 import { BackToSiteLink } from "@/components/BackToSiteLink";
+import contactHero from "@/assets/asset-miami.jpg";
 
 export const Route = createFileRoute("/contact")({
   head: () => ({
@@ -20,7 +21,10 @@ function Contact() {
   const [sent, setSent] = useState(false);
   return (
     <SiteLayout>
-      <section className="mx-auto max-w-7xl px-6 lg:px-10 pt-16 pb-24 grid lg:grid-cols-2 gap-16">
+      <div className="relative -mt-20">
+        <img src={contactHero} alt="" className="absolute inset-0 h-[70vh] w-full object-cover" />
+        <div className="absolute inset-0 h-[70vh] bg-gradient-to-b from-background/70 via-background/85 to-background" />
+        <section className="relative mx-auto max-w-7xl px-6 lg:px-10 pt-32 pb-24 grid lg:grid-cols-2 gap-16">
         <div>
           <BackToSiteLink className="mb-8" />
           <div className="text-[10px] tracking-luxury uppercase text-gold">Private Concierge</div>
@@ -82,7 +86,8 @@ function Contact() {
             </>
           )}
         </form>
-      </section>
+        </section>
+      </div>
     </SiteLayout>
   );
 }
