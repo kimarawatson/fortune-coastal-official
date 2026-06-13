@@ -5,6 +5,7 @@ import { useServerFn } from "@tanstack/react-start";
 import { SiteLayout } from "@/components/SiteLayout";
 import { BackToSiteLink } from "@/components/BackToSiteLink";
 import { listPublicListings } from "@/lib/listings.functions";
+import marketHero from "@/assets/asset-penthouse.jpg";
 import { supabase } from "@/integrations/supabase/client";
 import { formatBtc, formatUsd } from "@/lib/format";
 import { BadgeCheck, Bitcoin, MapPin } from "lucide-react";
