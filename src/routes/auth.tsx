@@ -5,6 +5,7 @@ import { toast } from "sonner";
 import { supabase } from "@/integrations/supabase/client";
 import { lovable } from "@/integrations/lovable";
 import logo from "@/assets/fcg-logo.png";
+import authBg from "@/assets/auth-luxury.jpg";
 
 export const Route = createFileRoute("/auth")({
   head: () => ({
