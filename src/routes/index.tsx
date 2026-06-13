@@ -48,7 +48,7 @@ function Home() {
               Explore Marketplace
               <ArrowRight size={16} className="transition-transform group-hover:translate-x-1" />
             </Link>
-            <Link to="/register" className="inline-flex items-center justify-center gap-3 border border-foreground/30 text-foreground px-8 py-4 text-xs tracking-luxury uppercase hover:border-gold hover:text-gold transition-colors">
+            <Link to="/auth" className="inline-flex items-center justify-center gap-3 border border-foreground/30 text-foreground px-8 py-4 text-xs tracking-luxury uppercase hover:border-gold hover:text-gold transition-colors">
               Become a Seller
             </Link>
           </div>
@@ -183,7 +183,7 @@ function Home() {
             Membership is curated. Apply for access to off-market American listings and bespoke concierge services.
           </p>
           <div className="mt-10 flex flex-col sm:flex-row justify-center gap-4">
-            <Link to="/register" className="bg-gold text-primary-foreground px-8 py-4 text-xs tracking-luxury uppercase hover:bg-gold-soft transition-colors">
+            <Link to="/auth" className="bg-gold text-primary-foreground px-8 py-4 text-xs tracking-luxury uppercase hover:bg-gold-soft transition-colors">
               Apply for Membership
             </Link>
             <Link to="/contact" className="border border-foreground/30 text-foreground px-8 py-4 text-xs tracking-luxury uppercase hover:border-gold hover:text-gold transition-colors bg-background/40 backdrop-blur-sm">

@@ -2,6 +2,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import { useState } from "react";
 import { Mail, MapPin, Phone } from "lucide-react";
 import { SiteLayout } from "@/components/SiteLayout";
+import { BackToSiteLink } from "@/components/BackToSiteLink";
 
 export const Route = createFileRoute("/contact")({
   head: () => ({
@@ -21,6 +22,7 @@ function Contact() {
     <SiteLayout>
       <section className="mx-auto max-w-7xl px-6 lg:px-10 pt-16 pb-24 grid lg:grid-cols-2 gap-16">
         <div>
+          <BackToSiteLink className="mb-8" />
           <div className="text-[10px] tracking-luxury uppercase text-gold">Private Concierge</div>
           <h1 className="mt-4 font-serif text-5xl md:text-6xl text-foreground leading-tight">Speak with us, <span className="italic gradient-gold-text">privately</span>.</h1>
           <p className="mt-6 text-muted-foreground max-w-md">
@@ -29,8 +31,8 @@ function Contact() {
 
           <div className="mt-12 space-y-6">
             {[
-              { icon: MapPin, label: "Headquarters", value: "11 Avenue Princesse Grace, Monte Carlo, Monaco" },
-              { icon: Phone, label: "Concierge Desk", value: "+377 9 9 50 00 00" },
+              { icon: MapPin, label: "Headquarters", value: "Miami, Florida, United States" },
+              { icon: Phone, label: "Concierge Desk", value: "+1 (305) 555-0148" },
               { icon: Mail, label: "Private Inquiries", value: "concierge@fortunecoastal.com" },
             ].map(({ icon: Icon, label, value }) => (
               <div key={label} className="flex items-start gap-4">

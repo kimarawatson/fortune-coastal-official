@@ -8,7 +8,7 @@ export function SiteFooter() {
           <div className="font-serif text-2xl text-foreground">Fortune Coastal Group</div>
           <div className="text-[10px] tracking-luxury text-gold uppercase mt-1">A Private Wealth Marketplace</div>
           <p className="mt-6 text-sm text-muted-foreground leading-relaxed">
-            The world's discreet marketplace for luxury real estate, vehicles, yachts, jets, and exclusive
+            America's discreet marketplace for luxury real estate, vehicles, yachts, jets, and exclusive
             experiences — settled in USD or Bitcoin.
           </p>
         </div>
@@ -26,8 +26,8 @@ export function SiteFooter() {
           <ul className="space-y-3 text-sm text-muted-foreground">
             <li><Link to="/about" className="hover:text-foreground">About</Link></li>
             <li><Link to="/contact" className="hover:text-foreground">Contact</Link></li>
-            <li><Link to="/register" className="hover:text-foreground">Become a Seller</Link></li>
-            <li><Link to="/login" className="hover:text-foreground">Client Portal</Link></li>
+            <li><Link to="/auth" className="hover:text-foreground">Become a Seller</Link></li>
+            <li><Link to="/auth" className="hover:text-foreground">Client Portal</Link></li>
           </ul>
         </div>
       </div>
