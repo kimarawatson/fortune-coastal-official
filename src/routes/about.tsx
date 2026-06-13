@@ -1,5 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { SiteLayout } from "@/components/SiteLayout";
+import { BackToSiteLink } from "@/components/BackToSiteLink";
 import hero from "@/assets/asset-villa.jpg";
 
 export const Route = createFileRoute("/about")({
@@ -23,6 +24,7 @@ function About() {
         <img src={hero} alt="" className="absolute inset-0 h-full w-full object-cover" />
         <div className="absolute inset-0 bg-gradient-to-b from-background/60 via-background/30 to-background" />
         <div className="relative h-full mx-auto max-w-7xl px-6 lg:px-10 flex flex-col justify-end pb-16">
+          <BackToSiteLink className="mb-8 text-foreground/80 hover:text-gold" />
           <div className="text-[10px] tracking-luxury uppercase text-gold">About FCG</div>
           <h1 className="mt-4 font-serif text-5xl md:text-7xl text-foreground max-w-3xl leading-tight">
             A new <span className="italic gradient-gold-text">standard</span> for luxury ownership.
@@ -32,10 +34,10 @@ function About() {
 
       <section className="mx-auto max-w-5xl px-6 lg:px-10 py-24 space-y-24">
         {[
-          { eyebrow: "Our Vision", title: "Borderless luxury, settled in any currency.", body: "We envision a world where the most coveted assets — homes, jets, yachts, and experiences — can change hands across borders with the same trust and speed as the global capital that fuels them." },
-          { eyebrow: "Our Mission", title: "To curate, verify, and settle.", body: "Fortune Coastal Group unifies the world's discerning buyers and sellers under a single, verified marketplace. We authenticate every listing, vet every counterparty, and concierge every settlement — in USD or Bitcoin." },
-          { eyebrow: "Why FCG", title: "Discretion is not a feature. It is the foundation.", body: "Our clients include heads of state, founders, and family offices. Every transaction is bound by private-banking grade confidentiality and concierge-led care." },
-          { eyebrow: "Future Roadmap", title: "Beyond the listing.", body: "Phase II brings tokenized fractional ownership, secondary-market liquidity, and a fully on-chain settlement layer — preserving the discretion our members expect." },
+          { eyebrow: "Our Vision", title: "American luxury, privately transacted.", body: "We are building a trusted marketplace for premier U.S. real estate, aviation, marine, automotive, and concierge assets — with the speed modern buyers expect and the discretion high-value transactions require." },
+          { eyebrow: "Our Mission", title: "To curate, verify, and close with confidence.", body: "Fortune Coastal Group connects discerning buyers and vetted sellers across the United States. We verify every listing, review every counterpart, and support settlement in USD or Bitcoin." },
+          { eyebrow: "Why FCG", title: "Discretion is our operating standard.", body: "Our clients include founders, executives, athletes, and family offices. Every interaction is handled with white-glove communication, verified inventory, and concierge-led support." },
+          { eyebrow: "Platform Direction", title: "Beyond static listings.", body: "Phase 2 turns the marketplace into a live operating platform with dynamic inventory, seller onboarding, admin controls, and a U.S.-focused luxury catalog that updates in real time." },
         ].map((s, i) => (
           <div key={s.eyebrow} className="grid md:grid-cols-[200px_1fr] gap-8 md:gap-12 items-start">
             <div>
