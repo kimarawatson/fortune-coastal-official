@@ -329,6 +329,7 @@ function Home() {
               Join the Movement <ArrowRight size={14} />
             </Link>
           </div>
+          </div>
         </div>
 
         <p className="mt-10 text-center text-sm italic text-muted-foreground">
