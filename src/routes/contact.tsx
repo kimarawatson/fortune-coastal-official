@@ -87,7 +87,8 @@ function Contact() {
             </>
           )}
         </form>
-      </section>
+        </section>
+      </div>
     </SiteLayout>
   );
 }
