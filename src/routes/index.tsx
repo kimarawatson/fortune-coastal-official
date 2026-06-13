@@ -123,8 +123,10 @@ function Home() {
       </section>
 
       {/* ============ DIGITAL WEALTH / FORTUNE VAULT ============ */}
-      <section className="mt-32 relative overflow-hidden">
-        <div className="absolute inset-0" style={{ background: "radial-gradient(60% 60% at 80% 50%, var(--gold) 0%, transparent 70%)", opacity: 0.06 }} />
+      <section className="mt-32 relative overflow-hidden py-20">
+        <img src={villa} alt="" aria-hidden className="absolute inset-0 h-full w-full object-cover opacity-20" />
+        <div className="absolute inset-0 bg-gradient-to-b from-background via-background/90 to-background" />
+        <div className="absolute inset-0" style={{ background: "radial-gradient(60% 60% at 80% 50%, var(--gold) 0%, transparent 70%)", opacity: 0.10 }} />
         <div className="relative mx-auto max-w-7xl px-6 lg:px-10">
           <div className="text-center">
             <div className="inline-flex items-center gap-2 border border-gold/40 px-4 py-2 text-[10px] tracking-luxury uppercase text-gold">
