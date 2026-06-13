@@ -9,26 +9,23 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
-import { Route as SellerRouteImport } from './routes/seller'
-import { Route as RegisterRouteImport } from './routes/register'
+import { Route as ResetPasswordRouteImport } from './routes/reset-password'
 import { Route as MarketplaceRouteImport } from './routes/marketplace'
-import { Route as LoginRouteImport } from './routes/login'
-import { Route as DashboardRouteImport } from './routes/dashboard'
 import { Route as ContactRouteImport } from './routes/contact'
-import { Route as AdminLoginRouteImport } from './routes/admin-login'
-import { Route as AdminRouteImport } from './routes/admin'
+import { Route as AuthRouteImport } from './routes/auth'
 import { Route as AboutRouteImport } from './routes/about'
+import { Route as AuthenticatedRouteRouteImport } from './routes/_authenticated/route'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as AssetIdRouteImport } from './routes/asset.$id'
+import { Route as AuthenticatedSellerRouteImport } from './routes/_authenticated/seller'
+import { Route as AuthenticatedDashboardRouteImport } from './routes/_authenticated/dashboard'
+import { Route as AuthenticatedAdminRouteImport } from './routes/_authenticated/admin'
+import { Route as AuthenticatedSellerNewRouteImport } from './routes/_authenticated/seller.new'
+import { Route as AuthenticatedSellerIdRouteImport } from './routes/_authenticated/seller.$id'
 
-const SellerRoute = SellerRouteImport.update({
-  id: '/seller',
-  path: '/seller',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const RegisterRoute = RegisterRouteImport.update({
-  id: '/register',
-  path: '/register',
+const ResetPasswordRoute = ResetPasswordRouteImport.update({
+  id: '/reset-password',
+  path: '/reset-password',
   getParentRoute: () => rootRouteImport,
 } as any)
 const MarketplaceRoute = MarketplaceRouteImport.update({
@@ -36,34 +33,23 @@ const MarketplaceRoute = MarketplaceRouteImport.update({
   path: '/marketplace',
   getParentRoute: () => rootRouteImport,
 } as any)
-const LoginRoute = LoginRouteImport.update({
-  id: '/login',
-  path: '/login',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const DashboardRoute = DashboardRouteImport.update({
-  id: '/dashboard',
-  path: '/dashboard',
-  getParentRoute: () => rootRouteImport,
-} as any)
 const ContactRoute = ContactRouteImport.update({
   id: '/contact',
   path: '/contact',
   getParentRoute: () => rootRouteImport,
 } as any)
-const AdminLoginRoute = AdminLoginRouteImport.update({
-  id: '/admin-login',
-  path: '/admin-login',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const AdminRoute = AdminRouteImport.update({
-  id: '/admin',
-  path: '/admin',
+const AuthRoute = AuthRouteImport.update({
+  id: '/auth',
+  path: '/auth',
   getParentRoute: () => rootRouteImport,
 } as any)
 const AboutRoute = AboutRouteImport.update({
   id: '/about',
   path: '/about',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AuthenticatedRouteRoute = AuthenticatedRouteRouteImport.update({
+  id: '/_authenticated',
   getParentRoute: () => rootRouteImport,
 } as any)
 const IndexRoute = IndexRouteImport.update({
@@ -76,117 +62,140 @@ const AssetIdRoute = AssetIdRouteImport.update({
   path: '/asset/$id',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AuthenticatedSellerRoute = AuthenticatedSellerRouteImport.update({
+  id: '/seller',
+  path: '/seller',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
+const AuthenticatedDashboardRoute = AuthenticatedDashboardRouteImport.update({
+  id: '/dashboard',
+  path: '/dashboard',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
+const AuthenticatedAdminRoute = AuthenticatedAdminRouteImport.update({
+  id: '/admin',
+  path: '/admin',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
+const AuthenticatedSellerNewRoute = AuthenticatedSellerNewRouteImport.update({
+  id: '/new',
+  path: '/new',
+  getParentRoute: () => AuthenticatedSellerRoute,
+} as any)
+const AuthenticatedSellerIdRoute = AuthenticatedSellerIdRouteImport.update({
+  id: '/$id',
+  path: '/$id',
+  getParentRoute: () => AuthenticatedSellerRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
-  '/admin': typeof AdminRoute
-  '/admin-login': typeof AdminLoginRoute
+  '/auth': typeof AuthRoute
   '/contact': typeof ContactRoute
-  '/dashboard': typeof DashboardRoute
-  '/login': typeof LoginRoute
   '/marketplace': typeof MarketplaceRoute
-  '/register': typeof RegisterRoute
-  '/seller': typeof SellerRoute
+  '/reset-password': typeof ResetPasswordRoute
+  '/admin': typeof AuthenticatedAdminRoute
+  '/dashboard': typeof AuthenticatedDashboardRoute
+  '/seller': typeof AuthenticatedSellerRouteWithChildren
   '/asset/$id': typeof AssetIdRoute
+  '/seller/$id': typeof AuthenticatedSellerIdRoute
+  '/seller/new': typeof AuthenticatedSellerNewRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
-  '/admin': typeof AdminRoute
-  '/admin-login': typeof AdminLoginRoute
+  '/auth': typeof AuthRoute
   '/contact': typeof ContactRoute
-  '/dashboard': typeof DashboardRoute
-  '/login': typeof LoginRoute
   '/marketplace': typeof MarketplaceRoute
-  '/register': typeof RegisterRoute
-  '/seller': typeof SellerRoute
+  '/reset-password': typeof ResetPasswordRoute
+  '/admin': typeof AuthenticatedAdminRoute
+  '/dashboard': typeof AuthenticatedDashboardRoute
+  '/seller': typeof AuthenticatedSellerRouteWithChildren
   '/asset/$id': typeof AssetIdRoute
+  '/seller/$id': typeof AuthenticatedSellerIdRoute
+  '/seller/new': typeof AuthenticatedSellerNewRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/_authenticated': typeof AuthenticatedRouteRouteWithChildren
   '/about': typeof AboutRoute
-  '/admin': typeof AdminRoute
-  '/admin-login': typeof AdminLoginRoute
+  '/auth': typeof AuthRoute
   '/contact': typeof ContactRoute
-  '/dashboard': typeof DashboardRoute
-  '/login': typeof LoginRoute
   '/marketplace': typeof MarketplaceRoute
-  '/register': typeof RegisterRoute
-  '/seller': typeof SellerRoute
+  '/reset-password': typeof ResetPasswordRoute
+  '/_authenticated/admin': typeof AuthenticatedAdminRoute
+  '/_authenticated/dashboard': typeof AuthenticatedDashboardRoute
+  '/_authenticated/seller': typeof AuthenticatedSellerRouteWithChildren
   '/asset/$id': typeof AssetIdRoute
+  '/_authenticated/seller/$id': typeof AuthenticatedSellerIdRoute
+  '/_authenticated/seller/new': typeof AuthenticatedSellerNewRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
     | '/about'
-    | '/admin'
-    | '/admin-login'
+    | '/auth'
     | '/contact'
-    | '/dashboard'
-    | '/login'
     | '/marketplace'
-    | '/register'
+    | '/reset-password'
+    | '/admin'
+    | '/dashboard'
     | '/seller'
     | '/asset/$id'
+    | '/seller/$id'
+    | '/seller/new'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
     | '/about'
-    | '/admin'
-    | '/admin-login'
+    | '/auth'
     | '/contact'
-    | '/dashboard'
-    | '/login'
     | '/marketplace'
-    | '/register'
+    | '/reset-password'
+    | '/admin'
+    | '/dashboard'
     | '/seller'
     | '/asset/$id'
+    | '/seller/$id'
+    | '/seller/new'
   id:
     | '__root__'
     | '/'
+    | '/_authenticated'
     | '/about'
-    | '/admin'
-    | '/admin-login'
+    | '/auth'
     | '/contact'
-    | '/dashboard'
-    | '/login'
     | '/marketplace'
-    | '/register'
-    | '/seller'
+    | '/reset-password'
+    | '/_authenticated/admin'
+    | '/_authenticated/dashboard'
+    | '/_authenticated/seller'
     | '/asset/$id'
+    | '/_authenticated/seller/$id'
+    | '/_authenticated/seller/new'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AuthenticatedRouteRoute: typeof AuthenticatedRouteRouteWithChildren
   AboutRoute: typeof AboutRoute
-  AdminRoute: typeof AdminRoute
-  AdminLoginRoute: typeof AdminLoginRoute
+  AuthRoute: typeof AuthRoute
   ContactRoute: typeof ContactRoute
-  DashboardRoute: typeof DashboardRoute
-  LoginRoute: typeof LoginRoute
   MarketplaceRoute: typeof MarketplaceRoute
-  RegisterRoute: typeof RegisterRoute
-  SellerRoute: typeof SellerRoute
+  ResetPasswordRoute: typeof ResetPasswordRoute
   AssetIdRoute: typeof AssetIdRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
-    '/seller': {
-      id: '/seller'
-      path: '/seller'
-      fullPath: '/seller'
-      preLoaderRoute: typeof SellerRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/register': {
-      id: '/register'
-      path: '/register'
-      fullPath: '/register'
-      preLoaderRoute: typeof RegisterRouteImport
+    '/reset-password': {
+      id: '/reset-password'
+      path: '/reset-password'
+      fullPath: '/reset-password'
+      preLoaderRoute: typeof ResetPasswordRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/marketplace': {
@@ -196,20 +205,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof MarketplaceRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/login': {
-      id: '/login'
-      path: '/login'
-      fullPath: '/login'
-      preLoaderRoute: typeof LoginRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/dashboard': {
-      id: '/dashboard'
-      path: '/dashboard'
-      fullPath: '/dashboard'
-      preLoaderRoute: typeof DashboardRouteImport
-      parentRoute: typeof rootRouteImport
-    }
     '/contact': {
       id: '/contact'
       path: '/contact'
@@ -217,18 +212,11 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ContactRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/admin-login': {
-      id: '/admin-login'
-      path: '/admin-login'
-      fullPath: '/admin-login'
-      preLoaderRoute: typeof AdminLoginRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/admin': {
-      id: '/admin'
-      path: '/admin'
-      fullPath: '/admin'
-      preLoaderRoute: typeof AdminRouteImport
+    '/auth': {
+      id: '/auth'
+      path: '/auth'
+      fullPath: '/auth'
+      preLoaderRoute: typeof AuthRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/about': {
@@ -236,6 +224,13 @@ declare module '@tanstack/react-router' {
       path: '/about'
       fullPath: '/about'
       preLoaderRoute: typeof AboutRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/_authenticated': {
+      id: '/_authenticated'
+      path: ''
+      fullPath: '/'
+      preLoaderRoute: typeof AuthenticatedRouteRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/': {
@@ -252,32 +247,82 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AssetIdRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/_authenticated/seller': {
+      id: '/_authenticated/seller'
+      path: '/seller'
+      fullPath: '/seller'
+      preLoaderRoute: typeof AuthenticatedSellerRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/dashboard': {
+      id: '/_authenticated/dashboard'
+      path: '/dashboard'
+      fullPath: '/dashboard'
+      preLoaderRoute: typeof AuthenticatedDashboardRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/admin': {
+      id: '/_authenticated/admin'
+      path: '/admin'
+      fullPath: '/admin'
+      preLoaderRoute: typeof AuthenticatedAdminRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/seller/new': {
+      id: '/_authenticated/seller/new'
+      path: '/new'
+      fullPath: '/seller/new'
+      preLoaderRoute: typeof AuthenticatedSellerNewRouteImport
+      parentRoute: typeof AuthenticatedSellerRoute
+    }
+    '/_authenticated/seller/$id': {
+      id: '/_authenticated/seller/$id'
+      path: '/$id'
+      fullPath: '/seller/$id'
+      preLoaderRoute: typeof AuthenticatedSellerIdRouteImport
+      parentRoute: typeof AuthenticatedSellerRoute
+    }
   }
 }
 
+interface AuthenticatedSellerRouteChildren {
+  AuthenticatedSellerIdRoute: typeof AuthenticatedSellerIdRoute
+  AuthenticatedSellerNewRoute: typeof AuthenticatedSellerNewRoute
+}
+
+const AuthenticatedSellerRouteChildren: AuthenticatedSellerRouteChildren = {
+  AuthenticatedSellerIdRoute: AuthenticatedSellerIdRoute,
+  AuthenticatedSellerNewRoute: AuthenticatedSellerNewRoute,
+}
+
+const AuthenticatedSellerRouteWithChildren =
+  AuthenticatedSellerRoute._addFileChildren(AuthenticatedSellerRouteChildren)
+
+interface AuthenticatedRouteRouteChildren {
+  AuthenticatedAdminRoute: typeof AuthenticatedAdminRoute
+  AuthenticatedDashboardRoute: typeof AuthenticatedDashboardRoute
+  AuthenticatedSellerRoute: typeof AuthenticatedSellerRouteWithChildren
+}
+
+const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
+  AuthenticatedAdminRoute: AuthenticatedAdminRoute,
+  AuthenticatedDashboardRoute: AuthenticatedDashboardRoute,
+  AuthenticatedSellerRoute: AuthenticatedSellerRouteWithChildren,
+}
+
+const AuthenticatedRouteRouteWithChildren =
+  AuthenticatedRouteRoute._addFileChildren(AuthenticatedRouteRouteChildren)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AuthenticatedRouteRoute: AuthenticatedRouteRouteWithChildren,
   AboutRoute: AboutRoute,
-  AdminRoute: AdminRoute,
-  AdminLoginRoute: AdminLoginRoute,
+  AuthRoute: AuthRoute,
   ContactRoute: ContactRoute,
-  DashboardRoute: DashboardRoute,
-  LoginRoute: LoginRoute,
   MarketplaceRoute: MarketplaceRoute,
-  RegisterRoute: RegisterRoute,
-  SellerRoute: SellerRoute,
+  ResetPasswordRoute: ResetPasswordRoute,
   AssetIdRoute: AssetIdRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
-
-import type { getRouter } from './router.tsx'
-import type { startInstance } from './start.ts'
-declare module '@tanstack/react-start' {
-  interface Register {
-    ssr: true
-    router: Awaited<ReturnType<typeof getRouter>>
-    config: Awaited<ReturnType<typeof startInstance.getOptions>>
-  }
-}
