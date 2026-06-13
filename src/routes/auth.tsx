@@ -103,7 +103,7 @@ function AuthPage() {
             </Link>
           </div>
           <div>
-            <div className="font-serif text-4xl text-foreground italic drop-shadow-lg">"Wealth, made borderless."</div>
+            <div className="font-serif text-4xl text-foreground italic drop-shadow-lg">"American luxury, privately transacted."</div>
             <div className="mt-4 text-xs tracking-luxury uppercase text-gold">FCG · Private Members</div>
           </div>
         </div>
