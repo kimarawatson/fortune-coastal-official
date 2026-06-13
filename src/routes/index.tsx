@@ -36,8 +36,10 @@ function Home() {
     <SiteLayout>
       {/* ============ HERO ============ */}
       <section className="relative -mt-20 pt-32 pb-20 overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-br from-background via-charcoal/60 to-background" />
-        <div className="absolute -top-40 -right-40 h-[600px] w-[600px] rounded-full" style={{ background: "radial-gradient(circle, var(--gold) 0%, transparent 70%)", opacity: 0.12 }} />
+        <img src={hero} alt="Luxury American oceanfront estate" className="absolute inset-0 h-full w-full object-cover" />
+        <div className="absolute inset-0 bg-gradient-to-r from-background via-background/85 to-background/20" />
+        <div className="absolute inset-0 bg-gradient-to-b from-background/40 via-transparent to-background" />
+        <div className="absolute -top-40 -right-40 h-[600px] w-[600px] rounded-full" style={{ background: "radial-gradient(circle, var(--gold) 0%, transparent 70%)", opacity: 0.18 }} />
         <div className="relative mx-auto max-w-7xl px-6 lg:px-10 grid lg:grid-cols-2 gap-12 items-center">
           <div>
             <div className="inline-flex items-center gap-2 border border-gold/40 px-4 py-2 text-[10px] tracking-luxury uppercase text-gold">
@@ -80,13 +82,13 @@ function Home() {
             </div>
           </div>
 
-          <div className="relative h-[500px] lg:h-[620px]">
-            <img src={hero} alt="Luxury American estate" className="absolute inset-0 h-full w-full object-cover" />
-            <div className="absolute inset-0 bg-gradient-to-tr from-background/80 via-background/10 to-transparent" />
+          <div className="relative h-[500px] lg:h-[620px] hidden lg:block">
+            <img src={penthouse} alt="Manhattan skyline penthouse" className="absolute inset-0 h-full w-full object-cover border border-gold/30" />
+            <div className="absolute inset-0 bg-gradient-to-tr from-background/70 via-transparent to-transparent" />
             <div className="absolute bottom-6 right-6 border border-gold/40 bg-background/85 backdrop-blur-md px-5 py-4">
               <div className="text-[9px] tracking-luxury uppercase text-gold">Featured Listing</div>
-              <div className="font-serif text-xl text-foreground mt-1">East Hampton Estate</div>
-              <div className="text-xs text-muted-foreground mt-1">$49.5M · 4.2 acres oceanfront</div>
+              <div className="font-serif text-xl text-foreground mt-1">Manhattan Skyline Penthouse</div>
+              <div className="text-xs text-muted-foreground mt-1">$68M · 432 Park, NY</div>
             </div>
           </div>
         </div>
@@ -121,8 +123,10 @@ function Home() {
       </section>
 
       {/* ============ DIGITAL WEALTH / FORTUNE VAULT ============ */}
-      <section className="mt-32 relative overflow-hidden">
-        <div className="absolute inset-0" style={{ background: "radial-gradient(60% 60% at 80% 50%, var(--gold) 0%, transparent 70%)", opacity: 0.06 }} />
+      <section className="mt-32 relative overflow-hidden py-20">
+        <img src={villa} alt="" aria-hidden className="absolute inset-0 h-full w-full object-cover opacity-20" />
+        <div className="absolute inset-0 bg-gradient-to-b from-background via-background/90 to-background" />
+        <div className="absolute inset-0" style={{ background: "radial-gradient(60% 60% at 80% 50%, var(--gold) 0%, transparent 70%)", opacity: 0.10 }} />
         <div className="relative mx-auto max-w-7xl px-6 lg:px-10">
           <div className="text-center">
             <div className="inline-flex items-center gap-2 border border-gold/40 px-4 py-2 text-[10px] tracking-luxury uppercase text-gold">
@@ -286,7 +290,10 @@ function Home() {
 
       {/* ============ ROADMAP ============ */}
       <section className="mt-32 mx-auto max-w-6xl px-6 lg:px-10">
-        <div className="border border-border/40 bg-charcoal/40 backdrop-blur-sm p-10 lg:p-14">
+        <div className="relative overflow-hidden border border-border/40 p-10 lg:p-14">
+          <img src={aspen} alt="" aria-hidden className="absolute inset-0 h-full w-full object-cover opacity-25" />
+          <div className="absolute inset-0 bg-gradient-to-b from-background/90 via-background/85 to-background/95" />
+          <div className="relative">
           <div className="text-center">
             <div className="text-[10px] tracking-luxury uppercase text-gold">Strategy</div>
             <h2 className="mt-4 font-serif text-4xl md:text-5xl text-foreground">
@@ -321,6 +328,7 @@ function Home() {
             <Link to="/auth" className="inline-flex items-center gap-3 bg-gold text-primary-foreground px-8 py-4 text-xs tracking-luxury uppercase hover:bg-gold-soft transition-colors">
               Join the Movement <ArrowRight size={14} />
             </Link>
+          </div>
           </div>
         </div>
 
