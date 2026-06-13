@@ -1,6 +1,7 @@
 import { createServerFn } from "@tanstack/react-start";
 import { z } from "zod";
 import { requireSupabaseAuth } from "@/integrations/supabase/auth-middleware";
+import { mockListings } from "./seed-data";
 
 // --- PUBLIC: list approved listings with filters
 export const listPublicListings = createServerFn({ method: "GET" })
@@ -27,7 +28,21 @@ export const listPublicListings = createServerFn({ method: "GET" })
     if (typeof data.maxPrice === "number") q = q.lte("price_usd", data.maxPrice);
     const { data: rows, error } = await q;
     if (error) throw new Error(error.message);
-    return rows ?? [];
+    if ((rows?.length ?? 0) > 0) return rows ?? [];
+
+    return mockListings
+      .filter((listing) => (data.category ? listing.category_slug === data.category : true))
+      .filter((listing) => (data.country ? listing.country === data.country : true))
+      .filter((listing) => (data.btcOnly ? listing.accepts_btc : true))
+      .filter((listing) => (data.featuredOnly ? listing.featured : true))
+      .filter((listing) => (typeof data.minPrice === "number" ? listing.price_usd >= data.minPrice : true))
+      .filter((listing) => (typeof data.maxPrice === "number" ? listing.price_usd <= data.maxPrice : true))
+      .map((listing, index) => ({
+        id: `demo-${index}`,
+        ...listing,
+        status: "approved",
+        seller_id: null,
+      }));
   });
 
 export const getPublicListing = createServerFn({ method: "GET" })
@@ -40,7 +55,16 @@ export const getPublicListing = createServerFn({ method: "GET" })
       .eq("id", data.id)
       .eq("status", "approved")
       .maybeSingle();
-    if (!listing) return null;
+    if (!listing) {
+      const demoIndex = data.id.startsWith("demo-") ? Number(data.id.replace("demo-", "")) : NaN;
+      const demo = Number.isInteger(demoIndex) ? mockListings[demoIndex] : undefined;
+      if (!demo) return null;
+      return {
+        listing: { id: data.id, ...demo, status: "approved", seller_id: null },
+        images: demo.gallery.map((image_url, sort_order) => ({ image_url, sort_order })),
+        sellerName: "FCG Verified Seller",
+      };
+    }
     const { data: images } = await supabaseAdmin
       .from("listing_images")
       .select("image_url, sort_order")
