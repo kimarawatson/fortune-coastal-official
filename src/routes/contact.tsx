@@ -3,6 +3,7 @@ import { useState } from "react";
 import { Mail, MapPin, Phone } from "lucide-react";
 import { SiteLayout } from "@/components/SiteLayout";
 import { BackToSiteLink } from "@/components/BackToSiteLink";
+import contactHero from "@/assets/asset-miami.jpg";
 
 export const Route = createFileRoute("/contact")({
   head: () => ({
