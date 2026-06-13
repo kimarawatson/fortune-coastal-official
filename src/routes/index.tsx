@@ -271,29 +271,35 @@ function Home() {
       </section>
 
       {/* ============ MISSION / INNOVATION / FUTURE ============ */}
-      <section className="mt-32 mx-auto max-w-7xl px-6 lg:px-10">
+      <section className="relative mt-0 py-24 overflow-hidden">
+        <img src={yacht} alt="" aria-hidden className="absolute inset-0 h-full w-full object-cover opacity-30" />
+        <div className="absolute inset-0 bg-gradient-to-b from-background via-background/75 to-background" />
+        <div className="relative mx-auto max-w-7xl px-6 lg:px-10">
         <div className="text-center">
-          <div className="text-[10px] tracking-luxury uppercase text-gold">Our Vision</div>
-          <h2 className="mt-4 font-serif text-4xl md:text-5xl text-foreground">
+          <div className="inline-flex items-center gap-2 border border-gold/40 bg-background/40 backdrop-blur-sm px-4 py-2 text-[10px] tracking-luxury uppercase text-gold">
+            <Gem size={12} /> Our Vision
+          </div>
+          <h2 className="mt-6 font-serif text-4xl md:text-5xl text-foreground">
             Redefining <span className="italic gradient-gold-text">Luxury Real Estate</span> for the Digital Age
           </h2>
-          <p className="mt-4 text-muted-foreground max-w-2xl mx-auto">
+          <p className="mt-4 text-foreground/75 max-w-2xl mx-auto">
             Fortune Coastal merges digital wealth, blockchain trust, and immersive American property experiences. Our mission is to make ownership of luxury assets seamless, transparent, and intelligent.
           </p>
         </div>
 
         <div className="mt-14 grid gap-6 md:grid-cols-3">
-          {[
-            { icon: ShieldCheck, t: "Mission", d: "To democratize access to American luxury real estate through blockchain technology, making fractional ownership and seamless transactions a reality." },
-            { icon: Sparkles, t: "Innovation", d: "Pioneering Bitcoin-native property transactions, AI-driven matching, and 3D property experiences across all 50 U.S. states." },
-            { icon: Cpu, t: "Future", d: "Building the infrastructure for tomorrow's luxury assets — borderless, digitized, and intelligent across the American market." },
-          ].map(({ icon: Icon, t, d }) => (
-            <div key={t} className="border border-border/40 bg-charcoal/40 backdrop-blur-sm p-8 text-center">
-              <div className="mx-auto h-12 w-12 grid place-items-center border border-gold/40 text-gold"><Icon size={20} /></div>
+          {([
+            { Icon: Crown, t: "Mission", d: "To democratize access to American luxury real estate through blockchain technology, making fractional ownership and seamless transactions a reality." },
+            { Icon: Diamond, t: "Innovation", d: "Pioneering Bitcoin-native property transactions, AI-driven matching, and 3D property experiences across all 50 U.S. states." },
+            { Icon: Gem, t: "Future", d: "Building the infrastructure for tomorrow's luxury assets — borderless, digitized, and intelligent across the American market." },
+          ]).map(({ Icon, t, d }) => (
+            <div key={t} className="border border-gold/30 bg-background/60 backdrop-blur-md p-8 text-center hover:border-gold/60 transition-colors">
+              <div className="mx-auto h-14 w-14 grid place-items-center border border-gold/50 bg-gold/5 text-gold"><Icon size={22} /></div>
               <h3 className="mt-6 font-serif text-2xl text-foreground">{t}</h3>
               <p className="mt-3 text-sm text-muted-foreground leading-relaxed">{d}</p>
             </div>
           ))}
+        </div>
         </div>
       </section>
 
