@@ -36,8 +36,10 @@ function Home() {
     <SiteLayout>
       {/* ============ HERO ============ */}
       <section className="relative -mt-20 pt-32 pb-20 overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-br from-background via-charcoal/60 to-background" />
-        <div className="absolute -top-40 -right-40 h-[600px] w-[600px] rounded-full" style={{ background: "radial-gradient(circle, var(--gold) 0%, transparent 70%)", opacity: 0.12 }} />
+        <img src={hero} alt="Luxury American oceanfront estate" className="absolute inset-0 h-full w-full object-cover" />
+        <div className="absolute inset-0 bg-gradient-to-r from-background via-background/85 to-background/20" />
+        <div className="absolute inset-0 bg-gradient-to-b from-background/40 via-transparent to-background" />
+        <div className="absolute -top-40 -right-40 h-[600px] w-[600px] rounded-full" style={{ background: "radial-gradient(circle, var(--gold) 0%, transparent 70%)", opacity: 0.18 }} />
         <div className="relative mx-auto max-w-7xl px-6 lg:px-10 grid lg:grid-cols-2 gap-12 items-center">
           <div>
             <div className="inline-flex items-center gap-2 border border-gold/40 px-4 py-2 text-[10px] tracking-luxury uppercase text-gold">
