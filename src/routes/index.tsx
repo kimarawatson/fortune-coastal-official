@@ -55,20 +55,17 @@ function Home() {
             </p>
 
             <div className="mt-10 grid grid-cols-3 gap-px bg-gold/20 border border-gold/30 max-w-xl">
-              {[
-                [Crown, "5,000+", "Luxury Homes"],
-                [Bitcoin, "24/7", "Bitcoin Trading"],
-                [Diamond, "$2.5B+", "Assets Managed"],
-              ].map(([Icon, v, l]) => {
-                const I = Icon as typeof Crown;
-                return (
-                  <div key={l as string} className="bg-background/60 backdrop-blur-md px-4 py-5 text-center">
-                    <I size={14} className="mx-auto text-gold" />
-                    <div className="mt-2 font-serif text-2xl md:text-3xl gradient-gold-text">{v}</div>
-                    <div className="mt-1 text-[9px] tracking-luxury uppercase text-muted-foreground">{l}</div>
-                  </div>
-                );
-              })}
+              {([
+                { Icon: Crown, v: "5,000+", l: "Luxury Homes" },
+                { Icon: Bitcoin, v: "24/7", l: "Bitcoin Trading" },
+                { Icon: Diamond, v: "$2.5B+", l: "Assets Managed" },
+              ]).map(({ Icon, v, l }) => (
+                <div key={l} className="bg-background/60 backdrop-blur-md px-4 py-5 text-center">
+                  <Icon size={14} className="mx-auto text-gold" />
+                  <div className="mt-2 font-serif text-2xl md:text-3xl gradient-gold-text">{v}</div>
+                  <div className="mt-1 text-[9px] tracking-luxury uppercase text-muted-foreground">{l}</div>
+                </div>
+              ))}
             </div>
 
             <div className="mt-10 flex flex-col sm:flex-row gap-4">
