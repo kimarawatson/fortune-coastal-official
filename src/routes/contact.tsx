@@ -21,7 +21,6 @@ function Contact() {
   const [sent, setSent] = useState(false);
   return (
     <SiteLayout>
-    <SiteLayout>
       <div className="relative -mt-20">
         <img src={contactHero} alt="" className="absolute inset-0 h-[70vh] w-full object-cover" />
         <div className="absolute inset-0 h-[70vh] bg-gradient-to-b from-background/70 via-background/85 to-background" />
