@@ -9,7 +9,7 @@ export const Route = createFileRoute("/about")({
       { title: "About — Fortune Coastal Group" },
       { name: "description", content: "Our vision, mission, and the future of the world's premier luxury asset marketplace." },
       { property: "og:title", content: "About Fortune Coastal Group" },
-      { property: "og:description", content: "A private wealth marketplace built on discretion, verification, and global settlement." },
+      { property: "og:description", content: "A private wealth marketplace built on discretion, verification, and U.S.-focused luxury transactions." },
       { property: "og:url", content: "/about" },
     ],
     links: [{ rel: "canonical", href: "/about" }],
