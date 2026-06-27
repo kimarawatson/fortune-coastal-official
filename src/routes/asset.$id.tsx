@@ -5,7 +5,6 @@ import { useServerFn } from "@tanstack/react-start";
 import { toast } from "sonner";
 import { ArrowLeft, BadgeCheck, Bitcoin, MapPin } from "lucide-react";
 import { SiteLayout } from "@/components/SiteLayout";
-import { BackToSiteLink } from "@/components/BackToSiteLink";
 import { getPublicListing, submitInquiry } from "@/lib/listings.functions";
 import { formatBtc, formatUsd } from "@/lib/format";
 import { useAuth } from "@/hooks/use-auth";
@@ -57,7 +56,6 @@ function AssetDetail() {
     <SiteLayout>
       <div className="mx-auto max-w-7xl px-6 lg:px-10 pt-10">
         <div className="flex flex-wrap items-center gap-5">
-          <BackToSiteLink />
           <Link to="/marketplace" className="inline-flex items-center gap-2 text-xs tracking-luxury uppercase text-muted-foreground hover:text-gold">
             <ArrowLeft size={14} /> Back to Marketplace
           </Link>

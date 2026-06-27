@@ -5,7 +5,6 @@ import { useServerFn } from "@tanstack/react-start";
 import { toast } from "sonner";
 import { BarChart3, Box, FileImage, Home, LogOut, Tag, Users, UserPlus, Sparkles } from "lucide-react";
 import logo from "@/assets/fcg-logo.png";
-import { BackToSiteLink } from "@/components/BackToSiteLink";
 import { useAuth } from "@/hooks/use-auth";
 import {
   adminDecideSellerApplication,
@@ -58,7 +57,6 @@ function Admin() {
             <div className="font-serif text-sm text-foreground">Admin Console</div>
           </div>
         </Link>
-        <BackToSiteLink className="mb-8" />
         <nav className="space-y-1">
           {nav.map(({ key, label, icon: Icon }) => (
             <button key={key} onClick={() => setSection(key)} className={`w-full flex items-center gap-3 px-3 py-2.5 text-xs tracking-luxury uppercase transition-colors ${section === key ? "bg-gold/10 text-gold border-l-2 border-gold" : "text-muted-foreground hover:text-foreground"}`}>

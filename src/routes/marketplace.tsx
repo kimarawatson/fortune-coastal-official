@@ -3,7 +3,6 @@ import { useMemo, useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { useServerFn } from "@tanstack/react-start";
 import { SiteLayout } from "@/components/SiteLayout";
-import { BackToSiteLink } from "@/components/BackToSiteLink";
 import { listPublicListings } from "@/lib/listings.functions";
 import marketHero from "@/assets/asset-penthouse.jpg";
 import { supabase } from "@/integrations/supabase/client";
@@ -50,7 +49,6 @@ function Marketplace() {
         <img src={marketHero} alt="" className="absolute inset-0 h-full w-full object-cover" />
         <div className="absolute inset-0 bg-gradient-to-b from-background/70 via-background/40 to-background" />
         <div className="relative h-full mx-auto max-w-7xl px-6 lg:px-10 flex flex-col justify-end pb-16">
-          <BackToSiteLink className="mb-8 text-foreground/80 hover:text-gold" />
           <div className="text-[10px] tracking-luxury uppercase text-gold">The Marketplace</div>
           <h1 className="mt-4 font-serif text-5xl md:text-6xl text-foreground">A Curated <span className="italic gradient-gold-text">World</span> of Assets</h1>
           <p className="mt-5 max-w-xl text-muted-foreground">Every listing is verified by our in-house specialists. Filter to begin.</p>

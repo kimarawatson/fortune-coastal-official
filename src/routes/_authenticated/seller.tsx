@@ -4,7 +4,6 @@ import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { toast } from "sonner";
 import { Edit, MessageSquare, Plus, Trash2 } from "lucide-react";
 import { SiteLayout } from "@/components/SiteLayout";
-import { BackToSiteLink } from "@/components/BackToSiteLink";
 import { useAuth } from "@/hooks/use-auth";
 import { supabase } from "@/integrations/supabase/client";
 import { formatUsd } from "@/lib/format";
@@ -60,7 +59,6 @@ function SellerPortal() {
     <SiteLayout>
       <section className="mx-auto max-w-7xl px-6 lg:px-10 pt-16 pb-12 flex items-end justify-between flex-wrap gap-6">
         <div className="w-full">
-          <BackToSiteLink className="mb-8" />
         </div>
         <div>
           <div className="text-[10px] tracking-luxury uppercase text-gold">Seller Portal</div>
@@ -214,7 +212,6 @@ function SellerApply({ existing, onSubmitted }: { existing: any; onSubmitted: ()
   return (
     <SiteLayout>
       <section className="mx-auto max-w-2xl px-6 lg:px-10 py-20">
-        <BackToSiteLink className="mb-8" />
         <div className="text-[10px] tracking-luxury uppercase text-gold">Seller Application</div>
         <h1 className="mt-3 font-serif text-5xl text-foreground">Become an FCG Seller</h1>
         <p className="mt-4 text-muted-foreground">
