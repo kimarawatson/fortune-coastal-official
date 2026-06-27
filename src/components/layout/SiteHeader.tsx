@@ -39,7 +39,6 @@ export function SiteHeader() {
           })}
           {session && (
             <>
-              <Link to="/dashboard" className="text-xs tracking-luxury uppercase text-muted-foreground hover:text-foreground">Dashboard</Link>
               {isSeller && <Link to="/seller" className="text-xs tracking-luxury uppercase text-muted-foreground hover:text-foreground">Seller</Link>}
               {isAdmin && <Link to="/admin" className="text-xs tracking-luxury uppercase text-gold">Admin</Link>}
             </>
