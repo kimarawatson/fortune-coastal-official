@@ -5,11 +5,12 @@ import logo from "@/assets/fcg-logo.png";
 import { useAuth } from "@/hooks/use-auth";
 
 const nav = [
-  { to: "/marketplace", label: "Marketplace" },
   { to: "/", label: "Dashboard" },
+  { to: "/marketplace", label: "Marketplace" },
   { to: "/about", label: "About" },
   { to: "/contact", label: "Contact" },
 ];
+
 
 export function SiteHeader() {
   const navigate = useNavigate();
