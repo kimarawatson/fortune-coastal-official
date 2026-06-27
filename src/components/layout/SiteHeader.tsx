@@ -30,7 +30,7 @@ export function SiteHeader() {
 
         <nav className="hidden md:flex items-center gap-10">
           {nav.map((n) => {
-            const active = location.pathname.startsWith(n.to);
+            const active = n.to === "/" ? location.pathname === "/" : location.pathname.startsWith(n.to);
             return (
               <Link key={n.to} to={n.to} className={`text-xs tracking-luxury uppercase transition-colors ${active ? "text-gold" : "text-muted-foreground hover:text-foreground"}`}>
                 {n.label}
