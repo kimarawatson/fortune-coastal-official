@@ -6,6 +6,7 @@ import { useAuth } from "@/hooks/use-auth";
 
 const nav = [
   { to: "/marketplace", label: "Marketplace" },
+  { to: "/dashboard", label: "Dashboard" },
   { to: "/about", label: "About" },
   { to: "/contact", label: "Contact" },
 ];
@@ -38,7 +39,6 @@ export function SiteHeader() {
           })}
           {session && (
             <>
-              <Link to="/dashboard" className="text-xs tracking-luxury uppercase text-muted-foreground hover:text-foreground">Dashboard</Link>
               {isSeller && <Link to="/seller" className="text-xs tracking-luxury uppercase text-muted-foreground hover:text-foreground">Seller</Link>}
               {isAdmin && <Link to="/admin" className="text-xs tracking-luxury uppercase text-gold">Admin</Link>}
             </>
@@ -65,7 +65,7 @@ export function SiteHeader() {
         <div className="md:hidden border-t border-border/40 bg-background/95 backdrop-blur-xl">
           <div className="px-6 py-6 flex flex-col gap-5">
             {nav.map((n) => <Link key={n.to} to={n.to} onClick={() => setOpen(false)} className="text-sm tracking-luxury uppercase text-foreground">{n.label}</Link>)}
-            {session && <Link to="/dashboard" onClick={() => setOpen(false)} className="text-sm tracking-luxury uppercase text-foreground">Dashboard</Link>}
+            
             {session && isSeller && <Link to="/seller" onClick={() => setOpen(false)} className="text-sm tracking-luxury uppercase text-foreground">Seller</Link>}
             {session && isAdmin && <Link to="/admin" onClick={() => setOpen(false)} className="text-sm tracking-luxury uppercase text-gold">Admin</Link>}
             <div className="hairline my-2" />

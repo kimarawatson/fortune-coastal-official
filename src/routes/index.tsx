@@ -57,33 +57,47 @@ function Home() {
               Where digital wealth meets physical luxury. Trade premium American properties and manage Bitcoin holdings in one private platform.
             </p>
 
-            <div className="mt-10 grid grid-cols-3 gap-px bg-gold/20 border border-gold/30 max-w-xl">
-              {([
-                { Icon: Crown, v: "5,000+", l: "Luxury Homes" },
-                { Icon: Bitcoin, v: "24/7", l: "Bitcoin Trading" },
-                { Icon: Diamond, v: "$2.5B+", l: "Assets Managed" },
-              ]).map(({ Icon, v, l }) => (
-                <div key={l} className="bg-background/60 backdrop-blur-md px-4 py-5 text-center">
-                  <Icon size={14} className="mx-auto text-gold" />
-                  <div className="mt-2 font-serif text-2xl md:text-3xl gradient-gold-text">{v}</div>
-                  <div className="mt-1 text-[9px] tracking-luxury uppercase text-muted-foreground">{l}</div>
-                </div>
-              ))}
+            {/* Luxe stat panel */}
+            <div className="mt-12 relative max-w-2xl">
+              {/* corner ornaments */}
+              <span aria-hidden className="absolute -top-px -left-px h-4 w-4 border-t border-l border-gold" />
+              <span aria-hidden className="absolute -top-px -right-px h-4 w-4 border-t border-r border-gold" />
+              <span aria-hidden className="absolute -bottom-px -left-px h-4 w-4 border-b border-l border-gold" />
+              <span aria-hidden className="absolute -bottom-px -right-px h-4 w-4 border-b border-r border-gold" />
+
+              <div
+                className="relative grid grid-cols-3 divide-x divide-gold/25 border border-gold/30 bg-gradient-to-br from-background/85 via-background/70 to-background/85 backdrop-blur-xl"
+                style={{ boxShadow: "0 30px 80px -30px rgba(201,168,76,0.25), inset 0 1px 0 rgba(201,168,76,0.15)" }}
+              >
+                {([
+                  { Icon: Crown, v: "5,000+", l: "Luxury Homes" },
+                  { Icon: Bitcoin, v: "24/7", l: "Bitcoin Trading" },
+                  { Icon: Diamond, v: "$2.5B+", l: "Assets Managed" },
+                ]).map(({ Icon, v, l }) => (
+                  <div key={l} className="px-6 py-8 text-center group">
+                    <div className="mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-full border border-gold/40 bg-gradient-to-br from-gold/15 to-transparent transition-all group-hover:border-gold group-hover:from-gold/25">
+                      <Icon size={20} className="text-gold" strokeWidth={1.5} />
+                    </div>
+                    <div className="font-serif text-3xl md:text-4xl gradient-gold-text leading-none">{v}</div>
+                    <div className="mt-3 text-[10px] tracking-luxury uppercase text-muted-foreground">{l}</div>
+                  </div>
+                ))}
+              </div>
             </div>
 
             <div className="mt-10 flex flex-col sm:flex-row gap-4">
-              <Link to="/marketplace" className="group inline-flex items-center justify-center gap-3 bg-gold text-primary-foreground px-8 py-4 text-xs tracking-luxury uppercase hover:bg-gold-soft transition-colors gold-shadow">
+              <Link to="/marketplace" className="group inline-flex items-center justify-center gap-3 bg-gradient-to-r from-gold to-gold-soft text-primary-foreground px-10 py-5 text-xs tracking-luxury uppercase font-medium hover:opacity-95 transition-all gold-shadow">
                 Explore Properties <ArrowRight size={16} className="transition-transform group-hover:translate-x-1" />
               </Link>
-              <Link to="/auth" className="inline-flex items-center justify-center gap-3 border border-gold/50 bg-background/40 backdrop-blur-sm text-foreground px-8 py-4 text-xs tracking-luxury uppercase hover:border-gold hover:text-gold transition-colors">
-                <Wallet size={14} /> Connect Wallet
+              <Link to="/auth" className="group inline-flex items-center justify-center gap-3 border border-gold/50 bg-background/40 backdrop-blur-sm text-foreground px-10 py-5 text-xs tracking-luxury uppercase hover:border-gold hover:text-gold transition-colors">
+                <Wallet size={15} strokeWidth={1.5} /> Connect Wallet
               </Link>
             </div>
 
-            <div className="mt-8 flex flex-wrap items-center gap-x-6 gap-y-2 text-[10px] tracking-luxury uppercase text-foreground/70">
-              <span className="inline-flex items-center gap-2"><BadgeCheck size={14} className="text-gold" /> Verified Listings</span>
-              <span className="inline-flex items-center gap-2"><Award size={14} className="text-gold" /> Licensed Brokers</span>
-              <span className="inline-flex items-center gap-2"><Bitcoin size={14} className="text-gold" /> Bitcoin Custody</span>
+            <div className="mt-10 flex flex-wrap items-center gap-x-8 gap-y-3 text-[10px] tracking-luxury uppercase text-foreground/70">
+              <span className="inline-flex items-center gap-2"><ShieldCheck size={15} className="text-gold" strokeWidth={1.5} /> Verified Listings</span>
+              <span className="inline-flex items-center gap-2"><Award size={15} className="text-gold" strokeWidth={1.5} /> Licensed Brokers</span>
+              <span className="inline-flex items-center gap-2"><Lock size={15} className="text-gold" strokeWidth={1.5} /> Bitcoin Custody</span>
             </div>
           </div>
         </div>
