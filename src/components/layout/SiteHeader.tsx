@@ -19,15 +19,16 @@ export function SiteHeader() {
   const { session, isAdmin, isSeller } = useAuth();
 
   return (
-    <header className="fixed top-0 inset-x-0 z-50 border-b border-border/40 bg-background/80 backdrop-blur-xl">
-      <div className="mx-auto max-w-7xl px-6 lg:px-10 h-20 flex items-center justify-between">
-        <Link to="/" className="flex items-center gap-3 group" aria-label="FCG home">
-          <img src={logo} alt="Fortune Coastal Group" className="h-10 w-10 rounded-md" />
+    <header className="fixed top-0 inset-x-0 z-50 border-b border-gold/15 bg-background/55 backdrop-blur-xl">
+      <div className="mx-auto max-w-7xl px-6 lg:px-10 h-24 flex items-center justify-between">
+        <Link to="/" className="flex items-center gap-4 group" aria-label="FCG home">
+          <img src={logo} alt="Fortune Coastal Group" className="h-14 w-14 rounded-md ring-1 ring-gold/40 shadow-[0_0_30px_-8px_var(--gold)]" />
           <div className="hidden sm:block leading-tight">
-            <div className="font-serif text-lg text-foreground">Fortune Coastal</div>
-            <div className="text-[10px] tracking-luxury text-gold uppercase">Group</div>
+            <div className="font-serif font-bold text-2xl text-foreground tracking-tight">Fortune Coastal</div>
+            <div className="text-[10px] font-semibold tracking-luxury text-gold uppercase mt-0.5">Group</div>
           </div>
         </Link>
+
 
         <nav className="hidden md:flex items-center gap-10">
           {nav.map((n) => {
