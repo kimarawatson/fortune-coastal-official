@@ -65,7 +65,7 @@ export function SiteHeader() {
         <div className="md:hidden border-t border-border/40 bg-background/95 backdrop-blur-xl">
           <div className="px-6 py-6 flex flex-col gap-5">
             {nav.map((n) => <Link key={n.to} to={n.to} onClick={() => setOpen(false)} className="text-sm tracking-luxury uppercase text-foreground">{n.label}</Link>)}
-            {session && <Link to="/dashboard" onClick={() => setOpen(false)} className="text-sm tracking-luxury uppercase text-foreground">Dashboard</Link>}
+            
             {session && isSeller && <Link to="/seller" onClick={() => setOpen(false)} className="text-sm tracking-luxury uppercase text-foreground">Seller</Link>}
             {session && isAdmin && <Link to="/admin" onClick={() => setOpen(false)} className="text-sm tracking-luxury uppercase text-gold">Admin</Link>}
             <div className="hairline my-2" />
