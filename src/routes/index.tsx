@@ -39,52 +39,51 @@ function Home() {
   return (
     <SiteLayout>
       {/* ============ HERO ============ */}
-      <section className="relative -mt-20 min-h-[92vh] flex items-center overflow-hidden">
+      <section className="relative -mt-24 min-h-[94vh] flex items-center overflow-hidden">
         <img src={hero} alt="Luxury American oceanfront estate" className="absolute inset-0 h-full w-full object-cover" />
-        <div className="absolute inset-0 bg-gradient-to-r from-background/95 via-background/65 to-background/30" />
-        <div className="absolute inset-0 bg-gradient-to-b from-background/30 via-transparent to-background" />
-        <div className="absolute -top-40 -right-40 h-[600px] w-[600px] rounded-full" style={{ background: "radial-gradient(circle, var(--gold) 0%, transparent 70%)", opacity: 0.20 }} />
-        <div className="relative mx-auto max-w-7xl px-6 lg:px-10 w-full pt-28 pb-20">
+        <div className="absolute inset-0 bg-gradient-to-r from-background/85 via-background/35 to-transparent" />
+        <div className="absolute inset-0 bg-gradient-to-b from-background/40 via-transparent to-background/90" />
+        <div className="absolute -top-40 -right-40 h-[600px] w-[600px] rounded-full" style={{ background: "radial-gradient(circle, var(--gold) 0%, transparent 70%)", opacity: 0.18 }} />
+        <div className="relative mx-auto max-w-7xl px-6 lg:px-10 w-full pt-32 pb-24">
           <div className="max-w-2xl">
-            <div className="inline-flex items-center gap-2 border border-gold/40 bg-background/40 backdrop-blur-sm px-4 py-2 text-[10px] tracking-luxury uppercase text-gold">
-              <Gem size={12} /> America's Luxury Wealth Platform
+            <div className="inline-flex items-center gap-2 text-[10px] tracking-luxury uppercase text-gold">
+              <Gem size={12} /> <span className="h-px w-8 bg-gold/60" /> America's Luxury Wealth Platform
             </div>
             <h1 className="mt-8 font-serif text-5xl md:text-6xl lg:text-7xl text-foreground leading-[1.05]">
               The Fortune Way of <br />
               <span className="gradient-gold-text italic">Buying, Selling</span> Luxury Real Estate
             </h1>
-            <p className="mt-8 max-w-xl text-base md:text-lg text-foreground/80 leading-relaxed">
+            <p className="mt-8 max-w-xl text-base md:text-lg text-foreground/85 leading-relaxed">
               Where digital wealth meets physical luxury. Trade premium American properties and manage Bitcoin holdings in one private platform.
             </p>
 
-            {/* Inline luxe stats — no panel */}
-            <div className="mt-14 max-w-2xl">
-              <div className="h-px w-16 bg-gradient-to-r from-gold to-transparent" />
-              <div className="mt-8 grid grid-cols-3 gap-10">
-                {([
-                  { Icon: Crown, v: "5,000+", l: "Luxury Homes" },
-                  { Icon: Bitcoin, v: "24/7", l: "Bitcoin Trading" },
-                  { Icon: Diamond, v: "$2.5B+", l: "Assets Managed" },
-                ]).map(({ Icon, v, l }, i) => (
-                  <div key={l} className={i > 0 ? "pl-10 border-l border-gold/20" : ""}>
-                    <Icon size={18} className="text-gold" strokeWidth={1.5} />
-                    <div className="mt-4 font-serif text-3xl md:text-4xl gradient-gold-text leading-none">{v}</div>
-                    <div className="mt-2 text-[10px] tracking-luxury uppercase text-muted-foreground">{l}</div>
+            {/* Stats — pure typography, no panels */}
+            <div className="mt-16 max-w-3xl flex flex-wrap items-end gap-x-14 gap-y-10">
+              {([
+                { Icon: Crown, v: "5,000+", l: "Luxury Homes" },
+                { Icon: Bitcoin, v: "24/7", l: "Bitcoin Trading" },
+                { Icon: Diamond, v: "$2.5B+", l: "Assets Managed" },
+              ]).map(({ Icon, v, l }) => (
+                <div key={l} className="flex items-end gap-4">
+                  <Icon size={22} className="text-gold mb-2" strokeWidth={1.25} />
+                  <div>
+                    <div className="font-serif text-4xl md:text-5xl gradient-gold-text leading-none">{v}</div>
+                    <div className="mt-2 text-[10px] tracking-luxury uppercase text-foreground/70">{l}</div>
                   </div>
-                ))}
-              </div>
+                </div>
+              ))}
             </div>
 
-            <div className="mt-10 flex flex-col sm:flex-row gap-4">
-              <Link to="/marketplace" className="group inline-flex items-center justify-center gap-3 bg-gradient-to-r from-gold to-gold-soft text-primary-foreground px-10 py-5 text-xs tracking-luxury uppercase font-medium hover:opacity-95 transition-all gold-shadow">
+            <div className="mt-12 flex flex-col sm:flex-row gap-5">
+              <Link to="/marketplace" className="group inline-flex items-center justify-center gap-3 bg-gradient-to-r from-gold to-gold-soft text-primary-foreground px-10 py-5 text-xs tracking-luxury uppercase font-semibold hover:opacity-95 transition-all gold-shadow">
                 Explore Properties <ArrowRight size={16} className="transition-transform group-hover:translate-x-1" />
               </Link>
-              <Link to="/auth" className="group inline-flex items-center justify-center gap-3 border border-gold/50 bg-background/40 backdrop-blur-sm text-foreground px-10 py-5 text-xs tracking-luxury uppercase hover:border-gold hover:text-gold transition-colors">
-                <Wallet size={15} strokeWidth={1.5} /> Connect Wallet
+              <Link to="/auth" className="group inline-flex items-center justify-center gap-3 text-foreground px-2 py-5 text-xs tracking-luxury uppercase hover:text-gold transition-colors">
+                <Wallet size={15} strokeWidth={1.5} /> Connect Wallet <ArrowRight size={14} className="opacity-60 transition-transform group-hover:translate-x-1" />
               </Link>
             </div>
 
-            <div className="mt-10 flex flex-wrap items-center gap-x-8 gap-y-3 text-[10px] tracking-luxury uppercase text-foreground/70">
+            <div className="mt-12 flex flex-wrap items-center gap-x-8 gap-y-3 text-[10px] tracking-luxury uppercase text-foreground/65">
               <span className="inline-flex items-center gap-2"><ShieldCheck size={15} className="text-gold" strokeWidth={1.5} /> Verified Listings</span>
               <span className="inline-flex items-center gap-2"><Award size={15} className="text-gold" strokeWidth={1.5} /> Licensed Brokers</span>
               <span className="inline-flex items-center gap-2"><Lock size={15} className="text-gold" strokeWidth={1.5} /> Bitcoin Custody</span>
@@ -92,6 +91,7 @@ function Home() {
           </div>
         </div>
       </section>
+
 
 
       {/* ============ FEATURED COLLECTION ============ */}
