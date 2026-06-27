@@ -2,7 +2,6 @@ import { createFileRoute, useNavigate, Link } from "@tanstack/react-router";
 import { useState } from "react";
 import { toast } from "sonner";
 import { supabase } from "@/integrations/supabase/client";
-import { BackToSiteLink } from "@/components/BackToSiteLink";
 
 export const Route = createFileRoute("/reset-password")({
   head: () => ({ meta: [{ title: "Reset password — FCG" }, { name: "robots", content: "noindex" }] }),
@@ -33,7 +32,6 @@ function ResetPassword() {
   return (
     <div className="min-h-screen bg-background flex items-center justify-center px-6">
       <form onSubmit={handle} className="w-full max-w-sm">
-        <BackToSiteLink className="mb-8" />
         <div className="text-[10px] tracking-luxury uppercase text-gold">Reset Password</div>
         <h1 className="mt-3 font-serif text-4xl text-foreground">Set a new password</h1>
         <label className="block mt-8">

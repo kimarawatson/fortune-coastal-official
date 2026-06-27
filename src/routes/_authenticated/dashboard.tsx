@@ -5,7 +5,6 @@ import { useServerFn } from "@tanstack/react-start";
 import { toast } from "sonner";
 import { ArrowRight, LogOut, MessageSquare, Plus, Settings, Shield, ShieldAlert, Store } from "lucide-react";
 import { SiteLayout } from "@/components/SiteLayout";
-import { BackToSiteLink } from "@/components/BackToSiteLink";
 import { useAuth } from "@/hooks/use-auth";
 import { supabase } from "@/integrations/supabase/client";
 import { claimFirstAdmin } from "@/lib/listings.functions";
@@ -54,7 +53,6 @@ function Dashboard() {
   return (
     <SiteLayout>
       <section className="mx-auto max-w-7xl px-6 lg:px-10 pt-16 pb-12">
-        <BackToSiteLink className="mb-8" />
         <div className="flex items-start justify-between gap-6 flex-wrap">
           <div>
             <div className="text-[10px] tracking-luxury uppercase text-gold">Member Portal</div>

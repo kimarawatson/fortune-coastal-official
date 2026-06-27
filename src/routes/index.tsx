@@ -57,29 +57,19 @@ function Home() {
               Where digital wealth meets physical luxury. Trade premium American properties and manage Bitcoin holdings in one private platform.
             </p>
 
-            {/* Luxe stat panel */}
-            <div className="mt-12 relative max-w-2xl">
-              {/* corner ornaments */}
-              <span aria-hidden className="absolute -top-px -left-px h-4 w-4 border-t border-l border-gold" />
-              <span aria-hidden className="absolute -top-px -right-px h-4 w-4 border-t border-r border-gold" />
-              <span aria-hidden className="absolute -bottom-px -left-px h-4 w-4 border-b border-l border-gold" />
-              <span aria-hidden className="absolute -bottom-px -right-px h-4 w-4 border-b border-r border-gold" />
-
-              <div
-                className="relative grid grid-cols-3 divide-x divide-gold/25 border border-gold/30 bg-gradient-to-br from-background/85 via-background/70 to-background/85 backdrop-blur-xl"
-                style={{ boxShadow: "0 30px 80px -30px rgba(201,168,76,0.25), inset 0 1px 0 rgba(201,168,76,0.15)" }}
-              >
+            {/* Inline luxe stats — no panel */}
+            <div className="mt-14 max-w-2xl">
+              <div className="h-px w-16 bg-gradient-to-r from-gold to-transparent" />
+              <div className="mt-8 grid grid-cols-3 gap-10">
                 {([
                   { Icon: Crown, v: "5,000+", l: "Luxury Homes" },
                   { Icon: Bitcoin, v: "24/7", l: "Bitcoin Trading" },
                   { Icon: Diamond, v: "$2.5B+", l: "Assets Managed" },
-                ]).map(({ Icon, v, l }) => (
-                  <div key={l} className="px-6 py-8 text-center group">
-                    <div className="mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-full border border-gold/40 bg-gradient-to-br from-gold/15 to-transparent transition-all group-hover:border-gold group-hover:from-gold/25">
-                      <Icon size={20} className="text-gold" strokeWidth={1.5} />
-                    </div>
-                    <div className="font-serif text-3xl md:text-4xl gradient-gold-text leading-none">{v}</div>
-                    <div className="mt-3 text-[10px] tracking-luxury uppercase text-muted-foreground">{l}</div>
+                ]).map(({ Icon, v, l }, i) => (
+                  <div key={l} className={i > 0 ? "pl-10 border-l border-gold/20" : ""}>
+                    <Icon size={18} className="text-gold" strokeWidth={1.5} />
+                    <div className="mt-4 font-serif text-3xl md:text-4xl gradient-gold-text leading-none">{v}</div>
+                    <div className="mt-2 text-[10px] tracking-luxury uppercase text-muted-foreground">{l}</div>
                   </div>
                 ))}
               </div>
