@@ -6,6 +6,7 @@ import { useAuth } from "@/hooks/use-auth";
 
 const nav = [
   { to: "/marketplace", label: "Marketplace" },
+  { to: "/dashboard", label: "Dashboard" },
   { to: "/about", label: "About" },
   { to: "/contact", label: "Contact" },
 ];
