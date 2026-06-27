@@ -51,10 +51,11 @@ export function SiteHeader() {
           {!session ? (
             <>
               <Link to="/auth" className="text-xs tracking-luxury uppercase text-muted-foreground hover:text-foreground transition-colors">Sign In</Link>
-              <Link to="/auth" className="text-xs tracking-luxury uppercase border border-gold/60 text-gold px-5 py-2.5 hover:bg-gold hover:text-primary-foreground transition-colors">Apply</Link>
+              <Link to="/auth" className="text-xs font-medium tracking-luxury uppercase bg-gradient-to-r from-gold to-gold-soft text-primary-foreground px-6 py-3 hover:opacity-90 transition-opacity">Apply</Link>
             </>
           ) : (
-            <Link to="/dashboard" className="text-xs tracking-luxury uppercase border border-gold/60 text-gold px-5 py-2.5 hover:bg-gold hover:text-primary-foreground transition-colors">My Portal</Link>
+            <Link to="/dashboard" className="text-xs font-medium tracking-luxury uppercase bg-gradient-to-r from-gold to-gold-soft text-primary-foreground px-6 py-3 hover:opacity-90 transition-opacity">My Portal</Link>
+
           )}
         </div>
 
