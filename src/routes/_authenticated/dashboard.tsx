@@ -59,16 +59,12 @@ function Dashboard() {
             <h1 className="mt-3 font-serif text-5xl text-foreground">Welcome, {user?.user_metadata?.full_name || user?.email}</h1>
             <p className="mt-3 text-muted-foreground">Roles: {roles.length ? roles.join(", ") : "buyer"}</p>
           </div>
-          <button
-            onClick={() => signOut().then(() => navigate({ to: "/" }))}
-            className="inline-flex items-center gap-2 border border-border/60 px-4 py-2 text-[10px] tracking-luxury uppercase text-muted-foreground hover:text-gold hover:border-gold transition-colors"
-          >
-            <LogOut size={12} /> Sign out
-          </button>
+          <SignOutButton />
         </div>
       </section>
 
       <section className="mx-auto max-w-7xl px-6 lg:px-10 grid gap-5 md:grid-cols-3">
+        <PortalCard to="/profile" icon={UserCircle} title="My Profile" body="Update your name, country, and avatar." />
         <PortalCard to="/marketplace" icon={ArrowRight} title="Browse Marketplace" body="Discover verified luxury assets across the United States." />
         <PortalCard to="/seller" icon={Store} title={isSeller ? "Seller Portal" : "Become a Seller"} body={isSeller ? "Manage your listings, photos, and inquiries." : "Apply to list assets on FCG."} />
         {isAdmin && <PortalCard to="/admin" icon={Shield} title="Admin Console" body="Manage listings, users, categories, and homepage." />}
