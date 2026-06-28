@@ -1,10 +1,11 @@
-import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
+import { createFileRoute, Link } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { useServerFn } from "@tanstack/react-start";
 import { toast } from "sonner";
-import { ArrowRight, LogOut, MessageSquare, Plus, Settings, Shield, ShieldAlert, Store } from "lucide-react";
+import { ArrowRight, MessageSquare, Shield, ShieldAlert, Store, UserCircle } from "lucide-react";
 import { SiteLayout } from "@/components/SiteLayout";
+import { SignOutButton } from "@/components/SignOutButton";
 import { useAuth } from "@/hooks/use-auth";
 import { supabase } from "@/integrations/supabase/client";
 import { claimFirstAdmin } from "@/lib/listings.functions";
@@ -16,8 +17,7 @@ export const Route = createFileRoute("/_authenticated/dashboard")({
 });
 
 function Dashboard() {
-  const { user, userId, roles, isAdmin, isSeller, signOut, loading } = useAuth();
-  const navigate = useNavigate();
+  const { user, userId, roles, isAdmin, isSeller, loading } = useAuth();
   const claim = useServerFn(claimFirstAdmin);
 
   const inquiriesQ = useQuery({
@@ -59,16 +59,12 @@ function Dashboard() {
             <h1 className="mt-3 font-serif text-5xl text-foreground">Welcome, {user?.user_metadata?.full_name || user?.email}</h1>
             <p className="mt-3 text-muted-foreground">Roles: {roles.length ? roles.join(", ") : "buyer"}</p>
           </div>
-          <button
-            onClick={() => signOut().then(() => navigate({ to: "/" }))}
-            className="inline-flex items-center gap-2 border border-border/60 px-4 py-2 text-[10px] tracking-luxury uppercase text-muted-foreground hover:text-gold hover:border-gold transition-colors"
-          >
-            <LogOut size={12} /> Sign out
-          </button>
+          <SignOutButton />
         </div>
       </section>
 
       <section className="mx-auto max-w-7xl px-6 lg:px-10 grid gap-5 md:grid-cols-3">
+        <PortalCard to="/profile" icon={UserCircle} title="My Profile" body="Update your name, country, and avatar." />
         <PortalCard to="/marketplace" icon={ArrowRight} title="Browse Marketplace" body="Discover verified luxury assets across the United States." />
         <PortalCard to="/seller" icon={Store} title={isSeller ? "Seller Portal" : "Become a Seller"} body={isSeller ? "Manage your listings, photos, and inquiries." : "Apply to list assets on FCG."} />
         {isAdmin && <PortalCard to="/admin" icon={Shield} title="Admin Console" body="Manage listings, users, categories, and homepage." />}
