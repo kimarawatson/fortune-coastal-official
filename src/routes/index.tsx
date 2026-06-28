@@ -95,9 +95,10 @@ function Home() {
 
 
       {/* ============ FEATURED COLLECTION ============ */}
-      <section className="relative mt-24 py-24 overflow-hidden">
-        <img src={hamptons} alt="" aria-hidden className="absolute inset-0 h-full w-full object-cover opacity-55" />
-        <div className="absolute inset-0 bg-gradient-to-b from-background/80 via-background/30 to-background/90" />
+      <section className="relative mt-0 py-24 overflow-hidden">
+        <img src={hamptons} alt="" aria-hidden className="absolute inset-0 h-full w-full object-cover opacity-40" />
+        <div className="absolute inset-0 bg-gradient-to-b from-background via-background/55 to-background" />
+
         <div className="relative mx-auto max-w-7xl px-6 lg:px-10">
         <div className="text-center">
           <div className="inline-flex items-center gap-2 text-[10px] tracking-luxury uppercase text-gold">
