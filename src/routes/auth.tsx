@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import { z } from "zod";
 import { toast } from "sonner";
 import { supabase } from "@/integrations/supabase/client";
-import { lovable } from "@/integrations/lovable";
+
 import logo from "@/assets/fcg-logo.png";
 import authBg from "@/assets/auth-luxury.jpg";
 
@@ -75,13 +75,13 @@ function AuthPage() {
   async function handleGoogle() {
     setLoading(true);
     try {
-      const res = await lovable.auth.signInWithOAuth("google", { redirect_uri: window.location.origin + "/dashboard" });
-      if (res.error) throw res.error as Error;
-      if (res.redirected) return;
-      navigate({ to: "/dashboard" });
+      const { error } = await supabase.auth.signInWithOAuth({
+        provider: "google",
+        options: { redirectTo: `${window.location.origin}/dashboard` },
+      });
+      if (error) throw error;
     } catch (err: any) {
       toast.error(err?.message ?? "Google sign-in failed.");
-    } finally {
       setLoading(false);
     }
   }
