@@ -1,6 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useState } from "react";
-import { Mail, MapPin, Phone } from "lucide-react";
+import { Instagram, Linkedin, Twitter, Facebook, Youtube, Mail, MapPin, Phone } from "lucide-react";
 import { SiteLayout } from "@/components/SiteLayout";
 import contactHero from "@/assets/asset-miami.jpg";
 
