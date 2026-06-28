@@ -224,8 +224,9 @@ function Home() {
 
       {/* ============ PLATFORM TECHNOLOGY ============ */}
       <section className="relative mt-0 py-24 overflow-hidden">
-        <img src={bombardier} alt="" aria-hidden className="absolute inset-0 h-full w-full object-cover opacity-50" />
-        <div className="absolute inset-0 bg-gradient-to-b from-background/80 via-background/35 to-background/90" />
+        <img src={bombardier} alt="" aria-hidden className="absolute inset-0 h-full w-full object-cover opacity-35" />
+        <div className="absolute inset-0 bg-gradient-to-b from-background via-background/60 to-background" />
+
         <div className="relative mx-auto max-w-7xl px-6 lg:px-10">
         <div className="text-center">
           <div className="inline-flex items-center gap-2 text-[10px] tracking-luxury uppercase text-gold">
