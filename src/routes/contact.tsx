@@ -1,6 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useState } from "react";
-import { Mail, MapPin, Phone } from "lucide-react";
+import { Instagram, Linkedin, Twitter, Facebook, Youtube, Mail, MapPin, Phone } from "lucide-react";
 import { SiteLayout } from "@/components/SiteLayout";
 import contactHero from "@/assets/asset-miami.jpg";
 
@@ -47,11 +47,23 @@ function Contact() {
             ))}
           </div>
 
-          <div className="mt-12 flex gap-3">
-            {["IG", "LI", "X"].map((s) => (
-              <a key={s} href="#" className="h-10 w-10 grid place-items-center border border-border/40 text-xs text-muted-foreground hover:border-gold hover:text-gold transition-colors">{s}</a>
-            ))}
+          <div className="mt-12">
+            <div className="text-[10px] tracking-luxury uppercase text-muted-foreground mb-4">Follow Fortune Coastal</div>
+            <div className="flex gap-3">
+              {[
+                { Icon: Instagram, label: "Instagram", href: "#" },
+                { Icon: Linkedin, label: "LinkedIn", href: "#" },
+                { Icon: Twitter, label: "X", href: "#" },
+                { Icon: Facebook, label: "Facebook", href: "#" },
+                { Icon: Youtube, label: "YouTube", href: "#" },
+              ].map(({ Icon, label, href }) => (
+                <a key={label} href={href} aria-label={label} className="h-11 w-11 grid place-items-center border border-border/40 bg-charcoal/40 text-muted-foreground hover:border-gold hover:text-gold hover:bg-gold/5 transition-all">
+                  <Icon size={16} strokeWidth={1.5} />
+                </a>
+              ))}
+            </div>
           </div>
+
         </div>
 
         <form

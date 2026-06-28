@@ -95,9 +95,10 @@ function Home() {
 
 
       {/* ============ FEATURED COLLECTION ============ */}
-      <section className="relative mt-24 py-24 overflow-hidden">
-        <img src={hamptons} alt="" aria-hidden className="absolute inset-0 h-full w-full object-cover opacity-55" />
-        <div className="absolute inset-0 bg-gradient-to-b from-background/80 via-background/30 to-background/90" />
+      <section className="relative mt-0 py-24 overflow-hidden">
+        <img src={hamptons} alt="" aria-hidden className="absolute inset-0 h-full w-full object-cover opacity-40" />
+        <div className="absolute inset-0 bg-gradient-to-b from-background via-background/55 to-background" />
+
         <div className="relative mx-auto max-w-7xl px-6 lg:px-10">
         <div className="text-center">
           <div className="inline-flex items-center gap-2 text-[10px] tracking-luxury uppercase text-gold">
@@ -129,8 +130,9 @@ function Home() {
 
       {/* ============ DIGITAL WEALTH / FORTUNE VAULT ============ */}
       <section className="mt-0 relative overflow-hidden py-24">
-        <img src={villa} alt="" aria-hidden className="absolute inset-0 h-full w-full object-cover opacity-55" />
-        <div className="absolute inset-0 bg-gradient-to-b from-background/80 via-background/35 to-background/90" />
+        <img src={villa} alt="" aria-hidden className="absolute inset-0 h-full w-full object-cover opacity-40" />
+        <div className="absolute inset-0 bg-gradient-to-b from-background via-background/60 to-background" />
+
         <div className="absolute inset-0" style={{ background: "radial-gradient(60% 60% at 80% 50%, var(--gold) 0%, transparent 70%)", opacity: 0.12 }} />
         <div className="relative mx-auto max-w-7xl px-6 lg:px-10">
           <div className="text-center">
@@ -222,8 +224,9 @@ function Home() {
 
       {/* ============ PLATFORM TECHNOLOGY ============ */}
       <section className="relative mt-0 py-24 overflow-hidden">
-        <img src={bombardier} alt="" aria-hidden className="absolute inset-0 h-full w-full object-cover opacity-50" />
-        <div className="absolute inset-0 bg-gradient-to-b from-background/80 via-background/35 to-background/90" />
+        <img src={bombardier} alt="" aria-hidden className="absolute inset-0 h-full w-full object-cover opacity-35" />
+        <div className="absolute inset-0 bg-gradient-to-b from-background via-background/60 to-background" />
+
         <div className="relative mx-auto max-w-7xl px-6 lg:px-10">
         <div className="text-center">
           <div className="inline-flex items-center gap-2 text-[10px] tracking-luxury uppercase text-gold">
@@ -275,8 +278,9 @@ function Home() {
 
       {/* ============ MISSION / INNOVATION / FUTURE ============ */}
       <section className="relative mt-0 py-24 overflow-hidden">
-        <img src={yacht} alt="" aria-hidden className="absolute inset-0 h-full w-full object-cover opacity-55" />
-        <div className="absolute inset-0 bg-gradient-to-b from-background/80 via-background/35 to-background/90" />
+        <img src={yacht} alt="" aria-hidden className="absolute inset-0 h-full w-full object-cover opacity-40" />
+        <div className="absolute inset-0 bg-gradient-to-b from-background via-background/60 to-background" />
+
         <div className="relative mx-auto max-w-7xl px-6 lg:px-10">
         <div className="text-center">
           <div className="inline-flex items-center gap-2 text-[10px] tracking-luxury uppercase text-gold">
@@ -307,10 +311,11 @@ function Home() {
       </section>
 
       {/* ============ ROADMAP ============ */}
-      <section className="mt-32 mx-auto max-w-6xl px-6 lg:px-10">
-        <div className="relative overflow-hidden p-10 lg:p-14">
-          <img src={aspen} alt="" aria-hidden className="absolute inset-0 h-full w-full object-cover opacity-50" />
-          <div className="absolute inset-0 bg-gradient-to-b from-background/70 via-background/50 to-background/85" />
+      <section className="mt-0 relative py-24 overflow-hidden">
+        <div className="relative mx-auto max-w-6xl px-6 lg:px-10 overflow-hidden p-10 lg:p-14">
+          <img src={aspen} alt="" aria-hidden className="absolute inset-0 h-full w-full object-cover opacity-35" />
+          <div className="absolute inset-0 bg-gradient-to-b from-background via-background/55 to-background" />
+
           <div className="relative">
           <div className="text-center">
             <div className="text-[10px] tracking-luxury uppercase text-gold">Strategy</div>

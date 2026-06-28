@@ -90,24 +90,33 @@ function Marketplace() {
 
 function ListingCard({ l }: { l: any }) {
   return (
-    <Link to="/asset/$id" params={{ id: l.id }} className="group block">
+    <Link to="/asset/$id" params={{ id: l.id }} className="group block bg-charcoal/40 backdrop-blur-sm border border-border/40 hover:border-gold/60 hover:bg-charcoal/60 transition-all duration-500 shadow-[0_8px_30px_-12px_rgba(0,0,0,0.6)] hover:shadow-[0_20px_50px_-16px_rgba(201,168,76,0.25)]">
       <div className="relative aspect-[4/3] overflow-hidden bg-charcoal">
         {l.cover_image && <img src={l.cover_image} alt={l.title} className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105" />}
+        <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
         {l.verified && <div className="absolute top-3 left-3 flex items-center gap-1 bg-background/70 backdrop-blur-md border border-gold/30 px-2 py-1 text-[10px] tracking-luxury uppercase text-gold"><BadgeCheck size={11} />Verified</div>}
         {l.accepts_btc && <div className="absolute top-3 right-3 bg-background/70 backdrop-blur-md border border-gold/30 px-2 py-1 text-gold"><Bitcoin size={11} /></div>}
       </div>
-      <div className="mt-4">
+      <div className="p-5">
         <div className="text-[10px] tracking-luxury uppercase text-gold">{l.category_slug.replace(/-/g, " ")}</div>
         <div className="mt-1 font-serif text-xl text-foreground group-hover:text-gold transition-colors">{l.title}</div>
         <div className="mt-1 flex items-center gap-1 text-xs text-muted-foreground"><MapPin size={11} /> {l.location}</div>
-        <div className="mt-3 flex items-end justify-between">
-          <div className="font-serif text-lg text-foreground">{formatUsd(Number(l.price_usd))}</div>
-          <div className="text-xs text-gold">{formatBtc(l.price_btc)}</div>
+        <div className="hairline my-4" />
+        <div className="flex items-end justify-between">
+          <div>
+            <div className="text-[10px] tracking-luxury uppercase text-muted-foreground">Price</div>
+            <div className="font-serif text-lg text-foreground">{formatUsd(Number(l.price_usd))}</div>
+          </div>
+          <div className="text-right">
+            <div className="text-[10px] tracking-luxury uppercase text-muted-foreground">Bitcoin</div>
+            <div className="text-sm text-gold">{formatBtc(l.price_btc)}</div>
+          </div>
         </div>
       </div>
     </Link>
   );
 }
+
 
 function Sel({ label, value, onChange, options }: { label: string; value: string; onChange: (v: string) => void; options: { value: string; label: string }[] }) {
   return (
