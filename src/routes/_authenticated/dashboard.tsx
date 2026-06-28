@@ -3,8 +3,9 @@ import { useEffect, useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { useServerFn } from "@tanstack/react-start";
 import { toast } from "sonner";
-import { ArrowRight, LogOut, MessageSquare, Plus, Settings, Shield, ShieldAlert, Store } from "lucide-react";
+import { ArrowRight, MessageSquare, Shield, ShieldAlert, Store, UserCircle } from "lucide-react";
 import { SiteLayout } from "@/components/SiteLayout";
+import { SignOutButton } from "@/components/SignOutButton";
 import { useAuth } from "@/hooks/use-auth";
 import { supabase } from "@/integrations/supabase/client";
 import { claimFirstAdmin } from "@/lib/listings.functions";
@@ -16,8 +17,7 @@ export const Route = createFileRoute("/_authenticated/dashboard")({
 });
 
 function Dashboard() {
-  const { user, userId, roles, isAdmin, isSeller, signOut, loading } = useAuth();
-  const navigate = useNavigate();
+  const { user, userId, roles, isAdmin, isSeller, loading } = useAuth();
   const claim = useServerFn(claimFirstAdmin);
 
   const inquiriesQ = useQuery({
