@@ -1,44 +1,26 @@
-## Why nothing shows up
+## Problem
 
-Two independent root causes — both must be fixed:
+Auth logs show every sign-in attempt failing with `email_not_confirmed`. Signup succeeds and creates the user, but Supabase is configured to require an email confirmation click before the session is issued — and confirmation emails aren't being delivered reliably on your project. Because no one can sign in, no one can reach `/dashboard` to press "Claim First Admin", which is why the admin role also appears broken.
 
-### 1. Supabase env vars must be **build-time**, not runtime
-Vite inlines `import.meta.env.VITE_*` into the JS bundle **when you build**. Runtime Worker/Pages secrets are invisible to the browser bundle, so the client falls back to the values baked in at build time — which still point at the old Lovable Cloud project (or are missing entirely). Result: queries hit the wrong DB / get blocked, and the marketplace renders 0 rows with no console errors (empty query = empty UI).
+There is nothing wrong with the auth code or the `has_role` logic — it's a single auth setting plus a one-time role grant.
 
-### 2. Your new Supabase project has no data
-Migrations created the **schema** (tables, policies, GRANTs, bucket), but no listings, categories, or homepage content. Marketplace queries `listings` → returns `[]` → "0 Assets".
+## Fix
 
----
+1. **Turn off "Confirm email" on the backend** so email + password signups are signed in immediately (Google sign-in is unaffected). New users land on `/dashboard` right after creating an account.
+2. **Promote your existing account to admin via a one-shot SQL migration** for `kimarawatson90@gmail.com` (the account already created in the logs), so you don't have to rely on the in-app "Claim First Admin" button. Inserts a row into `user_roles` with role `admin`; idempotent (`ON CONFLICT DO NOTHING`).
+3. **Verify**: sign in with that email/password → header shows your name → `/admin` loads → Demo Data → Seed populates the marketplace.
 
-## Fix — do both
+## Notes
 
-### A. Set build-time env vars on Cloudflare
-In **Cloudflare Pages → your project → Settings → Environment variables**, add for **Production** (and Preview):
+- This does not change the auth UI, routes, or any frontend code.
+- Google sign-in is currently failing separately with `missing OAuth secret` — that means Google isn't enabled on the backend yet. Out of scope for this fix; tell me when you want to wire it up and I'll enable the Google provider and walk you through the Client ID / Secret.
+- If you'd rather keep email confirmation ON for production later, we can re-enable it once a custom SMTP sender is configured.
 
-```
-VITE_SUPABASE_URL          = https://<your-project-ref>.supabase.co
-VITE_SUPABASE_PUBLISHABLE_KEY = <your anon/publishable key>
-VITE_SUPABASE_PROJECT_ID   = <your-project-ref>
-```
+## Technical detail
 
-Then **trigger a new deployment** (env-var changes only apply to new builds, not the current one). If you're using Workers directly with Wrangler, put these in `[vars]` in `wrangler.toml` and redeploy — not as `wrangler secret put` (those are runtime-only).
-
-Verify after deploy: open DevTools → Network on the live site → you should see XHRs going to **your** `supabase.co` URL, not the old one.
-
-### B. Seed your own database
-On the live site against your new Supabase:
-1. Sign up an account (email/password).
-2. Visit `/dashboard` → click **Claim First Admin** (only works if no admin exists yet — yours will be the first).
-3. Go to `/admin` → **Demo Data** → **Seed** to populate listings, categories, and homepage content.
-4. Approve the seeded listings if they land as `pending`.
-
-### C. (If listing images stay broken after seeding)
-The seed inserts image URLs that point at the bundled `/src/assets/*` files — those resolve fine because they're shipped with the Cloudflare build. But if you later upload images via the seller form, the `listing-media` bucket is **private** and uses signed URLs — make sure the bucket exists in your new Supabase Storage (migrations should have created it; check **Storage → Buckets**).
-
----
-
-## What I'll do in this session
-Nothing in the codebase needs to change — this is a deployment + data issue on your side. I'll stay on standby to:
-- Add a clearer "no data yet, seed me" empty state on the marketplace, or
-- Add a one-click seed button visible before claiming admin,
-- if you'd like either of those as a follow-up.
+- Tool calls: `supabase--configure_auth` with `auto_confirm_email: true` (other flags unchanged: `disable_signup: false`, `external_anonymous_users_enabled: false`, `password_hibp_enabled: true`); then `supabase--migration` running:
+  ```sql
+  INSERT INTO public.user_roles (user_id, role)
+  SELECT id, 'admin' FROM auth.users WHERE email = 'kimarawatson90@gmail.com'
+  ON CONFLICT (user_id, role) DO NOTHING;
+  ```
