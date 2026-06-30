@@ -26,43 +26,71 @@ function createSupabaseFetch(supabaseKey: string): typeof fetch {
   };
 }
 
-// Detect environment based on hostname or build mode
+// 🔑 ENVIRONMENT DETECTION - automatically switches Supabase projects
 function getEnvironmentConfig() {
   const hostname = typeof window !== 'undefined' ? window.location.hostname : '';
-  const isLovable = hostname.includes('lovable.app') || hostname.includes('lovable.dev');
-  const isCloudflare = hostname.includes('pages.dev') || hostname.includes('fortunecoastalgroup.com');
-  const isDevelopment = import.meta.env.DEV || import.meta.env.MODE === 'development';
-
-  // Priority: Environment variables > Hostname detection
-  const url = import.meta.env.VITE_SUPABASE_URL || import.meta.env.SUPABASE_URL;
-  const key = import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY || import.meta.env.SUPABASE_PUBLISHABLE_KEY;
-
-  // If explicit env vars are set, use them (Cloudflare)
-  if (url && key) {
-    return { url, key };
+  
+  console.log('🔵 Environment detection - Hostname:', hostname);
+  
+  // Cloudflare Production (your custom domain)
+  if (hostname.includes('fortunecoastalgroup.com') || hostname.includes('fortunecoastal.com')) {
+    console.log('🔵 Using Cloudflare Supabase: sjdocxbywfmzksxyezq');
+    return {
+      url: 'https://sjdocxbywfmzksxyezq.supabase.co',
+      key: 'YOUR_CLOUDFLARE_PUBLISHABLE_KEY' // Replace with your actual Cloudflare key
+    };
   }
-
-  // Fallback: Lovable uses its own defaults
-  if (isLovable || isDevelopment) {
+  
+  // Cloudflare Pages preview (pages.dev)
+  if (hostname.includes('pages.dev')) {
+    console.log('🔵 Using Cloudflare Pages Supabase: sjdocxbywfmzksxyezq');
+    return {
+      url: 'https://sjdocxbywfmzksxyezq.supabase.co',
+      key: 'YOUR_CLOUDFLARE_PUBLISHABLE_KEY' // Replace with your actual Cloudflare key
+    };
+  }
+  
+  // Lovable (development/preview)
+  if (hostname.includes('lovable.app') || hostname.includes('lovable.dev')) {
+    console.log('🔵 Using Lovable Supabase: fycahwbrblvrytmkocfk');
     return {
       url: 'https://fycahwbrblvrytmkocfk.supabase.co',
       key: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImZ5Y2Fod2JyYmx2cnl0bWtvY2ZrIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODI0MTI5NzAsImV4cCI6MjA5Nzk4ODk3MH0.tVPXsdtOgDUv4BGywr00F8dJNL-QyP2judHWwvDclWw'
     };
   }
-
-  // Cloudflare fallback
+  
+  // Local development (localhost)
+  if (hostname.includes('localhost') || hostname === '') {
+    console.log('🔵 Using Lovable Supabase (local dev): fycahwbrblvrytmkocfk');
+    return {
+      url: 'https://fycahwbrblvrytmkocfk.supabase.co',
+      key: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImZ5Y2Fod2JyYmx2cnl0bWtvY2ZrIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODI0MTI5NzAsImV4cCI6MjA5Nzk4ODk3MH0.tVPXsdtOgDUv4BGywr00F8dJNL-QyP2judHWwvDclWw'
+    };
+  }
+  
+  // Fallback: use environment variables if set
+  const url = import.meta.env.VITE_SUPABASE_URL || import.meta.env.SUPABASE_URL;
+  const key = import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY || import.meta.env.SUPABASE_PUBLISHABLE_KEY;
+  
+  if (url && key) {
+    console.log('🔵 Using environment variables for Supabase');
+    return { url, key };
+  }
+  
+  // Final fallback to Lovable's Supabase
+  console.log('🔵 Using Lovable Supabase (fallback): fycahwbrblvrytmkocfk');
   return {
-    url: 'https://sjdocxbywfmzksxyezq.supabase.co',
-    key: 'YOUR_CLOUDFLARE_PUBLISHABLE_KEY'
+    url: 'https://fycahwbrblvrytmkocfk.supabase.co',
+    key: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImZ5Y2Fod2JyYmx2cnl0bWtvY2ZrIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODI0MTI5NzAsImV4cCI6MjA5Nzk4ODk3MH0.tVPXsdtOgDUv4BGywr00F8dJNL-QyP2judHWwvDclWw'
   };
 }
 
 function createSupabaseClient() {
-  // Use import.meta.env for client-side (Vite build-time replacement)
-  // Fall back to hostname detection
   const config = getEnvironmentConfig();
   const SUPABASE_URL = config.url;
   const SUPABASE_PUBLISHABLE_KEY = config.key;
+
+  console.log('✅ Supabase client initialized with URL:', SUPABASE_URL);
 
   if (!SUPABASE_URL || !SUPABASE_PUBLISHABLE_KEY) {
     const message = `Missing Supabase environment variable(s).`;
@@ -84,6 +112,8 @@ function createSupabaseClient() {
 
 let _supabase: ReturnType<typeof createSupabaseClient> | undefined;
 
+// Import the supabase client like this:
+// import { supabase } from "@/integrations/supabase/client";
 export const supabase = new Proxy({} as ReturnType<typeof createSupabaseClient>, {
   get(_, prop, receiver) {
     if (!_supabase) _supabase = createSupabaseClient();

@@ -27,18 +27,31 @@ function createSupabaseFetch(supabaseKey: string): typeof fetch {
 }
 
 function getServerConfig() {
-  // Priority: Environment variables (Cloudflare)
+  // First try environment variables (Cloudflare)
   const url = process.env.SUPABASE_URL || process.env.VITE_SUPABASE_URL;
   const key = process.env.SUPABASE_SERVICE_ROLE_KEY || process.env.SUPABASE_PUBLISHABLE_KEY || process.env.VITE_SUPABASE_PUBLISHABLE_KEY;
 
   if (url && key) {
+    console.log('🔵 Server using environment variables for Supabase');
     return { url, key };
   }
 
-  // Lovable fallback (use Lovable's Supabase)
+  // Check if we're in Cloudflare environment
+  const isCloudflare = process.env.CF_PAGES === '1' || process.env.CF_WORKERS === '1';
+  
+  if (isCloudflare) {
+    console.log('🔵 Server using Cloudflare Supabase: sjdocxbywfmzksxyezq');
+    return {
+      url: 'https://sjdocxbywfmzksxyezq.supabase.co',
+      key: process.env.SUPABASE_SERVICE_ROLE_KEY || 'YOUR_CLOUDFLARE_SERVICE_KEY'
+    };
+  }
+
+  // Lovable fallback
+  console.log('🔵 Server using Lovable Supabase: fycahwbrblvrytmkocfk');
   return {
     url: 'https://fycahwbrblvrytmkocfk.supabase.co',
-    key: 'YOUR_LOVABLE_SERVICE_ROLE_KEY'
+    key: process.env.SUPABASE_SERVICE_ROLE_KEY || 'YOUR_LOVABLE_SERVICE_KEY'
   };
 }
 
@@ -46,6 +59,8 @@ function createSupabaseAdminClient() {
   const config = getServerConfig();
   const SUPABASE_URL = config.url;
   const SUPABASE_SERVICE_ROLE_KEY = config.key;
+
+  console.log('✅ Server Supabase admin initialized with URL:', SUPABASE_URL);
 
   if (!SUPABASE_URL || !SUPABASE_SERVICE_ROLE_KEY) {
     const message = `Missing Supabase environment variable(s).`;
