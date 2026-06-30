@@ -18,8 +18,8 @@ function createPublicClient() {
 // admin policies via has_role() must permit the operation).
 async function getAdminDb(context: { supabase: any }) {
   if (process.env.SUPABASE_SERVICE_ROLE_KEY && process.env.SUPABASE_URL) {
-    const supabaseAdmin = await getAdminDb(context);
-    return supabaseAdmin;
+    const mod = await import("@/integrations/supabase/client.server");
+    return mod.supabaseAdmin;
   }
   return context.supabase;
 }
