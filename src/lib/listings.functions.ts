@@ -192,9 +192,9 @@ export const adminListUsers = createServerFn({ method: "GET" })
     const supabaseAdmin = await getAdminDb(context);
     const { data: profiles } = await supabaseAdmin.from("profiles").select("*").order("created_at", { ascending: false });
     const { data: roles } = await supabaseAdmin.from("user_roles").select("user_id, role");
-    return (profiles ?? []).map((p) => ({
+    return (profiles ?? []).map((p: any) => ({
       ...p,
-      roles: (roles ?? []).filter((r) => r.user_id === p.id).map((r) => r.role),
+      roles: (roles ?? []).filter((r: any) => r.user_id === p.id).map((r: any) => r.role),
     }));
   });
 
