@@ -13,6 +13,17 @@ function createPublicClient() {
   );
 }
 
+// Returns the service-role admin client when SUPABASE_SERVICE_ROLE_KEY is set,
+// otherwise falls back to the caller's authenticated client (RLS still applies,
+// admin policies via has_role() must permit the operation).
+async function getAdminDb(context: { supabase: any }) {
+  if (process.env.SUPABASE_SERVICE_ROLE_KEY && process.env.SUPABASE_URL) {
+    const { supabaseAdmin } = await import("@/integrations/supabase/client.server");
+    return supabaseAdmin;
+  }
+  return context.supabase;
+}
+
 // --- PUBLIC: list approved listings with filters
 export const listPublicListings = createServerFn({ method: "GET" })
   .inputValidator((d: unknown) =>
