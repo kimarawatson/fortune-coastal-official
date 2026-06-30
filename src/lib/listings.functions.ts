@@ -1,7 +1,17 @@
 import { createServerFn } from "@tanstack/react-start";
 import { z } from "zod";
+import { createClient } from "@supabase/supabase-js";
 import { requireSupabaseAuth } from "@/integrations/supabase/auth-middleware";
+import type { Database } from "@/integrations/supabase/types";
 import { mockListings } from "./seed-data";
+
+function createPublicClient() {
+  return createClient<Database>(
+    process.env.SUPABASE_URL!,
+    process.env.SUPABASE_PUBLISHABLE_KEY!,
+    { auth: { storage: undefined, persistSession: false, autoRefreshToken: false } },
+  );
+}
 
 // --- PUBLIC: list approved listings with filters
 export const listPublicListings = createServerFn({ method: "GET" })
@@ -18,8 +28,8 @@ export const listPublicListings = createServerFn({ method: "GET" })
       .parse(d ?? {}),
   )
   .handler(async ({ data }) => {
-    const { supabaseAdmin } = await import("@/integrations/supabase/client.server");
-    let q = supabaseAdmin.from("listings").select("*").eq("status", "approved").order("created_at", { ascending: false });
+    const supabasePublic = createPublicClient();
+    let q = supabasePublic.from("listings").select("*").eq("status", "approved").order("created_at", { ascending: false });
     if (data.category) q = q.eq("category_slug", data.category);
     if (data.country) q = q.eq("country", data.country);
     if (data.btcOnly) q = q.eq("accepts_btc", true);
@@ -48,8 +58,8 @@ export const listPublicListings = createServerFn({ method: "GET" })
 export const getPublicListing = createServerFn({ method: "GET" })
   .inputValidator((d: unknown) => z.object({ id: z.string() }).parse(d))
   .handler(async ({ data }) => {
-    const { supabaseAdmin } = await import("@/integrations/supabase/client.server");
-    const { data: listing } = await supabaseAdmin
+    const supabasePublic = createPublicClient();
+    const { data: listing } = await supabasePublic
       .from("listings")
       .select("*")
       .eq("id", data.id)
@@ -65,12 +75,12 @@ export const getPublicListing = createServerFn({ method: "GET" })
         sellerName: "FCG Verified Seller",
       };
     }
-    const { data: images } = await supabaseAdmin
+    const { data: images } = await supabasePublic
       .from("listing_images")
       .select("image_url, sort_order")
       .eq("listing_id", data.id)
       .order("sort_order");
-    const { data: profile } = await supabaseAdmin
+    const { data: profile } = await supabasePublic
       .from("profiles")
       .select("full_name, country")
       .eq("id", listing.seller_id)
@@ -79,8 +89,8 @@ export const getPublicListing = createServerFn({ method: "GET" })
   });
 
 export const getHomepage = createServerFn({ method: "GET" }).handler(async () => {
-  const { supabaseAdmin } = await import("@/integrations/supabase/client.server");
-  const { data: hp } = await supabaseAdmin.from("homepage_content").select("*").eq("id", 1).maybeSingle();
+  const supabasePublic = createPublicClient();
+  const { data: hp } = await supabasePublic.from("homepage_content").select("*").eq("id", 1).maybeSingle();
   return hp;
 });
 
