@@ -346,7 +346,7 @@ export const adminSeedDemoData = createServerFn({ method: "POST" })
     const { data: inserted, error } = await supabaseAdmin.from("listings").insert(rows).select("id, title");
     if (error) throw new Error(error.message);
 
-    const imageRows = (inserted ?? []).flatMap((row, idx) =>
+    const imageRows = (inserted ?? []).flatMap((row: any, idx: number) =>
       mockListings[idx].gallery.map((url, i) => ({ listing_id: row.id, image_url: url, sort_order: i })),
     );
     if (imageRows.length) await supabaseAdmin.from("listing_images").insert(imageRows);
