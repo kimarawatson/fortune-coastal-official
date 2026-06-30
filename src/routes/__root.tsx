@@ -103,10 +103,20 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
 });
 
 function RootShell({ children }: { children: ReactNode }) {
+  // Inject public Supabase config at request time from server env so the
+  // browser bundle never has to be rebuilt to point at a different backend.
+  // Only PUBLISHABLE values are exposed here — never service-role secrets.
+  const runtimeEnv = {
+    SUPABASE_URL: process.env.SUPABASE_URL ?? process.env.VITE_SUPABASE_URL ?? "",
+    SUPABASE_PUBLISHABLE_KEY:
+      process.env.SUPABASE_PUBLISHABLE_KEY ?? process.env.VITE_SUPABASE_PUBLISHABLE_KEY ?? "",
+  };
+  const envScript = `window.__ENV__=${JSON.stringify(runtimeEnv)};`;
   return (
     <html lang="en">
       <head>
         <HeadContent />
+        <script dangerouslySetInnerHTML={{ __html: envScript }} />
       </head>
       <body>
         {children}

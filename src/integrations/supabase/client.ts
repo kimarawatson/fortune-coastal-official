@@ -28,10 +28,23 @@ function createSupabaseFetch(supabaseKey: string): typeof fetch {
 
 
 function createSupabaseClient() {
-  // Use import.meta.env for client-side (Vite build-time replacement)
-  // Fall back to process.env for SSR (server-side rendering)
-  const SUPABASE_URL = import.meta.env.VITE_SUPABASE_URL || process.env.SUPABASE_URL;
-  const SUPABASE_PUBLISHABLE_KEY = import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY || process.env.SUPABASE_PUBLISHABLE_KEY;
+  // Resolution order:
+  //   1. window.__ENV__ — runtime config injected by the server shell from
+  //      process.env at request time. This lets a deployment (e.g. Cloudflare
+  //      Pages/Workers) change SUPABASE_URL / SUPABASE_PUBLISHABLE_KEY without
+  //      a rebuild — flip the env var and the next request picks it up.
+  //   2. import.meta.env.VITE_* — build-time replacement (local dev / when
+  //      no runtime override is present).
+  //   3. process.env.* — SSR fallback before window exists.
+  const runtimeEnv = (typeof window !== 'undefined' ? (window as any).__ENV__ : undefined) ?? {};
+  const SUPABASE_URL =
+    runtimeEnv.SUPABASE_URL ||
+    import.meta.env.VITE_SUPABASE_URL ||
+    process.env.SUPABASE_URL;
+  const SUPABASE_PUBLISHABLE_KEY =
+    runtimeEnv.SUPABASE_PUBLISHABLE_KEY ||
+    import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY ||
+    process.env.SUPABASE_PUBLISHABLE_KEY;
 
   if (!SUPABASE_URL || !SUPABASE_PUBLISHABLE_KEY) {
     const missing = [
