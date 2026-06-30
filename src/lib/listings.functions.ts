@@ -18,7 +18,7 @@ function createPublicClient() {
 // admin policies via has_role() must permit the operation).
 async function getAdminDb(context: { supabase: any }) {
   if (process.env.SUPABASE_SERVICE_ROLE_KEY && process.env.SUPABASE_URL) {
-    const { supabaseAdmin } = await import("@/integrations/supabase/client.server");
+    const supabaseAdmin = await getAdminDb(context);
     return supabaseAdmin;
   }
   return context.supabase;
@@ -109,7 +109,7 @@ export const getHomepage = createServerFn({ method: "GET" }).handler(async () =>
 export const claimFirstAdmin = createServerFn({ method: "POST" })
   .middleware([requireSupabaseAuth])
   .handler(async ({ context }) => {
-    const { supabaseAdmin } = await import("@/integrations/supabase/client.server");
+    const supabaseAdmin = await getAdminDb(context);
     const { data: existing } = await supabaseAdmin.from("user_roles").select("id").eq("role", "admin").limit(1);
     if (existing && existing.length > 0) throw new Error("An admin already exists.");
     await supabaseAdmin.from("user_roles").insert({ user_id: context.userId, role: "admin" });
@@ -127,7 +127,7 @@ export const adminListAllListings = createServerFn({ method: "GET" })
   .middleware([requireSupabaseAuth])
   .handler(async ({ context }) => {
     await assertAdmin(context.supabase, context.userId);
-    const { supabaseAdmin } = await import("@/integrations/supabase/client.server");
+    const supabaseAdmin = await getAdminDb(context);
     const { data } = await supabaseAdmin
       .from("listings")
       .select("*, profiles:seller_id(full_name, email)")
@@ -148,7 +148,7 @@ export const adminSetListingStatus = createServerFn({ method: "POST" })
   )
   .handler(async ({ data, context }) => {
     await assertAdmin(context.supabase, context.userId);
-    const { supabaseAdmin } = await import("@/integrations/supabase/client.server");
+    const supabaseAdmin = await getAdminDb(context);
     const { error } = await supabaseAdmin.from("listings").update({ status: data.status, admin_notes: data.admin_notes }).eq("id", data.id);
     if (error) throw new Error(error.message);
     return { ok: true };
@@ -159,7 +159,7 @@ export const adminToggleFeatured = createServerFn({ method: "POST" })
   .inputValidator((d: unknown) => z.object({ id: z.string(), featured: z.boolean() }).parse(d))
   .handler(async ({ data, context }) => {
     await assertAdmin(context.supabase, context.userId);
-    const { supabaseAdmin } = await import("@/integrations/supabase/client.server");
+    const supabaseAdmin = await getAdminDb(context);
     await supabaseAdmin.from("listings").update({ featured: data.featured }).eq("id", data.id);
     return { ok: true };
   });
@@ -169,7 +169,7 @@ export const adminToggleVerified = createServerFn({ method: "POST" })
   .inputValidator((d: unknown) => z.object({ id: z.string(), verified: z.boolean() }).parse(d))
   .handler(async ({ data, context }) => {
     await assertAdmin(context.supabase, context.userId);
-    const { supabaseAdmin } = await import("@/integrations/supabase/client.server");
+    const supabaseAdmin = await getAdminDb(context);
     await supabaseAdmin.from("listings").update({ verified: data.verified }).eq("id", data.id);
     return { ok: true };
   });
@@ -179,7 +179,7 @@ export const adminDeleteListing = createServerFn({ method: "POST" })
   .inputValidator((d: unknown) => z.object({ id: z.string() }).parse(d))
   .handler(async ({ data, context }) => {
     await assertAdmin(context.supabase, context.userId);
-    const { supabaseAdmin } = await import("@/integrations/supabase/client.server");
+    const supabaseAdmin = await getAdminDb(context);
     await supabaseAdmin.from("listings").delete().eq("id", data.id);
     return { ok: true };
   });
@@ -189,7 +189,7 @@ export const adminListUsers = createServerFn({ method: "GET" })
   .middleware([requireSupabaseAuth])
   .handler(async ({ context }) => {
     await assertAdmin(context.supabase, context.userId);
-    const { supabaseAdmin } = await import("@/integrations/supabase/client.server");
+    const supabaseAdmin = await getAdminDb(context);
     const { data: profiles } = await supabaseAdmin.from("profiles").select("*").order("created_at", { ascending: false });
     const { data: roles } = await supabaseAdmin.from("user_roles").select("user_id, role");
     return (profiles ?? []).map((p) => ({
@@ -205,7 +205,7 @@ export const adminSetUserRole = createServerFn({ method: "POST" })
   )
   .handler(async ({ data, context }) => {
     await assertAdmin(context.supabase, context.userId);
-    const { supabaseAdmin } = await import("@/integrations/supabase/client.server");
+    const supabaseAdmin = await getAdminDb(context);
     if (data.enabled) {
       await supabaseAdmin.from("user_roles").upsert({ user_id: data.user_id, role: data.role }, { onConflict: "user_id,role" });
     } else {
@@ -219,7 +219,7 @@ export const adminListSellerApplications = createServerFn({ method: "GET" })
   .middleware([requireSupabaseAuth])
   .handler(async ({ context }) => {
     await assertAdmin(context.supabase, context.userId);
-    const { supabaseAdmin } = await import("@/integrations/supabase/client.server");
+    const supabaseAdmin = await getAdminDb(context);
     const { data } = await supabaseAdmin
       .from("seller_applications")
       .select("*, profiles:user_id(full_name, email)")
@@ -234,7 +234,7 @@ export const adminDecideSellerApplication = createServerFn({ method: "POST" })
   )
   .handler(async ({ data, context }) => {
     await assertAdmin(context.supabase, context.userId);
-    const { supabaseAdmin } = await import("@/integrations/supabase/client.server");
+    const supabaseAdmin = await getAdminDb(context);
     const { data: app } = await supabaseAdmin.from("seller_applications").select("user_id").eq("id", data.id).single();
     if (!app) throw new Error("Not found");
     await supabaseAdmin
@@ -266,7 +266,7 @@ export const adminUpdateHomepage = createServerFn({ method: "POST" })
   )
   .handler(async ({ data, context }) => {
     await assertAdmin(context.supabase, context.userId);
-    const { supabaseAdmin } = await import("@/integrations/supabase/client.server");
+    const supabaseAdmin = await getAdminDb(context);
     const { error } = await supabaseAdmin.from("homepage_content").update({ ...data, updated_at: new Date().toISOString() }).eq("id", 1);
     if (error) throw new Error(error.message);
     return { ok: true };
@@ -277,7 +277,7 @@ export const adminGetStats = createServerFn({ method: "GET" })
   .middleware([requireSupabaseAuth])
   .handler(async ({ context }) => {
     await assertAdmin(context.supabase, context.userId);
-    const { supabaseAdmin } = await import("@/integrations/supabase/client.server");
+    const supabaseAdmin = await getAdminDb(context);
     const [{ count: total }, { count: pending }, { count: approved }, { count: users }, { count: sellerApps }] = await Promise.all([
       supabaseAdmin.from("listings").select("*", { count: "exact", head: true }),
       supabaseAdmin.from("listings").select("*", { count: "exact", head: true }).eq("status", "pending"),
@@ -303,7 +303,7 @@ export const submitInquiry = createServerFn({ method: "POST" })
     z.object({ listing_id: z.string(), message: z.string().min(5).max(2000) }).parse(d),
   )
   .handler(async ({ data, context }) => {
-    const { supabaseAdmin } = await import("@/integrations/supabase/client.server");
+    const supabaseAdmin = await getAdminDb(context);
     const { data: listing } = await supabaseAdmin.from("listings").select("seller_id").eq("id", data.listing_id).maybeSingle();
     if (!listing) throw new Error("Listing not found");
     const { error } = await context.supabase.from("inquiries").insert({
@@ -321,7 +321,7 @@ export const adminSeedDemoData = createServerFn({ method: "POST" })
   .middleware([requireSupabaseAuth])
   .handler(async ({ context }) => {
     await assertAdmin(context.supabase, context.userId);
-    const { supabaseAdmin } = await import("@/integrations/supabase/client.server");
+    const supabaseAdmin = await getAdminDb(context);
     const { mockListings } = await import("./seed-data");
     const { count } = await supabaseAdmin.from("listings").select("*", { count: "exact", head: true });
     if ((count ?? 0) > 0) return { ok: true, skipped: true, message: "Listings already exist." };
