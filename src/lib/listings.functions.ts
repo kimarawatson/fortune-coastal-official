@@ -18,8 +18,16 @@ function createPublicClient() {
 // admin policies via has_role() must permit the operation).
 async function getAdminDb(context: { supabase: any }) {
   if (process.env.SUPABASE_SERVICE_ROLE_KEY && process.env.SUPABASE_URL) {
-    const mod = await import("@/integrations/supabase/client.server");
-    return mod.supabaseAdmin;
+    try {
+      const mod = await import("@/integrations/supabase/client.server");
+      // Touch the proxy while still inside the try/catch. If the deployment
+      // does not expose a usable service key, fall back to the signed-in admin
+      // client instead of crashing the whole admin page.
+      void mod.supabaseAdmin.from;
+      return mod.supabaseAdmin;
+    } catch {
+      return context.supabase;
+    }
   }
   return context.supabase;
 }
