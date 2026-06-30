@@ -28,8 +28,8 @@ export const listPublicListings = createServerFn({ method: "GET" })
       .parse(d ?? {}),
   )
   .handler(async ({ data }) => {
-    const { supabaseAdmin } = await import("@/integrations/supabase/client.server");
-    let q = supabaseAdmin.from("listings").select("*").eq("status", "approved").order("created_at", { ascending: false });
+    const supabasePublic = createPublicClient();
+    let q = supabasePublic.from("listings").select("*").eq("status", "approved").order("created_at", { ascending: false });
     if (data.category) q = q.eq("category_slug", data.category);
     if (data.country) q = q.eq("country", data.country);
     if (data.btcOnly) q = q.eq("accepts_btc", true);
