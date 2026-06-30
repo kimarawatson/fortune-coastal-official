@@ -35,7 +35,7 @@ function Dashboard() {
 
   const [adminCount, setAdminCount] = useState<number | null>(null);
   useEffect(() => {
-    supabase.from("user_roles").select("*", { count: "exact", head: true }).eq("role", "admin").then(({ count }) => setAdminCount(count ?? 0));
+    supabase.rpc("admin_exists").then(({ data }) => setAdminCount(data ? 1 : 0));
   }, []);
 
   async function handleClaim() {
