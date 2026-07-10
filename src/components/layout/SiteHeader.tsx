@@ -16,7 +16,7 @@ export function SiteHeader() {
   const navigate = useNavigate();
   const [open, setOpen] = useState(false);
   const { location } = useRouterState();
-  const { session, isAdmin, isSeller } = useAuth();
+  const { session, isSeller } = useAuth();
 
   return (
     <header className="fixed top-0 inset-x-0 z-50 border-b border-gold/15 bg-background/55 backdrop-blur-xl">
@@ -39,12 +39,7 @@ export function SiteHeader() {
               </Link>
             );
           })}
-          {session && (
-            <>
-              {isSeller && <Link to="/seller" className="text-xs tracking-luxury uppercase text-muted-foreground hover:text-foreground">Seller</Link>}
-              {isAdmin && <Link to="/admin" className="text-xs tracking-luxury uppercase text-gold">Admin</Link>}
-            </>
-          )}
+          {session && isSeller && <Link to="/seller" className="text-xs tracking-luxury uppercase text-muted-foreground hover:text-foreground">Seller</Link>}
         </nav>
 
         <div className="hidden md:flex items-center gap-3">
@@ -70,7 +65,6 @@ export function SiteHeader() {
             {nav.map((n) => <Link key={n.to} to={n.to} onClick={() => setOpen(false)} className="text-sm tracking-luxury uppercase text-foreground">{n.label}</Link>)}
             
             {session && isSeller && <Link to="/seller" onClick={() => setOpen(false)} className="text-sm tracking-luxury uppercase text-foreground">Seller</Link>}
-            {session && isAdmin && <Link to="/admin" onClick={() => setOpen(false)} className="text-sm tracking-luxury uppercase text-gold">Admin</Link>}
             <div className="hairline my-2" />
             {!session ? (
               <Link to="/auth" onClick={() => setOpen(false)} className="text-sm tracking-luxury uppercase text-gold">Sign in / Apply</Link>
