@@ -3,9 +3,8 @@ import { useEffect, useState } from "react";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { useServerFn } from "@tanstack/react-start";
 import { toast } from "sonner";
-import { BarChart3, Box, FileImage, Home, LogOut, Tag, Users, UserPlus, Sparkles } from "lucide-react";
+import { BarChart3, Box, FileImage, Home, Lock, LogOut, Sparkles, Tag, UserPlus, Users } from "lucide-react";
 import logo from "@/assets/fcg-logo.png";
-import { useAuth } from "@/hooks/use-auth";
 import {
   adminDecideSellerApplication,
   adminDeleteListing,
@@ -21,22 +20,76 @@ import {
   adminUpdateHomepage,
   getHomepage,
 } from "@/lib/listings.functions";
+import { getAdminStatus, lockAdmin, unlockAdmin } from "@/lib/admin-gate.functions";
 import { formatUsd } from "@/lib/format";
 
-export const Route = createFileRoute("/_authenticated/admin")({
+export const Route = createFileRoute("/admin")({
   head: () => ({ meta: [{ title: "Admin — FCG" }, { name: "robots", content: "noindex" }] }),
-  component: Admin,
+  component: AdminRoot,
 });
 
 type Section = "overview" | "listings" | "applications" | "users" | "homepage" | "seed";
 
-function Admin() {
-  const { isAdmin, loading, signOut } = useAuth();
-  const navigate = useNavigate();
-  const [section, setSection] = useState<Section>("overview");
+function AdminRoot() {
+  const status = useServerFn(getAdminStatus);
+  const q = useQuery({ queryKey: ["admin-gate-status"], queryFn: () => status() });
 
-  if (loading) return <Full>Loading…</Full>;
-  if (!isAdmin) return <Full>Admin access required. <Link to="/dashboard" className="text-gold ml-2">Go back</Link></Full>;
+  if (q.isLoading) return <Full>Loading…</Full>;
+  if (!q.data?.unlocked) return <UnlockScreen onUnlocked={() => q.refetch()} />;
+  return <Console />;
+}
+
+function UnlockScreen({ onUnlocked }: { onUnlocked: () => void }) {
+  const unlock = useServerFn(unlockAdmin);
+  const [password, setPassword] = useState("");
+  const [loading, setLoading] = useState(false);
+
+  async function submit(e: React.FormEvent) {
+    e.preventDefault();
+    setLoading(true);
+    try {
+      const r = await unlock({ data: { password } });
+      if (r.ok) { toast.success("Unlocked."); onUnlocked(); }
+      else toast.error("Incorrect password.");
+    } catch (err: any) {
+      toast.error(err?.message ?? "Unlock failed.");
+    } finally {
+      setLoading(false);
+    }
+  }
+
+  return (
+    <div className="min-h-screen bg-background grid place-items-center px-6">
+      <form onSubmit={submit} className="w-full max-w-sm border border-border/40 p-8 space-y-5 bg-charcoal/40">
+        <div className="flex items-center gap-3">
+          <Lock className="text-gold" size={18} />
+          <div>
+            <div className="text-[10px] tracking-luxury uppercase text-gold">Admin Console</div>
+            <div className="font-serif text-xl text-foreground">Enter admin password</div>
+          </div>
+        </div>
+        <input
+          type="password"
+          autoFocus
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+          placeholder="Admin password"
+          className="w-full bg-background border border-border/40 px-3 py-2 text-foreground focus:border-gold focus:outline-none"
+        />
+        <button disabled={loading || !password} className="w-full bg-gold text-primary-foreground px-6 py-3 text-xs tracking-luxury uppercase hover:bg-gold-soft disabled:opacity-60">
+          {loading ? "Checking…" : "Unlock"}
+        </button>
+        <Link to="/" className="block text-center text-[10px] tracking-luxury uppercase text-muted-foreground">Back to site</Link>
+      </form>
+    </div>
+  );
+}
+
+function Console() {
+  const navigate = useNavigate();
+  const lock = useServerFn(lockAdmin);
+  const qc = useQueryClient();
+  const [section, setSection] = useState<Section>("overview");
 
   const nav: { key: Section; label: string; icon: any }[] = [
     { key: "overview", label: "Overview", icon: Home },
@@ -46,6 +99,12 @@ function Admin() {
     { key: "homepage", label: "Homepage", icon: FileImage },
     { key: "seed", label: "Demo Data", icon: Sparkles },
   ];
+
+  async function signOut() {
+    await lock();
+    qc.clear();
+    navigate({ to: "/" });
+  }
 
   return (
     <div className="min-h-screen bg-background grid lg:grid-cols-[260px_1fr]">
@@ -64,8 +123,8 @@ function Admin() {
             </button>
           ))}
         </nav>
-        <button onClick={() => signOut().then(() => navigate({ to: "/" }))} className="mt-10 flex items-center gap-3 px-3 py-2.5 text-xs tracking-luxury uppercase text-muted-foreground hover:text-destructive">
-          <LogOut size={14} /> Sign Out
+        <button onClick={signOut} className="mt-10 flex items-center gap-3 px-3 py-2.5 text-xs tracking-luxury uppercase text-muted-foreground hover:text-destructive">
+          <LogOut size={14} /> Lock console
         </button>
       </aside>
 
@@ -230,7 +289,7 @@ function UsersPanel() {
                 <td className="p-4 text-foreground">{u.full_name ?? "—"}</td>
                 <td className="p-4 text-muted-foreground">{u.email}</td>
                 <td className="p-4 flex flex-wrap gap-3 text-xs">
-                  {(["admin", "seller", "buyer"] as const).map((r) => {
+                  {(["seller", "buyer"] as const).map((r) => {
                     const on = u.roles?.includes(r);
                     return <label key={r} className="inline-flex items-center gap-1"><input type="checkbox" checked={on} onChange={(e) => toggle(u.id, r, e.target.checked)} className="accent-[var(--gold)]" /> {r}</label>;
                   })}
@@ -323,7 +382,7 @@ function SeedPanel() {
     <>
       <PageHead eyebrow="Demo Data" title="Seed Marketplace" />
       <div className="border border-border/40 p-8 max-w-2xl">
-        <p className="text-sm text-muted-foreground">Populates the marketplace with curated demo listings (Hamptons, Aspen, Bugatti, etc.) owned by your admin account, in <b className="text-gold">pending</b> status so you can practice the approval workflow.</p>
+        <p className="text-sm text-muted-foreground">Populates the marketplace with curated demo listings, attached to the first seller (or first user profile) in your database.</p>
         <p className="mt-3 text-xs text-muted-foreground">Safe to run only on an empty marketplace — it skips if listings already exist.</p>
         <button onClick={() => m.mutate()} disabled={m.isPending} className="mt-6 bg-gold text-primary-foreground px-6 py-3 text-xs tracking-luxury uppercase hover:bg-gold-soft disabled:opacity-60">
           {m.isPending ? "Seeding…" : "Seed Demo Listings"}

@@ -1,14 +1,10 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { useEffect, useState } from "react";
 import { useQuery } from "@tanstack/react-query";
-import { useServerFn } from "@tanstack/react-start";
-import { toast } from "sonner";
-import { ArrowRight, MessageSquare, Shield, ShieldAlert, Store, UserCircle } from "lucide-react";
+import { ArrowRight, MessageSquare, Store, UserCircle } from "lucide-react";
 import { SiteLayout } from "@/components/SiteLayout";
 import { SignOutButton } from "@/components/SignOutButton";
 import { useAuth } from "@/hooks/use-auth";
 import { supabase } from "@/integrations/supabase/client";
-import { claimFirstAdmin } from "@/lib/listings.functions";
 import { formatUsd } from "@/lib/format";
 
 export const Route = createFileRoute("/_authenticated/dashboard")({
@@ -17,8 +13,7 @@ export const Route = createFileRoute("/_authenticated/dashboard")({
 });
 
 function Dashboard() {
-  const { user, userId, roles, isAdmin, isSeller, loading } = useAuth();
-  const claim = useServerFn(claimFirstAdmin);
+  const { user, userId, roles, isSeller, loading } = useAuth();
 
   const inquiriesQ = useQuery({
     queryKey: ["my-inquiries", userId],
@@ -32,21 +27,6 @@ function Dashboard() {
       return data ?? [];
     },
   });
-
-  const [adminCount, setAdminCount] = useState<number | null>(null);
-  useEffect(() => {
-    supabase.rpc("admin_exists").then(({ data }) => setAdminCount(data ? 1 : 0));
-  }, []);
-
-  async function handleClaim() {
-    try {
-      await claim();
-      toast.success("You are now the admin. Refreshing…");
-      setTimeout(() => window.location.reload(), 600);
-    } catch (e: any) {
-      toast.error(e?.message ?? "Could not claim admin.");
-    }
-  }
 
   if (loading) return <div className="min-h-screen bg-background grid place-items-center text-muted-foreground text-xs tracking-luxury uppercase">Loading…</div>;
 
@@ -67,14 +47,6 @@ function Dashboard() {
         <PortalCard to="/profile" icon={UserCircle} title="My Profile" body="Update your name, country, and avatar." />
         <PortalCard to="/marketplace" icon={ArrowRight} title="Browse Marketplace" body="Discover verified luxury assets across the United States." />
         <PortalCard to="/seller" icon={Store} title={isSeller ? "Seller Portal" : "Become a Seller"} body={isSeller ? "Manage your listings, photos, and inquiries." : "Apply to list assets on FCG."} />
-        {isAdmin && <PortalCard to="/admin" icon={Shield} title="Admin Console" body="Manage listings, users, categories, and homepage." />}
-        {adminCount === 0 && !isAdmin && (
-          <button onClick={handleClaim} className="text-left border border-gold/60 bg-gold/5 p-8 hover:bg-gold/10 transition-colors">
-            <ShieldAlert className="text-gold" size={20} />
-            <div className="mt-4 font-serif text-2xl text-foreground">Claim admin access</div>
-            <p className="mt-2 text-sm text-muted-foreground">No admin exists yet. Claim the first admin role for the marketplace.</p>
-          </button>
-        )}
       </section>
 
       <section className="mx-auto max-w-7xl px-6 lg:px-10 mt-16">
