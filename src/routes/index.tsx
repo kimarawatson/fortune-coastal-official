@@ -98,8 +98,8 @@ function Home() {
 
       {/* ============ FEATURED COLLECTION ============ */}
       <section className="relative mt-0 py-24 overflow-hidden">
-        <img src={hamptons} alt="" aria-hidden className="absolute inset-0 h-full w-full object-cover opacity-40" />
-        <div className="absolute inset-0 bg-gradient-to-b from-background via-background/55 to-background" />
+        <img src={hamptons} alt="" aria-hidden className="absolute inset-0 h-full w-full object-cover opacity-60" />
+        <div className="absolute inset-0 bg-gradient-to-b from-background/70 via-background/30 to-background/70" />
 
         <div className="relative mx-auto max-w-7xl px-6 lg:px-10">
         <div className="text-center">
