@@ -59,31 +59,64 @@ function UnlockScreen({ onUnlocked }: { onUnlocked: () => void }) {
   }
 
   return (
-    <div className="min-h-screen bg-background grid place-items-center px-6">
-      <form onSubmit={submit} className="w-full max-w-sm border border-border/40 p-8 space-y-5 bg-charcoal/40">
-        <div className="flex items-center gap-3">
-          <Lock className="text-gold" size={18} />
+    <div className="relative min-h-screen bg-background grid place-items-center px-6 overflow-hidden">
+      {/* Luxury backdrop */}
+      <div className="pointer-events-none absolute inset-0 -z-10">
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,var(--gold)/12%,transparent_55%),radial-gradient(ellipse_at_bottom_right,var(--gold)/8%,transparent_60%)]" />
+        <div
+          className="absolute inset-0 opacity-[0.08]"
+          style={{
+            backgroundImage:
+              "linear-gradient(var(--gold) 1px, transparent 1px), linear-gradient(90deg, var(--gold) 1px, transparent 1px)",
+            backgroundSize: "80px 80px",
+          }}
+        />
+        <div className="absolute -top-40 -left-40 h-[520px] w-[520px] rounded-full blur-3xl" style={{ background: "radial-gradient(circle, var(--gold) 0%, transparent 70%)", opacity: 0.18 }} />
+        <div className="absolute -bottom-40 -right-40 h-[520px] w-[520px] rounded-full blur-3xl" style={{ background: "radial-gradient(circle, var(--gold) 0%, transparent 70%)", opacity: 0.14 }} />
+      </div>
+
+      <form
+        onSubmit={submit}
+        className="w-full max-w-xl border border-gold/25 bg-charcoal/60 backdrop-blur-xl p-12 md:p-14 space-y-8 shadow-[0_40px_120px_-40px_rgba(0,0,0,0.8)] relative"
+      >
+        <div className="absolute inset-x-0 -top-px h-px bg-gradient-to-r from-transparent via-gold to-transparent" />
+        <div className="flex items-center gap-4">
+          <div className="h-12 w-12 grid place-items-center border border-gold/40 bg-gold/5">
+            <Lock className="text-gold" size={20} />
+          </div>
           <div>
             <div className="text-[10px] tracking-luxury uppercase text-gold">Admin Console</div>
-            <div className="font-serif text-xl text-foreground">Enter admin password</div>
+            <div className="font-serif text-2xl text-foreground">Private Access</div>
           </div>
         </div>
-        <input
-          type="password"
-          autoFocus
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          placeholder="Admin password"
-          className="w-full bg-background border border-border/40 px-3 py-2 text-foreground focus:border-gold focus:outline-none"
-        />
-        <button disabled={loading || !password} className="w-full bg-gold text-primary-foreground px-6 py-3 text-xs tracking-luxury uppercase hover:bg-gold-soft disabled:opacity-60">
-          {loading ? "Checking…" : "Unlock"}
+        <div>
+          <div className="text-[10px] tracking-luxury uppercase text-muted-foreground mb-2">Password</div>
+          <input
+            type="password"
+            autoFocus
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            placeholder="••••••••••••"
+            className="w-full bg-background/60 border border-border/60 px-4 py-3.5 text-foreground tracking-widest focus:border-gold focus:outline-none"
+          />
+        </div>
+        <button
+          disabled={loading || !password}
+          className="w-full bg-gold text-primary-foreground px-6 py-4 text-xs tracking-luxury uppercase hover:bg-gold-soft disabled:opacity-60 transition-colors"
+        >
+          {loading ? "Verifying…" : "Unlock Console"}
         </button>
-        <Link to="/" className="block text-center text-[10px] tracking-luxury uppercase text-muted-foreground">Back to site</Link>
+        <Link
+          to="/"
+          className="block text-center text-[10px] tracking-luxury uppercase text-muted-foreground hover:text-gold transition-colors"
+        >
+          Back to site
+        </Link>
       </form>
     </div>
   );
 }
+
 
 function Console() {
   const navigate = useNavigate();
