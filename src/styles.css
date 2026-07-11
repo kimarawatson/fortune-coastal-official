@@ -117,14 +117,54 @@
   .reveal-delay-2 { transition-delay: 160ms; }
   .reveal-delay-3 { transition-delay: 240ms; }
 
-  /* Weak frosted boundary between sections */
+  /* Weak frosted boundary between sections — soft blend, no visible edge */
   .section-edge {
-    height: 1px;
+    height: 120px;
     width: 100%;
-    background: linear-gradient(90deg, transparent 0%, oklch(0.78 0.14 78 / 0.18) 20%, oklch(0.78 0.14 78 / 0.28) 50%, oklch(0.78 0.14 78 / 0.18) 80%, transparent 100%);
-    backdrop-filter: blur(2px);
-    -webkit-mask-image: linear-gradient(90deg, transparent 0%, black 10%, black 90%, transparent 100%);
-    mask-image: linear-gradient(90deg, transparent 0%, black 10%, black 90%, transparent 100%);
+    margin-top: -60px;
+    margin-bottom: -60px;
+    position: relative;
+    z-index: 5;
+    pointer-events: none;
+    background: linear-gradient(180deg, transparent 0%, oklch(0.14 0.01 60 / 0.38) 50%, transparent 100%);
+    backdrop-filter: blur(18px) saturate(120%);
+    -webkit-mask-image: linear-gradient(180deg, transparent 0%, black 40%, black 60%, transparent 100%);
+    mask-image: linear-gradient(180deg, transparent 0%, black 40%, black 60%, transparent 100%);
+  }
+  .section-edge::after {
+    content: "";
+    position: absolute;
+    left: 12%; right: 12%; top: 50%;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, oklch(0.78 0.14 78 / 0.28) 50%, transparent);
+  }
+
+  /* Shimmer sweep across a container */
+  @keyframes shimmer-sweep { 0% { transform: translateX(-120%); } 100% { transform: translateX(120%); } }
+  .shimmer-sweep { position: relative; overflow: hidden; }
+  .shimmer-sweep::before {
+    content: ""; position: absolute; inset: 0;
+    background: linear-gradient(110deg, transparent 30%, oklch(0.78 0.14 78 / 0.16) 50%, transparent 70%);
+    animation: shimmer-sweep 4s ease-in-out infinite;
+    pointer-events: none;
+  }
+
+  /* Slow orb drift */
+  @keyframes drift-a { 0%,100% { transform: translate(0,0) scale(1);} 50% { transform: translate(40px,-30px) scale(1.08);} }
+  @keyframes drift-b { 0%,100% { transform: translate(0,0) scale(1);} 50% { transform: translate(-30px,40px) scale(1.05);} }
+  .drift-a { animation: drift-a 18s ease-in-out infinite; }
+  .drift-b { animation: drift-b 22s ease-in-out infinite; }
+
+  /* Gentle gold shimmer for text/underlines */
+  @keyframes gold-flow {
+    0% { background-position: 0% 50%; }
+    100% { background-position: 200% 50%; }
+  }
+  .gold-flow-text {
+    background: linear-gradient(90deg, oklch(0.78 0.14 78), oklch(0.9 0.12 88), oklch(0.78 0.14 78));
+    background-size: 200% 100%;
+    -webkit-background-clip: text; background-clip: text; color: transparent;
+    animation: gold-flow 6s linear infinite;
   }
 
   @keyframes pulse-ring {

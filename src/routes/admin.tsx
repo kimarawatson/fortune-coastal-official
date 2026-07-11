@@ -140,8 +140,16 @@ function Console() {
   }
 
   return (
-    <div className="min-h-screen bg-background grid lg:grid-cols-[260px_1fr]">
-      <aside className="border-r border-border/40 bg-charcoal/40 p-6 lg:min-h-screen">
+    <div className="relative min-h-screen bg-background grid lg:grid-cols-[260px_1fr] overflow-hidden">
+      {/* Luxury backdrop */}
+      <div className="pointer-events-none absolute inset-0 -z-10">
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_left,oklch(0.78_0.14_78/0.10),transparent_55%),radial-gradient(ellipse_at_bottom_right,oklch(0.78_0.14_78/0.08),transparent_60%)]" />
+        <div className="absolute inset-0 opacity-[0.06]" style={{ backgroundImage: "linear-gradient(var(--gold) 1px, transparent 1px), linear-gradient(90deg, var(--gold) 1px, transparent 1px)", backgroundSize: "80px 80px" }} />
+        <div className="drift-a absolute -top-40 -left-40 h-[560px] w-[560px] rounded-full blur-3xl" style={{ background: "radial-gradient(circle, var(--gold) 0%, transparent 70%)", opacity: 0.16 }} />
+        <div className="drift-b absolute -bottom-40 -right-40 h-[560px] w-[560px] rounded-full blur-3xl" style={{ background: "radial-gradient(circle, var(--gold) 0%, transparent 70%)", opacity: 0.12 }} />
+      </div>
+      <aside className="relative border-r border-gold/15 bg-charcoal/50 backdrop-blur-xl p-6 lg:min-h-screen">
+
         <Link to="/" className="flex items-center gap-3 mb-10">
           <img src={logo} alt="" className="h-10 w-10" />
           <div>
