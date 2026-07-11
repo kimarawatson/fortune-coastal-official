@@ -118,9 +118,9 @@
   .reveal-delay-3 { transition-delay: 240ms; }
 
   @keyframes pulse-ring {
-    0%   { box-shadow: 0 0 0 0 oklch(0.6 0.24 275 / 0.55); }
-    70%  { box-shadow: 0 0 0 22px oklch(0.6 0.24 275 / 0); }
-    100% { box-shadow: 0 0 0 0 oklch(0.6 0.24 275 / 0); }
+    0%   { box-shadow: 0 0 0 0 oklch(0.78 0.14 78 / 0.55); }
+    70%  { box-shadow: 0 0 0 22px oklch(0.78 0.14 78 / 0); }
+    100% { box-shadow: 0 0 0 0 oklch(0.78 0.14 78 / 0); }
   }
   .pulse-ring { animation: pulse-ring 1.6s ease-out infinite; }
 
