@@ -178,13 +178,9 @@ function Home() {
             {/* BTC Ticker */}
             <div className="bg-charcoal/30 backdrop-blur-md p-8 lg:p-10 relative overflow-hidden">
               <div className="absolute -top-20 -right-20 h-64 w-64 rounded-full" style={{ background: "radial-gradient(circle, var(--gold) 0%, transparent 70%)", opacity: 0.18 }} />
+              <BtcTicker />
               <div className="relative">
-                <div className="flex items-center justify-between">
-                  <div className="text-[10px] tracking-luxury uppercase text-muted-foreground">Live BTC Rate</div>
-                  <Bitcoin size={20} className="text-gold" />
-                </div>
-                <div className="mt-4 font-serif text-5xl md:text-6xl gradient-gold-text">$91,250</div>
-                <div className="text-xs text-emerald-400/80 mt-2">+2.4% past 24h</div>
+
 
                 <div className="mt-10 divide-y divide-border/30">
                   {[
