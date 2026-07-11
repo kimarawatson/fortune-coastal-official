@@ -6,6 +6,7 @@ import {
 } from "lucide-react";
 import { SiteLayout } from "@/components/SiteLayout";
 import { BtcTicker } from "@/components/BtcTicker";
+import { Reveal } from "@/components/Reveal";
 import { assets, formatUsd } from "@/data/mock";
 import hero from "@/assets/hero-villa.jpg";
 import penthouse from "@/assets/asset-penthouse.jpg";
@@ -64,14 +65,14 @@ function Home() {
                 { Icon: Crown, v: "5,000+", l: "Luxury Homes" },
                 { Icon: Bitcoin, v: "24/7", l: "Bitcoin Trading" },
                 { Icon: Diamond, v: "$2.5B+", l: "Assets Managed" },
-              ]).map(({ Icon, v, l }) => (
-                <div key={l} className="flex items-end gap-4">
-                  <Icon size={22} className="text-gold mb-2" strokeWidth={1.25} />
+              ]).map(({ Icon, v, l }, i) => (
+                <Reveal key={l} delay={(i + 1) as 1 | 2 | 3} className="flex items-end gap-4">
+                  <Icon size={36} className="text-gold mb-1" strokeWidth={1.25} />
                   <div>
                     <div className="font-serif text-4xl md:text-5xl gradient-gold-text leading-none">{v}</div>
                     <div className="mt-2 text-[10px] tracking-luxury uppercase text-foreground/70">{l}</div>
                   </div>
-                </div>
+                </Reveal>
               ))}
             </div>
 
@@ -85,9 +86,9 @@ function Home() {
             </div>
 
             <div className="mt-12 flex flex-wrap items-center gap-x-8 gap-y-3 text-[10px] tracking-luxury uppercase text-foreground/65">
-              <span className="inline-flex items-center gap-2"><ShieldCheck size={15} className="text-gold" strokeWidth={1.5} /> Verified Listings</span>
-              <span className="inline-flex items-center gap-2"><Award size={15} className="text-gold" strokeWidth={1.5} /> Licensed Brokers</span>
-              <span className="inline-flex items-center gap-2"><Lock size={15} className="text-gold" strokeWidth={1.5} /> Bitcoin Custody</span>
+              <span className="inline-flex items-center gap-2"><ShieldCheck size={22} className="text-gold" strokeWidth={1.5} /> Verified Listings</span>
+              <span className="inline-flex items-center gap-2"><Award size={22} className="text-gold" strokeWidth={1.5} /> Licensed Brokers</span>
+              <span className="inline-flex items-center gap-2"><Lock size={22} className="text-gold" strokeWidth={1.5} /> Bitcoin Custody</span>
             </div>
           </div>
         </div>
@@ -208,12 +209,12 @@ function Home() {
               { icon: Zap, t: "Lightning Fast", d: "Lightning-network settlement closes high-value deals in minutes, not weeks." },
               { icon: LineChart, t: "Live Market Data", d: "Real-time BTC pricing, portfolio tracking, and market insights — always on." },
               { icon: ShieldCheck, t: "Military-Grade Security", d: "Multi-sig custody, cold storage, and institutional-grade insurance built in." },
-            ].map(({ icon: Icon, t, d }) => (
-              <div key={t} className="bg-background/80 backdrop-blur-sm p-7">
-                <Icon size={20} className="text-gold" />
-                <h4 className="mt-4 font-serif text-lg text-foreground">{t}</h4>
+            ].map(({ icon: Icon, t, d }, i) => (
+              <Reveal key={t} delay={((i % 3) + 1) as 1 | 2 | 3} className="bg-background/80 backdrop-blur-sm p-7">
+                <div className="h-12 w-12 grid place-items-center rounded-md bg-gold/10 text-gold"><Icon size={28} strokeWidth={1.5} /></div>
+                <h4 className="mt-5 font-serif text-lg text-foreground">{t}</h4>
                 <p className="mt-2 text-xs text-muted-foreground leading-relaxed">{d}</p>
-              </div>
+              </Reveal>
             ))}
           </div>
         </div>
@@ -247,12 +248,12 @@ function Home() {
             { icon: BadgeCheck, t: "Licensed Network", d: "Every broker and seller is licensed, vetted, and verifiable on-chain." },
             { icon: Network, t: "Multi-Platform Access", d: "Web, iOS, and Android with seamless wallet pairing." },
             { icon: Coins, t: "Flexible Financing", d: "Bitcoin-collateralized lending and traditional wires — your choice." },
-          ].map(({ icon: Icon, t, d }) => (
-            <div key={t} className="bg-background/70 backdrop-blur-md p-7 hover:bg-background/90 transition-colors">
-              <div className="h-11 w-11 grid place-items-center border border-gold/50 bg-gold/5 text-gold"><Icon size={18} /></div>
+          ].map(({ icon: Icon, t, d }, i) => (
+            <Reveal key={t} delay={((i % 3) + 1) as 1 | 2 | 3} className="bg-background/70 backdrop-blur-md p-7 hover:bg-background/90 transition-colors">
+              <div className="h-14 w-14 grid place-items-center rounded-md border border-gold/50 bg-gold/10 text-gold"><Icon size={28} strokeWidth={1.5} /></div>
               <h4 className="mt-5 font-serif text-lg text-foreground">{t}</h4>
               <p className="mt-2 text-xs text-muted-foreground leading-relaxed">{d}</p>
-            </div>
+            </Reveal>
           ))}
         </div>
 
@@ -262,12 +263,12 @@ function Home() {
             { Icon: Globe, v: "70+", l: "U.S. Markets" },
             { Icon: Building2, v: "5,000+", l: "Properties" },
             { Icon: Crown, v: "24/7", l: "Concierge" },
-          ]).map(({ Icon, v, l }) => (
-            <div key={l} className="bg-background/70 backdrop-blur-md py-10 text-center">
-              <Icon size={18} className="mx-auto text-gold" />
+          ]).map(({ Icon, v, l }, i) => (
+            <Reveal key={l} delay={((i % 3) + 1) as 1 | 2 | 3} className="bg-background/70 backdrop-blur-md py-10 text-center">
+              <Icon size={30} className="mx-auto text-gold" strokeWidth={1.5} />
               <div className="mt-3 font-serif text-3xl md:text-4xl gradient-gold-text">{v}</div>
               <div className="mt-2 text-[10px] tracking-luxury uppercase text-muted-foreground">{l}</div>
-            </div>
+            </Reveal>
           ))}
         </div>
         </div>
@@ -296,12 +297,12 @@ function Home() {
             { Icon: Crown, t: "Mission", d: "To democratize access to American luxury real estate through blockchain technology, making fractional ownership and seamless transactions a reality." },
             { Icon: Diamond, t: "Innovation", d: "Pioneering Bitcoin-native property transactions, AI-driven matching, and 3D property experiences across all 50 U.S. states." },
             { Icon: Gem, t: "Future", d: "Building the infrastructure for tomorrow's luxury assets — borderless, digitized, and intelligent across the American market." },
-          ]).map(({ Icon, t, d }) => (
-            <div key={t} className="bg-charcoal/30 backdrop-blur-md p-8 text-center hover:bg-charcoal/50 transition-colors">
-              <div className="mx-auto h-14 w-14 grid place-items-center border border-gold/50 bg-gold/5 text-gold"><Icon size={22} /></div>
+          ]).map(({ Icon, t, d }, i) => (
+            <Reveal key={t} delay={((i % 3) + 1) as 1 | 2 | 3} className="bg-charcoal/30 backdrop-blur-md p-8 text-center hover:bg-charcoal/50 transition-colors">
+              <div className="mx-auto h-16 w-16 grid place-items-center rounded-md border border-gold/50 bg-gold/10 text-gold"><Icon size={32} strokeWidth={1.5} /></div>
               <h3 className="mt-6 font-serif text-2xl text-foreground">{t}</h3>
               <p className="mt-3 text-sm text-muted-foreground leading-relaxed">{d}</p>
-            </div>
+            </Reveal>
           ))}
         </div>
         </div>
