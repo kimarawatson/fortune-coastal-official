@@ -298,8 +298,8 @@ function Home() {
             { Icon: Diamond, t: "Innovation", d: "Pioneering Bitcoin-native property transactions, AI-driven matching, and 3D property experiences across all 50 U.S. states." },
             { Icon: Gem, t: "Future", d: "Building the infrastructure for tomorrow's luxury assets — borderless, digitized, and intelligent across the American market." },
           ]).map(({ Icon, t, d }, i) => (
-            <Reveal key={t} delay={((i % 3) + 1) as 1 | 2 | 3} className="bg-charcoal/30 backdrop-blur-md p-8 text-center hover:bg-charcoal/50 transition-colors">
-              <div className="mx-auto h-16 w-16 grid place-items-center rounded-md border border-gold/50 bg-gold/10 text-gold"><Icon size={32} strokeWidth={1.5} /></div>
+            <Reveal key={t} delay={((i % 3) + 1) as 1 | 2 | 3} className="bg-charcoal/20 backdrop-blur-md p-8 text-center hover:bg-charcoal/40 transition-colors">
+              <div className="mx-auto h-16 w-16 grid place-items-center rounded-full border border-gold/50 bg-gold/10 text-gold"><Icon size={32} strokeWidth={1.5} /></div>
               <h3 className="mt-6 font-serif text-2xl text-foreground">{t}</h3>
               <p className="mt-3 text-sm text-muted-foreground leading-relaxed">{d}</p>
             </Reveal>
