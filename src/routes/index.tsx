@@ -164,7 +164,7 @@ function Home() {
                   ["Smart Escrow & Proofs", "Multi-sig custody and chain-verified deeds."],
                 ].map(([t, d]) => (
                   <li key={t} className="flex items-start gap-3">
-                    <div className="mt-1 h-6 w-6 grid place-items-center border border-gold/40 text-gold"><Check size={12} /></div>
+                    <div className="mt-1 h-6 w-6 grid place-items-center rounded-full border border-gold/40 text-gold"><Check size={12} /></div>
                     <div>
                       <div className="text-foreground text-sm">{t}</div>
                       <div className="text-xs text-muted-foreground mt-0.5">{d}</div>
