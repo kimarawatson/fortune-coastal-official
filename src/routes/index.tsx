@@ -264,7 +264,7 @@ function Home() {
             { Icon: Building2, v: "5,000+", l: "Properties" },
             { Icon: Crown, v: "24/7", l: "Concierge" },
           ]).map(({ Icon, v, l }, i) => (
-            <Reveal key={l} delay={((i % 3) + 1) as 1 | 2 | 3} className="bg-background/70 backdrop-blur-md py-10 text-center">
+            <Reveal key={l} delay={((i % 3) + 1) as 1 | 2 | 3} className="bg-background/40 backdrop-blur-md py-10 text-center">
               <Icon size={30} className="mx-auto text-gold" strokeWidth={1.5} />
               <div className="mt-3 font-serif text-3xl md:text-4xl gradient-gold-text">{v}</div>
               <div className="mt-2 text-[10px] tracking-luxury uppercase text-muted-foreground">{l}</div>
