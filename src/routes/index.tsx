@@ -329,9 +329,9 @@ function Home() {
               { p: "Phase Three — Innovation", items: ["Immersive 3D tours", "Fortune AI concierge", "On-chain title transfer"] },
               { p: "Phase Four — Ecosystem", items: ["Luxury membership program", "Global community network", "Institutional partnerships"] },
             ].map(({ p, items }) => (
-              <div key={p} className="bg-charcoal/30 backdrop-blur-sm p-6">
+              <div key={p} className="bg-charcoal/20 backdrop-blur-sm p-6">
                 <div className="flex items-center gap-3">
-                  <div className="h-7 w-7 grid place-items-center border border-gold/40 text-gold text-xs">{p.split(" ")[1][0]}</div>
+                  <div className="h-7 w-7 grid place-items-center rounded-full border border-gold/40 text-gold text-xs">{p.split(" ")[1][0]}</div>
                   <div className="font-serif text-lg text-foreground">{p}</div>
                 </div>
                 <ul className="mt-4 space-y-2.5">
