@@ -98,8 +98,8 @@ function Home() {
 
       {/* ============ FEATURED COLLECTION ============ */}
       <section className="relative mt-0 py-24 overflow-hidden">
-        <img src={hamptons} alt="" aria-hidden className="absolute inset-0 h-full w-full object-cover opacity-40" />
-        <div className="absolute inset-0 bg-gradient-to-b from-background via-background/55 to-background" />
+        <img src={hamptons} alt="" aria-hidden className="absolute inset-0 h-full w-full object-cover opacity-60" />
+        <div className="absolute inset-0 bg-gradient-to-b from-background/70 via-background/30 to-background/70" />
 
         <div className="relative mx-auto max-w-7xl px-6 lg:px-10">
         <div className="text-center">
@@ -132,8 +132,8 @@ function Home() {
 
       {/* ============ DIGITAL WEALTH / FORTUNE VAULT ============ */}
       <section className="mt-0 relative overflow-hidden py-24">
-        <img src={villa} alt="" aria-hidden className="absolute inset-0 h-full w-full object-cover opacity-40" />
-        <div className="absolute inset-0 bg-gradient-to-b from-background via-background/60 to-background" />
+        <img src={villa} alt="" aria-hidden className="absolute inset-0 h-full w-full object-cover opacity-55" />
+        <div className="absolute inset-0 bg-gradient-to-b from-background/70 via-background/30 to-background/70" />
 
         <div className="absolute inset-0" style={{ background: "radial-gradient(60% 60% at 80% 50%, var(--gold) 0%, transparent 70%)", opacity: 0.12 }} />
         <div className="relative mx-auto max-w-7xl px-6 lg:px-10">
@@ -151,7 +151,7 @@ function Home() {
 
           <div className="mt-14 grid md:grid-cols-2 gap-6">
             {/* Vault */}
-            <div className="bg-charcoal/30 backdrop-blur-md p-8 lg:p-10">
+            <div className="bg-charcoal/40 backdrop-blur-md p-8 lg:p-10">
               <div className="text-[10px] tracking-luxury uppercase text-gold">The Fortune Vault</div>
               <h3 className="mt-3 font-serif text-2xl text-foreground">Your all-in-one wealth desk</h3>
               <p className="mt-3 text-sm text-muted-foreground leading-relaxed">
@@ -164,7 +164,7 @@ function Home() {
                   ["Smart Escrow & Proofs", "Multi-sig custody and chain-verified deeds."],
                 ].map(([t, d]) => (
                   <li key={t} className="flex items-start gap-3">
-                    <div className="mt-1 h-6 w-6 grid place-items-center border border-gold/40 text-gold"><Check size={12} /></div>
+                    <div className="mt-1 h-6 w-6 grid place-items-center rounded-full border border-gold/40 text-gold"><Check size={12} /></div>
                     <div>
                       <div className="text-foreground text-sm">{t}</div>
                       <div className="text-xs text-muted-foreground mt-0.5">{d}</div>
@@ -178,7 +178,7 @@ function Home() {
             </div>
 
             {/* BTC Ticker */}
-            <div className="bg-charcoal/30 backdrop-blur-md p-8 lg:p-10 relative overflow-hidden">
+            <div className="bg-charcoal/40 backdrop-blur-md p-8 lg:p-10 relative overflow-hidden">
               <div className="absolute -top-20 -right-20 h-64 w-64 rounded-full" style={{ background: "radial-gradient(circle, var(--gold) 0%, transparent 70%)", opacity: 0.18 }} />
               <BtcTicker />
               <div className="relative">
@@ -210,8 +210,8 @@ function Home() {
               { icon: LineChart, t: "Live Market Data", d: "Real-time BTC pricing, portfolio tracking, and market insights — always on." },
               { icon: ShieldCheck, t: "Military-Grade Security", d: "Multi-sig custody, cold storage, and institutional-grade insurance built in." },
             ].map(({ icon: Icon, t, d }, i) => (
-              <Reveal key={t} delay={((i % 3) + 1) as 1 | 2 | 3} className="bg-background/80 backdrop-blur-sm p-7">
-                <div className="h-12 w-12 grid place-items-center rounded-md bg-gold/10 text-gold"><Icon size={28} strokeWidth={1.5} /></div>
+              <Reveal key={t} delay={((i % 3) + 1) as 1 | 2 | 3} className="bg-background/40 backdrop-blur-sm p-7">
+                <div className="h-12 w-12 grid place-items-center rounded-full bg-gold/10 text-gold"><Icon size={28} strokeWidth={1.5} /></div>
                 <h4 className="mt-5 font-serif text-lg text-foreground">{t}</h4>
                 <p className="mt-2 text-xs text-muted-foreground leading-relaxed">{d}</p>
               </Reveal>
@@ -222,8 +222,8 @@ function Home() {
 
       {/* ============ PLATFORM TECHNOLOGY ============ */}
       <section className="relative mt-0 py-24 overflow-hidden">
-        <img src={bombardier} alt="" aria-hidden className="absolute inset-0 h-full w-full object-cover opacity-35" />
-        <div className="absolute inset-0 bg-gradient-to-b from-background via-background/60 to-background" />
+        <img src={bombardier} alt="" aria-hidden className="absolute inset-0 h-full w-full object-cover opacity-55" />
+        <div className="absolute inset-0 bg-gradient-to-b from-background/70 via-background/30 to-background/70" />
 
         <div className="relative mx-auto max-w-7xl px-6 lg:px-10">
         <div className="text-center">
@@ -249,8 +249,8 @@ function Home() {
             { icon: Network, t: "Multi-Platform Access", d: "Web, iOS, and Android with seamless wallet pairing." },
             { icon: Coins, t: "Flexible Financing", d: "Bitcoin-collateralized lending and traditional wires — your choice." },
           ].map(({ icon: Icon, t, d }, i) => (
-            <Reveal key={t} delay={((i % 3) + 1) as 1 | 2 | 3} className="bg-background/70 backdrop-blur-md p-7 hover:bg-background/90 transition-colors">
-              <div className="h-14 w-14 grid place-items-center rounded-md border border-gold/50 bg-gold/10 text-gold"><Icon size={28} strokeWidth={1.5} /></div>
+            <Reveal key={t} delay={((i % 3) + 1) as 1 | 2 | 3} className="bg-background/40 backdrop-blur-md p-7 hover:bg-background/60 transition-colors">
+              <div className="h-14 w-14 grid place-items-center rounded-full border border-gold/50 bg-gold/10 text-gold"><Icon size={28} strokeWidth={1.5} /></div>
               <h4 className="mt-5 font-serif text-lg text-foreground">{t}</h4>
               <p className="mt-2 text-xs text-muted-foreground leading-relaxed">{d}</p>
             </Reveal>
@@ -264,7 +264,7 @@ function Home() {
             { Icon: Building2, v: "5,000+", l: "Properties" },
             { Icon: Crown, v: "24/7", l: "Concierge" },
           ]).map(({ Icon, v, l }, i) => (
-            <Reveal key={l} delay={((i % 3) + 1) as 1 | 2 | 3} className="bg-background/70 backdrop-blur-md py-10 text-center">
+            <Reveal key={l} delay={((i % 3) + 1) as 1 | 2 | 3} className="bg-background/40 backdrop-blur-md py-10 text-center">
               <Icon size={30} className="mx-auto text-gold" strokeWidth={1.5} />
               <div className="mt-3 font-serif text-3xl md:text-4xl gradient-gold-text">{v}</div>
               <div className="mt-2 text-[10px] tracking-luxury uppercase text-muted-foreground">{l}</div>
@@ -276,8 +276,8 @@ function Home() {
 
       {/* ============ MISSION / INNOVATION / FUTURE ============ */}
       <section className="relative mt-0 py-24 overflow-hidden">
-        <img src={yacht} alt="" aria-hidden className="absolute inset-0 h-full w-full object-cover opacity-40" />
-        <div className="absolute inset-0 bg-gradient-to-b from-background via-background/60 to-background" />
+        <img src={yacht} alt="" aria-hidden className="absolute inset-0 h-full w-full object-cover opacity-60" />
+        <div className="absolute inset-0 bg-gradient-to-b from-background/70 via-background/30 to-background/70" />
 
         <div className="relative mx-auto max-w-7xl px-6 lg:px-10">
         <div className="text-center">
@@ -298,8 +298,8 @@ function Home() {
             { Icon: Diamond, t: "Innovation", d: "Pioneering Bitcoin-native property transactions, AI-driven matching, and 3D property experiences across all 50 U.S. states." },
             { Icon: Gem, t: "Future", d: "Building the infrastructure for tomorrow's luxury assets — borderless, digitized, and intelligent across the American market." },
           ]).map(({ Icon, t, d }, i) => (
-            <Reveal key={t} delay={((i % 3) + 1) as 1 | 2 | 3} className="bg-charcoal/30 backdrop-blur-md p-8 text-center hover:bg-charcoal/50 transition-colors">
-              <div className="mx-auto h-16 w-16 grid place-items-center rounded-md border border-gold/50 bg-gold/10 text-gold"><Icon size={32} strokeWidth={1.5} /></div>
+            <Reveal key={t} delay={((i % 3) + 1) as 1 | 2 | 3} className="bg-charcoal/20 backdrop-blur-md p-8 text-center hover:bg-charcoal/40 transition-colors">
+              <div className="mx-auto h-16 w-16 grid place-items-center rounded-full border border-gold/50 bg-gold/10 text-gold"><Icon size={32} strokeWidth={1.5} /></div>
               <h3 className="mt-6 font-serif text-2xl text-foreground">{t}</h3>
               <p className="mt-3 text-sm text-muted-foreground leading-relaxed">{d}</p>
             </Reveal>
@@ -311,8 +311,8 @@ function Home() {
       {/* ============ ROADMAP ============ */}
       <section className="mt-0 relative py-24 overflow-hidden">
         <div className="relative mx-auto max-w-6xl px-6 lg:px-10 overflow-hidden p-10 lg:p-14">
-          <img src={aspen} alt="" aria-hidden className="absolute inset-0 h-full w-full object-cover opacity-35" />
-          <div className="absolute inset-0 bg-gradient-to-b from-background via-background/55 to-background" />
+          <img src={aspen} alt="" aria-hidden className="absolute inset-0 h-full w-full object-cover opacity-55" />
+          <div className="absolute inset-0 bg-gradient-to-b from-background/70 via-background/30 to-background/70" />
 
           <div className="relative">
           <div className="text-center">
@@ -329,9 +329,9 @@ function Home() {
               { p: "Phase Three — Innovation", items: ["Immersive 3D tours", "Fortune AI concierge", "On-chain title transfer"] },
               { p: "Phase Four — Ecosystem", items: ["Luxury membership program", "Global community network", "Institutional partnerships"] },
             ].map(({ p, items }) => (
-              <div key={p} className="bg-charcoal/30 backdrop-blur-sm p-6">
+              <div key={p} className="bg-charcoal/20 backdrop-blur-sm p-6">
                 <div className="flex items-center gap-3">
-                  <div className="h-7 w-7 grid place-items-center border border-gold/40 text-gold text-xs">{p.split(" ")[1][0]}</div>
+                  <div className="h-7 w-7 grid place-items-center rounded-full border border-gold/40 text-gold text-xs">{p.split(" ")[1][0]}</div>
                   <div className="font-serif text-lg text-foreground">{p}</div>
                 </div>
                 <ul className="mt-4 space-y-2.5">
