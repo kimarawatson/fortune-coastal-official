@@ -117,6 +117,16 @@
   .reveal-delay-2 { transition-delay: 160ms; }
   .reveal-delay-3 { transition-delay: 240ms; }
 
+  /* Weak frosted boundary between sections */
+  .section-edge {
+    height: 1px;
+    width: 100%;
+    background: linear-gradient(90deg, transparent 0%, oklch(0.78 0.14 78 / 0.18) 20%, oklch(0.78 0.14 78 / 0.28) 50%, oklch(0.78 0.14 78 / 0.18) 80%, transparent 100%);
+    backdrop-filter: blur(2px);
+    -webkit-mask-image: linear-gradient(90deg, transparent 0%, black 10%, black 90%, transparent 100%);
+    mask-image: linear-gradient(90deg, transparent 0%, black 10%, black 90%, transparent 100%);
+  }
+
   @keyframes pulse-ring {
     0%   { box-shadow: 0 0 0 0 oklch(0.78 0.14 78 / 0.55); }
     70%  { box-shadow: 0 0 0 22px oklch(0.78 0.14 78 / 0); }
