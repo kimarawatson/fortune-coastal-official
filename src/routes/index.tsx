@@ -151,7 +151,7 @@ function Home() {
 
           <div className="mt-14 grid md:grid-cols-2 gap-6">
             {/* Vault */}
-            <div className="bg-charcoal/30 backdrop-blur-md p-8 lg:p-10">
+            <div className="bg-charcoal/40 backdrop-blur-md p-8 lg:p-10">
               <div className="text-[10px] tracking-luxury uppercase text-gold">The Fortune Vault</div>
               <h3 className="mt-3 font-serif text-2xl text-foreground">Your all-in-one wealth desk</h3>
               <p className="mt-3 text-sm text-muted-foreground leading-relaxed">
