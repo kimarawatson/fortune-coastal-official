@@ -178,7 +178,7 @@ function Home() {
             </div>
 
             {/* BTC Ticker */}
-            <div className="bg-charcoal/30 backdrop-blur-md p-8 lg:p-10 relative overflow-hidden">
+            <div className="bg-charcoal/40 backdrop-blur-md p-8 lg:p-10 relative overflow-hidden">
               <div className="absolute -top-20 -right-20 h-64 w-64 rounded-full" style={{ background: "radial-gradient(circle, var(--gold) 0%, transparent 70%)", opacity: 0.18 }} />
               <BtcTicker />
               <div className="relative">
