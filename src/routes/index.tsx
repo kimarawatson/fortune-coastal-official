@@ -132,8 +132,8 @@ function Home() {
 
       {/* ============ DIGITAL WEALTH / FORTUNE VAULT ============ */}
       <section className="mt-0 relative overflow-hidden py-24">
-        <img src={villa} alt="" aria-hidden className="absolute inset-0 h-full w-full object-cover opacity-40" />
-        <div className="absolute inset-0 bg-gradient-to-b from-background via-background/60 to-background" />
+        <img src={villa} alt="" aria-hidden className="absolute inset-0 h-full w-full object-cover opacity-55" />
+        <div className="absolute inset-0 bg-gradient-to-b from-background/70 via-background/30 to-background/70" />
 
         <div className="absolute inset-0" style={{ background: "radial-gradient(60% 60% at 80% 50%, var(--gold) 0%, transparent 70%)", opacity: 0.12 }} />
         <div className="relative mx-auto max-w-7xl px-6 lg:px-10">
