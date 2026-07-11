@@ -249,8 +249,8 @@ function Home() {
             { icon: Network, t: "Multi-Platform Access", d: "Web, iOS, and Android with seamless wallet pairing." },
             { icon: Coins, t: "Flexible Financing", d: "Bitcoin-collateralized lending and traditional wires — your choice." },
           ].map(({ icon: Icon, t, d }, i) => (
-            <Reveal key={t} delay={((i % 3) + 1) as 1 | 2 | 3} className="bg-background/70 backdrop-blur-md p-7 hover:bg-background/90 transition-colors">
-              <div className="h-14 w-14 grid place-items-center rounded-md border border-gold/50 bg-gold/10 text-gold"><Icon size={28} strokeWidth={1.5} /></div>
+            <Reveal key={t} delay={((i % 3) + 1) as 1 | 2 | 3} className="bg-background/40 backdrop-blur-md p-7 hover:bg-background/60 transition-colors">
+              <div className="h-14 w-14 grid place-items-center rounded-full border border-gold/50 bg-gold/10 text-gold"><Icon size={28} strokeWidth={1.5} /></div>
               <h4 className="mt-5 font-serif text-lg text-foreground">{t}</h4>
               <p className="mt-2 text-xs text-muted-foreground leading-relaxed">{d}</p>
             </Reveal>
