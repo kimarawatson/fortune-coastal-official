@@ -5,6 +5,7 @@ import {
   Gem, Crown, Diamond, BadgeCheck, Award, Building2,
 } from "lucide-react";
 import { SiteLayout } from "@/components/SiteLayout";
+import { BtcTicker } from "@/components/BtcTicker";
 import { assets, formatUsd } from "@/data/mock";
 import hero from "@/assets/hero-villa.jpg";
 import penthouse from "@/assets/asset-penthouse.jpg";
