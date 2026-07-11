@@ -70,8 +70,8 @@
 
 
 .dark {
-  --background: oklch(0.13 0.04 275);
-  --foreground: oklch(0.98 0.01 260);
+  --background: oklch(0.14 0.01 60);
+  --foreground: oklch(0.97 0.01 85);
 }
 
 @layer base {
@@ -82,14 +82,15 @@
     font-family: var(--font-sans);
     font-feature-settings: "ss01", "cv11";
     -webkit-font-smoothing: antialiased;
-    background-color: #06060f;
+    background-color: #0b0906;
     background-image:
-      radial-gradient(60% 50% at 12% 0%, oklch(0.6 0.24 275 / 0.16) 0%, transparent 60%),
-      radial-gradient(50% 40% at 100% 20%, oklch(0.55 0.22 300 / 0.12) 0%, transparent 60%),
-      radial-gradient(70% 60% at 50% 100%, oklch(0.4 0.18 265 / 0.16) 0%, transparent 70%),
-      linear-gradient(180deg, #07071a 0%, #0a0a22 40%, #06060f 100%);
+      radial-gradient(60% 50% at 12% 0%, oklch(0.78 0.14 78 / 0.14) 0%, transparent 60%),
+      radial-gradient(50% 40% at 100% 20%, oklch(0.72 0.15 72 / 0.10) 0%, transparent 60%),
+      radial-gradient(70% 60% at 50% 100%, oklch(0.4 0.05 60 / 0.16) 0%, transparent 70%),
+      linear-gradient(180deg, #100c07 0%, #14100a 40%, #0a0805 100%);
     background-attachment: fixed;
   }
+
   h1, h2, h3, h4 { font-family: var(--font-serif); font-weight: 400; letter-spacing: -0.015em; }
 }
 
