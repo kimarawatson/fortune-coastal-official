@@ -210,8 +210,8 @@ function Home() {
               { icon: LineChart, t: "Live Market Data", d: "Real-time BTC pricing, portfolio tracking, and market insights — always on." },
               { icon: ShieldCheck, t: "Military-Grade Security", d: "Multi-sig custody, cold storage, and institutional-grade insurance built in." },
             ].map(({ icon: Icon, t, d }, i) => (
-              <Reveal key={t} delay={((i % 3) + 1) as 1 | 2 | 3} className="bg-background/80 backdrop-blur-sm p-7">
-                <div className="h-12 w-12 grid place-items-center rounded-md bg-gold/10 text-gold"><Icon size={28} strokeWidth={1.5} /></div>
+              <Reveal key={t} delay={((i % 3) + 1) as 1 | 2 | 3} className="bg-background/40 backdrop-blur-sm p-7">
+                <div className="h-12 w-12 grid place-items-center rounded-full bg-gold/10 text-gold"><Icon size={28} strokeWidth={1.5} /></div>
                 <h4 className="mt-5 font-serif text-lg text-foreground">{t}</h4>
                 <p className="mt-2 text-xs text-muted-foreground leading-relaxed">{d}</p>
               </Reveal>
