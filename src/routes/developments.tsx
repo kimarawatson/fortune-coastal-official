@@ -31,6 +31,7 @@ export const Route = createFileRoute("/developments")({
 });
 
 type Dev = {
+  slug: string;
   name: string;
   city: string;
   region: string;
@@ -40,13 +41,24 @@ type Dev = {
 };
 
 const developments: Dev[] = [
-  { name: "Fortune Coastal Tower", city: "Miami", region: "Florida, USA", status: "Pre-Development", completion: "2030", image: miami.url },
-  { name: "Fortune Coastal Tower", city: "California", region: "California, USA", status: "Pre-Development", completion: "2031", image: california.url },
-  { name: "Fortune Coastal Tower", city: "Las Vegas", region: "Nevada, USA", status: "Pre-Development", completion: "2032", image: vegas.url },
-  { name: "Fortune Coastal Tower", city: "Macao", region: "Macao, China", status: "Pre-Development", completion: "2033", image: macao.url },
+  { slug: "miami", name: "Fortune Coastal Tower", city: "Miami", region: "Florida, USA", status: "Pre-Development", completion: "2030", image: miami.url },
+  { slug: "california", name: "Fortune Coastal Tower", city: "California", region: "California, USA", status: "Pre-Development", completion: "2031", image: california.url },
+  { slug: "vegas", name: "Fortune Coastal Tower", city: "Las Vegas", region: "Nevada, USA", status: "Pre-Development", completion: "2032", image: vegas.url },
+  { slug: "macao", name: "Fortune Coastal Tower", city: "Macao", region: "Macao, China", status: "Pre-Development", completion: "2033", image: macao.url },
 ];
 
-const partners = ["EG Project Mgmt", "MGE Development", "Interior Architects", "Scopetec", "KAST Construction", "DeSimone"];
+const partnerLogos = [
+  { src: p2.url, alt: "Arya" },
+  { src: p3.url, alt: "Ardie Tavangarian" },
+  { src: p4.url, alt: "Ark Architects" },
+  { src: p5.url, alt: "Ark" },
+  { src: p6.url, alt: "McClean Design" },
+  { src: p7.url, alt: "Blue Heron Design Build" },
+  { src: p8.url, alt: "Apel Design Studio" },
+  { src: p9.url, alt: "FGR Architects" },
+  { src: p10.url, alt: "Nobel" },
+  { src: p11.url, alt: "Think Wilder Architecture" },
+];
 
 function Developments() {
   return (
