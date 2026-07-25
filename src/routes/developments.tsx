@@ -151,23 +151,37 @@ function Developments() {
         </div>
       </section>
 
-      {/* Partners */}
+      {/* Partners — marquee */}
       <section className="mx-auto max-w-7xl px-6 lg:px-10 py-24">
         <div className="flex items-center justify-center gap-6 mb-12">
           <div className="h-px w-16 bg-gold/40" />
           <h2 className="text-xs tracking-[0.4em] uppercase text-gold">Development Partners</h2>
           <div className="h-px w-16 bg-gold/40" />
         </div>
-        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-8 items-center">
-          {partners.map((p) => (
-            <div key={p} className="text-center text-sm tracking-luxury uppercase text-muted-foreground/70 hover:text-gold transition-colors">
-              {p}
-            </div>
-          ))}
+
+        <div
+          className="relative overflow-hidden"
+          style={{
+            maskImage: "linear-gradient(to right, transparent, black 8%, black 92%, transparent)",
+            WebkitMaskImage: "linear-gradient(to right, transparent, black 8%, black 92%, transparent)",
+          }}
+        >
+          <div className="marquee-track flex w-max items-center gap-16 py-6">
+            {[...partnerLogos, ...partnerLogos].map((logo, i) => (
+              <div
+                key={i}
+                className="shrink-0 h-20 w-40 flex items-center justify-center opacity-70 hover:opacity-100 transition-opacity"
+              >
+                <img
+                  src={logo.src}
+                  alt={logo.alt}
+                  loading="lazy"
+                  className="max-h-16 max-w-full object-contain"
+                />
+              </div>
+            ))}
+          </div>
         </div>
-        <p className="mt-8 text-center text-[10px] tracking-luxury uppercase text-muted-foreground/60">
-          Client logos will be provided
-        </p>
       </section>
 
       {/* CTA */}
