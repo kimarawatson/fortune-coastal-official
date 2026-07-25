@@ -33,9 +33,9 @@ function Contact() {
 
           <div className="mt-12 space-y-6">
             {[
-              { icon: MapPin, label: "Headquarters", value: "Miami, Florida, United States" },
-              { icon: Phone, label: "Concierge Desk", value: "+1 (305) 555-0148" },
-              { icon: Mail, label: "Private Inquiries", value: "concierge@fortunecoastal.com" },
+              { icon: MapPin, label: "Headquarters", value: "Los Angeles, California, United States" },
+              { icon: Phone, label: "Concierge Desk", value: "(206) 333.7469" },
+              { icon: Mail, label: "Private Inquiries", value: "InvestFortuneCoastalGroup@outlook.com" },
             ].map(({ icon: Icon, label, value }) => (
               <div key={label} className="flex items-start gap-4">
                 <div className="border border-gold/40 p-3 text-gold"><Icon size={16} /></div>
