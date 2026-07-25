@@ -2,10 +2,10 @@ import { createFileRoute, Link, notFound } from "@tanstack/react-router";
 import { SiteLayout } from "@/components/SiteLayout";
 import { Reveal } from "@/components/Reveal";
 import { ArrowLeft, MapPin, Calendar, Building2, Sparkles } from "lucide-react";
-import miami from "@/assets/dev-6.png.asset.json";
-import california from "@/assets/dev-7.png.asset.json";
-import vegas from "@/assets/dev-8.png.asset.json";
-import macao from "@/assets/dev-9.png.asset.json";
+import miami from "@/assets/dev-6.png";
+import california from "@/assets/dev-7.png";
+import vegas from "@/assets/dev-8.png";
+import macao from "@/assets/dev-9.png";
 
 type Dev = {
   slug: string;
