@@ -1,4 +1,4 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, Link } from "@tanstack/react-router";
 import { SiteLayout } from "@/components/SiteLayout";
 import { Reveal } from "@/components/Reveal";
 import { Star, Gem, Waves, Sparkles } from "lucide-react";
@@ -7,6 +7,16 @@ import miami from "@/assets/dev-6.png.asset.json";
 import california from "@/assets/dev-7.png.asset.json";
 import vegas from "@/assets/dev-8.png.asset.json";
 import macao from "@/assets/dev-9.png.asset.json";
+import p2 from "@/assets/partner-2.jpg.asset.json";
+import p3 from "@/assets/partner-3.jpg.asset.json";
+import p4 from "@/assets/partner-4.jpg.asset.json";
+import p5 from "@/assets/partner-5.jpg.asset.json";
+import p6 from "@/assets/partner-6.jpg.asset.json";
+import p7 from "@/assets/partner-7.jpg.asset.json";
+import p8 from "@/assets/partner-8.jpg.asset.json";
+import p9 from "@/assets/partner-9.jpg.asset.json";
+import p10 from "@/assets/partner-10.jpg.asset.json";
+import p11 from "@/assets/partner-11.jpg.asset.json";
 
 export const Route = createFileRoute("/developments")({
   head: () => ({
