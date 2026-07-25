@@ -114,8 +114,19 @@ function Developments() {
                   </div>
                 </div>
                 <div className="grid grid-cols-2 border-t border-gold/15">
-                  <button className="text-[10px] tracking-luxury uppercase text-foreground py-4 border-r border-gold/15 hover:bg-gold/5 transition-colors">View Development</button>
-                  <button className="text-[10px] tracking-luxury uppercase text-primary-foreground bg-gradient-to-r from-gold to-gold-soft py-4 hover:opacity-90 transition-opacity">Invest</button>
+                  <Link
+                    to="/developments/$slug"
+                    params={{ slug: d.slug }}
+                    className="text-center text-[10px] tracking-luxury uppercase text-foreground py-4 border-r border-gold/15 hover:bg-gold/5 transition-colors"
+                  >
+                    View Development
+                  </Link>
+                  <Link
+                    to="/contact"
+                    className="text-center text-[10px] tracking-luxury uppercase text-primary-foreground bg-gradient-to-r from-gold to-gold-soft py-4 hover:opacity-90 transition-opacity"
+                  >
+                    Invest
+                  </Link>
                 </div>
               </article>
             </Reveal>
