@@ -71,9 +71,9 @@ const DevelopmentsIndexRoute = DevelopmentsIndexRouteImport.update({
   getParentRoute: () => rootRouteImport,
 } as any)
 const DevelopmentsSlugRoute = DevelopmentsSlugRouteImport.update({
-  id: '/$slug',
-  path: '/$slug',
-  getParentRoute: () => DevelopmentsRoute,
+  id: '/developments/$slug',
+  path: '/developments/$slug',
+  getParentRoute: () => rootRouteImport,
 } as any)
 const AssetIdRoute = AssetIdRouteImport.update({
   id: '/asset/$id',
@@ -224,6 +224,7 @@ export interface RootRouteChildren {
   MarketplaceRoute: typeof MarketplaceRoute
   ResetPasswordRoute: typeof ResetPasswordRoute
   AssetIdRoute: typeof AssetIdRoute
+  DevelopmentsSlugRoute: typeof DevelopmentsSlugRoute
   DevelopmentsIndexRoute: typeof DevelopmentsIndexRoute
 }
 
@@ -294,10 +295,10 @@ declare module '@tanstack/react-router' {
     }
     '/developments/$slug': {
       id: '/developments/$slug'
-      path: '/$slug'
+      path: '/developments/$slug'
       fullPath: '/developments/$slug'
       preLoaderRoute: typeof DevelopmentsSlugRouteImport
-      parentRoute: typeof DevelopmentsRoute
+      parentRoute: typeof rootRouteImport
     }
     '/asset/$id': {
       id: '/asset/$id'
@@ -382,18 +383,9 @@ const rootRouteChildren: RootRouteChildren = {
   MarketplaceRoute: MarketplaceRoute,
   ResetPasswordRoute: ResetPasswordRoute,
   AssetIdRoute: AssetIdRoute,
+  DevelopmentsSlugRoute: DevelopmentsSlugRoute,
   DevelopmentsIndexRoute: DevelopmentsIndexRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
-
-import type { getRouter } from './router.tsx'
-import type { startInstance } from './start.ts'
-declare module '@tanstack/react-start' {
-  interface Register {
-    ssr: true
-    router: Awaited<ReturnType<typeof getRouter>>
-    config: Awaited<ReturnType<typeof startInstance.getOptions>>
-  }
-}
