@@ -11,6 +11,7 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as ResetPasswordRouteImport } from './routes/reset-password'
 import { Route as MarketplaceRouteImport } from './routes/marketplace'
+import { Route as DevelopmentsRouteImport } from './routes/developments'
 import { Route as ContactRouteImport } from './routes/contact'
 import { Route as AuthRouteImport } from './routes/auth'
 import { Route as AdminRouteImport } from './routes/admin'
@@ -32,6 +33,11 @@ const ResetPasswordRoute = ResetPasswordRouteImport.update({
 const MarketplaceRoute = MarketplaceRouteImport.update({
   id: '/marketplace',
   path: '/marketplace',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const DevelopmentsRoute = DevelopmentsRouteImport.update({
+  id: '/developments',
+  path: '/developments',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ContactRoute = ContactRouteImport.update({
@@ -100,6 +106,7 @@ export interface FileRoutesByFullPath {
   '/admin': typeof AdminRoute
   '/auth': typeof AuthRoute
   '/contact': typeof ContactRoute
+  '/developments': typeof DevelopmentsRoute
   '/marketplace': typeof MarketplaceRoute
   '/reset-password': typeof ResetPasswordRoute
   '/dashboard': typeof AuthenticatedDashboardRoute
@@ -115,6 +122,7 @@ export interface FileRoutesByTo {
   '/admin': typeof AdminRoute
   '/auth': typeof AuthRoute
   '/contact': typeof ContactRoute
+  '/developments': typeof DevelopmentsRoute
   '/marketplace': typeof MarketplaceRoute
   '/reset-password': typeof ResetPasswordRoute
   '/dashboard': typeof AuthenticatedDashboardRoute
@@ -132,6 +140,7 @@ export interface FileRoutesById {
   '/admin': typeof AdminRoute
   '/auth': typeof AuthRoute
   '/contact': typeof ContactRoute
+  '/developments': typeof DevelopmentsRoute
   '/marketplace': typeof MarketplaceRoute
   '/reset-password': typeof ResetPasswordRoute
   '/_authenticated/dashboard': typeof AuthenticatedDashboardRoute
@@ -149,6 +158,7 @@ export interface FileRouteTypes {
     | '/admin'
     | '/auth'
     | '/contact'
+    | '/developments'
     | '/marketplace'
     | '/reset-password'
     | '/dashboard'
@@ -164,6 +174,7 @@ export interface FileRouteTypes {
     | '/admin'
     | '/auth'
     | '/contact'
+    | '/developments'
     | '/marketplace'
     | '/reset-password'
     | '/dashboard'
@@ -180,6 +191,7 @@ export interface FileRouteTypes {
     | '/admin'
     | '/auth'
     | '/contact'
+    | '/developments'
     | '/marketplace'
     | '/reset-password'
     | '/_authenticated/dashboard'
@@ -197,6 +209,7 @@ export interface RootRouteChildren {
   AdminRoute: typeof AdminRoute
   AuthRoute: typeof AuthRoute
   ContactRoute: typeof ContactRoute
+  DevelopmentsRoute: typeof DevelopmentsRoute
   MarketplaceRoute: typeof MarketplaceRoute
   ResetPasswordRoute: typeof ResetPasswordRoute
   AssetIdRoute: typeof AssetIdRoute
@@ -216,6 +229,13 @@ declare module '@tanstack/react-router' {
       path: '/marketplace'
       fullPath: '/marketplace'
       preLoaderRoute: typeof MarketplaceRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/developments': {
+      id: '/developments'
+      path: '/developments'
+      fullPath: '/developments'
+      preLoaderRoute: typeof DevelopmentsRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/contact': {
@@ -340,6 +360,7 @@ const rootRouteChildren: RootRouteChildren = {
   AdminRoute: AdminRoute,
   AuthRoute: AuthRoute,
   ContactRoute: ContactRoute,
+  DevelopmentsRoute: DevelopmentsRoute,
   MarketplaceRoute: MarketplaceRoute,
   ResetPasswordRoute: ResetPasswordRoute,
   AssetIdRoute: AssetIdRoute,
