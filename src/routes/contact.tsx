@@ -36,6 +36,7 @@ function Contact() {
               { icon: MapPin, label: "Headquarters", value: "Los Angeles, California, United States" },
               { icon: Phone, label: "Concierge Desk", value: "(206) 333.7469" },
               { icon: Mail, label: "Private Inquiries", value: "InvestFortuneCoastalGroup@outlook.com" },
+            ].map(({ icon: Icon, label, value }) => (
               <div key={label} className="flex items-start gap-4">
                 <div className="border border-gold/40 p-3 text-gold"><Icon size={16} /></div>
                 <div>
