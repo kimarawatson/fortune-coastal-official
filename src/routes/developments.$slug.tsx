@@ -105,7 +105,7 @@ const developments: Record<string, Dev> = {
 };
 
 export const Route = createFileRoute("/developments/$slug")({
-  loader: ({ params }) => {
+  loader: ({ params }): { dev: Dev } => {
     const dev = developments[params.slug];
     if (!dev) throw notFound();
     return { dev };

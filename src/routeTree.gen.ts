@@ -18,6 +18,7 @@ import { Route as AdminRouteImport } from './routes/admin'
 import { Route as AboutRouteImport } from './routes/about'
 import { Route as AuthenticatedRouteRouteImport } from './routes/_authenticated/route'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as DevelopmentsSlugRouteImport } from './routes/developments.$slug'
 import { Route as AssetIdRouteImport } from './routes/asset.$id'
 import { Route as AuthenticatedSellerRouteImport } from './routes/_authenticated/seller'
 import { Route as AuthenticatedProfileRouteImport } from './routes/_authenticated/profile'
@@ -69,6 +70,11 @@ const IndexRoute = IndexRouteImport.update({
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const DevelopmentsSlugRoute = DevelopmentsSlugRouteImport.update({
+  id: '/$slug',
+  path: '/$slug',
+  getParentRoute: () => DevelopmentsRoute,
+} as any)
 const AssetIdRoute = AssetIdRouteImport.update({
   id: '/asset/$id',
   path: '/asset/$id',
@@ -106,13 +112,14 @@ export interface FileRoutesByFullPath {
   '/admin': typeof AdminRoute
   '/auth': typeof AuthRoute
   '/contact': typeof ContactRoute
-  '/developments': typeof DevelopmentsRoute
+  '/developments': typeof DevelopmentsRouteWithChildren
   '/marketplace': typeof MarketplaceRoute
   '/reset-password': typeof ResetPasswordRoute
   '/dashboard': typeof AuthenticatedDashboardRoute
   '/profile': typeof AuthenticatedProfileRoute
   '/seller': typeof AuthenticatedSellerRouteWithChildren
   '/asset/$id': typeof AssetIdRoute
+  '/developments/$slug': typeof DevelopmentsSlugRoute
   '/seller/$id': typeof AuthenticatedSellerIdRoute
   '/seller/new': typeof AuthenticatedSellerNewRoute
 }
@@ -122,13 +129,14 @@ export interface FileRoutesByTo {
   '/admin': typeof AdminRoute
   '/auth': typeof AuthRoute
   '/contact': typeof ContactRoute
-  '/developments': typeof DevelopmentsRoute
+  '/developments': typeof DevelopmentsRouteWithChildren
   '/marketplace': typeof MarketplaceRoute
   '/reset-password': typeof ResetPasswordRoute
   '/dashboard': typeof AuthenticatedDashboardRoute
   '/profile': typeof AuthenticatedProfileRoute
   '/seller': typeof AuthenticatedSellerRouteWithChildren
   '/asset/$id': typeof AssetIdRoute
+  '/developments/$slug': typeof DevelopmentsSlugRoute
   '/seller/$id': typeof AuthenticatedSellerIdRoute
   '/seller/new': typeof AuthenticatedSellerNewRoute
 }
@@ -140,13 +148,14 @@ export interface FileRoutesById {
   '/admin': typeof AdminRoute
   '/auth': typeof AuthRoute
   '/contact': typeof ContactRoute
-  '/developments': typeof DevelopmentsRoute
+  '/developments': typeof DevelopmentsRouteWithChildren
   '/marketplace': typeof MarketplaceRoute
   '/reset-password': typeof ResetPasswordRoute
   '/_authenticated/dashboard': typeof AuthenticatedDashboardRoute
   '/_authenticated/profile': typeof AuthenticatedProfileRoute
   '/_authenticated/seller': typeof AuthenticatedSellerRouteWithChildren
   '/asset/$id': typeof AssetIdRoute
+  '/developments/$slug': typeof DevelopmentsSlugRoute
   '/_authenticated/seller/$id': typeof AuthenticatedSellerIdRoute
   '/_authenticated/seller/new': typeof AuthenticatedSellerNewRoute
 }
@@ -165,6 +174,7 @@ export interface FileRouteTypes {
     | '/profile'
     | '/seller'
     | '/asset/$id'
+    | '/developments/$slug'
     | '/seller/$id'
     | '/seller/new'
   fileRoutesByTo: FileRoutesByTo
@@ -181,6 +191,7 @@ export interface FileRouteTypes {
     | '/profile'
     | '/seller'
     | '/asset/$id'
+    | '/developments/$slug'
     | '/seller/$id'
     | '/seller/new'
   id:
@@ -198,6 +209,7 @@ export interface FileRouteTypes {
     | '/_authenticated/profile'
     | '/_authenticated/seller'
     | '/asset/$id'
+    | '/developments/$slug'
     | '/_authenticated/seller/$id'
     | '/_authenticated/seller/new'
   fileRoutesById: FileRoutesById
@@ -209,7 +221,7 @@ export interface RootRouteChildren {
   AdminRoute: typeof AdminRoute
   AuthRoute: typeof AuthRoute
   ContactRoute: typeof ContactRoute
-  DevelopmentsRoute: typeof DevelopmentsRoute
+  DevelopmentsRoute: typeof DevelopmentsRouteWithChildren
   MarketplaceRoute: typeof MarketplaceRoute
   ResetPasswordRoute: typeof ResetPasswordRoute
   AssetIdRoute: typeof AssetIdRoute
@@ -279,6 +291,13 @@ declare module '@tanstack/react-router' {
       fullPath: '/'
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
+    }
+    '/developments/$slug': {
+      id: '/developments/$slug'
+      path: '/$slug'
+      fullPath: '/developments/$slug'
+      preLoaderRoute: typeof DevelopmentsSlugRouteImport
+      parentRoute: typeof DevelopmentsRoute
     }
     '/asset/$id': {
       id: '/asset/$id'
@@ -353,6 +372,18 @@ const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
 const AuthenticatedRouteRouteWithChildren =
   AuthenticatedRouteRoute._addFileChildren(AuthenticatedRouteRouteChildren)
 
+interface DevelopmentsRouteChildren {
+  DevelopmentsSlugRoute: typeof DevelopmentsSlugRoute
+}
+
+const DevelopmentsRouteChildren: DevelopmentsRouteChildren = {
+  DevelopmentsSlugRoute: DevelopmentsSlugRoute,
+}
+
+const DevelopmentsRouteWithChildren = DevelopmentsRoute._addFileChildren(
+  DevelopmentsRouteChildren,
+)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AuthenticatedRouteRoute: AuthenticatedRouteRouteWithChildren,
@@ -360,7 +391,7 @@ const rootRouteChildren: RootRouteChildren = {
   AdminRoute: AdminRoute,
   AuthRoute: AuthRoute,
   ContactRoute: ContactRoute,
-  DevelopmentsRoute: DevelopmentsRoute,
+  DevelopmentsRoute: DevelopmentsRouteWithChildren,
   MarketplaceRoute: MarketplaceRoute,
   ResetPasswordRoute: ResetPasswordRoute,
   AssetIdRoute: AssetIdRoute,
