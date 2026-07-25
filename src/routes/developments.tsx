@@ -49,7 +49,7 @@ function Developments() {
           <Reveal>
             <h1 className="font-serif text-5xl md:text-7xl tracking-[0.15em] text-foreground">DEVELOPMENTS</h1>
           </Reveal>
-          <Reveal delay={120}>
+          <Reveal delay={1}>
             <div className="mt-6 text-xs md:text-sm tracking-luxury uppercase text-gold-soft">
               Iconic Architecture. Global Destinations.
             </div>
@@ -70,7 +70,7 @@ function Developments() {
 
         <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
           {developments.map((d, i) => (
-            <Reveal key={d.city} delay={i * 80}>
+            <Reveal key={d.city} delay={Math.min(i, 3) as 0 | 1 | 2 | 3}>
               <article className="group relative overflow-hidden border border-gold/15 bg-charcoal/40 backdrop-blur-sm hover:border-gold/50 transition-all duration-500">
                 <div className="relative aspect-[3/4] overflow-hidden">
                   <img src={d.image} alt={`${d.name} — ${d.city}`} loading="lazy" className="h-full w-full object-cover transition-transform duration-[1.4s] group-hover:scale-105" />
