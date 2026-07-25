@@ -28,7 +28,7 @@ const developments: Record<string, Dev> = {
     region: "Florida, USA",
     status: "Pre-Development",
     completion: "2030",
-    image: miami.url,
+    image: miami,
     tagline: "A vertical resort rising above Biscayne Bay.",
     description: [
       "Fortune Coastal Tower Miami is a sculpted, spiraling landmark designed for a new era of oceanfront living. Envisioned as a vertical resort, the tower fuses full-floor private residences with a curated program of hospitality, wellness, and sky-level social clubs.",
@@ -49,7 +49,7 @@ const developments: Record<string, Dev> = {
     region: "California, USA",
     status: "Pre-Development",
     completion: "2031",
-    image: california.url,
+    image: california,
     tagline: "A pointed silhouette on the Pacific skyline.",
     description: [
       "Rising along the California coast, Fortune Coastal Tower Los Angeles pairs cinematic ocean views with the disciplined elegance of West Coast modernism. The pointed crown is designed as a signature marker on the Pacific horizon.",
@@ -69,7 +69,7 @@ const developments: Record<string, Dev> = {
     region: "Nevada, USA",
     status: "Pre-Development",
     completion: "2032",
-    image: vegas.url,
+    image: vegas,
     tagline: "Iconic architecture on the world's most watched street.",
     description: [
       "A luminous, sculpted tower rising over the Las Vegas Strip. Fortune Coastal Tower Las Vegas is designed as a private counterpoint to the city — a residential sanctuary elevated far above the entertainment core.",
@@ -89,7 +89,7 @@ const developments: Record<string, Dev> = {
     region: "Macao, China",
     status: "Pre-Development",
     completion: "2033",
-    image: macao.url,
+    image: macao,
     tagline: "A harbor landmark bridging heritage and horizon.",
     description: [
       "Set on the Macao waterfront, Fortune Coastal Tower Macao anchors a new luxury district that honors the city's Portuguese heritage while projecting a distinctly modern silhouette across the harbor.",
