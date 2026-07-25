@@ -11,13 +11,13 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as ResetPasswordRouteImport } from './routes/reset-password'
 import { Route as MarketplaceRouteImport } from './routes/marketplace'
-import { Route as DevelopmentsRouteImport } from './routes/developments'
 import { Route as ContactRouteImport } from './routes/contact'
 import { Route as AuthRouteImport } from './routes/auth'
 import { Route as AdminRouteImport } from './routes/admin'
 import { Route as AboutRouteImport } from './routes/about'
 import { Route as AuthenticatedRouteRouteImport } from './routes/_authenticated/route'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as DevelopmentsIndexRouteImport } from './routes/developments.index'
 import { Route as DevelopmentsSlugRouteImport } from './routes/developments.$slug'
 import { Route as AssetIdRouteImport } from './routes/asset.$id'
 import { Route as AuthenticatedSellerRouteImport } from './routes/_authenticated/seller'
@@ -34,11 +34,6 @@ const ResetPasswordRoute = ResetPasswordRouteImport.update({
 const MarketplaceRoute = MarketplaceRouteImport.update({
   id: '/marketplace',
   path: '/marketplace',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const DevelopmentsRoute = DevelopmentsRouteImport.update({
-  id: '/developments',
-  path: '/developments',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ContactRoute = ContactRouteImport.update({
@@ -68,6 +63,11 @@ const AuthenticatedRouteRoute = AuthenticatedRouteRouteImport.update({
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const DevelopmentsIndexRoute = DevelopmentsIndexRouteImport.update({
+  id: '/developments/',
+  path: '/developments/',
   getParentRoute: () => rootRouteImport,
 } as any)
 const DevelopmentsSlugRoute = DevelopmentsSlugRouteImport.update({
@@ -112,7 +112,6 @@ export interface FileRoutesByFullPath {
   '/admin': typeof AdminRoute
   '/auth': typeof AuthRoute
   '/contact': typeof ContactRoute
-  '/developments': typeof DevelopmentsRouteWithChildren
   '/marketplace': typeof MarketplaceRoute
   '/reset-password': typeof ResetPasswordRoute
   '/dashboard': typeof AuthenticatedDashboardRoute
@@ -120,6 +119,7 @@ export interface FileRoutesByFullPath {
   '/seller': typeof AuthenticatedSellerRouteWithChildren
   '/asset/$id': typeof AssetIdRoute
   '/developments/$slug': typeof DevelopmentsSlugRoute
+  '/developments/': typeof DevelopmentsIndexRoute
   '/seller/$id': typeof AuthenticatedSellerIdRoute
   '/seller/new': typeof AuthenticatedSellerNewRoute
 }
@@ -129,7 +129,6 @@ export interface FileRoutesByTo {
   '/admin': typeof AdminRoute
   '/auth': typeof AuthRoute
   '/contact': typeof ContactRoute
-  '/developments': typeof DevelopmentsRouteWithChildren
   '/marketplace': typeof MarketplaceRoute
   '/reset-password': typeof ResetPasswordRoute
   '/dashboard': typeof AuthenticatedDashboardRoute
@@ -137,6 +136,7 @@ export interface FileRoutesByTo {
   '/seller': typeof AuthenticatedSellerRouteWithChildren
   '/asset/$id': typeof AssetIdRoute
   '/developments/$slug': typeof DevelopmentsSlugRoute
+  '/developments': typeof DevelopmentsIndexRoute
   '/seller/$id': typeof AuthenticatedSellerIdRoute
   '/seller/new': typeof AuthenticatedSellerNewRoute
 }
@@ -148,7 +148,6 @@ export interface FileRoutesById {
   '/admin': typeof AdminRoute
   '/auth': typeof AuthRoute
   '/contact': typeof ContactRoute
-  '/developments': typeof DevelopmentsRouteWithChildren
   '/marketplace': typeof MarketplaceRoute
   '/reset-password': typeof ResetPasswordRoute
   '/_authenticated/dashboard': typeof AuthenticatedDashboardRoute
@@ -156,6 +155,7 @@ export interface FileRoutesById {
   '/_authenticated/seller': typeof AuthenticatedSellerRouteWithChildren
   '/asset/$id': typeof AssetIdRoute
   '/developments/$slug': typeof DevelopmentsSlugRoute
+  '/developments/': typeof DevelopmentsIndexRoute
   '/_authenticated/seller/$id': typeof AuthenticatedSellerIdRoute
   '/_authenticated/seller/new': typeof AuthenticatedSellerNewRoute
 }
@@ -167,7 +167,6 @@ export interface FileRouteTypes {
     | '/admin'
     | '/auth'
     | '/contact'
-    | '/developments'
     | '/marketplace'
     | '/reset-password'
     | '/dashboard'
@@ -175,6 +174,7 @@ export interface FileRouteTypes {
     | '/seller'
     | '/asset/$id'
     | '/developments/$slug'
+    | '/developments/'
     | '/seller/$id'
     | '/seller/new'
   fileRoutesByTo: FileRoutesByTo
@@ -184,7 +184,6 @@ export interface FileRouteTypes {
     | '/admin'
     | '/auth'
     | '/contact'
-    | '/developments'
     | '/marketplace'
     | '/reset-password'
     | '/dashboard'
@@ -192,6 +191,7 @@ export interface FileRouteTypes {
     | '/seller'
     | '/asset/$id'
     | '/developments/$slug'
+    | '/developments'
     | '/seller/$id'
     | '/seller/new'
   id:
@@ -202,7 +202,6 @@ export interface FileRouteTypes {
     | '/admin'
     | '/auth'
     | '/contact'
-    | '/developments'
     | '/marketplace'
     | '/reset-password'
     | '/_authenticated/dashboard'
@@ -210,6 +209,7 @@ export interface FileRouteTypes {
     | '/_authenticated/seller'
     | '/asset/$id'
     | '/developments/$slug'
+    | '/developments/'
     | '/_authenticated/seller/$id'
     | '/_authenticated/seller/new'
   fileRoutesById: FileRoutesById
@@ -221,10 +221,10 @@ export interface RootRouteChildren {
   AdminRoute: typeof AdminRoute
   AuthRoute: typeof AuthRoute
   ContactRoute: typeof ContactRoute
-  DevelopmentsRoute: typeof DevelopmentsRouteWithChildren
   MarketplaceRoute: typeof MarketplaceRoute
   ResetPasswordRoute: typeof ResetPasswordRoute
   AssetIdRoute: typeof AssetIdRoute
+  DevelopmentsIndexRoute: typeof DevelopmentsIndexRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -241,13 +241,6 @@ declare module '@tanstack/react-router' {
       path: '/marketplace'
       fullPath: '/marketplace'
       preLoaderRoute: typeof MarketplaceRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/developments': {
-      id: '/developments'
-      path: '/developments'
-      fullPath: '/developments'
-      preLoaderRoute: typeof DevelopmentsRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/contact': {
@@ -290,6 +283,13 @@ declare module '@tanstack/react-router' {
       path: '/'
       fullPath: '/'
       preLoaderRoute: typeof IndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/developments/': {
+      id: '/developments/'
+      path: '/developments'
+      fullPath: '/developments/'
+      preLoaderRoute: typeof DevelopmentsIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/developments/$slug': {
@@ -372,18 +372,6 @@ const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
 const AuthenticatedRouteRouteWithChildren =
   AuthenticatedRouteRoute._addFileChildren(AuthenticatedRouteRouteChildren)
 
-interface DevelopmentsRouteChildren {
-  DevelopmentsSlugRoute: typeof DevelopmentsSlugRoute
-}
-
-const DevelopmentsRouteChildren: DevelopmentsRouteChildren = {
-  DevelopmentsSlugRoute: DevelopmentsSlugRoute,
-}
-
-const DevelopmentsRouteWithChildren = DevelopmentsRoute._addFileChildren(
-  DevelopmentsRouteChildren,
-)
-
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AuthenticatedRouteRoute: AuthenticatedRouteRouteWithChildren,
@@ -391,11 +379,21 @@ const rootRouteChildren: RootRouteChildren = {
   AdminRoute: AdminRoute,
   AuthRoute: AuthRoute,
   ContactRoute: ContactRoute,
-  DevelopmentsRoute: DevelopmentsRouteWithChildren,
   MarketplaceRoute: MarketplaceRoute,
   ResetPasswordRoute: ResetPasswordRoute,
   AssetIdRoute: AssetIdRoute,
+  DevelopmentsIndexRoute: DevelopmentsIndexRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
+
+import type { getRouter } from './router.tsx'
+import type { startInstance } from './start.ts'
+declare module '@tanstack/react-start' {
+  interface Register {
+    ssr: true
+    router: Awaited<ReturnType<typeof getRouter>>
+    config: Awaited<ReturnType<typeof startInstance.getOptions>>
+  }
+}
