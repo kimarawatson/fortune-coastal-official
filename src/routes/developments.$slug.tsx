@@ -193,7 +193,7 @@ function DevelopmentDetail() {
             <h2 className="text-xs tracking-[0.4em] uppercase text-gold">The Vision</h2>
           </div>
           <div className="space-y-6">
-            {dev.description.map((p, i) => (
+            {dev.description.map((p: string, i: number) => (
               <p key={i} className="text-base md:text-lg text-muted-foreground leading-relaxed font-light">
                 {p}
               </p>
