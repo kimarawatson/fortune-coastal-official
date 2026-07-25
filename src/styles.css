@@ -194,4 +194,11 @@
 
   @keyframes float-slow { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
   .float-slow { animation: float-slow 6s ease-in-out infinite; }
+
+  @keyframes marquee-x {
+    0%   { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+  }
+  .marquee-track { animation: marquee-x 40s linear infinite; will-change: transform; }
+  .marquee-track:hover { animation-play-state: paused; }
 }
