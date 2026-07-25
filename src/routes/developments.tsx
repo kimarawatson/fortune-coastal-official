@@ -2,21 +2,21 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { SiteLayout } from "@/components/SiteLayout";
 import { Reveal } from "@/components/Reveal";
 import { Star, Gem, Waves, Sparkles } from "lucide-react";
-import banner from "@/assets/dev-10.png.asset.json";
-import miami from "@/assets/dev-6.png.asset.json";
-import california from "@/assets/dev-7.png.asset.json";
-import vegas from "@/assets/dev-8.png.asset.json";
-import macao from "@/assets/dev-9.png.asset.json";
-import p2 from "@/assets/partner-2.jpg.asset.json";
-import p3 from "@/assets/partner-3.jpg.asset.json";
-import p4 from "@/assets/partner-4.jpg.asset.json";
-import p5 from "@/assets/partner-5.jpg.asset.json";
-import p6 from "@/assets/partner-6.jpg.asset.json";
-import p7 from "@/assets/partner-7.jpg.asset.json";
-import p8 from "@/assets/partner-8.jpg.asset.json";
-import p9 from "@/assets/partner-9.jpg.asset.json";
-import p10 from "@/assets/partner-10.jpg.asset.json";
-import p11 from "@/assets/partner-11.jpg.asset.json";
+import banner from "@/assets/dev-10.png";
+import miami from "@/assets/dev-6.png";
+import california from "@/assets/dev-7.png";
+import vegas from "@/assets/dev-8.png";
+import macao from "@/assets/dev-9.png";
+import p2 from "@/assets/partner-2.jpg";
+import p3 from "@/assets/partner-3.jpg";
+import p4 from "@/assets/partner-4.jpg";
+import p5 from "@/assets/partner-5.jpg";
+import p6 from "@/assets/partner-6.jpg";
+import p7 from "@/assets/partner-7.jpg";
+import p8 from "@/assets/partner-8.jpg";
+import p9 from "@/assets/partner-9.jpg";
+import p10 from "@/assets/partner-10.jpg";
+import p11 from "@/assets/partner-11.jpg";
 
 export const Route = createFileRoute("/developments")({
   head: () => ({
@@ -41,23 +41,23 @@ type Dev = {
 };
 
 const developments: Dev[] = [
-  { slug: "miami", name: "Fortune Coastal Tower", city: "Miami", region: "Florida, USA", status: "Pre-Development", completion: "2030", image: miami.url },
-  { slug: "california", name: "Fortune Coastal Tower", city: "California", region: "California, USA", status: "Pre-Development", completion: "2031", image: california.url },
-  { slug: "vegas", name: "Fortune Coastal Tower", city: "Las Vegas", region: "Nevada, USA", status: "Pre-Development", completion: "2032", image: vegas.url },
-  { slug: "macao", name: "Fortune Coastal Tower", city: "Macao", region: "Macao, China", status: "Pre-Development", completion: "2033", image: macao.url },
+  { slug: "miami", name: "Fortune Coastal Tower", city: "Miami", region: "Florida, USA", status: "Pre-Development", completion: "2030", image: miami },
+  { slug: "california", name: "Fortune Coastal Tower", city: "California", region: "California, USA", status: "Pre-Development", completion: "2031", image: california },
+  { slug: "vegas", name: "Fortune Coastal Tower", city: "Las Vegas", region: "Nevada, USA", status: "Pre-Development", completion: "2032", image: vegas },
+  { slug: "macao", name: "Fortune Coastal Tower", city: "Macao", region: "Macao, China", status: "Pre-Development", completion: "2033", image: macao },
 ];
 
 const partnerLogos = [
-  { src: p2.url, alt: "Arya" },
-  { src: p3.url, alt: "Ardie Tavangarian" },
-  { src: p4.url, alt: "Ark Architects" },
-  { src: p5.url, alt: "Ark" },
-  { src: p6.url, alt: "McClean Design" },
-  { src: p7.url, alt: "Blue Heron Design Build" },
-  { src: p8.url, alt: "Apel Design Studio" },
-  { src: p9.url, alt: "FGR Architects" },
-  { src: p10.url, alt: "Nobel" },
-  { src: p11.url, alt: "Think Wilder Architecture" },
+  { src: p2, alt: "Arya" },
+  { src: p3, alt: "Ardie Tavangarian" },
+  { src: p4, alt: "Ark Architects" },
+  { src: p5, alt: "Ark" },
+  { src: p6, alt: "McClean Design" },
+  { src: p7, alt: "Blue Heron Design Build" },
+  { src: p8, alt: "Apel Design Studio" },
+  { src: p9, alt: "FGR Architects" },
+  { src: p10, alt: "Nobel" },
+  { src: p11, alt: "Think Wilder Architecture" },
 ];
 
 function Developments() {
@@ -65,7 +65,7 @@ function Developments() {
     <SiteLayout>
       {/* Banner */}
       <section className="relative -mt-24 h-[52vh] min-h-[380px] w-full overflow-hidden">
-        <img src={banner.url} alt="Fortune Coastal Developments" className="absolute inset-0 h-full w-full object-cover" />
+        <img src={banner} alt="Fortune Coastal Developments" className="absolute inset-0 h-full w-full object-cover" />
         <div className="absolute inset-0 bg-gradient-to-b from-background/60 via-background/30 to-background" />
         <div className="relative h-full flex flex-col items-center justify-center text-center px-6">
           <Reveal>
