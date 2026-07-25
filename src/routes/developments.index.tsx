@@ -18,7 +18,7 @@ import p9 from "@/assets/partner-9.jpg";
 import p10 from "@/assets/partner-10.jpg";
 import p11 from "@/assets/partner-11.jpg";
 
-export const Route = createFileRoute("/developments")({
+export const Route = createFileRoute("/developments/")({
   head: () => ({
     meta: [
       { title: "Developments — Fortune Coastal Group" },
