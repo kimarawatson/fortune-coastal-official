@@ -221,7 +221,7 @@ function DevelopmentDetail() {
             <h2 className="text-xs tracking-[0.4em] uppercase text-gold">Tower Program</h2>
           </div>
           <ul className="divide-y divide-gold/15 border-y border-gold/15">
-            {dev.zones.map((z) => (
+            {dev.zones.map((z: { level: string; label: string }) => (
               <li key={z.level} className="flex items-center justify-between py-4">
                 <span className="text-[11px] tracking-luxury uppercase text-gold-soft">{z.level}</span>
                 <span className="text-sm text-foreground text-right">{z.label}</span>
