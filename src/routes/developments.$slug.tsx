@@ -258,14 +258,14 @@ function DevelopmentDetail() {
             <h2 className="text-xs tracking-[0.4em] uppercase text-gold">Tower Program</h2>
           </div>
           <ul className="space-y-6">
-            {dev.zones.map((z) => (
+            {dev.zones.map((z: Zone) => (
               <li key={z.level} className="border-l-2 border-gold/40 pl-6 py-1">
                 <div className="text-[10px] tracking-[0.35em] uppercase text-gold-soft">{z.level}</div>
                 <div className="mt-2 font-serif text-2xl md:text-3xl tracking-[0.05em] text-foreground">
                   {z.title.toUpperCase()}
                 </div>
                 <div className="mt-3 space-y-1">
-                  {z.lines.map((line) => (
+                  {z.lines.map((line: string) => (
                     <div
                       key={line}
                       className="text-[11px] tracking-luxury uppercase text-muted-foreground"
