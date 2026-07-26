@@ -1,8 +1,8 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { SiteLayout } from "@/components/SiteLayout";
 import { Reveal } from "@/components/Reveal";
-import { Star, Gem, Waves, Sparkles } from "lucide-react";
-import banner from "@/assets/dev-10.png";
+import { Star, Gem, Waves, Sparkles, ArrowRight, MapPin, Calendar } from "lucide-react";
+import banner from "@/assets/dev-banner.jpg";
 import miami from "@/assets/dev-6.png";
 import california from "@/assets/dev-7.png";
 import vegas from "@/assets/dev-8.png";
@@ -17,6 +17,15 @@ import p8 from "@/assets/partner-8.jpg";
 import p9 from "@/assets/partner-9.jpg";
 import p10 from "@/assets/partner-10.jpg";
 import p11 from "@/assets/partner-11.jpg";
+import pOrca from "@/assets/partner-orca.jpg";
+import pAlpago from "@/assets/partner-alpago.jpg";
+import pEnes from "@/assets/partner-enes.jpg";
+import pProsper from "@/assets/partner-prosper.jpg";
+import pPinin from "@/assets/partner-pininfarina.jpg";
+import pSaota from "@/assets/partner-saota.jpg";
+import pZaha from "@/assets/partner-zaha.jpg";
+import pEqui from "@/assets/partner-equidistant.jpg";
+import pSpectre from "@/assets/partner-spectre.jpg";
 
 export const Route = createFileRoute("/developments/")({
   head: () => ({
@@ -42,7 +51,7 @@ type Dev = {
 
 const developments: Dev[] = [
   { slug: "miami", name: "Fortune Coastal Tower", city: "Miami", region: "Florida, USA", status: "Pre-Development", completion: "2030", image: miami },
-  { slug: "california", name: "Fortune Coastal Tower", city: "California", region: "California, USA", status: "Pre-Development", completion: "2031", image: california },
+  { slug: "california", name: "Fortune Coastal Tower", city: "Los Angeles", region: "California, USA", status: "Pre-Development", completion: "2031", image: california },
   { slug: "vegas", name: "Fortune Coastal Tower", city: "Las Vegas", region: "Nevada, USA", status: "Pre-Development", completion: "2032", image: vegas },
   { slug: "macao", name: "Fortune Coastal Tower", city: "Macao", region: "Macao, China", status: "Pre-Development", completion: "2033", image: macao },
 ];
@@ -58,25 +67,39 @@ const partnerLogos = [
   { src: p9, alt: "FGR Architects" },
   { src: p10, alt: "Nobel" },
   { src: p11, alt: "Think Wilder Architecture" },
+  { src: pOrca, alt: "Orca Design" },
+  { src: pAlpago, alt: "Alpago Properties" },
+  { src: pEnes, alt: "Enes Yilmazer" },
+  { src: pProsper, alt: "Prosper Group" },
+  { src: pPinin, alt: "Pininfarina" },
+  { src: pSaota, alt: "SAOTA" },
+  { src: pZaha, alt: "Zaha Hadid Architects" },
+  { src: pEqui, alt: "Equidistant Architect" },
+  { src: pSpectre, alt: "Spectre 27" },
 ];
 
 function Developments() {
   return (
     <SiteLayout>
       {/* Banner */}
-      <section className="relative -mt-24 h-[52vh] min-h-[380px] w-full overflow-hidden">
+      <section className="relative -mt-24 h-[70vh] min-h-[520px] w-full overflow-hidden">
         <img src={banner} alt="Fortune Coastal Developments" className="absolute inset-0 h-full w-full object-cover" />
-        <div className="absolute inset-0 bg-gradient-to-b from-background/60 via-background/30 to-background" />
+        <div className="absolute inset-0 bg-gradient-to-b from-background/70 via-background/30 to-background" />
         <div className="relative h-full flex flex-col items-center justify-center text-center px-6">
           <Reveal>
-            <h1 className="font-serif text-5xl md:text-7xl tracking-[0.15em] text-foreground">DEVELOPMENTS</h1>
+            <div className="text-[11px] tracking-[0.5em] uppercase text-gold mb-6">Fortune Coastal Group</div>
           </Reveal>
           <Reveal delay={1}>
-            <div className="mt-6 text-xs md:text-sm tracking-luxury uppercase text-gold-soft">
-              Iconic Architecture. Global Destinations.
-            </div>
-            <div className="mt-2 text-xs md:text-sm tracking-luxury uppercase text-gold-soft">
-              Exclusive Investment Opportunities.
+            <h1 className="font-serif text-5xl md:text-8xl tracking-[0.15em] text-foreground">DEVELOPMENTS</h1>
+          </Reveal>
+          <Reveal delay={2}>
+            <div className="mt-8 max-w-3xl space-y-2">
+              <div className="text-xs md:text-sm tracking-luxury uppercase text-gold-soft">
+                Iconic Architecture. Global Destinations.
+              </div>
+              <div className="text-xs md:text-sm tracking-luxury uppercase text-gold-soft">
+                Exclusive Investment Opportunities.
+              </div>
             </div>
           </Reveal>
         </div>
@@ -90,43 +113,63 @@ function Developments() {
           <div className="h-px w-16 bg-gold/40" />
         </div>
 
-        <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
+        <div className="grid gap-10 md:grid-cols-2">
           {developments.map((d, i) => (
             <Reveal key={d.city} delay={Math.min(i, 3) as 0 | 1 | 2 | 3}>
-              <article className="group relative overflow-hidden border border-gold/15 bg-charcoal/40 backdrop-blur-sm hover:border-gold/50 transition-all duration-500">
-                <div className="relative aspect-[3/4] overflow-hidden">
-                  <img src={d.image} alt={`${d.name} — ${d.city}`} loading="lazy" className="h-full w-full object-cover transition-transform duration-[1.4s] group-hover:scale-105" />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/20 to-transparent" />
-                  <div className="absolute top-5 left-5">
-                    <div className="text-[10px] tracking-luxury uppercase text-gold">{d.name}</div>
-                    <div className="mt-1 font-serif text-xl text-foreground">{d.city}</div>
-                    <div className="text-[11px] tracking-wide uppercase text-muted-foreground mt-0.5">{d.region}</div>
-                  </div>
-                  <div className="absolute bottom-24 left-5 right-5 flex justify-between text-[10px] tracking-luxury uppercase">
-                    <div>
-                      <div className="text-muted-foreground">Status</div>
-                      <div className="text-foreground mt-1">{d.status}</div>
-                    </div>
-                    <div className="text-right">
-                      <div className="text-muted-foreground">Est. Completion</div>
-                      <div className="text-foreground mt-1">{d.completion}</div>
-                    </div>
+              <article className="group relative overflow-hidden bg-charcoal/30 backdrop-blur-sm border border-gold/10 hover:border-gold/40 transition-all duration-500">
+                {/* Image */}
+                <div className="relative aspect-[4/5] overflow-hidden">
+                  <img
+                    src={d.image}
+                    alt={`${d.name} — ${d.city}`}
+                    loading="lazy"
+                    className="h-full w-full object-cover transition-transform duration-[1.6s] group-hover:scale-105"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-transparent" />
+                  {/* Status pill */}
+                  <div className="absolute top-6 right-6 px-3 py-1.5 bg-black/60 backdrop-blur-sm border border-gold/30 text-[10px] tracking-luxury uppercase text-gold">
+                    {d.status}
                   </div>
                 </div>
-                <div className="grid grid-cols-2 border-t border-gold/15">
-                  <Link
-                    to="/developments/$slug"
-                    params={{ slug: d.slug }}
-                    className="text-center text-[10px] tracking-luxury uppercase text-foreground py-4 border-r border-gold/15 hover:bg-gold/5 transition-colors"
-                  >
-                    View Development
-                  </Link>
-                  <Link
-                    to="/contact"
-                    className="text-center text-[10px] tracking-luxury uppercase text-primary-foreground bg-gradient-to-r from-gold to-gold-soft py-4 hover:opacity-90 transition-opacity"
-                  >
-                    Invest
-                  </Link>
+
+                {/* Text block below the image, plenty of room */}
+                <div className="p-8 lg:p-10 space-y-6">
+                  <div>
+                    <div className="text-[11px] tracking-[0.4em] uppercase text-gold mb-3">{d.name}</div>
+                    <h3 className="font-serif text-4xl lg:text-5xl tracking-[0.08em] text-foreground">
+                      {d.city.toUpperCase()}
+                    </h3>
+                  </div>
+
+                  <div className="flex flex-wrap gap-x-8 gap-y-3 text-[11px] tracking-luxury uppercase">
+                    <div className="flex items-center gap-2 text-muted-foreground">
+                      <MapPin size={13} className="text-gold" strokeWidth={1.5} />
+                      {d.region}
+                    </div>
+                    <div className="flex items-center gap-2 text-muted-foreground">
+                      <Calendar size={13} className="text-gold" strokeWidth={1.5} />
+                      Est. Completion {d.completion}
+                    </div>
+                  </div>
+
+                  <div className="h-px w-full bg-gold/15" />
+
+                  <div className="flex flex-col sm:flex-row gap-3">
+                    <Link
+                      to="/developments/$slug"
+                      params={{ slug: d.slug }}
+                      className="group/btn inline-flex items-center justify-center gap-2 flex-1 bg-gradient-to-r from-gold to-gold-soft text-primary-foreground py-4 text-[11px] tracking-luxury uppercase hover:opacity-90 transition-opacity"
+                    >
+                      View Details
+                      <ArrowRight size={14} strokeWidth={1.5} className="transition-transform group-hover/btn:translate-x-1" />
+                    </Link>
+                    <Link
+                      to="/contact"
+                      className="inline-flex items-center justify-center flex-1 border border-gold/40 text-foreground py-4 text-[11px] tracking-luxury uppercase hover:bg-gold/10 transition-colors"
+                    >
+                      Invest
+                    </Link>
+                  </div>
                 </div>
               </article>
             </Reveal>

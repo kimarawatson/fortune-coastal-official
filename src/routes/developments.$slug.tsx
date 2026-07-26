@@ -149,10 +149,10 @@ function DevelopmentDetail() {
         <img
           src={dev.image}
           alt={`${dev.name} — ${dev.city}`}
-          className="absolute inset-0 h-full w-full object-cover"
+          className="absolute inset-0 h-full w-full object-contain md:object-cover object-center bg-black"
         />
-        <div className="absolute inset-0 bg-gradient-to-b from-background/50 via-background/20 to-background" />
-        <div className="absolute inset-0 bg-gradient-to-r from-background/70 via-transparent to-transparent" />
+        <div className="absolute inset-0 bg-gradient-to-b from-background/20 via-transparent to-background/95" />
+        <div className="absolute inset-0 bg-gradient-to-r from-background/60 via-transparent to-transparent" />
 
         <div className="relative w-full mx-auto max-w-7xl px-6 lg:px-10 pb-24 pt-40">
           <Reveal>
