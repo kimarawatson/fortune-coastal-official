@@ -113,59 +113,56 @@ function Developments() {
           <div className="h-px w-16 bg-gold/40" />
         </div>
 
-        <div className="grid gap-10 md:grid-cols-2">
+        <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
           {developments.map((d, i) => (
             <Reveal key={d.city} delay={Math.min(i, 3) as 0 | 1 | 2 | 3}>
-              <article className="group relative overflow-hidden bg-charcoal/30 backdrop-blur-sm border border-gold/10 hover:border-gold/40 transition-all duration-500">
-                {/* Image */}
-                <div className="relative aspect-[4/5] overflow-hidden">
+              <article className="group relative overflow-hidden bg-charcoal/30 backdrop-blur-sm border border-gold/10 hover:border-gold/40 transition-all duration-500 h-full flex flex-col">
+                <div className="relative aspect-[3/4] overflow-hidden">
                   <img
                     src={d.image}
                     alt={`${d.name} — ${d.city}`}
                     loading="lazy"
                     className="h-full w-full object-cover transition-transform duration-[1.6s] group-hover:scale-105"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-transparent" />
-                  {/* Status pill */}
-                  <div className="absolute top-6 right-6 px-3 py-1.5 bg-black/60 backdrop-blur-sm border border-gold/30 text-[10px] tracking-luxury uppercase text-gold">
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/75 via-black/10 to-transparent" />
+                  <div className="absolute top-4 right-4 px-2.5 py-1 bg-black/60 backdrop-blur-sm border border-gold/30 text-[9px] tracking-luxury uppercase text-gold">
                     {d.status}
                   </div>
                 </div>
 
-                {/* Text block below the image, plenty of room */}
-                <div className="p-8 lg:p-10 space-y-6">
+                <div className="p-5 flex flex-col gap-3 flex-1">
                   <div>
-                    <div className="text-[11px] tracking-[0.4em] uppercase text-gold mb-3">{d.name}</div>
-                    <h3 className="font-serif text-4xl lg:text-5xl tracking-[0.08em] text-foreground">
+                    <div className="text-[9px] tracking-[0.35em] uppercase text-gold mb-1.5">{d.name}</div>
+                    <h3 className="font-serif text-2xl tracking-[0.06em] text-foreground">
                       {d.city.toUpperCase()}
                     </h3>
                   </div>
 
-                  <div className="flex flex-wrap gap-x-8 gap-y-3 text-[11px] tracking-luxury uppercase">
+                  <div className="space-y-1.5 text-[10px] tracking-luxury uppercase">
                     <div className="flex items-center gap-2 text-muted-foreground">
-                      <MapPin size={13} className="text-gold" strokeWidth={1.5} />
+                      <MapPin size={11} className="text-gold" strokeWidth={1.5} />
                       {d.region}
                     </div>
                     <div className="flex items-center gap-2 text-muted-foreground">
-                      <Calendar size={13} className="text-gold" strokeWidth={1.5} />
-                      Est. Completion {d.completion}
+                      <Calendar size={11} className="text-gold" strokeWidth={1.5} />
+                      Est. {d.completion}
                     </div>
                   </div>
 
                   <div className="h-px w-full bg-gold/15" />
 
-                  <div className="flex flex-col sm:flex-row gap-3">
+                  <div className="mt-auto flex flex-col gap-2">
                     <Link
                       to="/developments/$slug"
                       params={{ slug: d.slug }}
-                      className="group/btn inline-flex items-center justify-center gap-2 flex-1 bg-gradient-to-r from-gold to-gold-soft text-primary-foreground py-4 text-[11px] tracking-luxury uppercase hover:opacity-90 transition-opacity"
+                      className="group/btn inline-flex items-center justify-center gap-2 bg-gradient-to-r from-gold to-gold-soft text-primary-foreground py-2.5 text-[10px] tracking-luxury uppercase hover:opacity-90 transition-opacity"
                     >
                       View Details
-                      <ArrowRight size={14} strokeWidth={1.5} className="transition-transform group-hover/btn:translate-x-1" />
+                      <ArrowRight size={12} strokeWidth={1.5} className="transition-transform group-hover/btn:translate-x-1" />
                     </Link>
                     <Link
                       to="/contact"
-                      className="inline-flex items-center justify-center flex-1 border border-gold/40 text-foreground py-4 text-[11px] tracking-luxury uppercase hover:bg-gold/10 transition-colors"
+                      className="inline-flex items-center justify-center border border-gold/40 text-foreground py-2.5 text-[10px] tracking-luxury uppercase hover:bg-gold/10 transition-colors"
                     >
                       Invest
                     </Link>

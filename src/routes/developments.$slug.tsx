@@ -1,8 +1,8 @@
 import { createFileRoute, Link, notFound } from "@tanstack/react-router";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { SiteLayout } from "@/components/SiteLayout";
 import { Reveal } from "@/components/Reveal";
-import { ArrowLeft, MapPin, Calendar, Building2, Sparkles, Maximize2, X } from "lucide-react";
+import { ArrowLeft, MapPin, Calendar, Building2, Sparkles, Maximize2, X, ZoomIn, ZoomOut, RotateCcw } from "lucide-react";
 import miami from "@/assets/dev-6.png";
 import california from "@/assets/dev-7.png";
 import vegas from "@/assets/dev-8.png";
@@ -148,6 +148,23 @@ export const Route = createFileRoute("/developments/$slug")({
 function DevelopmentDetail() {
   const { dev } = Route.useLoaderData();
   const [viewerOpen, setViewerOpen] = useState(false);
+  const [zoom, setZoom] = useState(1);
+
+  useEffect(() => {
+    if (!viewerOpen) return;
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") setViewerOpen(false);
+      if (e.key === "+" || e.key === "=") setZoom((z) => Math.min(z + 0.25, 5));
+      if (e.key === "-") setZoom((z) => Math.max(z - 0.25, 0.5));
+      if (e.key === "0") setZoom(1);
+    };
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, [viewerOpen]);
+
+  useEffect(() => {
+    if (!viewerOpen) setZoom(1);
+  }, [viewerOpen]);
 
   return (
     <SiteLayout>
@@ -164,8 +181,8 @@ function DevelopmentDetail() {
         </div>
       </div>
 
-      {/* Big hero */}
-      <section className="relative -mt-24 min-h-screen w-full overflow-hidden flex items-end">
+      {/* Hero — reduced height */}
+      <section className="relative -mt-24 h-[70vh] min-h-[520px] w-full overflow-hidden flex items-end">
         <button
           type="button"
           onClick={() => setViewerOpen(true)}
@@ -181,20 +198,20 @@ function DevelopmentDetail() {
         <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-background/20 via-transparent to-background/95" />
         <div className="pointer-events-none absolute inset-0 bg-gradient-to-r from-background/60 via-transparent to-transparent" />
 
-        <div className="relative w-full mx-auto max-w-7xl px-6 lg:px-10 pb-24 pt-40 pointer-events-none">
+        <div className="relative w-full mx-auto max-w-7xl px-6 lg:px-10 pb-16 pt-32 pointer-events-none">
           <Reveal>
             <div className="text-[11px] tracking-[0.4em] uppercase text-gold">{dev.name}</div>
           </Reveal>
           <Reveal delay={1}>
-            <h1 className="mt-4 font-serif text-6xl md:text-8xl tracking-[0.08em] text-foreground">
+            <h1 className="mt-3 font-serif text-5xl md:text-7xl tracking-[0.08em] text-foreground">
               {dev.city.toUpperCase()}
             </h1>
           </Reveal>
           <Reveal delay={2}>
-            <p className="mt-6 max-w-xl text-lg text-muted-foreground">{dev.tagline}</p>
+            <p className="mt-4 max-w-xl text-base text-muted-foreground">{dev.tagline}</p>
           </Reveal>
           <Reveal delay={3}>
-            <div className="mt-10 flex flex-wrap gap-x-10 gap-y-4 text-[11px] tracking-luxury uppercase">
+            <div className="mt-6 flex flex-wrap gap-x-8 gap-y-3 text-[11px] tracking-luxury uppercase">
               <div className="flex items-center gap-2 text-muted-foreground">
                 <MapPin size={14} className="text-gold" strokeWidth={1.5} />
                 {dev.region}
@@ -213,7 +230,7 @@ function DevelopmentDetail() {
             <button
               type="button"
               onClick={() => setViewerOpen(true)}
-              className="pointer-events-auto mt-10 inline-flex items-center gap-3 bg-gradient-to-r from-gold to-gold-soft text-primary-foreground px-8 py-4 text-xs tracking-luxury uppercase hover:opacity-90 transition-opacity"
+              className="pointer-events-auto mt-6 inline-flex items-center gap-3 bg-gradient-to-r from-gold to-gold-soft text-primary-foreground px-6 py-3 text-xs tracking-luxury uppercase hover:opacity-90 transition-opacity"
             >
               <Maximize2 size={14} strokeWidth={1.75} />
               View Full Rendering
@@ -222,30 +239,30 @@ function DevelopmentDetail() {
         </div>
       </section>
 
-      {/* Description + Zones */}
-      <section className="mx-auto max-w-7xl px-6 lg:px-10 py-24 grid gap-16 lg:grid-cols-[1.1fr_1fr]">
+      {/* Description + Zones — compact */}
+      <section className="mx-auto max-w-7xl px-6 lg:px-10 py-20 grid gap-14 lg:grid-cols-[1.1fr_1fr]">
         <div>
-          <div className="flex items-center gap-4 mb-8">
+          <div className="flex items-center gap-4 mb-6">
             <div className="h-px w-12 bg-gold/40" />
             <h2 className="text-xs tracking-[0.4em] uppercase text-gold">The Vision</h2>
           </div>
-          <div className="space-y-6">
+          <div className="space-y-4">
             {dev.description.map((p: string, i: number) => (
-              <p key={i} className="text-base md:text-lg text-muted-foreground leading-relaxed font-light">
+              <p key={i} className="text-sm md:text-base text-muted-foreground leading-relaxed font-light">
                 {p}
               </p>
             ))}
           </div>
-          <div className="mt-10 flex flex-wrap gap-4">
+          <div className="mt-8 flex flex-wrap gap-3">
             <Link
               to="/contact"
-              className="inline-block bg-gradient-to-r from-gold to-gold-soft text-primary-foreground px-8 py-4 text-xs tracking-luxury uppercase hover:opacity-90 transition-opacity"
+              className="inline-block bg-gradient-to-r from-gold to-gold-soft text-primary-foreground px-6 py-3 text-xs tracking-luxury uppercase hover:opacity-90 transition-opacity"
             >
               Request Investment Deck
             </Link>
             <Link
               to="/developments"
-              className="inline-block border border-gold/40 text-foreground px-8 py-4 text-xs tracking-luxury uppercase hover:bg-gold/10 transition-colors"
+              className="inline-block border border-gold/40 text-foreground px-6 py-3 text-xs tracking-luxury uppercase hover:bg-gold/10 transition-colors"
             >
               All Developments
             </Link>
@@ -253,64 +270,111 @@ function DevelopmentDetail() {
         </div>
 
         <div>
-          <div className="flex items-center gap-4 mb-8">
+          <div className="flex items-center gap-4 mb-6">
             <div className="h-px w-12 bg-gold/40" />
             <h2 className="text-xs tracking-[0.4em] uppercase text-gold">Tower Program</h2>
           </div>
-          <ul className="space-y-6">
+          <ul className="space-y-4">
             {dev.zones.map((z: Zone) => (
-              <li key={z.level} className="border-l-2 border-gold/40 pl-6 py-1">
-                <div className="text-[10px] tracking-[0.35em] uppercase text-gold-soft">{z.level}</div>
-                <div className="mt-2 font-serif text-2xl md:text-3xl tracking-[0.05em] text-foreground">
+              <li key={z.level} className="border-l-2 border-gold/40 pl-4 py-0.5">
+                <div className="text-[9px] tracking-[0.35em] uppercase text-gold-soft">{z.level}</div>
+                <div className="mt-1 font-serif text-lg md:text-xl tracking-[0.05em] text-foreground">
                   {z.title.toUpperCase()}
                 </div>
-                <div className="mt-3 space-y-1">
+                <div className="mt-1.5 flex flex-wrap gap-x-3 gap-y-1">
                   {z.lines.map((line: string) => (
-                    <div
+                    <span
                       key={line}
-                      className="text-[11px] tracking-luxury uppercase text-muted-foreground"
+                      className="text-[10px] tracking-luxury uppercase text-muted-foreground"
                     >
                       {line}
-                    </div>
+                    </span>
                   ))}
                 </div>
               </li>
             ))}
           </ul>
-          <div className="mt-8 flex items-center gap-3 text-[11px] tracking-luxury uppercase text-muted-foreground">
-            <Sparkles size={14} className="text-gold" strokeWidth={1.5} />
+          <div className="mt-6 flex items-center gap-3 text-[10px] tracking-luxury uppercase text-muted-foreground">
+            <Sparkles size={12} className="text-gold" strokeWidth={1.5} />
             Concept illustration — subject to final design
           </div>
         </div>
       </section>
 
-      {/* Fullscreen image viewer */}
+      {/* Fullscreen image viewer with zoom */}
       {viewerOpen && (
         <div
-          className="fixed inset-0 z-[100] bg-black/95 backdrop-blur-sm flex items-center justify-center p-4 animate-in fade-in duration-300"
+          className="fixed inset-0 z-[100] bg-black/95 backdrop-blur-sm flex items-center justify-center p-4 animate-in fade-in duration-300 overflow-hidden"
           onClick={() => setViewerOpen(false)}
           role="dialog"
           aria-modal="true"
           aria-label={`${dev.name} ${dev.city} full rendering`}
         >
-          <button
-            type="button"
-            onClick={() => setViewerOpen(false)}
-            className="absolute top-6 right-6 z-10 inline-flex items-center gap-2 text-[11px] tracking-luxury uppercase text-gold hover:text-gold-soft border border-gold/30 rounded-full px-4 py-2 bg-black/60 backdrop-blur-sm"
-            aria-label="Close viewer"
-          >
-            <X size={16} strokeWidth={1.75} />
-            Close
-          </button>
           <div className="absolute top-6 left-6 z-10 text-[11px] tracking-[0.35em] uppercase text-gold-soft">
             {dev.name} — {dev.city}
           </div>
-          <img
-            src={dev.image}
-            alt={`${dev.name} — ${dev.city} full rendering`}
-            className="max-h-[92vh] max-w-[96vw] object-contain select-none"
+
+          {/* Zoom controls */}
+          <div
+            className="absolute top-6 right-6 z-10 flex items-center gap-2"
             onClick={(e) => e.stopPropagation()}
-          />
+          >
+            <div className="flex items-center gap-1 border border-gold/30 rounded-full bg-black/60 backdrop-blur-sm px-1.5 py-1">
+              <button
+                type="button"
+                onClick={() => setZoom((z) => Math.max(z - 0.25, 0.5))}
+                className="p-2 text-gold hover:text-gold-soft transition-colors"
+                aria-label="Zoom out"
+              >
+                <ZoomOut size={16} strokeWidth={1.75} />
+              </button>
+              <div className="text-[10px] tracking-luxury uppercase text-gold-soft w-12 text-center tabular-nums">
+                {Math.round(zoom * 100)}%
+              </div>
+              <button
+                type="button"
+                onClick={() => setZoom((z) => Math.min(z + 0.25, 5))}
+                className="p-2 text-gold hover:text-gold-soft transition-colors"
+                aria-label="Zoom in"
+              >
+                <ZoomIn size={16} strokeWidth={1.75} />
+              </button>
+              <button
+                type="button"
+                onClick={() => setZoom(1)}
+                className="p-2 text-gold hover:text-gold-soft transition-colors"
+                aria-label="Reset zoom"
+              >
+                <RotateCcw size={14} strokeWidth={1.75} />
+              </button>
+            </div>
+            <button
+              type="button"
+              onClick={() => setViewerOpen(false)}
+              className="inline-flex items-center gap-2 text-[11px] tracking-luxury uppercase text-gold hover:text-gold-soft border border-gold/30 rounded-full px-4 py-2 bg-black/60 backdrop-blur-sm"
+              aria-label="Close viewer"
+            >
+              <X size={16} strokeWidth={1.75} />
+              Close
+            </button>
+          </div>
+
+          <div
+            className="w-full h-full flex items-center justify-center overflow-auto"
+            onClick={(e) => e.stopPropagation()}
+            onWheel={(e) => {
+              if (e.deltaY < 0) setZoom((z) => Math.min(z + 0.1, 5));
+              else setZoom((z) => Math.max(z - 0.1, 0.5));
+            }}
+          >
+            <img
+              src={dev.image}
+              alt={`${dev.name} — ${dev.city} full rendering`}
+              draggable={false}
+              style={{ transform: `scale(${zoom})`, transformOrigin: "center center", transition: "transform 200ms ease-out" }}
+              className="max-h-[92vh] max-w-[96vw] object-contain select-none"
+            />
+          </div>
         </div>
       )}
     </SiteLayout>
