@@ -1,8 +1,8 @@
 import { createFileRoute, Link, notFound } from "@tanstack/react-router";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { SiteLayout } from "@/components/SiteLayout";
 import { Reveal } from "@/components/Reveal";
-import { ArrowLeft, MapPin, Calendar, Building2, Sparkles, Maximize2, X } from "lucide-react";
+import { ArrowLeft, MapPin, Calendar, Building2, Sparkles, Maximize2, X, ZoomIn, ZoomOut, RotateCcw } from "lucide-react";
 import miami from "@/assets/dev-6.png";
 import california from "@/assets/dev-7.png";
 import vegas from "@/assets/dev-8.png";
