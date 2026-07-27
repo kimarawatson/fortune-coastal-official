@@ -11,7 +11,6 @@ import macao from "@/assets/dev-9.png";
 import p2 from "@/assets/partner-2.png";
 import p3 from "@/assets/partner-3.png";
 import p4 from "@/assets/partner-4.png";
-import p5 from "@/assets/partner-5.png";
 import p6 from "@/assets/partner-6.png";
 import p7 from "@/assets/partner-7.png";
 import p8 from "@/assets/partner-8.png";
@@ -61,7 +60,6 @@ const partnerLogos = [
   { src: p2, alt: "Arya" },
   { src: p3, alt: "Ardie Tavangarian" },
   { src: p4, alt: "Ark Architects" },
-  { src: p5, alt: "Ark" },
   { src: p6, alt: "McClean Design" },
   { src: p7, alt: "Blue Heron Design Build" },
   { src: p8, alt: "Apel Design Studio" },
