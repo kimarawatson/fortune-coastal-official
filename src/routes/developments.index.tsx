@@ -123,7 +123,7 @@ function Developments() {
           <img src={starLogo} alt="Meozzi Star Developments emblem" className="h-10 w-auto md:h-12" />
           <div className="flex items-baseline gap-3 leading-none">
             <span className="font-serif text-xl md:text-2xl tracking-[0.14em] text-gold">MEOZZI STAR</span>
-            <span className="text-[9px] md:text-[10px] tracking-[0.5em] uppercase text-gold-soft">Developments</span>
+            <span className="text-[9px] md:text-[10px] tracking-[0.5em] uppercase text-foreground">DEVELOPMENTS</span>
           </div>
         </div>
       </section>
