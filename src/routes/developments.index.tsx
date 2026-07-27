@@ -3,6 +3,7 @@ import { SiteLayout } from "@/components/SiteLayout";
 import { Reveal } from "@/components/Reveal";
 import { Star, Gem, Waves, Sparkles, ArrowRight, MapPin, Calendar } from "lucide-react";
 import banner from "@/assets/dev-banner.jpg";
+import starLogo from "@/assets/meozzi-star.png";
 import miami from "@/assets/dev-6.png";
 import california from "@/assets/dev-7.png";
 import vegas from "@/assets/dev-8.png";
@@ -105,8 +106,19 @@ function Developments() {
         </div>
       </section>
 
+      {/* Brand mark */}
+      <section className="mx-auto max-w-7xl px-6 lg:px-10 pt-14">
+        <div className="flex items-center gap-5">
+          <img src={starLogo} alt="Meozzi Star Developments emblem" className="h-20 w-auto md:h-24" />
+          <div className="leading-none">
+            <div className="font-serif text-2xl md:text-4xl tracking-[0.14em] text-gold">MEOZZI STAR</div>
+            <div className="mt-2 text-[10px] md:text-xs tracking-[0.5em] uppercase text-gold-soft">Developments</div>
+          </div>
+        </div>
+      </section>
+
       {/* Current Developments */}
-      <section className="mx-auto max-w-7xl px-6 lg:px-10 py-24">
+      <section className="mx-auto max-w-7xl px-6 lg:px-10 py-20">
         <div className="flex items-center justify-center gap-6 mb-16">
           <div className="h-px w-16 bg-gold/40" />
           <h2 className="text-xs tracking-[0.4em] uppercase text-gold">Current Developments</h2>
