@@ -36,7 +36,7 @@ function About() {
       <section className="relative overflow-hidden">
         <img src={bg1} alt="" aria-hidden className="absolute inset-0 h-full w-full object-cover opacity-25" />
         <div className="absolute inset-0 bg-gradient-to-b from-background via-background/70 to-background" />
-        <div className="relative mx-auto max-w-5xl px-6 lg:px-10 py-24 space-y-20">
+        <div className="relative mx-auto max-w-5xl px-4 lg:px-8 py-24 space-y-20">
           {[
             { eyebrow: "Our Vision", title: "American luxury, privately transacted.", body: "We are building a trusted marketplace for premier U.S. real estate, aviation, marine, automotive, and concierge assets — with the speed modern buyers expect and the discretion high-value transactions require." },
             { eyebrow: "Our Mission", title: "To curate, verify, and close with confidence.", body: "Fortune Coastal Group connects discerning buyers and vetted sellers across the United States. We verify every listing, review every counterpart, and support settlement in USD or Bitcoin." },

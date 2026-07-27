@@ -211,7 +211,7 @@ function SellerApply({ existing, onSubmitted }: { existing: any; onSubmitted: ()
 
   return (
     <SiteLayout>
-      <section className="mx-auto max-w-2xl px-6 lg:px-10 py-20">
+      <section className="mx-auto max-w-2xl px-4 lg:px-8 py-20">
         <div className="text-[10px] tracking-luxury uppercase text-gold">Seller Application</div>
         <h1 className="mt-3 font-serif text-5xl text-foreground">Become an FCG Seller</h1>
         <p className="mt-4 text-muted-foreground">

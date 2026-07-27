@@ -83,7 +83,7 @@ function ProfilePage() {
 
   return (
     <SiteLayout>
-      <section className="mx-auto max-w-3xl px-6 lg:px-10 pt-16 pb-16">
+      <section className="mx-auto max-w-3xl px-4 lg:px-8 pt-16 pb-16">
         <Link to="/dashboard" className="inline-flex items-center gap-2 text-[10px] tracking-luxury uppercase text-muted-foreground hover:text-gold transition-colors">
           <ArrowLeft size={12} /> Back to Dashboard
         </Link>

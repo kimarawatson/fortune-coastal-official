@@ -318,7 +318,7 @@ function Home() {
 
       {/* ============ ROADMAP ============ */}
       <section className="mt-0 relative py-24 overflow-hidden">
-        <div className="relative mx-auto max-w-6xl px-6 lg:px-10 overflow-hidden p-10 lg:p-14">
+        <div className="relative mx-auto max-w-6xl px-4 lg:px-8 overflow-hidden p-10 lg:p-14">
           <img src={aspen} alt="" aria-hidden className="absolute inset-0 h-full w-full object-cover opacity-65" />
           <div className="absolute inset-0 bg-gradient-to-b from-background/55 via-background/20 to-background/55" />
 
