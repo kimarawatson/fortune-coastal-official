@@ -170,7 +170,7 @@ function DevelopmentDetail() {
     <SiteLayout>
       {/* Back nav */}
       <div className="sticky top-24 z-30 pointer-events-none">
-        <div className="mx-auto max-w-7xl px-6 lg:px-10">
+        <div className="mx-auto max-w-[1700px] px-4 lg:px-8">
           <Link
             to="/developments"
             className="pointer-events-auto inline-flex items-center gap-2 text-[11px] tracking-luxury uppercase text-gold hover:text-gold-soft transition-colors backdrop-blur-sm bg-background/40 px-4 py-2 rounded-full border border-gold/20"
@@ -198,7 +198,7 @@ function DevelopmentDetail() {
         <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-background/20 via-transparent to-background/95" />
         <div className="pointer-events-none absolute inset-0 bg-gradient-to-r from-background/60 via-transparent to-transparent" />
 
-        <div className="relative w-full mx-auto max-w-7xl px-6 lg:px-10 pb-16 pt-32 pointer-events-none">
+        <div className="relative w-full mx-auto max-w-[1700px] px-4 lg:px-8 pb-16 pt-32 pointer-events-none">
           <Reveal>
             <div className="text-[11px] tracking-[0.4em] uppercase text-gold">{dev.name}</div>
           </Reveal>
@@ -240,7 +240,7 @@ function DevelopmentDetail() {
       </section>
 
       {/* Description + Zones — compact */}
-      <section className="mx-auto max-w-7xl px-6 lg:px-10 py-20 grid gap-14 lg:grid-cols-[1.1fr_1fr]">
+      <section className="mx-auto max-w-[1700px] px-4 lg:px-8 py-20 grid gap-14 lg:grid-cols-[1.1fr_1fr]">
         <div>
           <div className="flex items-center gap-4 mb-6">
             <div className="h-px w-12 bg-gold/40" />

@@ -48,7 +48,7 @@ function Marketplace() {
       <section className="relative -mt-20 h-[60vh] min-h-[440px] overflow-hidden">
         <img src={marketHero} alt="" className="absolute inset-0 h-full w-full object-cover" />
         <div className="absolute inset-0 bg-gradient-to-b from-background/70 via-background/40 to-background" />
-        <div className="relative h-full mx-auto max-w-7xl px-6 lg:px-10 flex flex-col justify-end pb-16">
+        <div className="relative h-full mx-auto max-w-[1700px] px-4 lg:px-8 flex flex-col justify-end pb-16">
           <div className="text-[10px] tracking-luxury uppercase text-gold">The Marketplace</div>
           <h1 className="mt-4 font-serif text-5xl md:text-6xl text-foreground">A Curated <span className="italic gradient-gold-text">World</span> of Assets</h1>
           <p className="mt-5 max-w-xl text-muted-foreground">Every listing is verified by our in-house specialists. Filter to begin.</p>
@@ -56,7 +56,7 @@ function Marketplace() {
       </section>
 
       <section className="border-y border-border/40 bg-charcoal/50">
-        <div className="mx-auto max-w-7xl px-6 lg:px-10 py-6 grid gap-4 md:grid-cols-4">
+        <div className="mx-auto max-w-[1700px] px-4 lg:px-8 py-6 grid gap-4 md:grid-cols-4">
           <Sel label="Category" value={category} onChange={setCategory} options={[{ value: "", label: "All Categories" }, ...((catsQ.data ?? []) as any[]).map((c: any) => ({ value: c.slug, label: c.name }))]} />
           <Sel label="Country" value={country} onChange={setCountry} options={[{ value: "", label: "All Countries" }, ...countries.map((c) => ({ value: c as string, label: c as string }))]} />
           <Sel label="Price Range" value={String(priceIdx)} onChange={(v) => setPriceIdx(Number(v))} options={PRICE_RANGES.map((p, i) => ({ value: String(i), label: p.label }))} />
@@ -69,7 +69,7 @@ function Marketplace() {
         </div>
       </section>
 
-      <section className="mx-auto max-w-7xl px-6 lg:px-10 py-16">
+      <section className="mx-auto max-w-[1700px] px-4 lg:px-8 py-16">
         <div className="mb-8 text-xs tracking-luxury uppercase text-muted-foreground">
           {q.isLoading ? "Loading…" : `${(q.data ?? []).length} ${(q.data ?? []).length === 1 ? "Asset" : "Assets"}`}
         </div>

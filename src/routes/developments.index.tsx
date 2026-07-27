@@ -252,7 +252,7 @@ function Developments() {
 
       {/* CTA */}
       <section className="border-t border-gold/10 bg-charcoal/40">
-        <div className="mx-auto max-w-7xl px-6 lg:px-10 py-20 grid gap-10 lg:grid-cols-3">
+        <div className="mx-auto max-w-[1700px] px-4 lg:px-8 py-20 grid gap-10 lg:grid-cols-3">
           <div>
             <h3 className="font-serif text-3xl md:text-4xl text-foreground">Let's Build<br/>Something Iconic</h3>
             <p className="mt-4 text-sm text-muted-foreground max-w-sm">

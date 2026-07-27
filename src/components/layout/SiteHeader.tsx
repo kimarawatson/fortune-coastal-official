@@ -21,7 +21,7 @@ export function SiteHeader() {
 
   return (
     <header className="fixed top-0 inset-x-0 z-50 border-b border-gold/15 bg-background/55 backdrop-blur-xl">
-      <div className="mx-auto max-w-7xl px-6 lg:px-10 h-24 flex items-center justify-between">
+      <div className="mx-auto max-w-[1700px] px-4 lg:px-8 h-24 flex items-center justify-between">
         <Link to="/" className="flex items-center gap-4 group" aria-label="FCG home">
           <img src={logo} alt="Fortune Coastal Quantum Luxury" className="h-14 w-14 rounded-md ring-1 ring-gold/40 shadow-[0_0_30px_-8px_var(--gold)]" />
           <div className="hidden sm:block leading-tight">

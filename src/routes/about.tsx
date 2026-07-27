@@ -25,7 +25,7 @@ function About() {
       <section className="relative h-[60vh] min-h-[460px] -mt-20 overflow-hidden">
         <img src={hero} alt="" className="absolute inset-0 h-full w-full object-cover" />
         <div className="absolute inset-0 bg-gradient-to-b from-background/60 via-background/30 to-background" />
-        <div className="relative h-full mx-auto max-w-7xl px-6 lg:px-10 flex flex-col justify-end pb-16">
+        <div className="relative h-full mx-auto max-w-[1700px] px-4 lg:px-8 flex flex-col justify-end pb-16">
           <div className="text-[10px] tracking-luxury uppercase text-gold">About FCG</div>
           <h1 className="mt-4 font-serif text-5xl md:text-7xl text-foreground max-w-3xl leading-tight">
             A new <span className="italic gradient-gold-text">standard</span> for luxury ownership.

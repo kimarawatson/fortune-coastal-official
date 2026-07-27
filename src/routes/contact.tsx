@@ -23,7 +23,7 @@ function Contact() {
       <div className="relative -mt-20">
         <img src={contactHero} alt="" className="absolute inset-0 h-[70vh] w-full object-cover" />
         <div className="absolute inset-0 h-[70vh] bg-gradient-to-b from-background/70 via-background/85 to-background" />
-        <section className="relative mx-auto max-w-7xl px-6 lg:px-10 pt-32 pb-24 grid lg:grid-cols-2 gap-16">
+        <section className="relative mx-auto max-w-[1700px] px-4 lg:px-8 pt-32 pb-24 grid lg:grid-cols-2 gap-16">
         <div>
           <div className="text-[10px] tracking-luxury uppercase text-gold">Private Concierge</div>
           <h1 className="mt-4 font-serif text-5xl md:text-6xl text-foreground leading-tight">Speak with us, <span className="italic gradient-gold-text">privately</span>.</h1>

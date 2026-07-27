@@ -46,7 +46,7 @@ function Home() {
         <div className="absolute inset-0 bg-gradient-to-r from-background/85 via-background/35 to-transparent" />
         <div className="absolute inset-0 bg-gradient-to-b from-background/40 via-transparent to-background/90" />
         <div className="absolute -top-40 -right-40 h-[600px] w-[600px] rounded-full" style={{ background: "radial-gradient(circle, var(--gold) 0%, transparent 70%)", opacity: 0.18 }} />
-        <div className="relative mx-auto max-w-7xl px-6 lg:px-10 w-full pt-32 pb-24">
+        <div className="relative mx-auto max-w-[1700px] px-4 lg:px-8 w-full pt-32 pb-24">
           <div className="max-w-2xl">
             <div className="inline-flex items-center gap-2 text-[10px] tracking-luxury uppercase text-gold">
               <Gem size={12} /> <span className="h-px w-8 bg-gold/60" /> America's Luxury Wealth Platform
@@ -101,7 +101,7 @@ function Home() {
         <img src={hamptons} alt="" aria-hidden className="absolute inset-0 h-full w-full object-cover opacity-70" />
         <div className="absolute inset-0 bg-gradient-to-b from-background/55 via-background/20 to-background/55" />
 
-        <div className="relative mx-auto max-w-7xl px-6 lg:px-10">
+        <div className="relative mx-auto max-w-[1700px] px-4 lg:px-8">
         <div className="text-center">
           <div className="inline-flex items-center gap-2 text-[10px] tracking-luxury uppercase text-gold">
             <Building2 size={12} /> Featured Properties
@@ -138,7 +138,7 @@ function Home() {
         <div className="absolute inset-0 bg-gradient-to-b from-background/55 via-background/20 to-background/55" />
 
         <div className="absolute inset-0" style={{ background: "radial-gradient(60% 60% at 80% 50%, var(--gold) 0%, transparent 70%)", opacity: 0.12 }} />
-        <div className="relative mx-auto max-w-7xl px-6 lg:px-10">
+        <div className="relative mx-auto max-w-[1700px] px-4 lg:px-8">
           <div className="text-center">
             <div className="inline-flex items-center gap-2 text-[10px] tracking-luxury uppercase text-gold">
               <Bitcoin size={12} /> Fortune Vault
@@ -229,7 +229,7 @@ function Home() {
         <img src={bombardier} alt="" aria-hidden className="absolute inset-0 h-full w-full object-cover opacity-65" />
         <div className="absolute inset-0 bg-gradient-to-b from-background/55 via-background/20 to-background/55" />
 
-        <div className="relative mx-auto max-w-7xl px-6 lg:px-10">
+        <div className="relative mx-auto max-w-[1700px] px-4 lg:px-8">
         <div className="text-center">
           <div className="inline-flex items-center gap-2 text-[10px] tracking-luxury uppercase text-gold">
             <Cpu size={12} /> Platform Features
@@ -285,7 +285,7 @@ function Home() {
         <img src={yacht} alt="" aria-hidden className="absolute inset-0 h-full w-full object-cover opacity-70" />
         <div className="absolute inset-0 bg-gradient-to-b from-background/55 via-background/20 to-background/55" />
 
-        <div className="relative mx-auto max-w-7xl px-6 lg:px-10">
+        <div className="relative mx-auto max-w-[1700px] px-4 lg:px-8">
         <div className="text-center">
           <div className="inline-flex items-center gap-2 text-[10px] tracking-luxury uppercase text-gold">
             <Gem size={12} /> Our Vision
