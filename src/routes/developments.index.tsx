@@ -107,7 +107,7 @@ function Developments() {
       </section>
 
       {/* Brand mark */}
-      <section className="mx-auto max-w-7xl px-6 lg:px-10 pt-14">
+      <section className="mx-auto max-w-[1700px] px-4 lg:px-8 pt-14">
         <div className="flex items-center gap-4">
           <img src={starLogo} alt="Meozzi Star Developments emblem" className="h-12 w-auto md:h-16" />
           <div className="leading-none">
@@ -118,65 +118,59 @@ function Developments() {
       </section>
 
       {/* Current Developments */}
-      <section className="mx-auto max-w-7xl px-6 lg:px-10 py-20">
-        <div className="flex items-center justify-center gap-6 mb-16">
+      <section className="mx-auto max-w-[1700px] px-4 lg:px-8 py-20">
+        <div className="flex items-center justify-center gap-6 mb-12">
           <div className="h-px w-16 bg-gold/40" />
           <h2 className="text-xs tracking-[0.4em] uppercase text-gold">Current Developments</h2>
           <div className="h-px w-16 bg-gold/40" />
         </div>
 
-        <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+        <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
           {developments.map((d, i) => (
             <Reveal key={d.city} delay={Math.min(i, 3) as 0 | 1 | 2 | 3}>
-              <article className="group relative overflow-hidden bg-charcoal/30 backdrop-blur-sm border border-gold/10 hover:border-gold/40 transition-all duration-500 h-full flex flex-col">
-                <div className="relative aspect-[3/4] overflow-hidden">
+              <article className="group relative overflow-hidden bg-charcoal/25 backdrop-blur-sm h-full flex flex-col">
+                <div className="relative aspect-[4/5] overflow-hidden">
                   <img
                     src={d.image}
                     alt={`${d.name} — ${d.city}`}
                     loading="lazy"
                     className="h-full w-full object-cover transition-transform duration-[1.6s] group-hover:scale-105"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/75 via-black/10 to-transparent" />
-                  <div className="absolute top-4 right-4 px-2.5 py-1 bg-black/60 backdrop-blur-sm border border-gold/30 text-[9px] tracking-luxury uppercase text-gold">
-                    {d.status}
+                  <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-transparent to-black/70" />
+                  <div className="absolute top-5 left-5">
+                    <img src={starLogo} alt="" aria-hidden className="h-7 w-auto mb-2 opacity-90" />
+                    <div className="font-serif text-sm tracking-[0.18em] text-gold">{d.name.toUpperCase()}</div>
+                    <div className="mt-2 text-sm tracking-[0.12em] uppercase text-foreground">{d.city}</div>
+                    <div className="text-[10px] tracking-luxury uppercase text-muted-foreground">{d.region}</div>
                   </div>
                 </div>
 
-                <div className="p-5 flex flex-col gap-3 flex-1">
-                  <div>
-                    <div className="text-[9px] tracking-[0.35em] uppercase text-gold mb-1.5">{d.name}</div>
-                    <h3 className="font-serif text-2xl tracking-[0.06em] text-foreground">
-                      {d.city.toUpperCase()}
-                    </h3>
-                  </div>
-
-                  <div className="space-y-1.5 text-[10px] tracking-luxury uppercase">
-                    <div className="flex items-center gap-2 text-muted-foreground">
-                      <MapPin size={11} className="text-gold" strokeWidth={1.5} />
-                      {d.region}
+                <div className="p-4 flex flex-col gap-3">
+                  <div className="flex items-start justify-between gap-3 text-[9px] tracking-luxury uppercase">
+                    <div>
+                      <div className="text-muted-foreground/70">Status</div>
+                      <div className="mt-1 text-foreground">{d.status}</div>
                     </div>
-                    <div className="flex items-center gap-2 text-muted-foreground">
-                      <Calendar size={11} className="text-gold" strokeWidth={1.5} />
-                      Est. {d.completion}
+                    <div className="text-right">
+                      <div className="text-muted-foreground/70">Est. Completion</div>
+                      <div className="mt-1 text-gold">{d.completion}</div>
                     </div>
                   </div>
 
-                  <div className="h-px w-full bg-gold/15" />
-
-                  <div className="mt-auto flex flex-col gap-2">
+                  <div className="grid grid-cols-2 gap-2">
                     <Link
                       to="/developments/$slug"
                       params={{ slug: d.slug }}
-                      className="group/btn inline-flex items-center justify-center gap-2 bg-gradient-to-r from-gold to-gold-soft text-primary-foreground py-2.5 text-[10px] tracking-luxury uppercase hover:opacity-90 transition-opacity"
+                      className="inline-flex items-center justify-center border border-gold/35 text-foreground py-2.5 text-[9px] tracking-luxury uppercase hover:bg-gold/10 transition-colors"
                     >
-                      View Details
-                      <ArrowRight size={12} strokeWidth={1.5} className="transition-transform group-hover/btn:translate-x-1" />
+                      View Development
                     </Link>
                     <Link
                       to="/contact"
-                      className="inline-flex items-center justify-center border border-gold/40 text-foreground py-2.5 text-[10px] tracking-luxury uppercase hover:bg-gold/10 transition-colors"
+                      className="inline-flex items-center justify-center gap-1.5 bg-gradient-to-r from-gold to-gold-soft text-primary-foreground py-2.5 text-[9px] tracking-luxury uppercase hover:opacity-90 transition-opacity"
                     >
                       Invest
+                      <ArrowRight size={11} strokeWidth={1.5} />
                     </Link>
                   </div>
                 </div>
@@ -184,10 +178,33 @@ function Developments() {
             </Reveal>
           ))}
         </div>
+
+        {/* Stats strip */}
+        <Reveal>
+          <div className="mt-4 bg-charcoal/30 backdrop-blur-sm grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 divide-y divide-gold/10 sm:divide-y-0 lg:divide-x lg:divide-gold/10">
+            {stats.map((s) => (
+              <div key={s.label} className="flex items-center gap-3 px-5 py-6">
+                <s.icon size={26} strokeWidth={1} className="text-gold shrink-0" />
+                <div className="min-w-0">
+                  <div className="font-serif text-xl text-foreground leading-none">{s.value}</div>
+                  <div className="mt-1.5 text-[9px] tracking-luxury uppercase text-muted-foreground truncate">{s.label}</div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </Reveal>
+
+        <div className="mt-8 flex items-center justify-center gap-6">
+          <div className="h-px w-20 bg-gold/25" />
+          <div className="text-[10px] tracking-[0.4em] uppercase text-gold-soft text-center">
+            Building Legacies. Creating Landmarks. Delivering Excellence.
+          </div>
+          <div className="h-px w-20 bg-gold/25" />
+        </div>
       </section>
 
       {/* Partners — marquee */}
-      <section className="mx-auto max-w-7xl px-6 lg:px-10 py-24">
+      <section className="mx-auto max-w-[1700px] px-4 lg:px-8 py-24">
         <div className="flex items-center justify-center gap-6 mb-12">
           <div className="h-px w-16 bg-gold/40" />
           <h2 className="text-xs tracking-[0.4em] uppercase text-gold">Development Partners</h2>
@@ -201,7 +218,7 @@ function Developments() {
             WebkitMaskImage: "linear-gradient(to right, transparent, black 8%, black 92%, transparent)",
           }}
         >
-          <div className="marquee-track flex w-max items-center gap-16 py-6">
+          <div className="marquee-track flex w-max items-center gap-16 py-6" style={{ animationDuration: "110s" }}>
             {[...partnerLogos, ...partnerLogos].map((logo, i) => (
               <div
                 key={i}
@@ -218,6 +235,7 @@ function Developments() {
           </div>
         </div>
       </section>
+
 
       {/* CTA */}
       <section className="border-t border-gold/10 bg-charcoal/40">
