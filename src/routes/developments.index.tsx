@@ -119,23 +119,32 @@ function Developments() {
 
       {/* Brand mark */}
       <section className="mx-auto max-w-[1700px] px-4 lg:px-8 pt-14">
-        <div className="flex items-center gap-3">
-          <img src={starLogo} alt="Meozzi Star Developments emblem" className="h-10 w-auto md:h-12" />
-          <div className="flex items-baseline gap-3 leading-none">
-            <span className="font-serif text-xl md:text-2xl tracking-[0.14em] text-gold">MEOZZI STAR</span>
-            <span className="text-[9px] md:text-[10px] tracking-[0.5em] uppercase text-foreground">DEVELOPMENTS</span>
+        <div className="flex items-center gap-4">
+          <img
+            src={starLogo}
+            alt="Meozzi Star Developments emblem"
+            className="h-10 w-auto md:h-12"
+          />
+
+          <div className="flex flex-col leading-none">
+            <span className="font-serif text-xl md:text-2xl tracking-[0.14em] text-gold">
+              MEOZZI STAR
+            </span>
+            <span className="mt-1 text-[9px] md:text-[10px] tracking-[0.5em] uppercase text-foreground">
+              DEVELOPMENTS
+            </span>
           </div>
         </div>
-      </section>
-
-      {/* Current Developments */}
-      <section className="mx-auto max-w-[1700px] px-4 lg:px-8 py-20">
         <div className="flex items-center justify-center gap-6 mb-12">
           <div className="h-px w-16 bg-gold/40" />
           <h2 className="text-xs tracking-[0.4em] uppercase text-gold">Current Developments</h2>
           <div className="h-px w-16 bg-gold/40" />
         </div>
 
+      </section>
+
+      {/* Current Developments */}
+      <section className="mx-auto max-w-[1700px] px-4 lg:px-8 pt-4 pb-20">
         <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
           {developments.map((d, i) => (
             <Reveal key={d.city} delay={Math.min(i, 3) as 0 | 1 | 2 | 3}>
@@ -208,7 +217,7 @@ function Developments() {
       </section>
 
       {/* Partners — marquee */}
-      <section className="mx-auto max-w-[1700px] px-4 lg:px-8 py-24">
+      <section className="mx-auto max-w-[1700px] px-4 lg:px-8 pt-4 pt-4 pb-20">
         <div className="flex items-center justify-center gap-6 mb-12">
           <div className="h-px w-16 bg-gold/40" />
           <h2 className="text-xs tracking-[0.4em] uppercase text-gold">Development Partners</h2>
