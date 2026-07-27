@@ -1,7 +1,7 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { SiteLayout } from "@/components/SiteLayout";
 import { Reveal } from "@/components/Reveal";
-import { ArrowRight, MapPin, Calendar, Globe, Building2, DollarSign, KeyRound, Gem, CalendarDays } from "lucide-react";
+import { ArrowRight, Globe, Building2, DollarSign, KeyRound, Gem, CalendarDays } from "lucide-react";
 import banner from "@/assets/dev-banner.jpg";
 import starLogo from "@/assets/meozzi-star.png";
 import miami from "@/assets/dev-6.png";
