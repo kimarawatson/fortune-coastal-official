@@ -119,11 +119,11 @@ function Developments() {
 
       {/* Brand mark */}
       <section className="mx-auto max-w-[1700px] px-4 lg:px-8 pt-14">
-        <div className="flex items-center gap-4">
-          <img src={starLogo} alt="Meozzi Star Developments emblem" className="h-12 w-auto md:h-16" />
-          <div className="leading-none">
-            <div className="font-serif text-xl md:text-2xl tracking-[0.14em] text-gold">MEOZZI STAR</div>
-            <div className="mt-1.5 text-[9px] md:text-[10px] tracking-[0.5em] uppercase text-gold-soft">Developments</div>
+        <div className="flex items-center gap-3">
+          <img src={starLogo} alt="Meozzi Star Developments emblem" className="h-10 w-auto md:h-12" />
+          <div className="flex items-baseline gap-3 leading-none">
+            <span className="font-serif text-xl md:text-2xl tracking-[0.14em] text-gold">MEOZZI STAR</span>
+            <span className="text-[9px] md:text-[10px] tracking-[0.5em] uppercase text-gold-soft">Developments</span>
           </div>
         </div>
       </section>
@@ -205,13 +205,6 @@ function Developments() {
           </div>
         </Reveal>
 
-        <div className="mt-8 flex items-center justify-center gap-6">
-          <div className="h-px w-20 bg-gold/25" />
-          <div className="text-[10px] tracking-[0.4em] uppercase text-gold-soft text-center">
-            Building Legacies. Creating Landmarks. Delivering Excellence.
-          </div>
-          <div className="h-px w-20 bg-gold/25" />
-        </div>
       </section>
 
       {/* Partners — marquee */}
