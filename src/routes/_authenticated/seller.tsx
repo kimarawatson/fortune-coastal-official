@@ -57,7 +57,7 @@ function SellerPortal() {
 
   return (
     <SiteLayout>
-      <section className="mx-auto max-w-7xl px-6 lg:px-10 pt-16 pb-12 flex items-end justify-between flex-wrap gap-6">
+      <section className="mx-auto max-w-[1700px] px-4 lg:px-8 pt-16 pb-12 flex items-end justify-between flex-wrap gap-6">
         <div className="w-full">
         </div>
         <div>
@@ -69,7 +69,7 @@ function SellerPortal() {
         </Link>
       </section>
 
-      <section className="mx-auto max-w-7xl px-6 lg:px-10">
+      <section className="mx-auto max-w-[1700px] px-4 lg:px-8">
         {listingsQ.isLoading ? (
           <div className="text-xs text-muted-foreground">Loading…</div>
         ) : !listingsQ.data?.length ? (
@@ -111,7 +111,7 @@ function SellerPortal() {
         )}
       </section>
 
-      <section className="mx-auto max-w-7xl px-6 lg:px-10 mt-16 pb-20">
+      <section className="mx-auto max-w-[1700px] px-4 lg:px-8 mt-16 pb-20">
         <div className="flex items-center gap-3 mb-6"><MessageSquare size={16} className="text-gold" /><h2 className="font-serif text-2xl text-foreground">Buyer Inquiries</h2></div>
         {!inquiriesQ.data?.length ? (
           <div className="border border-border/40 p-8 text-muted-foreground text-sm">No inquiries yet.</div>
@@ -211,7 +211,7 @@ function SellerApply({ existing, onSubmitted }: { existing: any; onSubmitted: ()
 
   return (
     <SiteLayout>
-      <section className="mx-auto max-w-2xl px-6 lg:px-10 py-20">
+      <section className="mx-auto max-w-2xl px-4 lg:px-8 py-20">
         <div className="text-[10px] tracking-luxury uppercase text-gold">Seller Application</div>
         <h1 className="mt-3 font-serif text-5xl text-foreground">Become an FCG Seller</h1>
         <p className="mt-4 text-muted-foreground">

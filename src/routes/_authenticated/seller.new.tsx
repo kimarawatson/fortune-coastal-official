@@ -109,7 +109,7 @@ export function ListingForm({ mode, initial }: { mode: "create" | "edit"; initia
 
   return (
     <SiteLayout>
-      <section className="mx-auto max-w-3xl px-6 lg:px-10 py-16">
+      <section className="mx-auto max-w-3xl px-4 lg:px-8 py-16">
         <div className="text-[10px] tracking-luxury uppercase text-gold">Seller</div>
         <h1 className="mt-3 font-serif text-5xl text-foreground">{mode === "create" ? "New Listing" : "Edit Listing"}</h1>
         <p className="mt-3 text-muted-foreground text-sm">Submissions are reviewed by our in-house specialists before going live.</p>

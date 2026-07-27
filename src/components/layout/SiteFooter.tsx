@@ -3,7 +3,7 @@ import { Link } from "@tanstack/react-router";
 export function SiteFooter() {
   return (
     <footer className="border-t border-border/40 mt-32">
-      <div className="mx-auto max-w-7xl px-6 lg:px-10 py-20 grid gap-12 md:grid-cols-4">
+      <div className="mx-auto max-w-[1700px] px-4 lg:px-8 py-20 grid gap-12 md:grid-cols-4">
         <div className="md:col-span-2 max-w-md">
           <div className="font-serif text-2xl text-foreground">Fortune Coastal Group</div>
           <div className="text-[10px] tracking-luxury text-gold uppercase mt-1">A Private Wealth Marketplace</div>
@@ -32,7 +32,7 @@ export function SiteFooter() {
         </div>
       </div>
       <div className="border-t border-border/40">
-        <div className="mx-auto max-w-7xl px-6 lg:px-10 py-6 flex flex-col md:flex-row items-center justify-between gap-3">
+        <div className="mx-auto max-w-[1700px] px-4 lg:px-8 py-6 flex flex-col md:flex-row items-center justify-between gap-3">
           <div className="text-xs text-muted-foreground">© {new Date().getFullYear()} Fortune Coastal Group. All rights reserved.</div>
           <div className="text-[10px] tracking-luxury uppercase text-muted-foreground">Discretion · Verification · Settlement</div>
         </div>

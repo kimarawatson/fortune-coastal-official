@@ -32,7 +32,7 @@ function Dashboard() {
 
   return (
     <SiteLayout>
-      <section className="mx-auto max-w-7xl px-6 lg:px-10 pt-16 pb-12">
+      <section className="mx-auto max-w-[1700px] px-4 lg:px-8 pt-16 pb-12">
         <div className="flex items-start justify-between gap-6 flex-wrap">
           <div>
             <div className="text-[10px] tracking-luxury uppercase text-gold">Member Portal</div>
@@ -43,13 +43,13 @@ function Dashboard() {
         </div>
       </section>
 
-      <section className="mx-auto max-w-7xl px-6 lg:px-10 grid gap-5 md:grid-cols-3">
+      <section className="mx-auto max-w-[1700px] px-4 lg:px-8 grid gap-5 md:grid-cols-3">
         <PortalCard to="/profile" icon={UserCircle} title="My Profile" body="Update your name, country, and avatar." />
         <PortalCard to="/marketplace" icon={ArrowRight} title="Browse Marketplace" body="Discover verified luxury assets across the United States." />
         <PortalCard to="/seller" icon={Store} title={isSeller ? "Seller Portal" : "Become a Seller"} body={isSeller ? "Manage your listings, photos, and inquiries." : "Apply to list assets on FCG."} />
       </section>
 
-      <section className="mx-auto max-w-7xl px-6 lg:px-10 mt-16">
+      <section className="mx-auto max-w-[1700px] px-4 lg:px-8 mt-16">
         <div className="flex items-center gap-3 mb-6">
           <MessageSquare size={16} className="text-gold" />
           <h2 className="font-serif text-2xl text-foreground">My Inquiries</h2>

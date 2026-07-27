@@ -54,7 +54,7 @@ function AssetDetail() {
 
   return (
     <SiteLayout>
-      <div className="mx-auto max-w-7xl px-6 lg:px-10 pt-10">
+      <div className="mx-auto max-w-[1700px] px-4 lg:px-8 pt-10">
         <div className="flex flex-wrap items-center gap-5">
           <Link to="/marketplace" className="inline-flex items-center gap-2 text-xs tracking-luxury uppercase text-muted-foreground hover:text-gold">
             <ArrowLeft size={14} /> Back to Marketplace
@@ -62,7 +62,7 @@ function AssetDetail() {
         </div>
       </div>
 
-      <section className="mx-auto max-w-7xl px-6 lg:px-10 mt-8 grid lg:grid-cols-[1.4fr_1fr] gap-12">
+      <section className="mx-auto max-w-[1700px] px-4 lg:px-8 mt-8 grid lg:grid-cols-[1.4fr_1fr] gap-12">
         <div>
           <div className="relative aspect-[4/3] overflow-hidden bg-charcoal">
             {gallery[active] && <img src={gallery[active]} alt={a.title} className="h-full w-full object-cover" />}
