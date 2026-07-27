@@ -79,6 +79,17 @@ const partnerLogos = [
   { src: pSpectre, alt: "Spectre 27" },
 ];
 
+const stats = [
+  { icon: Globe, value: "4", label: "Global Destinations" },
+  { icon: Building2, value: "4", label: "Iconic Developments" },
+  { icon: DollarSign, value: "$12.8B+", label: "Total Project Value" },
+  { icon: KeyRound, value: "1,327+", label: "Luxury Residences" },
+  { icon: Gem, value: "74+", label: "Ultra Luxury Penthouses" },
+  { icon: CalendarDays, value: "2029–2033", label: "Estimated Completion" },
+];
+
+
+
 function Developments() {
   return (
     <SiteLayout>
