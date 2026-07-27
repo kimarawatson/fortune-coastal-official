@@ -1,7 +1,7 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { SiteLayout } from "@/components/SiteLayout";
 import { Reveal } from "@/components/Reveal";
-import { Star, Gem, Waves, Sparkles, ArrowRight, MapPin, Calendar } from "lucide-react";
+import { ArrowRight, MapPin, Calendar } from "lucide-react";
 import banner from "@/assets/dev-banner.jpg";
 import starLogo from "@/assets/meozzi-star.png";
 import miami from "@/assets/dev-6.png";
@@ -108,11 +108,11 @@ function Developments() {
 
       {/* Brand mark */}
       <section className="mx-auto max-w-7xl px-6 lg:px-10 pt-14">
-        <div className="flex items-center gap-5">
-          <img src={starLogo} alt="Meozzi Star Developments emblem" className="h-20 w-auto md:h-24" />
+        <div className="flex items-center gap-4">
+          <img src={starLogo} alt="Meozzi Star Developments emblem" className="h-12 w-auto md:h-16" />
           <div className="leading-none">
-            <div className="font-serif text-2xl md:text-4xl tracking-[0.14em] text-gold">MEOZZI STAR</div>
-            <div className="mt-2 text-[10px] md:text-xs tracking-[0.5em] uppercase text-gold-soft">Developments</div>
+            <div className="font-serif text-xl md:text-2xl tracking-[0.14em] text-gold">MEOZZI STAR</div>
+            <div className="mt-1.5 text-[9px] md:text-[10px] tracking-[0.5em] uppercase text-gold-soft">Developments</div>
           </div>
         </div>
       </section>
@@ -182,23 +182,6 @@ function Developments() {
                 </div>
               </article>
             </Reveal>
-          ))}
-        </div>
-      </section>
-
-      {/* Highlights */}
-      <section className="border-t border-gold/10 bg-black/30">
-        <div className="mx-auto max-w-7xl px-6 lg:px-10 py-20 grid gap-10 sm:grid-cols-2 lg:grid-cols-4 text-center">
-          {[
-            { Icon: Sparkles, label: "Iconic Design by Vision" },
-            { Icon: Gem, label: "Timeless Luxury Curated" },
-            { Icon: Waves, label: "Waterfront Living" },
-            { Icon: Star, label: "Exclusive Lifestyle" },
-          ].map(({ Icon, label }) => (
-            <div key={label} className="flex flex-col items-center gap-4">
-              <Icon size={32} className="text-gold" strokeWidth={1.2} />
-              <div className="text-[11px] tracking-luxury uppercase text-muted-foreground">{label}</div>
-            </div>
           ))}
         </div>
       </section>
