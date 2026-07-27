@@ -35,7 +35,7 @@ export function SiteHeader() {
           {nav.map((n) => {
             const active = n.to === "/" ? location.pathname === "/" : location.pathname.startsWith(n.to);
             return (
-              <Link key={n.to} to={n.to} className={`text-xs tracking-luxury uppercase transition-colors ${active ? "text-gold" : "text-muted-foreground hover:text-foreground"}`}>
+              <Link key={n.to} to={n.to} className={`text-xs tracking-luxury uppercase transition-colors ${active ? "text-foreground" : "text-muted-foreground hover:text-foreground"}`}>
                 {n.label}
               </Link>
             );
