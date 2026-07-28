@@ -24,6 +24,7 @@ function About() {
     <SiteLayout>
       <section className="relative h-[60vh] min-h-[460px] -mt-20 overflow-hidden">
         <img src={hero} alt="" className="absolute inset-0 h-full w-full object-cover hero-motion" />
+        <div className="hero-sheen" aria-hidden />
         <div className="absolute inset-0 bg-gradient-to-b from-background/60 via-background/30 to-background" />
         <div className="relative h-full mx-auto max-w-[1700px] px-4 lg:px-8 flex flex-col justify-end pb-16">
           <div className="text-[10px] tracking-luxury uppercase text-gold">About FCG</div>
