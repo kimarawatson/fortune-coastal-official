@@ -96,18 +96,18 @@ function Developments() {
         <img src={banner} alt="Fortune Coastal Developments" className="absolute inset-0 h-full w-full object-cover" />
         <div className="absolute inset-0 bg-gradient-to-b from-background/70 via-background/30 to-background" />
         <div className="relative h-full flex flex-col items-center justify-center text-center px-6">
-          <Reveal>
-            <div className="text-[11px] tracking-[0.5em] uppercase text-gold mb-6">Fortune Coastal Group</div>
-          </Reveal>
+
           <Reveal delay={1}>
-            <h1 className="font-serif text-5xl md:text-8xl tracking-[0.15em] text-foreground">DEVELOPMENTS</h1>
+            <h1 className="font-serif text-5xl md:text-8xl tracking-[0.15em] text-gold">
+              DEVELOPMENTS
+            </h1>
           </Reveal>
           <Reveal delay={2}>
             <div className="mt-8 max-w-3xl space-y-2">
-              <div className="text-xs md:text-sm tracking-luxury uppercase text-gold-soft">
+              <div className="text-xs md:text-sm tracking-luxury uppercase text-foreground">
                 Iconic Architecture. Global Destinations.
               </div>
-              <div className="text-xs md:text-sm tracking-luxury uppercase text-gold-soft">
+              <div className="text-xs md:text-sm tracking-luxury uppercase text-foreground">
                 Exclusive Investment Opportunities.
               </div>
             </div>
@@ -258,9 +258,9 @@ function Developments() {
             </p>
           </div>
           <div className="space-y-4 text-sm">
-            <div className="text-muted-foreground">(206) 333.7469</div>
-            <div className="text-muted-foreground">InvestFortuneCoastalGroup@outlook.com</div>
-            <div className="text-muted-foreground">Los Angeles, California, USA</div>
+            <div className="text-muted-foreground">(206) 333-7469</div>
+            <div className="text-muted-foreground">FortuneCoastalGroup@outlook.com</div>
+            <div className="text-muted-foreground">Los Angeles, California</div>
           </div>
           <a href="/contact" className="self-start inline-block bg-gradient-to-r from-gold to-gold-soft text-primary-foreground px-8 py-4 text-xs tracking-luxury uppercase hover:opacity-90 transition-opacity">
             Send Message
