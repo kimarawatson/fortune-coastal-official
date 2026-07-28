@@ -458,8 +458,8 @@ function DevelopmentDetail() {
             }}
           >
             <img
-              src={dev.image}
-              alt={`${dev.name} — ${dev.city} full rendering`}
+              src={dev.detailImage}
+              alt={`${dev.name} — ${dev.city} detailed tower program rendering`}
               draggable={false}
               style={{ transform: `scale(${zoom})`, transformOrigin: "center center", transition: "transform 200ms ease-out" }}
               className="max-h-[92vh] max-w-[96vw] object-contain select-none"
