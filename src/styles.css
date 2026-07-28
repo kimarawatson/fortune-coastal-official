@@ -221,8 +221,14 @@
   }
   .hero-sheen {
     position: absolute;
-    inset: -20% -40%;
+    inset: 0;
+    overflow: hidden;
     pointer-events: none;
+  }
+  .hero-sheen::before {
+    content: "";
+    position: absolute;
+    inset: -20% -40%;
     background: linear-gradient(90deg, transparent, oklch(0.85 0.13 85 / 0.10), transparent);
     animation: hero-sheen 11s ease-in-out infinite;
     will-change: transform, opacity;

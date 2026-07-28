@@ -20,7 +20,7 @@ function Contact() {
   const [sent, setSent] = useState(false);
   return (
     <SiteLayout>
-      <div className="relative -mt-20">
+      <div className="relative -mt-20 overflow-hidden">
         <img src={contactHero} alt="" className="absolute inset-0 h-[70vh] w-full object-cover hero-motion" />
         <div className="hero-sheen" aria-hidden />
         <div className="absolute inset-0 h-[70vh] bg-gradient-to-b from-background/70 via-background/85 to-background" />
