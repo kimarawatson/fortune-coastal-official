@@ -34,8 +34,8 @@ function Contact() {
           <div className="mt-12 space-y-6">
             {[
               { icon: MapPin, label: "Headquarters", value: "Los Angeles, California, United States" },
-              { icon: Phone, label: "Concierge Desk", value: "(206) 333.7469" },
-              { icon: Mail, label: "Private Inquiries", value: "InvestFortuneCoastalGroup@outlook.com" },
+              { icon: Phone, label: "Concierge Desk", value: "(206) 333-7469" },
+              { icon: Mail, label: "Private Inquiries", value: "FortuneCoastalGroup@outlook.com" },
             ].map(({ icon: Icon, label, value }) => (
               <div key={label} className="flex items-start gap-4">
                 <div className="border border-gold/40 p-3 text-gold"><Icon size={16} /></div>
@@ -51,11 +51,11 @@ function Contact() {
             <div className="text-[10px] tracking-luxury uppercase text-muted-foreground mb-4">Follow Fortune Coastal</div>
             <div className="flex gap-3">
               {[
-                { Icon: Instagram, label: "Instagram", href: "#" },
-                { Icon: Linkedin, label: "LinkedIn", href: "#" },
-                { Icon: Twitter, label: "X", href: "#" },
-                { Icon: Facebook, label: "Facebook", href: "#" },
-                { Icon: Youtube, label: "YouTube", href: "#" },
+                { Icon: Instagram, label: "Instagram", href: "https://instagram.com/fortunecoastalgroup" },
+                { Icon: Linkedin, label: "LinkedIn", href: "https://linkedin.com/company/fortunecoastalgroup" },
+                { Icon: Twitter, label: "X", href: "https://twitter.com/fortunecoastalgroup" },
+                { Icon: Facebook, label: "Facebook", href: "https://facebook.com/fortunecoastalgroup" },
+                { Icon: Youtube, label: "YouTube", href: "https://youtube.com/fortunecoastalgroup" },
               ].map(({ Icon, label, href }) => (
                 <a key={label} href={href} aria-label={label} className="h-11 w-11 grid place-items-center border border-border/40 bg-charcoal/40 text-muted-foreground hover:border-gold hover:text-gold hover:bg-gold/5 transition-all">
                   <Icon size={16} strokeWidth={1.5} />
