@@ -89,7 +89,7 @@ function AuthPage() {
   return (
     <div className="min-h-screen bg-background grid lg:grid-cols-2">
       <div className="hidden lg:block relative bg-charcoal overflow-hidden">
-        <img src={authBg} alt="Luxury oceanfront estate at golden hour" className="absolute inset-0 h-full w-full object-cover" />
+        <img src={authBg} alt="Luxury oceanfront estate at golden hour" className="absolute inset-0 h-full w-full object-cover hero-motion" />
         <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-black/60" />
         <div className="absolute inset-0" style={{ background: "radial-gradient(60% 50% at 30% 40%, oklch(0.74 0.09 78 / 0.18), transparent 70%)" }} />
         <div className="relative h-full flex flex-col justify-between p-12">

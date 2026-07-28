@@ -46,7 +46,7 @@ function Marketplace() {
   return (
     <SiteLayout>
       <section className="relative -mt-20 h-[60vh] min-h-[440px] overflow-hidden">
-        <img src={marketHero} alt="" className="absolute inset-0 h-full w-full object-cover" />
+        <img src={marketHero} alt="" className="absolute inset-0 h-full w-full object-cover hero-motion" />
         <div className="absolute inset-0 bg-gradient-to-b from-background/70 via-background/40 to-background" />
         <div className="relative h-full mx-auto max-w-[1700px] px-4 lg:px-8 flex flex-col justify-end pb-16">
           <div className="text-[10px] tracking-luxury uppercase text-gold">The Marketplace</div>
