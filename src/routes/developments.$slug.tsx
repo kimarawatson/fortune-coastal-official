@@ -7,8 +7,12 @@ import miami from "@/assets/dev-6.png";
 import california from "@/assets/dev-7.png";
 import vegas from "@/assets/dev-8.png";
 import macao from "@/assets/dev-9.png";
+import miamiDetail from "@/assets/dev-6-detail.jpg";
+import californiaDetail from "@/assets/dev-7-detail.jpg";
+import vegasDetail from "@/assets/dev-8-detail.jpg";
+import macaoDetail from "@/assets/dev-9-detail.jpg";
 
-type Zone = { level: string; title: string; lines: string[] };
+type Zone = { zone: string; level: string; title: string; lines: string[] };
 type Dev = {
   slug: string;
   name: string;
@@ -17,109 +21,167 @@ type Dev = {
   status: string;
   completion: string;
   image: string;
+  detailImage: string;
   tagline: string;
   description: string[];
   zones: Zone[];
+  highlights: string[];
 };
 
-const commonZones = (): Zone[] => [
+const towerZones = (views: string, dining: string): Zone[] => [
   {
-    level: "Crown",
-    title: "Sky Center & Observatory",
-    lines: ["Private Observatory Lounge", "Champagne Bar", "360° Skyline Views"],
+    zone: "Zone 5",
+    level: "Level 60 – 61",
+    title: "Meozzi Zorah Sky Center",
+    lines: ["Private Sky Club", "Celestial Lounge", "Observatory", "Sky Gardens"],
   },
   {
-    level: "Levels 46 – 58",
-    title: "Sky Villas & Penthouses",
-    lines: ["Full-Floor Penthouses", "Private Elevators", "Wraparound Terraces"],
+    zone: "Zone 4",
+    level: "Level 58 – 59",
+    title: "Elice Penthouse",
+    lines: ["Ultra Luxury Penthouses", "Private Terraces", "Infinite Views"],
   },
   {
-    level: "Levels 26 – 45",
-    title: "Signature Residences",
-    lines: ["Full-Floor Residences", "Private Plunge Pools", "Sunrise to Sunset Light"],
+    zone: "Zone 4",
+    level: "Levels 50 – 57",
+    title: "Star Penthouses",
+    lines: ["Signature Penthouses", "Panoramic Terraces", "Private Elevators"],
   },
   {
+    zone: "Zone 3",
+    level: "Levels 34 – 49",
+    title: "Half Floor Residences",
+    lines: ["Spacious Residences", "Floor to Ceiling Views"],
+  },
+  {
+    zone: "Zone 2",
+    level: "Levels 26 – 33",
+    title: "Half Floor Residences",
+    lines: ["Premium Residences", views],
+  },
+  {
+    zone: "Zone 2",
     level: "Levels 15 – 25",
     title: "Half Floor Residences",
     lines: ["Modern Living", "Resort Style Amenities"],
   },
   {
+    zone: "Zone 1",
     level: "Levels 10 – 14",
     title: "Star Townhouse",
     lines: ["Townhouse Residences", "Private Entrances", "Garden Terraces"],
   },
   {
-    level: "Levels 1 – 9",
+    zone: "Zone 1",
+    level: "Levels 8 – 9",
     title: "Wellness & Spa",
-    lines: ["Aquatics Center", "Spa Suites", "Fitness & Pilates Studios"],
+    lines: ["Indoor Outdoor Wellness & Spa", "Fitness", "Recovery", "Meditation"],
   },
   {
-    level: "Podium",
-    title: "Arrival & Motor Lobby",
-    lines: ["Grand Motor Court", "Concierge Gallery", "Members' Salon"],
+    zone: "Ground",
+    level: "Levels 1 – 7",
+    title: "Podium",
+    lines: ["Arrival Lobby", dining, "Retail", "Event Spaces", "Art Galleries", "Parking & Services"],
   },
 ];
 
 const developments: Record<string, Dev> = {
   miami: {
     slug: "miami",
-    name: "Fortune Coastal Tower",
+    name: "Meozzi Star Tower",
     city: "Miami",
     region: "Florida, USA",
     status: "Pre-Development",
     completion: "2030",
     image: miami,
-    tagline: "A vertical resort rising above Biscayne Bay.",
+    detailImage: miamiDetail,
+    tagline: "Architecture that moves. Living that inspires.",
     description: [
-      "Fortune Coastal Tower Miami is a sculpted, spiraling landmark designed for a new era of oceanfront living. Envisioned as a vertical resort, the tower fuses full-floor private residences with a curated program of hospitality, wellness, and sky-level social clubs.",
+      "Meozzi Star Tower Miami is a sculpted, spiraling landmark designed for a new era of waterfront living. Envisioned as a vertical resort, the tower fuses full-floor private residences with a curated program of hospitality, wellness, and sky-level social clubs.",
       "Every residence is oriented to capture panoramic views of the Atlantic, downtown Miami, and Biscayne Bay, with private outdoor terraces, plunge pools, and sunrise-to-sunset light.",
     ],
-    zones: commonZones(),
+    zones: towerZones("Ocean & City Views", "Restaurants"),
+    highlights: [
+      "Iconic Design by Vision",
+      "Timeless Luxury Curated",
+      "Miami Waterfront Living",
+      "Wellness & Elevated Life",
+    ],
   },
   california: {
     slug: "california",
-    name: "Fortune Coastal Tower",
+    name: "Meozzi Star Tower",
     city: "Los Angeles",
     region: "California, USA",
     status: "Pre-Development",
     completion: "2031",
     image: california,
-    tagline: "A pointed silhouette on the Pacific skyline.",
+    detailImage: californiaDetail,
+    tagline: "Vision born in California. Excellence reaches the stars.",
     description: [
-      "Rising along the California coast, Fortune Coastal Tower Los Angeles pairs cinematic ocean views with the disciplined elegance of West Coast modernism. The pointed crown is designed as a signature marker on the Pacific horizon.",
+      "Rising along the California coast, Meozzi Star Tower California pairs cinematic ocean views with the disciplined elegance of West Coast modernism. The pointed crown is designed as a signature marker on the Pacific horizon.",
       "Interiors are curated by an award-winning studio, with a private members' club, screening rooms, and a full wellness deck reserved for residents and their guests.",
     ],
-    zones: commonZones(),
+    zones: towerZones("Ocean & City Views", "Restaurants"),
+    highlights: [
+      "California Lifestyle",
+      "Ocean View Living",
+      "Iconic Design by Vision",
+      "Sustainable Future",
+      "Wellness Focused",
+      "Exclusive Luxury",
+      "Made for California",
+    ],
   },
   vegas: {
     slug: "vegas",
-    name: "Fortune Coastal Tower",
+    name: "Meozzi Star Tower",
     city: "Las Vegas",
     region: "Nevada, USA",
     status: "Pre-Development",
     completion: "2032",
     image: vegas,
-    tagline: "Iconic architecture on the world's most watched street.",
+    detailImage: vegasDetail,
+    tagline: "Above the city. Beyond extraordinary.",
     description: [
-      "A luminous, sculpted tower rising over the Las Vegas Strip. Fortune Coastal Tower Las Vegas is designed as a private counterpoint to the city — a residential sanctuary elevated far above the entertainment core.",
-      "The property includes a private grand casino salon, a rooftop pool club, and dedicated concierge programming for owners and their guests.",
+      "A visionary icon in the entertainment capital of the world. Meozzi Star Tower Las Vegas is designed as a private counterpoint to the city — a residential sanctuary elevated far above the entertainment core.",
+      "The property includes private members' salons, a rooftop pool club, and dedicated concierge programming for owners and their guests.",
     ],
-    zones: commonZones(),
+    zones: towerZones("Strip & City Views", "Fine Dining"),
+    highlights: [
+      "Iconic Design by Vision",
+      "Timeless Luxury Curated",
+      "Las Vegas Lifestyle",
+      "Strip & City Views",
+      "Exclusive Amenities",
+      "World Class Hospitality",
+      "Security & Privacy",
+    ],
   },
   macao: {
     slug: "macao",
-    name: "Fortune Coastal Tower",
+    name: "Meozzi Star Tower",
     city: "Macao",
     region: "Macao, China",
     status: "Pre-Development",
     completion: "2033",
     image: macao,
-    tagline: "A harbor landmark bridging heritage and horizon.",
+    detailImage: macaoDetail,
+    tagline: "Where vision meets legacy. A new star rises over Macao.",
     description: [
-      "Set on the Macao waterfront, Fortune Coastal Tower Macao anchors a new luxury district that honors the city's Portuguese heritage while projecting a distinctly modern silhouette across the harbor.",
+      "Set on the Macao waterfront, Meozzi Star Tower Macao anchors a new luxury district that honors the city's heritage while projecting a distinctly modern silhouette across the harbor.",
       "Ground-floor arcades open onto public promenades, while upper floors offer private residences, hospitality suites, and members-only sky lounges with sweeping views of the Pearl River Delta.",
     ],
-    zones: commonZones(),
+    zones: towerZones("City & Waterfront Views", "Fine Dining"),
+    highlights: [
+      "Iconic Design by Vision",
+      "Timeless Luxury Curated",
+      "Macao Heritage Inspired",
+      "Waterfront Living",
+      "World Class Amenities",
+      "Exclusive Lifestyle",
+      "Security & Privacy",
+    ],
   },
 };
 
@@ -144,6 +206,7 @@ export const Route = createFileRoute("/developments/$slug")({
   }),
   component: DevelopmentDetail,
 });
+
 
 function DevelopmentDetail() {
   const { dev } = Route.useLoaderData();
