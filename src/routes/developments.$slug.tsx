@@ -368,6 +368,29 @@ function DevelopmentDetail() {
         </div>
       </section>
 
+      {/* Signature highlights */}
+      <section className="mx-auto max-w-[1700px] px-4 lg:px-8 pb-20">
+        <div className="flex items-center gap-4 mb-8">
+          <div className="h-px w-12 bg-gold/40" />
+          <h2 className="text-xs tracking-[0.4em] uppercase text-gold">Signature Highlights</h2>
+        </div>
+        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-7 gap-y-8 gap-x-6">
+          {dev.highlights.map((h: string, i: number) => (
+            <Reveal key={h} delay={(i % 4) as 0 | 1 | 2 | 3}>
+              <div className="flex flex-col items-center text-center gap-3">
+                <div className="h-12 w-12 rounded-full border border-gold/30 flex items-center justify-center">
+                  <Sparkles size={16} className="text-gold" strokeWidth={1.5} />
+                </div>
+                <div className="text-[10px] tracking-luxury uppercase text-muted-foreground leading-relaxed">
+                  {h}
+                </div>
+              </div>
+            </Reveal>
+          ))}
+        </div>
+      </section>
+
+
       {/* Fullscreen image viewer with zoom */}
       {viewerOpen && (
         <div
