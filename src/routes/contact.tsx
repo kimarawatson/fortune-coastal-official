@@ -20,10 +20,10 @@ function Contact() {
   const [sent, setSent] = useState(false);
   return (
     <SiteLayout>
-      <div className="relative -mt-20">
-        <img src={contactHero} alt="" className="absolute inset-0 h-[70vh] w-full object-cover hero-motion" />
+      <div className="relative -mt-20 overflow-hidden min-h-[70vh]">
+        <img src={contactHero} alt="" className="absolute inset-0 h-full w-full object-cover hero-motion" />
         <div className="hero-sheen" aria-hidden />
-        <div className="absolute inset-0 h-[70vh] bg-gradient-to-b from-background/70 via-background/85 to-background" />
+        <div className="absolute inset-0 h-full bg-gradient-to-b from-background/70 via-background/85 to-background" />
         <section className="relative mx-auto max-w-[1700px] px-4 lg:px-8 pt-32 pb-24 grid lg:grid-cols-2 gap-16">
         <div>
           <div className="text-[10px] tracking-luxury uppercase text-gold">Private Concierge</div>
