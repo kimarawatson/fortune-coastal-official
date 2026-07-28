@@ -204,7 +204,7 @@ function Home() {
           </div>
 
           {/* 6 features */}
-          <div className="mt-10 grid gap-px md:grid-cols-3 bg-gold/10">
+          <div className="mt-10 grid md:grid-cols-3 gap-4">
             {[
               { icon: Bitcoin, t: "Native Bitcoin Support", d: "Accept and pay in Bitcoin natively across every American listing." },
               { icon: Lock, t: "Fortune Vault", d: "Integrated digital wallet to hold BTC, ETH, and stablecoins alongside real assets." },
@@ -213,7 +213,7 @@ function Home() {
               { icon: LineChart, t: "Live Market Data", d: "Real-time BTC pricing, portfolio tracking, and market insights — always on." },
               { icon: ShieldCheck, t: "Military-Grade Security", d: "Multi-sig custody, cold storage, and institutional-grade insurance built in." },
             ].map(({ icon: Icon, t, d }, i) => (
-              <Reveal key={t} delay={((i % 3) + 1) as 1 | 2 | 3} className="bg-background/40 backdrop-blur-sm p-7">
+              <Reveal key={t} delay={((i % 3) + 1) as 1 | 2 | 3} className="rounded-lg bg-charcoal/40 backdrop-blur-md p-7 border border-border/40">
                 <div className="h-12 w-12 grid place-items-center rounded-full bg-gold/10 text-gold"><Icon size={28} strokeWidth={1.5} /></div>
                 <h4 className="mt-5 font-serif text-lg text-foreground">{t}</h4>
                 <p className="mt-2 text-xs text-muted-foreground leading-relaxed">{d}</p>
@@ -243,7 +243,7 @@ function Home() {
           </p>
         </div>
 
-        <div className="mt-14 grid gap-px sm:grid-cols-2 lg:grid-cols-4 bg-gold/10">
+        <div className="mt-14 grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
           {[
             { icon: Building2, t: "National Marketplace", d: "Access exclusive American estates from Hamptons to Hollywood." },
             { icon: Layers, t: "Property Tokenization", d: "Fractional ownership of trophy assets through compliant tokenization." },
@@ -254,7 +254,7 @@ function Home() {
             { icon: Network, t: "Multi-Platform Access", d: "Web, iOS, and Android with seamless wallet pairing." },
             { icon: Coins, t: "Flexible Financing", d: "Bitcoin-collateralized lending and traditional wires — your choice." },
           ].map(({ icon: Icon, t, d }, i) => (
-            <Reveal key={t} delay={((i % 3) + 1) as 1 | 2 | 3} className="bg-background/40 backdrop-blur-md p-7 hover:bg-background/60 transition-colors">
+            <Reveal key={t} delay={((i % 3) + 1) as 1 | 2 | 3} className="rounded-xl border border-border/40 bg-background/40 backdrop-blur-md p-7 hover:bg-background/60 transition-colors">
               <div className="h-14 w-14 grid place-items-center rounded-full border border-gold/50 bg-gold/10 text-gold"><Icon size={28} strokeWidth={1.5} /></div>
               <h4 className="mt-5 font-serif text-lg text-foreground">{t}</h4>
               <p className="mt-2 text-xs text-muted-foreground leading-relaxed">{d}</p>
@@ -262,14 +262,14 @@ function Home() {
           ))}
         </div>
 
-        <div className="mt-10 grid grid-cols-2 md:grid-cols-4 gap-px bg-gold/10">
+        <div className="mt-10 grid grid-cols-2 md:grid-cols-4 gap-6">
           {([
             { Icon: Diamond, v: "$2.5B+", l: "Total Asset Value" },
             { Icon: Globe, v: "70+", l: "U.S. Markets" },
             { Icon: Building2, v: "5,000+", l: "Properties" },
             { Icon: Crown, v: "24/7", l: "Concierge" },
           ]).map(({ Icon, v, l }, i) => (
-            <Reveal key={l} delay={((i % 3) + 1) as 1 | 2 | 3} className="bg-background/40 backdrop-blur-md py-10 text-center">
+            <Reveal key={l} delay={((i % 3) + 1) as 1 | 2 | 3} className="rounded-xl border border-border/40 bg-background/40 backdrop-blur-md py-10 text-center">
               <Icon size={30} className="mx-auto text-gold" strokeWidth={1.5} />
               <div className="mt-3 font-serif text-3xl md:text-4xl gradient-gold-text">{v}</div>
               <div className="mt-2 text-[10px] tracking-luxury uppercase text-muted-foreground">{l}</div>
