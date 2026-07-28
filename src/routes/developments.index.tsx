@@ -18,6 +18,7 @@ import p9 from "@/assets/partner-9.png";
 import p10 from "@/assets/partner-10.png";
 import p11 from "@/assets/partner-11.png";
 import pOrca from "@/assets/partner-orca.png";
+import pKhdevelopment from "@/assets/partner-KH-development.png";
 import pAlpago from "@/assets/partner-alpago.png";
 import pEnes from "@/assets/partner-enes.png";
 import pProsper from "@/assets/partner-prosper.png";
@@ -67,6 +68,7 @@ const partnerLogos = [
   { src: p10, alt: "Nobel" },
   { src: p11, alt: "Think Wilder Architecture" },
   { src: pOrca, alt: "Orca Design" },
+  { src: pKhdevelopment, alt: "KH Development" },
   { src: pAlpago, alt: "Alpago Properties" },
   { src: pEnes, alt: "Enes Yilmazer" },
   { src: pProsper, alt: "Prosper Group" },
