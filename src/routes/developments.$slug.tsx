@@ -340,7 +340,10 @@ function DevelopmentDetail() {
           <ul className="space-y-4">
             {dev.zones.map((z: Zone) => (
               <li key={z.level} className="border-l-2 border-gold/40 pl-4 py-0.5">
-                <div className="text-[9px] tracking-[0.35em] uppercase text-gold-soft">{z.level}</div>
+                <div className="flex items-baseline gap-3">
+                  <div className="text-[9px] tracking-[0.35em] uppercase text-gold-soft">{z.level}</div>
+                  <div className="text-[8px] tracking-[0.3em] uppercase text-muted-foreground/70">{z.zone}</div>
+                </div>
                 <div className="mt-1 font-serif text-lg md:text-xl tracking-[0.05em] text-foreground">
                   {z.title.toUpperCase()}
                 </div>
@@ -357,6 +360,7 @@ function DevelopmentDetail() {
               </li>
             ))}
           </ul>
+
           <div className="mt-6 flex items-center gap-3 text-[10px] tracking-luxury uppercase text-muted-foreground">
             <Sparkles size={12} className="text-gold" strokeWidth={1.5} />
             Concept illustration — subject to final design
