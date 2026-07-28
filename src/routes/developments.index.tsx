@@ -93,7 +93,8 @@ function Developments() {
     <SiteLayout>
       {/* Banner */}
       <section className="relative -mt-24 h-[70vh] min-h-[520px] w-full overflow-hidden">
-        <img src={banner} alt="Fortune Coastal Developments" className="absolute inset-0 h-full w-full object-cover" />
+        <img src={banner} alt="Fortune Coastal Developments" className="absolute inset-0 h-full w-full object-cover hero-motion" />
+        <div className="hero-sheen" aria-hidden />
         <div className="absolute inset-0 bg-gradient-to-b from-background/70 via-background/30 to-background" />
         <div className="relative h-full flex flex-col items-center justify-center text-center px-6">
 

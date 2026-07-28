@@ -255,9 +255,10 @@ function DevelopmentDetail() {
           <img
             src={dev.image}
             alt={`${dev.name} — ${dev.city}`}
-            className="absolute inset-0 h-full w-full object-contain md:object-cover object-center bg-black transition-transform duration-[1.6s] group-hover:scale-[1.02]"
+            className="absolute inset-0 h-full w-full object-contain md:object-cover object-center bg-black hero-motion transition-transform duration-[1.6s]"
           />
         </button>
+        <div className="hero-sheen" aria-hidden />
         <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-background/20 via-transparent to-background/95" />
         <div className="pointer-events-none absolute inset-0 bg-gradient-to-r from-background/60 via-transparent to-transparent" />
 

@@ -201,4 +201,35 @@
   }
   .marquee-track { animation: marquee-x 40s linear infinite; will-change: transform; }
   .marquee-track:hover { animation-play-state: paused; }
+
+  /* Cinematic hero background motion */
+  @keyframes hero-pan {
+    0%   { transform: scale(1.06) translate3d(0, 0, 0); }
+    50%  { transform: scale(1.14) translate3d(-1.5%, -1.5%, 0); }
+    100% { transform: scale(1.06) translate3d(0, 0, 0); }
+  }
+  .hero-motion {
+    animation: hero-pan 34s ease-in-out infinite;
+    will-change: transform;
+    transform-origin: center center;
+  }
+
+  @keyframes hero-sheen {
+    0%   { transform: translateX(-60%) skewX(-12deg); opacity: 0; }
+    35%  { opacity: 0.5; }
+    100% { transform: translateX(160%) skewX(-12deg); opacity: 0; }
+  }
+  .hero-sheen {
+    position: absolute;
+    inset: -20% -40%;
+    pointer-events: none;
+    background: linear-gradient(90deg, transparent, oklch(0.85 0.13 85 / 0.10), transparent);
+    animation: hero-sheen 11s ease-in-out infinite;
+    will-change: transform, opacity;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .hero-motion, .hero-sheen { animation: none; }
+  }
 }
+
