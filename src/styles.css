@@ -201,6 +201,8 @@
   }
   .marquee-track { animation: marquee-x 40s linear infinite; will-change: transform; }
   .marquee-track:hover { animation-play-state: paused; }
+  .marquee-slow { animation-duration: 70s; }
+
 
   /* Cinematic hero background motion */
   @keyframes hero-pan {

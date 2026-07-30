@@ -224,6 +224,102 @@ export type Database = {
           },
         ]
       }
+      map_markers: {
+        Row: {
+          btc_accepted: boolean
+          city: string
+          headline: string
+          id: string
+          region: string | null
+          sort_order: number
+          x: number
+          y: number
+        }
+        Insert: {
+          btc_accepted?: boolean
+          city: string
+          headline: string
+          id?: string
+          region?: string | null
+          sort_order?: number
+          x: number
+          y: number
+        }
+        Update: {
+          btc_accepted?: boolean
+          city?: string
+          headline?: string
+          id?: string
+          region?: string | null
+          sort_order?: number
+          x?: number
+          y?: number
+        }
+        Relationships: []
+      }
+      market_metrics: {
+        Row: {
+          delta: string | null
+          id: string
+          label: string
+          sort_order: number
+          trend: string
+          updated_at: string
+          value: string
+        }
+        Insert: {
+          delta?: string | null
+          id?: string
+          label: string
+          sort_order?: number
+          trend?: string
+          updated_at?: string
+          value: string
+        }
+        Update: {
+          delta?: string | null
+          id?: string
+          label?: string
+          sort_order?: number
+          trend?: string
+          updated_at?: string
+          value?: string
+        }
+        Relationships: []
+      }
+      membership_requests: {
+        Row: {
+          created_at: string
+          email: string
+          full_name: string
+          id: string
+          interest: string | null
+          message: string | null
+          phone: string | null
+          status: string
+        }
+        Insert: {
+          created_at?: string
+          email: string
+          full_name: string
+          id?: string
+          interest?: string | null
+          message?: string | null
+          phone?: string | null
+          status?: string
+        }
+        Update: {
+          created_at?: string
+          email?: string
+          full_name?: string
+          id?: string
+          interest?: string | null
+          message?: string | null
+          phone?: string | null
+          status?: string
+        }
+        Relationships: []
+      }
       profiles: {
         Row: {
           avatar_url: string | null
@@ -251,6 +347,36 @@ export type Database = {
           full_name?: string | null
           id?: string
           updated_at?: string
+        }
+        Relationships: []
+      }
+      recent_sales: {
+        Row: {
+          id: string
+          location: string
+          price_usd: number
+          settlement: string
+          sold_at: string
+          sort_order: number
+          title: string
+        }
+        Insert: {
+          id?: string
+          location: string
+          price_usd: number
+          settlement?: string
+          sold_at?: string
+          sort_order?: number
+          title: string
+        }
+        Update: {
+          id?: string
+          location?: string
+          price_usd?: number
+          settlement?: string
+          sold_at?: string
+          sort_order?: number
+          title?: string
         }
         Relationships: []
       }
