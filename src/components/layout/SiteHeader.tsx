@@ -50,7 +50,7 @@ export function SiteHeader() {
               <Link to="/auth" className="text-xs font-medium tracking-luxury uppercase bg-gradient-to-r from-gold to-gold-soft text-primary-foreground px-6 py-3 hover:opacity-90 transition-opacity">Apply</Link>
             </>
           ) : (
-            <Link to="/dashboard" className="text-xs font-medium tracking-luxury uppercase bg-gradient-to-r from-gold to-gold-soft text-primary-foreground px-6 py-3 hover:opacity-90 transition-opacity">My Portal</Link>
+            <Link to="/dashboard" className="text-xs font-medium tracking-luxury uppercase bg-gradient-to-r from-gold to-gold-soft text-primary-foreground px-6 py-3 hover:opacity-90 transition-opacity">View Portfolio</Link>
 
           )}
         </div>
