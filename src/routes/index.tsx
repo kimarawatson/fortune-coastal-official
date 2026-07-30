@@ -187,18 +187,13 @@ function Home() {
               <div className="relative">
 
 
-                <div className="mt-10 divide-y divide-border/30">
-                  {[
-                    ["Portfolio Value", "$147.8M"],
-                    ["BTC Holdings", "1,597.4 BTC"],
-                    ["Properties Owned", "12"],
-                  ].map(([k, v]) => (
-                    <div key={k} className="flex items-center justify-between py-4">
-                      <div className="text-xs text-muted-foreground tracking-luxury uppercase">{k}</div>
-                      <div className="font-serif text-lg text-foreground">{v}</div>
-                    </div>
-                  ))}
-                </div>
+                <p className="mt-8 text-base text-muted-foreground leading-relaxed">
+                  Members track portfolio value, holdings, and settlement activity inside the private Fortune dashboard.
+                </p>
+                <Link to="/dashboard" className="mt-6 inline-flex items-center gap-3 text-xs tracking-luxury uppercase text-gold border-b border-gold/50 pb-1 hover:gap-4 transition-all">
+                  View Portfolio <ArrowRight size={14} />
+                </Link>
+
               </div>
             </div>
           </div>
