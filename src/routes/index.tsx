@@ -211,7 +211,7 @@ function Home() {
               <Reveal key={t} delay={((i % 3) + 1) as 1 | 2 | 3} className="rounded-lg bg-charcoal/40 backdrop-blur-md p-7 border border-border/40">
                 <div className="h-12 w-12 grid place-items-center rounded-full bg-gold/10 text-gold"><Icon size={28} strokeWidth={1.5} /></div>
                 <h4 className="mt-5 font-serif text-lg text-foreground">{t}</h4>
-                <p className="mt-2 text-xs text-muted-foreground leading-relaxed">{d}</p>
+                <p className="mt-2 text-sm text-muted-foreground leading-relaxed">{d}</p>
               </Reveal>
             ))}
           </div>
@@ -252,7 +252,7 @@ function Home() {
             <Reveal key={t} delay={((i % 3) + 1) as 1 | 2 | 3} className="rounded-xl border border-border/40 bg-background/40 backdrop-blur-md p-7 hover:bg-background/60 transition-colors">
               <div className="h-14 w-14 grid place-items-center rounded-full border border-gold/50 bg-gold/10 text-gold"><Icon size={28} strokeWidth={1.5} /></div>
               <h4 className="mt-5 font-serif text-lg text-foreground">{t}</h4>
-              <p className="mt-2 text-xs text-muted-foreground leading-relaxed">{d}</p>
+              <p className="mt-2 text-sm text-muted-foreground leading-relaxed">{d}</p>
             </Reveal>
           ))}
         </div>
