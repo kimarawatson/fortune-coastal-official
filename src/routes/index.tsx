@@ -100,7 +100,7 @@ function Home() {
       {/* ============ FEATURED COLLECTION ============ */}
       <section className="relative mt-0 py-24 overflow-hidden">
         <img src={hamptons} alt="" aria-hidden className="absolute inset-0 h-full w-full object-cover opacity-70" />
-        <div className="absolute inset-0 bg-gradient-to-b from-background/55 via-background/20 to-background/55" />
+        <div className="absolute inset-0 bg-gradient-to-b from-background/85 via-background/65 to-background/85" />
 
         <div className="relative mx-auto max-w-[1700px] px-4 lg:px-8">
         <div className="text-center">
@@ -110,7 +110,7 @@ function Home() {
           <h2 className="mt-6 font-serif text-4xl md:text-5xl text-foreground">
             Fortune <span className="italic gradient-gold-text">Luxury Collection</span>
           </h2>
-          <p className="mt-4 text-foreground/75 max-w-2xl mx-auto">
+          <p className="mt-4 text-lg text-foreground/85 max-w-2xl mx-auto">
             Explore our curated selection of America's most prestigious estates — available in USD or Bitcoin, settled with private-banking discretion.
           </p>
         </div>
@@ -136,7 +136,7 @@ function Home() {
       {/* ============ DIGITAL WEALTH / FORTUNE VAULT ============ */}
       <section className="mt-0 relative overflow-hidden py-24">
         <img src={villa} alt="" aria-hidden className="absolute inset-0 h-full w-full object-cover opacity-65" />
-        <div className="absolute inset-0 bg-gradient-to-b from-background/55 via-background/20 to-background/55" />
+        <div className="absolute inset-0 bg-gradient-to-b from-background/85 via-background/65 to-background/85" />
 
         <div className="absolute inset-0" style={{ background: "radial-gradient(60% 60% at 80% 50%, var(--gold) 0%, transparent 70%)", opacity: 0.12 }} />
         <div className="relative mx-auto max-w-[1700px] px-4 lg:px-8">
@@ -187,18 +187,13 @@ function Home() {
               <div className="relative">
 
 
-                <div className="mt-10 divide-y divide-border/30">
-                  {[
-                    ["Portfolio Value", "$147.8M"],
-                    ["BTC Holdings", "1,597.4 BTC"],
-                    ["Properties Owned", "12"],
-                  ].map(([k, v]) => (
-                    <div key={k} className="flex items-center justify-between py-4">
-                      <div className="text-xs text-muted-foreground tracking-luxury uppercase">{k}</div>
-                      <div className="font-serif text-lg text-foreground">{v}</div>
-                    </div>
-                  ))}
-                </div>
+                <p className="mt-8 text-base text-muted-foreground leading-relaxed">
+                  Members track portfolio value, holdings, and settlement activity inside the private Fortune dashboard.
+                </p>
+                <Link to="/dashboard" className="mt-6 inline-flex items-center gap-3 text-xs tracking-luxury uppercase text-gold border-b border-gold/50 pb-1 hover:gap-4 transition-all">
+                  View Portfolio <ArrowRight size={14} />
+                </Link>
+
               </div>
             </div>
           </div>
@@ -216,7 +211,7 @@ function Home() {
               <Reveal key={t} delay={((i % 3) + 1) as 1 | 2 | 3} className="rounded-lg bg-charcoal/40 backdrop-blur-md p-7 border border-border/40">
                 <div className="h-12 w-12 grid place-items-center rounded-full bg-gold/10 text-gold"><Icon size={28} strokeWidth={1.5} /></div>
                 <h4 className="mt-5 font-serif text-lg text-foreground">{t}</h4>
-                <p className="mt-2 text-xs text-muted-foreground leading-relaxed">{d}</p>
+                <p className="mt-2 text-sm text-muted-foreground leading-relaxed">{d}</p>
               </Reveal>
             ))}
           </div>
@@ -228,7 +223,7 @@ function Home() {
       {/* ============ PLATFORM TECHNOLOGY ============ */}
       <section className="relative mt-0 py-24 overflow-hidden">
         <img src={bombardier} alt="" aria-hidden className="absolute inset-0 h-full w-full object-cover opacity-65" />
-        <div className="absolute inset-0 bg-gradient-to-b from-background/55 via-background/20 to-background/55" />
+        <div className="absolute inset-0 bg-gradient-to-b from-background/85 via-background/65 to-background/85" />
 
         <div className="relative mx-auto max-w-[1700px] px-4 lg:px-8">
         <div className="text-center">
@@ -238,7 +233,7 @@ function Home() {
           <h2 className="mt-6 font-serif text-4xl md:text-5xl text-foreground">
             Fortune <span className="italic gradient-gold-text">Technology</span> Meets Luxury Commerce
           </h2>
-          <p className="mt-4 text-foreground/75 max-w-2xl mx-auto">
+          <p className="mt-4 text-lg text-foreground/85 max-w-2xl mx-auto">
             Built with cutting-edge blockchain technology and traditional luxury real estate expertise — engineered for American private wealth.
           </p>
         </div>
@@ -257,25 +252,12 @@ function Home() {
             <Reveal key={t} delay={((i % 3) + 1) as 1 | 2 | 3} className="rounded-xl border border-border/40 bg-background/40 backdrop-blur-md p-7 hover:bg-background/60 transition-colors">
               <div className="h-14 w-14 grid place-items-center rounded-full border border-gold/50 bg-gold/10 text-gold"><Icon size={28} strokeWidth={1.5} /></div>
               <h4 className="mt-5 font-serif text-lg text-foreground">{t}</h4>
-              <p className="mt-2 text-xs text-muted-foreground leading-relaxed">{d}</p>
+              <p className="mt-2 text-sm text-muted-foreground leading-relaxed">{d}</p>
             </Reveal>
           ))}
         </div>
 
-        <div className="mt-10 grid grid-cols-2 md:grid-cols-4 gap-6">
-          {([
-            { Icon: Diamond, v: "$2.5B+", l: "Total Asset Value" },
-            { Icon: Globe, v: "70+", l: "U.S. Markets" },
-            { Icon: Building2, v: "5,000+", l: "Properties" },
-            { Icon: Crown, v: "24/7", l: "Concierge" },
-          ]).map(({ Icon, v, l }, i) => (
-            <Reveal key={l} delay={((i % 3) + 1) as 1 | 2 | 3} className="rounded-xl border border-border/40 bg-background/40 backdrop-blur-md py-10 text-center">
-              <Icon size={30} className="mx-auto text-gold" strokeWidth={1.5} />
-              <div className="mt-3 font-serif text-3xl md:text-4xl gradient-gold-text">{v}</div>
-              <div className="mt-2 text-[10px] tracking-luxury uppercase text-muted-foreground">{l}</div>
-            </Reveal>
-          ))}
-        </div>
+
         </div>
       </section>
 
@@ -284,7 +266,7 @@ function Home() {
       {/* ============ MISSION / INNOVATION / FUTURE ============ */}
       <section className="relative mt-0 py-24 overflow-hidden">
         <img src={yacht} alt="" aria-hidden className="absolute inset-0 h-full w-full object-cover opacity-70" />
-        <div className="absolute inset-0 bg-gradient-to-b from-background/55 via-background/20 to-background/55" />
+        <div className="absolute inset-0 bg-gradient-to-b from-background/85 via-background/65 to-background/85" />
 
         <div className="relative mx-auto max-w-[1700px] px-4 lg:px-8">
         <div className="text-center">
@@ -294,7 +276,7 @@ function Home() {
           <h2 className="mt-6 font-serif text-4xl md:text-5xl text-foreground">
             Redefining <span className="italic gradient-gold-text">Luxury Real Estate</span> for the Digital Age
           </h2>
-          <p className="mt-4 text-foreground/75 max-w-2xl mx-auto">
+          <p className="mt-4 text-lg text-foreground/85 max-w-2xl mx-auto">
             Fortune Coastal merges digital wealth, blockchain trust, and immersive American property experiences. Our mission is to make ownership of luxury assets seamless, transparent, and intelligent.
           </p>
         </div>
@@ -321,7 +303,7 @@ function Home() {
       <section className="mt-0 relative py-24 overflow-hidden">
         <div className="relative mx-auto max-w-6xl px-4 lg:px-8 overflow-hidden p-10 lg:p-14">
           <img src={aspen} alt="" aria-hidden className="absolute inset-0 h-full w-full object-cover opacity-65" />
-          <div className="absolute inset-0 bg-gradient-to-b from-background/55 via-background/20 to-background/55" />
+          <div className="absolute inset-0 bg-gradient-to-b from-background/85 via-background/65 to-background/85" />
 
           <div className="relative">
           <div className="text-center">
@@ -376,27 +358,42 @@ function FeaturedCard({ asset, large = false }: { asset: typeof assets[number]; 
     <Link
       to="/asset/$id"
       params={{ id: asset.id }}
-      className={`group relative block overflow-hidden bg-charcoal/30 hover:bg-charcoal/50 transition-colors ${large ? "h-full min-h-[520px]" : "h-[248px]"}`}
+      className={`group relative block overflow-hidden bg-charcoal/30 hover:bg-charcoal/50 transition-colors ${large ? "h-full min-h-[520px]" : "h-[320px]"}`}
     >
       <img src={img} alt={asset.title} className="absolute inset-0 h-full w-full object-cover opacity-80 group-hover:opacity-100 group-hover:scale-105 transition-all duration-700" />
-      <div className="absolute inset-0 bg-gradient-to-t from-background via-background/60 to-transparent" />
+      <div className="absolute inset-0 bg-gradient-to-t from-background via-background/80 to-background/20" />
       <div className="absolute top-4 left-4 flex gap-2">
-        <span className="bg-gold text-primary-foreground px-2.5 py-1 text-[9px] tracking-luxury uppercase">Featured</span>
-        {asset.btcAccepted && <span className="border border-gold/50 text-gold bg-background/60 backdrop-blur px-2.5 py-1 text-[9px] tracking-luxury uppercase inline-flex items-center gap-1"><Bitcoin size={10} /> BTC</span>}
+        <span className="bg-gold text-primary-foreground px-2.5 py-1 text-[10px] tracking-luxury uppercase">Featured</span>
+        {asset.btcAccepted && <span className="border border-gold/50 text-gold bg-background/60 backdrop-blur px-2.5 py-1 text-[10px] tracking-luxury uppercase inline-flex items-center gap-1"><Bitcoin size={11} /> BTC</span>}
       </div>
       <div className="absolute inset-x-0 bottom-0 p-6">
-        <div className="text-[10px] tracking-luxury uppercase text-gold">{asset.location}</div>
+        <div className="text-[11px] tracking-luxury uppercase text-gold">{asset.location} · {asset.category}</div>
         <div className={`mt-2 font-serif text-foreground ${large ? "text-3xl md:text-4xl" : "text-2xl"}`}>{asset.title}</div>
-        <div className="mt-3 flex items-center justify-between">
-          <div>
-            <div className="font-serif text-xl gradient-gold-text">{formatUsd(asset.priceUsd)}</div>
-            <div className="text-[10px] text-muted-foreground tracking-luxury uppercase">₿ {asset.priceBtc.toLocaleString(undefined, { maximumFractionDigits: 1 })}</div>
+
+        <dl className="mt-4 grid grid-cols-2 gap-x-8 gap-y-2 max-w-md text-sm">
+          <div className="flex items-baseline justify-between gap-3">
+            <dt className="text-muted-foreground">Price</dt>
+            <dd className="font-serif text-lg gradient-gold-text">{formatUsd(asset.priceUsd)}</dd>
           </div>
-          <div className="inline-flex items-center gap-2 text-[10px] tracking-luxury uppercase text-gold border-b border-gold/50 pb-0.5 group-hover:gap-3 transition-all">
-            View Details <ArrowRight size={12} />
+          <div className="flex items-baseline justify-between gap-3">
+            <dt className="text-muted-foreground">Min. investment</dt>
+            <dd className="text-foreground">{formatUsd(Math.round(asset.priceUsd * 0.05))}</dd>
           </div>
+          <div className="flex items-baseline justify-between gap-3">
+            <dt className="text-muted-foreground">Bitcoin</dt>
+            <dd className="text-foreground">₿ {asset.priceBtc.toLocaleString(undefined, { maximumFractionDigits: 1 })}</dd>
+          </div>
+          <div className="flex items-baseline justify-between gap-3">
+            <dt className="text-muted-foreground">Status</dt>
+            <dd className="text-foreground">{asset.verified ? "Verified" : "In review"}</dd>
+          </div>
+        </dl>
+
+        <div className="mt-4 inline-flex items-center gap-2 text-xs tracking-luxury uppercase text-gold border-b border-gold/50 pb-1 group-hover:gap-3 transition-all">
+          View Opportunity <ArrowRight size={13} />
         </div>
       </div>
+
     </Link>
   );
 }
