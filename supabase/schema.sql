@@ -295,3 +295,111 @@ on conflict (id) do nothing;
 -- account, so they are not embedded in this SQL. After signing up your first
 -- user, open /admin, unlock with ADMIN_PASSWORD, and click "Seed Demo Listings"
 -- in the Demo Data panel — this attaches the demo listings to that user.
+
+-- =============================================================================
+-- Homepage intelligence: market metrics, recent sales, world-map markers
+-- and private membership requests
+-- =============================================================================
+
+create table if not exists public.market_metrics (
+  id uuid primary key default gen_random_uuid(),
+  label text not null,
+  value text not null,
+  delta text,
+  trend text not null default 'flat',
+  sort_order integer not null default 0,
+  updated_at timestamptz not null default now()
+);
+grant select on public.market_metrics to anon, authenticated;
+grant all on public.market_metrics to service_role;
+alter table public.market_metrics enable row level security;
+drop policy if exists "market_metrics public read" on public.market_metrics;
+create policy "market_metrics public read" on public.market_metrics
+  for select to anon, authenticated using (true);
+
+create table if not exists public.recent_sales (
+  id uuid primary key default gen_random_uuid(),
+  title text not null,
+  location text not null,
+  price_usd numeric not null,
+  settlement text not null default 'USD',
+  sold_at date not null default current_date,
+  sort_order integer not null default 0
+);
+grant select on public.recent_sales to anon, authenticated;
+grant all on public.recent_sales to service_role;
+alter table public.recent_sales enable row level security;
+drop policy if exists "recent_sales public read" on public.recent_sales;
+create policy "recent_sales public read" on public.recent_sales
+  for select to anon, authenticated using (true);
+
+create table if not exists public.map_markers (
+  id uuid primary key default gen_random_uuid(),
+  city text not null,
+  region text,
+  headline text not null,
+  x numeric not null,
+  y numeric not null,
+  btc_accepted boolean not null default true,
+  sort_order integer not null default 0
+);
+grant select on public.map_markers to anon, authenticated;
+grant all on public.map_markers to service_role;
+alter table public.map_markers enable row level security;
+drop policy if exists "map_markers public read" on public.map_markers;
+create policy "map_markers public read" on public.map_markers
+  for select to anon, authenticated using (true);
+
+create table if not exists public.membership_requests (
+  id uuid primary key default gen_random_uuid(),
+  full_name text not null,
+  email text not null,
+  phone text,
+  interest text,
+  message text,
+  status text not null default 'new',
+  created_at timestamptz not null default now()
+);
+grant insert on public.membership_requests to anon, authenticated;
+grant all on public.membership_requests to service_role;
+alter table public.membership_requests enable row level security;
+drop policy if exists "membership anyone apply" on public.membership_requests;
+create policy "membership anyone apply" on public.membership_requests
+  for insert to anon, authenticated with check (true);
+
+-- Seed homepage content (only when the tables are still empty)
+insert into public.market_metrics (label, value, delta, trend, sort_order)
+select * from (values
+  ('Luxury Home Index', '412.8', '+4.2%', 'up', 1),
+  ('Luxury Market Volume', '$18.4B', '+2.6%', 'up', 2),
+  ('Tokenized Assets', '$6.1B', '+11.3%', 'up', 3),
+  ('Countries Active', '58', '+3', 'up', 4),
+  ('Properties Listed', '5,431', '+128', 'up', 5),
+  ('Avg. Days to Settle', '9', '-2', 'down', 6)
+) v(label, value, delta, trend, sort_order)
+where not exists (select 1 from public.market_metrics);
+
+insert into public.recent_sales (title, location, price_usd, settlement, sort_order)
+select * from (values
+  ('Malibu Oceanfront Estate', 'Malibu, California', 38000000::numeric, 'Purchased with BTC', 1),
+  ('Manhattan Skyline Penthouse', 'New York, New York', 27500000::numeric, 'Private Sale', 2),
+  ('Palm Beach Waterfront Villa', 'Palm Beach, Florida', 61000000::numeric, 'Closed', 3),
+  ('Aspen Mountain Chalet', 'Aspen, Colorado', 19400000::numeric, 'Purchased with BTC', 4),
+  ('Hamptons Dune Compound', 'East Hampton, New York', 44250000::numeric, 'Closed', 5),
+  ('Beverly Hills Modern Estate', 'Beverly Hills, California', 52000000::numeric, 'Private Sale', 6)
+) v(title, location, price_usd, settlement, sort_order)
+where not exists (select 1 from public.recent_sales);
+
+insert into public.map_markers (city, region, headline, x, y, btc_accepted, sort_order)
+select * from (values
+  ('Los Angeles', 'California', '$84M Cliffside Villa', 14.5::numeric, 40::numeric, true, 1),
+  ('Miami', 'Florida', '$61M Waterfront Estate', 23::numeric, 47::numeric, true, 2),
+  ('New York', 'New York', '$27M Skyline Penthouse', 27::numeric, 36::numeric, true, 3),
+  ('Bahamas', 'Caribbean', 'Private Island', 26::numeric, 50::numeric, true, 4),
+  ('London', 'United Kingdom', '$40M Mayfair Residence', 47::numeric, 30::numeric, false, 5),
+  ('Monaco', 'French Riviera', '$52M Sea-View Penthouse', 50::numeric, 35::numeric, true, 6),
+  ('Dubai', 'United Arab Emirates', '$70M Palm Mansion', 61::numeric, 45::numeric, true, 7),
+  ('Singapore', 'Singapore', '$33M Marina Residence', 74::numeric, 56::numeric, false, 8),
+  ('Tokyo', 'Japan', '$29M Azabu Tower Home', 83::numeric, 38::numeric, true, 9)
+) v(city, region, headline, x, y, btc_accepted, sort_order)
+where not exists (select 1 from public.map_markers);
