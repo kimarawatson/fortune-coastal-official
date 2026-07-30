@@ -358,27 +358,42 @@ function FeaturedCard({ asset, large = false }: { asset: typeof assets[number]; 
     <Link
       to="/asset/$id"
       params={{ id: asset.id }}
-      className={`group relative block overflow-hidden bg-charcoal/30 hover:bg-charcoal/50 transition-colors ${large ? "h-full min-h-[520px]" : "h-[248px]"}`}
+      className={`group relative block overflow-hidden bg-charcoal/30 hover:bg-charcoal/50 transition-colors ${large ? "h-full min-h-[520px]" : "h-[320px]"}`}
     >
       <img src={img} alt={asset.title} className="absolute inset-0 h-full w-full object-cover opacity-80 group-hover:opacity-100 group-hover:scale-105 transition-all duration-700" />
-      <div className="absolute inset-0 bg-gradient-to-t from-background via-background/60 to-transparent" />
+      <div className="absolute inset-0 bg-gradient-to-t from-background via-background/80 to-background/20" />
       <div className="absolute top-4 left-4 flex gap-2">
-        <span className="bg-gold text-primary-foreground px-2.5 py-1 text-[9px] tracking-luxury uppercase">Featured</span>
-        {asset.btcAccepted && <span className="border border-gold/50 text-gold bg-background/60 backdrop-blur px-2.5 py-1 text-[9px] tracking-luxury uppercase inline-flex items-center gap-1"><Bitcoin size={10} /> BTC</span>}
+        <span className="bg-gold text-primary-foreground px-2.5 py-1 text-[10px] tracking-luxury uppercase">Featured</span>
+        {asset.btcAccepted && <span className="border border-gold/50 text-gold bg-background/60 backdrop-blur px-2.5 py-1 text-[10px] tracking-luxury uppercase inline-flex items-center gap-1"><Bitcoin size={11} /> BTC</span>}
       </div>
       <div className="absolute inset-x-0 bottom-0 p-6">
-        <div className="text-[10px] tracking-luxury uppercase text-gold">{asset.location}</div>
+        <div className="text-[11px] tracking-luxury uppercase text-gold">{asset.location} · {asset.category}</div>
         <div className={`mt-2 font-serif text-foreground ${large ? "text-3xl md:text-4xl" : "text-2xl"}`}>{asset.title}</div>
-        <div className="mt-3 flex items-center justify-between">
-          <div>
-            <div className="font-serif text-xl gradient-gold-text">{formatUsd(asset.priceUsd)}</div>
-            <div className="text-[10px] text-muted-foreground tracking-luxury uppercase">₿ {asset.priceBtc.toLocaleString(undefined, { maximumFractionDigits: 1 })}</div>
+
+        <dl className="mt-4 grid grid-cols-2 gap-x-8 gap-y-2 max-w-md text-sm">
+          <div className="flex items-baseline justify-between gap-3">
+            <dt className="text-muted-foreground">Price</dt>
+            <dd className="font-serif text-lg gradient-gold-text">{formatUsd(asset.priceUsd)}</dd>
           </div>
-          <div className="inline-flex items-center gap-2 text-[10px] tracking-luxury uppercase text-gold border-b border-gold/50 pb-0.5 group-hover:gap-3 transition-all">
-            View Details <ArrowRight size={12} />
+          <div className="flex items-baseline justify-between gap-3">
+            <dt className="text-muted-foreground">Min. investment</dt>
+            <dd className="text-foreground">{formatUsd(Math.round(asset.priceUsd * 0.05))}</dd>
           </div>
+          <div className="flex items-baseline justify-between gap-3">
+            <dt className="text-muted-foreground">Bitcoin</dt>
+            <dd className="text-foreground">₿ {asset.priceBtc.toLocaleString(undefined, { maximumFractionDigits: 1 })}</dd>
+          </div>
+          <div className="flex items-baseline justify-between gap-3">
+            <dt className="text-muted-foreground">Status</dt>
+            <dd className="text-foreground">{asset.verified ? "Verified" : "In review"}</dd>
+          </div>
+        </dl>
+
+        <div className="mt-4 inline-flex items-center gap-2 text-xs tracking-luxury uppercase text-gold border-b border-gold/50 pb-1 group-hover:gap-3 transition-all">
+          View Opportunity <ArrowRight size={13} />
         </div>
       </div>
+
     </Link>
   );
 }
