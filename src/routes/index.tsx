@@ -100,7 +100,7 @@ function Home() {
       {/* ============ FEATURED COLLECTION ============ */}
       <section className="relative mt-0 py-24 overflow-hidden">
         <img src={hamptons} alt="" aria-hidden className="absolute inset-0 h-full w-full object-cover opacity-70" />
-        <div className="absolute inset-0 bg-gradient-to-b from-background/55 via-background/20 to-background/55" />
+        <div className="absolute inset-0 bg-gradient-to-b from-background/85 via-background/65 to-background/85" />
 
         <div className="relative mx-auto max-w-[1700px] px-4 lg:px-8">
         <div className="text-center">
@@ -110,7 +110,7 @@ function Home() {
           <h2 className="mt-6 font-serif text-4xl md:text-5xl text-foreground">
             Fortune <span className="italic gradient-gold-text">Luxury Collection</span>
           </h2>
-          <p className="mt-4 text-foreground/75 max-w-2xl mx-auto">
+          <p className="mt-4 text-lg text-foreground/85 max-w-2xl mx-auto">
             Explore our curated selection of America's most prestigious estates — available in USD or Bitcoin, settled with private-banking discretion.
           </p>
         </div>
@@ -136,7 +136,7 @@ function Home() {
       {/* ============ DIGITAL WEALTH / FORTUNE VAULT ============ */}
       <section className="mt-0 relative overflow-hidden py-24">
         <img src={villa} alt="" aria-hidden className="absolute inset-0 h-full w-full object-cover opacity-65" />
-        <div className="absolute inset-0 bg-gradient-to-b from-background/55 via-background/20 to-background/55" />
+        <div className="absolute inset-0 bg-gradient-to-b from-background/85 via-background/65 to-background/85" />
 
         <div className="absolute inset-0" style={{ background: "radial-gradient(60% 60% at 80% 50%, var(--gold) 0%, transparent 70%)", opacity: 0.12 }} />
         <div className="relative mx-auto max-w-[1700px] px-4 lg:px-8">
@@ -228,7 +228,7 @@ function Home() {
       {/* ============ PLATFORM TECHNOLOGY ============ */}
       <section className="relative mt-0 py-24 overflow-hidden">
         <img src={bombardier} alt="" aria-hidden className="absolute inset-0 h-full w-full object-cover opacity-65" />
-        <div className="absolute inset-0 bg-gradient-to-b from-background/55 via-background/20 to-background/55" />
+        <div className="absolute inset-0 bg-gradient-to-b from-background/85 via-background/65 to-background/85" />
 
         <div className="relative mx-auto max-w-[1700px] px-4 lg:px-8">
         <div className="text-center">
@@ -238,7 +238,7 @@ function Home() {
           <h2 className="mt-6 font-serif text-4xl md:text-5xl text-foreground">
             Fortune <span className="italic gradient-gold-text">Technology</span> Meets Luxury Commerce
           </h2>
-          <p className="mt-4 text-foreground/75 max-w-2xl mx-auto">
+          <p className="mt-4 text-lg text-foreground/85 max-w-2xl mx-auto">
             Built with cutting-edge blockchain technology and traditional luxury real estate expertise — engineered for American private wealth.
           </p>
         </div>
@@ -284,7 +284,7 @@ function Home() {
       {/* ============ MISSION / INNOVATION / FUTURE ============ */}
       <section className="relative mt-0 py-24 overflow-hidden">
         <img src={yacht} alt="" aria-hidden className="absolute inset-0 h-full w-full object-cover opacity-70" />
-        <div className="absolute inset-0 bg-gradient-to-b from-background/55 via-background/20 to-background/55" />
+        <div className="absolute inset-0 bg-gradient-to-b from-background/85 via-background/65 to-background/85" />
 
         <div className="relative mx-auto max-w-[1700px] px-4 lg:px-8">
         <div className="text-center">
@@ -294,7 +294,7 @@ function Home() {
           <h2 className="mt-6 font-serif text-4xl md:text-5xl text-foreground">
             Redefining <span className="italic gradient-gold-text">Luxury Real Estate</span> for the Digital Age
           </h2>
-          <p className="mt-4 text-foreground/75 max-w-2xl mx-auto">
+          <p className="mt-4 text-lg text-foreground/85 max-w-2xl mx-auto">
             Fortune Coastal merges digital wealth, blockchain trust, and immersive American property experiences. Our mission is to make ownership of luxury assets seamless, transparent, and intelligent.
           </p>
         </div>
@@ -321,7 +321,7 @@ function Home() {
       <section className="mt-0 relative py-24 overflow-hidden">
         <div className="relative mx-auto max-w-6xl px-4 lg:px-8 overflow-hidden p-10 lg:p-14">
           <img src={aspen} alt="" aria-hidden className="absolute inset-0 h-full w-full object-cover opacity-65" />
-          <div className="absolute inset-0 bg-gradient-to-b from-background/55 via-background/20 to-background/55" />
+          <div className="absolute inset-0 bg-gradient-to-b from-background/85 via-background/65 to-background/85" />
 
           <div className="relative">
           <div className="text-center">
