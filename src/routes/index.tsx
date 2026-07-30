@@ -41,9 +41,9 @@ export const Route = createFileRoute("/")({
 });
 
 const developments = [
-  { slug: "los-angeles", img: dev6, city: "Los Angeles", note: "Investment Opening Soon" },
-  { slug: "miami", img: dev7, city: "Miami", note: "Reserve Interest" },
-  { slug: "las-vegas", img: dev8, city: "Las Vegas", note: "Coming Soon" },
+  { slug: "miami", img: dev6, city: "Miami", note: "Investment Opening Soon" },
+  { slug: "california", img: dev7, city: "Los Angeles", note: "Reserve Interest" },
+  { slug: "vegas", img: dev8, city: "Las Vegas", note: "Coming Soon" },
   { slug: "macao", img: dev9, city: "Macao", note: "Coming Soon" },
 ];
 
