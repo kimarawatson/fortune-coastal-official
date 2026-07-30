@@ -257,20 +257,7 @@ function Home() {
           ))}
         </div>
 
-        <div className="mt-10 grid grid-cols-2 md:grid-cols-4 gap-6">
-          {([
-            { Icon: Diamond, v: "$2.5B+", l: "Total Asset Value" },
-            { Icon: Globe, v: "70+", l: "U.S. Markets" },
-            { Icon: Building2, v: "5,000+", l: "Properties" },
-            { Icon: Crown, v: "24/7", l: "Concierge" },
-          ]).map(({ Icon, v, l }, i) => (
-            <Reveal key={l} delay={((i % 3) + 1) as 1 | 2 | 3} className="rounded-xl border border-border/40 bg-background/40 backdrop-blur-md py-10 text-center">
-              <Icon size={30} className="mx-auto text-gold" strokeWidth={1.5} />
-              <div className="mt-3 font-serif text-3xl md:text-4xl gradient-gold-text">{v}</div>
-              <div className="mt-2 text-[10px] tracking-luxury uppercase text-muted-foreground">{l}</div>
-            </Reveal>
-          ))}
-        </div>
+
         </div>
       </section>
 
