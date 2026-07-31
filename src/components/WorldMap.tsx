@@ -14,16 +14,16 @@ export function WorldMap({ markers }: { markers: MapMarker[] }) {
 
   return (
     <div className="relative mx-auto w-full max-w-[1400px]">
-      <div className="relative w-full" style={{ aspectRatio: "1000 / 460" }}>
+      <div className="relative w-full" style={{ aspectRatio: "1000 / 340" }}>
         <svg
-          viewBox="0 40 1000 460"
+          viewBox="0 70 1000 340"
           className="absolute inset-0 h-full w-full"
           role="img"
           aria-label="Fortune Coastal active luxury markets"
         >
           <defs>
             <radialGradient id="fc-map-glow" cx="50%" cy="50%" r="50%">
-              <stop offset="0%" stopColor="var(--gold)" stopOpacity="0.55" />
+              <stop offset="0%" stopColor="var(--gold)" stopOpacity="0.4" />
               <stop offset="100%" stopColor="var(--gold)" stopOpacity="0" />
             </radialGradient>
           </defs>
@@ -40,7 +40,7 @@ export function WorldMap({ markers }: { markers: MapMarker[] }) {
               key={`glow-${m.city}`}
               cx={(m.x / 100) * 1000}
               cy={(m.y / 100) * 500}
-              r={active === m.city ? 42 : 30}
+              r={active === m.city ? 34 : 22}
               fill="url(#fc-map-glow)"
               className="transition-all duration-500"
             />
@@ -63,7 +63,7 @@ export function WorldMap({ markers }: { markers: MapMarker[] }) {
               className="absolute -translate-x-1/2 -translate-y-1/2 outline-none"
               style={{
                 left: `${m.x}%`,
-                top: `${((m.y / 100) * 500 - 40) / 460 * 100}%`,
+                top: `${(((m.y / 100) * 500 - 70) / 340) * 100}%`,
                 zIndex: open ? 30 : 10,
               }}
             >
