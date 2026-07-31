@@ -390,16 +390,18 @@ select * from (values
 ) v(title, location, price_usd, settlement, sort_order)
 where not exists (select 1 from public.recent_sales);
 
+-- x/y are percentages on an equirectangular world map:
+--   x = (lon + 180) / 360 * 100 ; y = (90 - lat) / 180 * 100
+delete from public.map_markers;
 insert into public.map_markers (city, region, headline, x, y, btc_accepted, sort_order)
-select * from (values
-  ('Los Angeles', 'California', '$84M Cliffside Villa', 14.5::numeric, 40::numeric, true, 1),
-  ('Miami', 'Florida', '$61M Waterfront Estate', 23::numeric, 47::numeric, true, 2),
-  ('New York', 'New York', '$27M Skyline Penthouse', 27::numeric, 36::numeric, true, 3),
-  ('Bahamas', 'Caribbean', 'Private Island', 26::numeric, 50::numeric, true, 4),
-  ('London', 'United Kingdom', '$40M Mayfair Residence', 47::numeric, 30::numeric, false, 5),
-  ('Monaco', 'French Riviera', '$52M Sea-View Penthouse', 50::numeric, 35::numeric, true, 6),
-  ('Dubai', 'United Arab Emirates', '$70M Palm Mansion', 61::numeric, 45::numeric, true, 7),
-  ('Singapore', 'Singapore', '$33M Marina Residence', 74::numeric, 56::numeric, false, 8),
-  ('Tokyo', 'Japan', '$29M Azabu Tower Home', 83::numeric, 38::numeric, true, 9)
-) v(city, region, headline, x, y, btc_accepted, sort_order)
-where not exists (select 1 from public.map_markers);
+values
+  ('Los Angeles', 'California', '$84M Cliffside Villa', 17.16::numeric, 31.08::numeric, true, 1),
+  ('San Francisco', 'California', '$36M Pacific Heights Manor', 16.03::numeric, 28.99::numeric, false, 2),
+  ('Aspen', 'Colorado', '$19M Mountain Chalet', 20.33::numeric, 28.23::numeric, true, 3),
+  ('Miami', 'Florida', '$61M Waterfront Estate', 27.72::numeric, 35.69::numeric, true, 4),
+  ('Palm Beach', 'Florida', '$44M Oceanfront Villa', 27.77::numeric, 35.16::numeric, true, 5),
+  ('New York', 'New York', '$27M Skyline Penthouse', 29.44::numeric, 27.38::numeric, true, 6),
+  ('The Hamptons', 'New York', '$44M Dune Compound', 29.95::numeric, 27.24::numeric, false, 7),
+  ('London', 'Gateway Market', '$40M Mayfair Residence', 49.96::numeric, 21.39::numeric, false, 8),
+  ('Dubai', 'Gateway Market', '$70M Palm Mansion', 59.80::numeric, 35.99::numeric, true, 9);
+
