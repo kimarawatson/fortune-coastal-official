@@ -19,6 +19,8 @@ import villa from "@/assets/asset-villa.jpg";
 import aspen from "@/assets/asset-aspen.jpg";
 import hamptons from "@/assets/asset-hamptons.jpg";
 import concierge from "@/assets/asset-concierge.jpg";
+import membershipBg from "@/assets/membership-luxury.jpg";
+
 import dev6 from "@/assets/dev-6.png";
 import dev7 from "@/assets/dev-7.png";
 import dev8 from "@/assets/dev-8.png";
@@ -360,8 +362,9 @@ function Home() {
 
       {/* ============ MEMBERSHIP ============ */}
       <section id="membership" className="relative py-28 overflow-hidden scroll-mt-24">
-        <img src={concierge} alt="" aria-hidden className="absolute inset-0 h-full w-full object-cover opacity-55" />
-        <div className="absolute inset-0 bg-gradient-to-r from-background/95 via-background/80 to-background/60" />
+        <img src={membershipBg} alt="" aria-hidden loading="lazy" width={1600} height={1008} className="absolute inset-0 h-full w-full object-cover opacity-70" />
+        <div className="absolute inset-0 bg-gradient-to-r from-background/95 via-background/75 to-background/45" />
+
 
         <div className="relative mx-auto max-w-[1700px] px-4 lg:px-8 grid lg:grid-cols-2 gap-10 items-center">
           <div>
