@@ -45,14 +45,17 @@ export const fallbackSales: RecentSale[] = [
   { title: "Beverly Hills Modern Estate", location: "Beverly Hills, California", price_usd: 52000000, settlement: "Private Sale", sort_order: 6 },
 ];
 
+// x/y are percentages on an equirectangular world map:
+//   x = (lon + 180) / 360 * 100 ; y = (90 - lat) / 180 * 100
 export const fallbackMarkers: MapMarker[] = [
-  { city: "Los Angeles", region: "California", headline: "$84M Cliffside Villa", x: 14.5, y: 40, btc_accepted: true, sort_order: 1 },
-  { city: "Miami", region: "Florida", headline: "$61M Waterfront Estate", x: 23, y: 47, btc_accepted: true, sort_order: 2 },
-  { city: "New York", region: "New York", headline: "$27M Skyline Penthouse", x: 27, y: 36, btc_accepted: true, sort_order: 3 },
-  { city: "Bahamas", region: "Caribbean", headline: "Private Island", x: 26, y: 50, btc_accepted: true, sort_order: 4 },
-  { city: "London", region: "United Kingdom", headline: "$40M Mayfair Residence", x: 47, y: 30, btc_accepted: false, sort_order: 5 },
-  { city: "Monaco", region: "French Riviera", headline: "$52M Sea-View Penthouse", x: 50, y: 35, btc_accepted: true, sort_order: 6 },
-  { city: "Dubai", region: "United Arab Emirates", headline: "$70M Palm Mansion", x: 61, y: 45, btc_accepted: true, sort_order: 7 },
-  { city: "Singapore", region: "Singapore", headline: "$33M Marina Residence", x: 74, y: 56, btc_accepted: false, sort_order: 8 },
-  { city: "Tokyo", region: "Japan", headline: "$29M Azabu Tower Home", x: 83, y: 38, btc_accepted: true, sort_order: 9 },
+  { city: "Los Angeles", region: "California", headline: "$84M Cliffside Villa", x: 17.16, y: 31.08, btc_accepted: true, sort_order: 1 },
+  { city: "San Francisco", region: "California", headline: "$36M Pacific Heights Manor", x: 16.03, y: 28.99, btc_accepted: false, sort_order: 2 },
+  { city: "Aspen", region: "Colorado", headline: "$19M Mountain Chalet", x: 20.33, y: 28.23, btc_accepted: true, sort_order: 3 },
+  { city: "Miami", region: "Florida", headline: "$61M Waterfront Estate", x: 27.72, y: 35.69, btc_accepted: true, sort_order: 4 },
+  { city: "Palm Beach", region: "Florida", headline: "$44M Oceanfront Villa", x: 27.77, y: 35.16, btc_accepted: true, sort_order: 5 },
+  { city: "New York", region: "New York", headline: "$27M Skyline Penthouse", x: 29.44, y: 27.38, btc_accepted: true, sort_order: 6 },
+  { city: "The Hamptons", region: "New York", headline: "$44M Dune Compound", x: 29.95, y: 27.24, btc_accepted: false, sort_order: 7 },
+  { city: "London", region: "Gateway Market", headline: "$40M Mayfair Residence", x: 49.96, y: 21.39, btc_accepted: false, sort_order: 8 },
+  { city: "Dubai", region: "Gateway Market", headline: "$70M Palm Mansion", x: 59.8, y: 35.99, btc_accepted: true, sort_order: 9 },
 ];
+
