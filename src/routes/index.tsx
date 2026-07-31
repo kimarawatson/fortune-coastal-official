@@ -192,7 +192,7 @@ function Home() {
               Luxury, <span className="italic gradient-gold-text">Illuminated</span> Worldwide
             </h2>
             <p className="mt-4 text-lg text-foreground/85">
-              Hover a market to reveal what is trading. From Malibu to Monaco, Fortune members transact across 58 countries.
+              Hover a market to reveal what is trading. From Los Angeles to the Hamptons, Fortune members settle across every major U.S. luxury market.
             </p>
           </div>
 
