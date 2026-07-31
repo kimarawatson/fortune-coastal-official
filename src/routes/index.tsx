@@ -18,7 +18,7 @@ import penthouse from "@/assets/asset-penthouse.jpg";
 import villa from "@/assets/asset-villa.jpg";
 import aspen from "@/assets/asset-aspen.jpg";
 import hamptons from "@/assets/asset-hamptons.jpg";
-import concierge from "@/assets/asset-concierge.jpg";
+
 import membershipBg from "@/assets/membership-luxury.jpg";
 
 import dev6 from "@/assets/dev-6.png";
