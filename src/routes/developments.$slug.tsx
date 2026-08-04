@@ -2,7 +2,7 @@ import { createFileRoute, Link, notFound } from "@tanstack/react-router";
 import { useState, useEffect } from "react";
 import { SiteLayout } from "@/components/SiteLayout";
 import { Reveal } from "@/components/Reveal";
-import { ArrowLeft, MapPin, Calendar, Building2, Sparkles, Maximize2, X, ZoomIn, ZoomOut, RotateCcw } from "lucide-react";
+import { ArrowLeft, MapPin, Calendar, Building2, Sparkles, Maximize2, Layers, X, ZoomIn, ZoomOut, RotateCcw } from "lucide-react";
 import miami from "@/assets/dev-6.png";
 import california from "@/assets/dev-7.png";
 import vegas from "@/assets/dev-8.png";
@@ -11,6 +11,10 @@ import miamiDetail from "@/assets/dev-6-detail.jpg";
 import californiaDetail from "@/assets/dev-7-detail.jpg";
 import vegasDetail from "@/assets/dev-8-detail.jpg";
 import macaoDetail from "@/assets/dev-9-detail.jpg";
+import miamiModel from "@/assets/dev-6-model.jpg";
+import californiaModel from "@/assets/dev-7-model.jpg";
+import vegasModel from "@/assets/dev-8-model.jpg";
+import macaoModel from "@/assets/dev-9-model.jpg";
 
 type Zone = { zone: string; level: string; title: string; lines: string[] };
 type Dev = {
@@ -22,6 +26,7 @@ type Dev = {
   completion: string;
   image: string;
   detailImage: string;
+  modelImage: string;
   tagline: string;
   description: string[];
   zones: Zone[];
@@ -95,6 +100,7 @@ const developments: Record<string, Dev> = {
     completion: "2030",
     image: miami,
     detailImage: miamiDetail,
+    modelImage: miamiModel,
     tagline: "Architecture that moves. Living that inspires.",
     description: [
       "Meozzi Star Tower Miami is a sculpted, spiraling landmark designed for a new era of waterfront living. Envisioned as a vertical resort, the tower fuses full-floor private residences with a curated program of hospitality, wellness, and sky-level social clubs.",
@@ -117,6 +123,7 @@ const developments: Record<string, Dev> = {
     completion: "2031",
     image: california,
     detailImage: californiaDetail,
+    modelImage: californiaModel,
     tagline: "Vision born in California. Excellence reaches the stars.",
     description: [
       "Rising along the California coast, Meozzi Star Tower California pairs cinematic ocean views with the disciplined elegance of West Coast modernism. The pointed crown is designed as a signature marker on the Pacific horizon.",
@@ -142,6 +149,7 @@ const developments: Record<string, Dev> = {
     completion: "2032",
     image: vegas,
     detailImage: vegasDetail,
+    modelImage: vegasModel,
     tagline: "Above the city. Beyond extraordinary.",
     description: [
       "A visionary icon in the entertainment capital of the world. Meozzi Star Tower Las Vegas is designed as a private counterpoint to the city — a residential sanctuary elevated far above the entertainment core.",
@@ -167,6 +175,7 @@ const developments: Record<string, Dev> = {
     completion: "2033",
     image: macao,
     detailImage: macaoDetail,
+    modelImage: macaoModel,
     tagline: "Where vision meets legacy. A new star rises over Macao.",
     description: [
       "Set on the Macao waterfront, Meozzi Star Tower Macao anchors a new luxury district that honors the city's heritage while projecting a distinctly modern silhouette across the harbor.",
@@ -210,13 +219,14 @@ export const Route = createFileRoute("/developments/$slug")({
 
 function DevelopmentDetail() {
   const { dev } = Route.useLoaderData();
-  const [viewerOpen, setViewerOpen] = useState(false);
+  const [viewerMode, setViewerMode] = useState<null | "render" | "model">(null);
+  const viewerOpen = viewerMode !== null;
   const [zoom, setZoom] = useState(1);
 
   useEffect(() => {
     if (!viewerOpen) return;
     const onKey = (e: KeyboardEvent) => {
-      if (e.key === "Escape") setViewerOpen(false);
+      if (e.key === "Escape") setViewerMode(null);
       if (e.key === "+" || e.key === "=") setZoom((z) => Math.min(z + 0.25, 5));
       if (e.key === "-") setZoom((z) => Math.max(z - 0.25, 0.5));
       if (e.key === "0") setZoom(1);
@@ -248,7 +258,7 @@ function DevelopmentDetail() {
       <section className="relative -mt-24 h-[70vh] min-h-[520px] w-full overflow-hidden flex items-end">
         <button
           type="button"
-          onClick={() => setViewerOpen(true)}
+          onClick={() => setViewerMode("render")}
           className="absolute inset-0 h-full w-full group cursor-zoom-in"
           aria-label={`View full image of ${dev.name} ${dev.city}`}
         >
@@ -293,11 +303,19 @@ function DevelopmentDetail() {
           <Reveal delay={3}>
             <button
               type="button"
-              onClick={() => setViewerOpen(true)}
+              onClick={() => setViewerMode("render")}
               className="pointer-events-auto mt-6 inline-flex items-center gap-3 bg-gradient-to-r from-gold to-gold-soft text-primary-foreground px-6 py-3 text-xs tracking-luxury uppercase hover:opacity-90 transition-opacity"
             >
               <Maximize2 size={14} strokeWidth={1.75} />
               View Full Rendering
+            </button>
+            <button
+              type="button"
+              onClick={() => setViewerMode("model")}
+              className="pointer-events-auto mt-6 ml-3 inline-flex items-center gap-3 border border-gold/40 text-foreground px-6 py-3 text-xs tracking-luxury uppercase hover:bg-gold/10 transition-colors"
+            >
+              <Layers size={14} strokeWidth={1.75} />
+              View Model Scale
             </button>
           </Reveal>
         </div>
@@ -396,13 +414,13 @@ function DevelopmentDetail() {
       {viewerOpen && (
         <div
           className="fixed inset-0 z-[100] bg-black/95 backdrop-blur-sm flex items-center justify-center p-4 animate-in fade-in duration-300 overflow-hidden"
-          onClick={() => setViewerOpen(false)}
+          onClick={() => setViewerMode(null)}
           role="dialog"
           aria-modal="true"
           aria-label={`${dev.name} ${dev.city} full rendering`}
         >
           <div className="absolute top-6 left-6 z-10 text-[11px] tracking-[0.35em] uppercase text-gold-soft">
-            {dev.name} — {dev.city}
+            {dev.name} — {dev.city}{viewerMode === "model" ? " — Scale Model" : ""}
           </div>
 
           {/* Zoom controls */}
@@ -441,7 +459,7 @@ function DevelopmentDetail() {
             </div>
             <button
               type="button"
-              onClick={() => setViewerOpen(false)}
+              onClick={() => setViewerMode(null)}
               className="inline-flex items-center gap-2 text-[11px] tracking-luxury uppercase text-gold hover:text-gold-soft border border-gold/30 rounded-full px-4 py-2 bg-black/60 backdrop-blur-sm"
               aria-label="Close viewer"
             >
