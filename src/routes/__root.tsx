@@ -10,7 +10,6 @@ import {
 import { useEffect, type ReactNode } from "react";
 
 import appCss from "../styles.css?url";
-import { reportLovableError } from "../lib/lovable-error-reporting";
 
 function NotFoundComponent() {
   return (
@@ -37,9 +36,7 @@ function NotFoundComponent() {
 function ErrorComponent({ error, reset }: { error: Error; reset: () => void }) {
   console.error(error);
   const router = useRouter();
-  useEffect(() => {
-    reportLovableError(error, { boundary: "tanstack_root_error_component" });
-  }, [error]);
+
 
   return (
     <div className="flex min-h-screen items-center justify-center bg-background px-4">
@@ -86,8 +83,6 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { name: "twitter:card", content: "summary_large_image" },
       { name: "twitter:title", content: "Fortune Coastal Quantum Luxury - Luxury Asset Marketplace" },
       { name: "twitter:description", content: "Discover, buy, and sell luxury real estate, vehicles, yachts, jets, and exclusive experiences. Settled in USD or Bitcoin." },
-      { property: "og:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/15575c46-be54-434e-867a-bd4162f4aa0b/id-preview-c23b9fcb--016dd9c8-d059-47c9-80c4-d2002767381c.lovable.app-1780623713678.png" },
-      { name: "twitter:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/15575c46-be54-434e-867a-bd4162f4aa0b/id-preview-c23b9fcb--016dd9c8-d059-47c9-80c4-d2002767381c.lovable.app-1780623713678.png" },
     ],
     links: [
       { rel: "stylesheet", href: appCss },
