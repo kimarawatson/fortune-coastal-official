@@ -8,6 +8,10 @@ import miami from "@/assets/dev-6.png";
 import california from "@/assets/dev-7.png";
 import vegas from "@/assets/dev-8.png";
 import macao from "@/assets/dev-9.png";
+import miamiModel from "@/assets/dev-6-model.jpg";
+import californiaModel from "@/assets/dev-7-model.jpg";
+import vegasModel from "@/assets/dev-8-model.jpg";
+import macaoModel from "@/assets/dev-9-model.jpg";
 import p2 from "@/assets/partner-2.png";
 import p3 from "@/assets/partner-3.png";
 import p4 from "@/assets/partner-4.png";
@@ -48,13 +52,14 @@ type Dev = {
   status: string;
   completion: string;
   image: string;
+  modelImage: string;
 };
 
 const developments: Dev[] = [
-  { slug: "miami", name: "Fortune Coastal Tower", city: "Miami", region: "Florida, USA", status: "Pre-Development", completion: "2030", image: miami },
-  { slug: "california", name: "Fortune Coastal Tower", city: "Los Angeles", region: "California, USA", status: "Pre-Development", completion: "2031", image: california },
-  { slug: "vegas", name: "Fortune Coastal Tower", city: "Las Vegas", region: "Nevada, USA", status: "Pre-Development", completion: "2032", image: vegas },
-  { slug: "macao", name: "Fortune Coastal Tower", city: "Macao", region: "Macao, China", status: "Pre-Development", completion: "2033", image: macao },
+  { slug: "miami", name: "Fortune Coastal Tower", city: "Miami", region: "Florida, USA", status: "Pre-Development", completion: "2030", image: miami, modelImage: miamiModel },
+  { slug: "california", name: "Fortune Coastal Tower", city: "Los Angeles", region: "California, USA", status: "Pre-Development", completion: "2031", image: california, modelImage: californiaModel },
+  { slug: "vegas", name: "Fortune Coastal Tower", city: "Las Vegas", region: "Nevada, USA", status: "Pre-Development", completion: "2032", image: vegas, modelImage: vegasModel },
+  { slug: "macao", name: "Fortune Coastal Tower", city: "Macao", region: "Macao, China", status: "Pre-Development", completion: "2033", image: macao, modelImage: macaoModel },
 ];
 
 const partnerLogos = [
@@ -155,7 +160,13 @@ function Developments() {
                     src={d.image}
                     alt={`${d.name} — ${d.city}`}
                     loading="lazy"
-                    className="h-full w-full object-cover transition-transform duration-[1.6s] group-hover:scale-105"
+                    className="h-full w-full object-cover transition-all duration-[1.6s] group-hover:scale-105 group-hover:opacity-0"
+                  />
+                  <img
+                    src={d.modelImage}
+                    alt={`${d.name} — ${d.city} scale model`}
+                    loading="lazy"
+                    className="absolute inset-0 h-full w-full object-cover opacity-0 scale-105 transition-all duration-700 group-hover:opacity-100 group-hover:scale-100"
                   />
                   <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-transparent to-black/70" />
                   <div className="absolute top-5 left-5">
