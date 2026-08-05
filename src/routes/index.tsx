@@ -180,27 +180,6 @@ function Home() {
 
       <div className="section-edge" />
 
-      {/* ============ FORTUNE WORLD MAP ============ */}
-      <section className="relative py-24 overflow-hidden bg-background">
-        <div className="absolute inset-0" style={{ background: "radial-gradient(70% 60% at 50% 40%, var(--gold) 0%, transparent 70%)", opacity: 0.08 }} />
-        <div className="relative mx-auto max-w-[1700px] px-4 lg:px-8">
-          <div className="max-w-2xl">
-            <div className="inline-flex items-center gap-2 text-[10px] tracking-luxury uppercase text-gold">
-              <Globe size={12} /> Fortune World
-            </div>
-            <h2 className="mt-6 font-serif text-4xl md:text-5xl text-foreground">
-              Luxury, <span className="italic gradient-gold-text">Illuminated</span> Worldwide
-            </h2>
-            <p className="mt-4 text-lg text-foreground/85">
-              Hover a market to reveal what is trading. From Los Angeles to the Hamptons, Fortune members settle across every major U.S. luxury market.
-            </p>
-          </div>
-
-          <div className="mt-10">
-            <WorldMap markers={markers} />
-          </div>
-        </div>
-      </section>
 
       {/* ============ LIVE MARKET INTELLIGENCE (light glass band) ============ */}
       <section className="relative py-24 overflow-hidden">
@@ -398,19 +377,6 @@ function Home() {
         </div>
       </section>
 
-      {/* ============ CLOSING ============ */}
-      <section className="relative py-20 overflow-hidden">
-        <img src={aspen} alt="" aria-hidden className="absolute inset-0 h-full w-full object-cover opacity-40" />
-        <div className="absolute inset-0 bg-background/85" />
-        <div className="relative mx-auto max-w-3xl px-4 text-center">
-          <p className="font-serif text-3xl md:text-4xl text-foreground italic">
-            "Where <span className="gradient-gold-text">Luxury</span> Meets the Digital Economy."
-          </p>
-          <Link to="/marketplace" className="mt-8 inline-flex items-center gap-3 bg-gradient-to-r from-gold to-gold-soft text-primary-foreground px-9 py-4 text-xs tracking-luxury uppercase font-semibold hover:opacity-95 transition-all gold-shadow">
-            Enter the Marketplace <ArrowRight size={15} />
-          </Link>
-        </div>
-      </section>
     </SiteLayout>
   );
 }
