@@ -7,7 +7,9 @@ import { listPublicListings } from "@/lib/listings.functions";
 import marketHero from "@/assets/asset-penthouse.jpg";
 import { supabase } from "@/integrations/supabase/client";
 import { formatBtc, formatUsd } from "@/lib/format";
-import { BadgeCheck, Bitcoin, MapPin } from "lucide-react";
+import { BadgeCheck, Bitcoin, Globe, MapPin } from "lucide-react";
+import { WorldMap } from "@/components/WorldMap";
+import { fallbackMarkers } from "@/data/home-content";
 
 export const Route = createFileRoute("/marketplace")({
   head: () => ({
@@ -84,6 +86,28 @@ function Marketplace() {
             {(q.data ?? []).map((l: any) => <ListingCard key={l.id} l={l} />)}
           </div>
         )}
+      </section>
+
+      {/* ============ FORTUNE WORLD MAP ============ */}
+      <section className="relative py-24 overflow-hidden bg-background">
+        <div className="absolute inset-0" style={{ background: "radial-gradient(70% 60% at 50% 40%, var(--gold) 0%, transparent 70%)", opacity: 0.08 }} />
+        <div className="relative mx-auto max-w-[1700px] px-4 lg:px-8">
+          <div className="max-w-2xl">
+            <div className="inline-flex items-center gap-2 text-[10px] tracking-luxury uppercase text-gold">
+              <Globe size={12} /> Fortune World
+            </div>
+            <h2 className="mt-6 font-serif text-4xl md:text-5xl text-foreground">
+              Luxury, <span className="italic gradient-gold-text">Illuminated</span> Worldwide
+            </h2>
+            <p className="mt-4 text-lg text-foreground/85">
+              Hover a market to reveal what is trading. From Los Angeles to the Hamptons, Fortune members settle across every major U.S. luxury market.
+            </p>
+          </div>
+
+          <div className="mt-10">
+            <WorldMap markers={fallbackMarkers} />
+          </div>
+        </div>
       </section>
     </SiteLayout>
   );

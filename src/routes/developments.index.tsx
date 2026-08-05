@@ -56,10 +56,10 @@ type Dev = {
 };
 
 const developments: Dev[] = [
-  { slug: "miami", name: "Fortune Coastal Tower", city: "Miami", region: "Florida, USA", status: "Pre-Development", completion: "2030", image: miami, modelImage: miamiModel },
-  { slug: "california", name: "Fortune Coastal Tower", city: "Los Angeles", region: "California, USA", status: "Pre-Development", completion: "2031", image: california, modelImage: californiaModel },
-  { slug: "vegas", name: "Fortune Coastal Tower", city: "Las Vegas", region: "Nevada, USA", status: "Pre-Development", completion: "2032", image: vegas, modelImage: vegasModel },
-  { slug: "macao", name: "Fortune Coastal Tower", city: "Macao", region: "Macao, China", status: "Pre-Development", completion: "2033", image: macao, modelImage: macaoModel },
+  { slug: "miami", name: "Meozzi Star Tower", city: "Miami", region: "Florida, USA", status: "Pre-Development", completion: "2030", image: miami, modelImage: miamiModel },
+  { slug: "california", name: "Meozzi Star Tower", city: "Los Angeles", region: "California, USA", status: "Pre-Development", completion: "2031", image: california, modelImage: californiaModel },
+  { slug: "vegas", name: "Meozzi Star Tower", city: "Las Vegas", region: "Nevada, USA", status: "Pre-Development", completion: "2032", image: vegas, modelImage: vegasModel },
+  { slug: "macao", name: "Meozzi Star Tower", city: "Macao", region: "Macao, China", status: "Pre-Development", completion: "2033", image: macao, modelImage: macaoModel },
 ];
 
 const partnerLogos = [
