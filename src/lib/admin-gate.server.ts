@@ -5,10 +5,14 @@ import { createHash, timingSafeEqual } from "node:crypto";
 export type AdminSession = { unlocked?: boolean };
 
 export function sessionConfig() {
-  const password = process.env["SESSION_SECRET"];
-  if (!password || password.length < 32) {
-    throw new Error("SESSION_SECRET env var missing or too short (min 32 chars).");
+  const configuredSessionSecret = process.env["SESSION_SECRET"];
+  const adminPassword = process.env["ADMIN_PASSWORD"] ?? process.env["ADIMIN_PASSWORD"];
+  if (!configuredSessionSecret && !adminPassword) {
+    throw new Error("ADMIN_PASSWORD env var is not configured.");
   }
+  const password = configuredSessionSecret && configuredSessionSecret.length >= 32
+    ? configuredSessionSecret
+    : createHash("sha256").update(adminPassword ?? configuredSessionSecret ?? "", "utf8").digest("hex");
   const request = getRequest();
   const forwardedProtocol = request.headers.get("x-forwarded-proto")?.split(",")[0]?.trim();
   const secure = forwardedProtocol ? forwardedProtocol === "https" : new URL(request.url).protocol === "https:";
