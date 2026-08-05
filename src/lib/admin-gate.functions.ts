@@ -14,7 +14,7 @@ export const requireAdminUnlocked = createMiddleware({ type: "function" }).serve
 export const unlockAdmin = createServerFn({ method: "POST" })
   .inputValidator((d: unknown) => z.object({ password: z.string().min(1).max(200) }).parse(d))
   .handler(async ({ data }) => {
-    const expected = process.env.ADMIN_PASSWORD;
+    const expected = process.env["ADMIN_PASSWORD"] ?? process.env["ADIMIN_PASSWORD"];
     if (!expected) throw new Error("ADMIN_PASSWORD env var is not configured.");
     const { passwordMatches, getAdminSession } = await import("@/lib/admin-gate.server");
     if (!passwordMatches(data.password, expected)) return { ok: false as const };
