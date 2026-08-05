@@ -2,13 +2,12 @@ import { useQuery } from "@tanstack/react-query";
 import { createFileRoute, Link } from "@tanstack/react-router";
 import {
   ArrowRight, Bitcoin, ShieldCheck, Zap, LineChart, Lock, Wallet,
-  Globe, FileCheck, Check, TrendingUp, TrendingDown,
+  FileCheck, Check, TrendingUp, TrendingDown,
   Gem, Crown, Diamond, Award, Building2,
 } from "lucide-react";
 import { SiteLayout } from "@/components/SiteLayout";
 import { BtcTicker } from "@/components/BtcTicker";
 import { Reveal } from "@/components/Reveal";
-import { WorldMap } from "@/components/WorldMap";
 import { MembershipForm } from "@/components/MembershipForm";
 import { getHomeIntel } from "@/lib/home.functions";
 import { fallbackMarkers, fallbackMetrics, fallbackSales } from "@/data/home-content";
@@ -64,7 +63,7 @@ function Home() {
     staleTime: 5 * 60_000,
   });
 
-  const { metrics, sales, markers } = intel.data;
+  const { metrics, sales } = intel.data;
   const ticker = [...sales, ...sales];
 
   return (
