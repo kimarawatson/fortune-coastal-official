@@ -18,6 +18,7 @@ import villa from "@/assets/asset-villa.jpg";
 import aspen from "@/assets/asset-aspen.jpg";
 import hamptons from "@/assets/asset-hamptons.jpg";
 import luxuryCollectionBg from "@/assets/luxury-collection-bg.png";
+import vaultBg from "@/assets/vault-coastal-night.png";
 
 import membershipBg from "@/assets/membership-luxury.jpg";
 
@@ -181,10 +182,9 @@ function Home() {
       <div className="section-edge" />
 
 
-      {/* ============ LIVE MARKET INTELLIGENCE (light glass band) ============ */}
-      <section className="relative py-24 overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-b from-foreground/[0.06] via-foreground/[0.10] to-foreground/[0.04]" />
-        <div className="absolute inset-0 backdrop-blur-2xl" />
+      {/* ============ LIVE MARKET INTELLIGENCE ============ */}
+      <section className="relative py-24 overflow-hidden bg-background">
+        <div className="absolute inset-0" style={{ background: "radial-gradient(70% 60% at 50% 0%, var(--gold) 0%, transparent 70%)", opacity: 0.07 }} />
         <div className="relative mx-auto max-w-[1700px] px-4 lg:px-8">
           <div className="flex items-end justify-between gap-6 flex-wrap">
             <div>
@@ -200,12 +200,12 @@ function Home() {
             </Link>
           </div>
 
-          <div className="mt-12 grid gap-px bg-gold/10 sm:grid-cols-2 lg:grid-cols-3">
+          <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
             {metrics.map((m, i) => {
               const up = m.trend !== "down";
               const Trend = up ? TrendingUp : TrendingDown;
               return (
-                <Reveal key={m.label} delay={((i % 3) + 1) as 1 | 2 | 3} className="bg-background/70 backdrop-blur-md p-8">
+                <Reveal key={m.label} delay={((i % 3) + 1) as 1 | 2 | 3} className="rounded-xl bg-charcoal/40 backdrop-blur-md p-8 transition-colors hover:bg-charcoal/60">
                   <div className="text-[10px] tracking-luxury uppercase text-muted-foreground">{m.label}</div>
                   <div className="mt-4 flex items-baseline gap-4">
                     <div className="font-serif text-4xl gradient-gold-text leading-none">{m.value}</div>
@@ -226,8 +226,8 @@ function Home() {
 
       {/* ============ FORTUNE VAULT ============ */}
       <section className="relative overflow-hidden py-24">
-        <img src={villa} alt="" aria-hidden className="absolute inset-0 h-full w-full object-cover opacity-60" />
-        <div className="absolute inset-0 bg-gradient-to-b from-background/90 via-background/70 to-background/95" />
+        <img src={vaultBg} alt="" aria-hidden className="absolute inset-0 h-full w-full object-cover opacity-80" />
+        <div className="absolute inset-0 bg-gradient-to-b from-background/85 via-background/55 to-background/90" />
         <div className="absolute inset-0" style={{ background: "radial-gradient(60% 60% at 80% 50%, var(--gold) 0%, transparent 70%)", opacity: 0.12 }} />
 
         <div className="relative mx-auto max-w-[1700px] px-4 lg:px-8">
