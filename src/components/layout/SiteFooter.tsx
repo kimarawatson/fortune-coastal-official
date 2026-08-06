@@ -1,9 +1,18 @@
 import { Link } from "@tanstack/react-router";
+import emblem from "@/assets/emblem-horse.png";
 
 export function SiteFooter() {
   return (
     <footer className="border-t border-border/40">
-      <div className="mx-auto max-w-[1700px] px-4 lg:px-8 py-20 grid gap-12 md:grid-cols-4">
+      <div className="mx-auto max-w-[1700px] px-4 lg:px-8 py-20 grid gap-12 md:grid-cols-5">
+        <div className="flex items-start justify-center md:justify-start">
+          <img
+            src={emblem}
+            alt="Fortune Coastal chrome stallion emblem"
+            loading="lazy"
+            className="w-40 md:w-48 h-auto opacity-90 drop-shadow-[0_0_28px_color-mix(in_oklab,var(--gold)_25%,transparent)]"
+          />
+        </div>
         <div className="md:col-span-2 max-w-md">
           <div className="font-serif text-2xl text-foreground">Fortune Coastal Group</div>
           <div className="text-[10px] tracking-luxury text-gold uppercase mt-1">A Private Wealth Marketplace</div>
