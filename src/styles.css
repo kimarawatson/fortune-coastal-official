@@ -93,6 +93,7 @@
   }
 
   h1, h2, h3, h4 { font-family: var(--font-serif); font-weight: 400; letter-spacing: 0.005em; }
+  button, input, select, textarea { font-family: var(--font-sans); }
 }
 
 @layer utilities {
