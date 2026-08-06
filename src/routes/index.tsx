@@ -146,8 +146,8 @@ function Home() {
 
       {/* ============ FEATURED ESTATES ============ */}
       <section className="relative py-28 overflow-hidden">
-        <img src={hamptons} alt="" aria-hidden className="absolute inset-0 h-full w-full object-cover opacity-60" />
-        <div className="absolute inset-0 bg-gradient-to-b from-background/90 via-background/70 to-background/95" />
+        <img src={luxuryCollectionBg} alt="" aria-hidden className="absolute inset-0 h-full w-full object-cover opacity-70" />
+        <div className="absolute inset-0 bg-gradient-to-b from-background/80 via-background/50 to-background/90" />
 
         <div className="relative mx-auto max-w-[1700px] px-4 lg:px-8">
           <div className="text-center">
