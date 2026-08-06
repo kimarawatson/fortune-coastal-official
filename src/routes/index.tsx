@@ -200,12 +200,12 @@ function Home() {
             </Link>
           </div>
 
-          <div className="mt-12 grid gap-px bg-gold/10 sm:grid-cols-2 lg:grid-cols-3">
+          <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
             {metrics.map((m, i) => {
               const up = m.trend !== "down";
               const Trend = up ? TrendingUp : TrendingDown;
               return (
-                <Reveal key={m.label} delay={((i % 3) + 1) as 1 | 2 | 3} className="bg-background/70 backdrop-blur-md p-8">
+                <Reveal key={m.label} delay={((i % 3) + 1) as 1 | 2 | 3} className="rounded-xl bg-charcoal/40 backdrop-blur-md p-8 transition-colors hover:bg-charcoal/60">
                   <div className="text-[10px] tracking-luxury uppercase text-muted-foreground">{m.label}</div>
                   <div className="mt-4 flex items-baseline gap-4">
                     <div className="font-serif text-4xl gradient-gold-text leading-none">{m.value}</div>
