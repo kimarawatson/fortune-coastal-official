@@ -227,8 +227,8 @@ function Home() {
 
       {/* ============ FORTUNE VAULT ============ */}
       <section className="relative overflow-hidden py-24">
-        <img src={villa} alt="" aria-hidden className="absolute inset-0 h-full w-full object-cover opacity-60" />
-        <div className="absolute inset-0 bg-gradient-to-b from-background/90 via-background/70 to-background/95" />
+        <img src={vaultBg} alt="" aria-hidden className="absolute inset-0 h-full w-full object-cover opacity-80" />
+        <div className="absolute inset-0 bg-gradient-to-b from-background/85 via-background/55 to-background/90" />
         <div className="absolute inset-0" style={{ background: "radial-gradient(60% 60% at 80% 50%, var(--gold) 0%, transparent 70%)", opacity: 0.12 }} />
 
         <div className="relative mx-auto max-w-[1700px] px-4 lg:px-8">
