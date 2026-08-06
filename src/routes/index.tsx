@@ -17,6 +17,7 @@ import penthouse from "@/assets/asset-penthouse.jpg";
 import villa from "@/assets/asset-villa.jpg";
 import aspen from "@/assets/asset-aspen.jpg";
 import hamptons from "@/assets/asset-hamptons.jpg";
+import luxuryCollectionBg from "@/assets/luxury-collection-bg.png";
 
 import membershipBg from "@/assets/membership-luxury.jpg";
 
