@@ -182,10 +182,9 @@ function Home() {
       <div className="section-edge" />
 
 
-      {/* ============ LIVE MARKET INTELLIGENCE (light glass band) ============ */}
-      <section className="relative py-24 overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-b from-foreground/[0.06] via-foreground/[0.10] to-foreground/[0.04]" />
-        <div className="absolute inset-0 backdrop-blur-2xl" />
+      {/* ============ LIVE MARKET INTELLIGENCE ============ */}
+      <section className="relative py-24 overflow-hidden bg-background">
+        <div className="absolute inset-0" style={{ background: "radial-gradient(70% 60% at 50% 0%, var(--gold) 0%, transparent 70%)", opacity: 0.07 }} />
         <div className="relative mx-auto max-w-[1700px] px-4 lg:px-8">
           <div className="flex items-end justify-between gap-6 flex-wrap">
             <div>
