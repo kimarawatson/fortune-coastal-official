@@ -79,13 +79,13 @@ function Home() {
         <div className="absolute inset-0 bg-gradient-to-b from-background/40 via-transparent to-background/90" />
         <div className="absolute -top-40 -right-40 h-[600px] w-[600px] rounded-full" style={{ background: "radial-gradient(circle, var(--gold) 0%, transparent 70%)", opacity: 0.18 }} />
         <div className="relative mx-auto max-w-[1700px] px-4 lg:px-8 w-full pt-32 pb-24">
-          <div className="max-w-2xl">
+          <div className="max-w-3xl">
             <div className="inline-flex items-center gap-2 text-[10px] tracking-luxury uppercase text-gold">
               <Gem size={12} /> <span className="h-px w-8 bg-gold/60" /> Digital Private Wealth Platform
             </div>
             <h1 className="mt-8 font-serif text-5xl md:text-6xl lg:text-7xl text-foreground leading-[1.05]">
-              The Fortune Way of <br />
-              <span className="gradient-gold-text italic">Owning, Growing</span> Luxury Assets
+              The Quantum Way of <br />
+              <span className="gradient-gold-text italic">Buying, Selling Luxury</span> Real Estate
             </h1>
             <p className="mt-8 max-w-xl text-base md:text-lg text-foreground/85 leading-relaxed">
               Acquire, finance and manage estates, yachts, jets and Bitcoin holdings worldwide — inside one intelligent private platform.
