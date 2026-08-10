@@ -83,12 +83,12 @@ function Home() {
             <div className="inline-flex items-center gap-2 text-[10px] tracking-luxury uppercase text-gold">
               <Gem size={12} /> <span className="h-px w-8 bg-gold/60" /> Digital Private Wealth Platform
             </div>
-            <h1 className="mt-8 font-serif text-5xl md:text-6xl lg:text-7xl text-foreground leading-[1.05]">
+            <h1 className="mt-8 font-serif text-5xl  font-bold md:text-6xl lg:text-7xl text-foreground leading-[1.05]">
               The Quantum Way of <br />
-              <span className="gradient-gold-text italic">Buying, Selling Luxury</span> Real Estate
+              <span className="gradient-gold-text">Buying, Selling Luxury</span> Real Estate
             </h1>
             <p className="mt-8 max-w-xl text-base md:text-lg text-foreground/85 leading-relaxed">
-              Acquire, finance and manage estates, yachts, jets and Bitcoin holdings worldwide — inside one intelligent private platform.
+              Acquire, finance and mange luxury estates, yachts, jets and Bitcoin holdings worldwide. Premium properties globally inside one intelligent private platform - The Fortune Way
             </p>
 
             <div className="mt-16 max-w-3xl flex flex-wrap items-end gap-x-14 gap-y-10">
@@ -156,8 +156,8 @@ function Home() {
             <div className="inline-flex items-center gap-2 text-[10px] tracking-luxury uppercase text-gold">
               <Building2 size={12} /> Featured Estates
             </div>
-            <h2 className="mt-6 font-serif text-4xl md:text-5xl text-foreground">
-              Fortune <span className="italic gradient-gold-text">Luxury Collection</span>
+            <h2 className="mt-6 font-serif text-4xl md:text-5xl font-bold text-foreground">
+              Fortune <span className="gradient-gold-text font-bold">Luxury Collection</span>
             </h2>
             <p className="mt-4 text-lg text-foreground/85 max-w-2xl mx-auto">
               A curated selection of the world's most prestigious estates — settled in USD or Bitcoin with private-banking discretion.
@@ -194,8 +194,8 @@ function Home() {
               <div className="inline-flex items-center gap-2 text-[10px] tracking-luxury uppercase text-gold">
                 <LineChart size={12} /> Live Market Intelligence
               </div>
-              <h2 className="mt-5 font-serif text-4xl md:text-5xl text-foreground">
-                The <span className="italic gradient-gold-text">Fortune Index</span>
+              <h2 className="mt-5 font-serif text-4xl  font-bold md:text-5xl text-foreground">
+                The <span className="gradient-gold-text">Fortune Index</span>
               </h2>
             </div>
             <Link to="/marketplace" className="text-xs tracking-luxury uppercase text-gold border-b border-gold/50 pb-1 hover:gap-4 transition-all">
@@ -238,8 +238,8 @@ function Home() {
             <div className="inline-flex items-center gap-2 text-[10px] tracking-luxury uppercase text-gold">
               <Bitcoin size={12} /> Fortune Vault
             </div>
-            <h2 className="mt-6 font-serif text-4xl md:text-5xl text-foreground max-w-3xl mx-auto leading-tight">
-              Where <span className="italic gradient-gold-text">Digital Wealth</span> Meets Physical Luxury
+            <h2 className="mt-6 font-serif text-4xl md:text-5xl font-bold text-foreground mx-auto leading-tight">
+              Where <span className="gradient-gold-text">Digital Wealth</span> Meets Physical Luxury
             </h2>
             <p className="mt-5 text-base text-foreground/80 max-w-2xl mx-auto">
               Hold Bitcoin, acquire trophy assets, and track portfolio performance with institutional-grade custody — in one place.
@@ -311,8 +311,8 @@ function Home() {
               <div className="inline-flex items-center gap-2 text-[10px] tracking-luxury uppercase text-gold">
                 <Building2 size={12} /> Meozzi Star Developments
               </div>
-              <h2 className="mt-5 font-serif text-4xl md:text-5xl text-foreground">
-                Featured <span className="italic gradient-gold-text">Developments</span>
+              <h2 className="mt-5 font-serif text-4xl md:text-5xl text-foreground font-bold">
+                Featured <span className="gradient-gold-text">Developments</span>
               </h2>
             </div>
             <Link to="/developments" className="text-xs tracking-luxury uppercase text-gold border-b border-gold/50 pb-1">
@@ -353,8 +353,8 @@ function Home() {
             <div className="inline-flex items-center gap-2 text-[10px] tracking-luxury uppercase text-gold">
               <Crown size={12} /> By Invitation
             </div>
-            <h2 className="mt-6 font-serif text-4xl md:text-5xl text-foreground">
-              Become a <span className="italic gradient-gold-text">Fortune Member</span>
+            <h2 className="mt-6 font-serif text-4xl font-bold md:text-5xl text-foreground">
+              Become a <span className="gradient-gold-text">Fortune Member</span>
             </h2>
             <p className="mt-4 text-lg text-foreground/85 max-w-xl">
               Not everyone gets access. Membership opens the private side of the platform.
