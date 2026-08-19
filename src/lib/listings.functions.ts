@@ -77,9 +77,11 @@ export const getPublicListing = createServerFn({ method: "GET" })
     }
     const { data: images } = await supabasePublic
       .from("listing_images").select("image_url, sort_order").eq("listing_id", data.id).order("sort_order");
-    const { data: profile } = await supabasePublic
-      .from("profiles").select("full_name, country").eq("id", listing.seller_id).maybeSingle();
-    return { listing, images: images ?? [], sellerName: profile?.full_name ?? "Verified Seller" };
+    const { data: profile } = listing.seller_id
+      ? await supabasePublic
+          .from("profiles").select("full_name, country").eq("id", listing.seller_id).maybeSingle()
+      : { data: null };
+    return { listing, images: images ?? [], sellerName: profile?.full_name ?? "FCG Verified Seller" };
   });
 
 export const getHomepage = createServerFn({ method: "GET" }).handler(async () => {
@@ -234,6 +236,7 @@ export const submitInquiry = createServerFn({ method: "POST" })
     const db = await getServiceRoleDb();
     const { data: listing } = await db.from("listings").select("seller_id").eq("id", data.listing_id).maybeSingle();
     if (!listing) throw new Error("Listing not found");
+    if (!listing.seller_id) throw new Error("This listing has no seller contact yet.");
     const { error } = await context.supabase.from("inquiries").insert({
       listing_id: data.listing_id,
       buyer_id: context.userId,
