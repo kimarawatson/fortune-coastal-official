@@ -236,6 +236,7 @@ export const submitInquiry = createServerFn({ method: "POST" })
     const db = await getServiceRoleDb();
     const { data: listing } = await db.from("listings").select("seller_id").eq("id", data.listing_id).maybeSingle();
     if (!listing) throw new Error("Listing not found");
+    if (!listing.seller_id) throw new Error("This listing has no seller contact yet.");
     const { error } = await context.supabase.from("inquiries").insert({
       listing_id: data.listing_id,
       buyer_id: context.userId,
