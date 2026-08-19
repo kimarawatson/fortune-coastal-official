@@ -160,12 +160,14 @@ export type Database = {
           cover_image: string | null
           created_at: string
           description: string | null
+          external_id: string | null
           featured: boolean
           id: string
           location: string | null
           price_btc: number | null
           price_usd: number
-          seller_id: string
+          seller_id: string | null
+          source_url: string | null
           status: Database["public"]["Enums"]["listing_status"]
           subtitle: string | null
           title: string
@@ -181,12 +183,14 @@ export type Database = {
           cover_image?: string | null
           created_at?: string
           description?: string | null
+          external_id?: string | null
           featured?: boolean
           id?: string
           location?: string | null
           price_btc?: number | null
           price_usd: number
-          seller_id: string
+          seller_id?: string | null
+          source_url?: string | null
           status?: Database["public"]["Enums"]["listing_status"]
           subtitle?: string | null
           title: string
@@ -202,12 +206,14 @@ export type Database = {
           cover_image?: string | null
           created_at?: string
           description?: string | null
+          external_id?: string | null
           featured?: boolean
           id?: string
           location?: string | null
           price_btc?: number | null
           price_usd?: number
-          seller_id?: string
+          seller_id?: string | null
+          source_url?: string | null
           status?: Database["public"]["Enums"]["listing_status"]
           subtitle?: string | null
           title?: string
