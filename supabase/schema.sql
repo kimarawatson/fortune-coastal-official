@@ -75,7 +75,7 @@ alter table public.categories enable row level security;
 -- ---------- listings --------------------------------------------------------
 create table if not exists public.listings (
   id uuid primary key default gen_random_uuid(),
-  seller_id uuid not null references auth.users(id) on delete cascade,
+  seller_id uuid references auth.users(id) on delete cascade,
   category_slug text not null,
   title text not null,
   subtitle text,
