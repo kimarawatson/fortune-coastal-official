@@ -91,9 +91,16 @@ create table if not exists public.listings (
   featured boolean not null default false,
   verified boolean not null default false,
   admin_notes text,
+  source_url text,
+  external_id text,
   created_at timestamptz not null default now(),
   updated_at timestamptz not null default now()
 );
+-- upgrade path for databases created before these columns existed
+alter table public.listings add column if not exists source_url text;
+alter table public.listings add column if not exists external_id text;
+alter table public.listings alter column seller_id drop not null;
+create unique index if not exists listings_external_id_key on public.listings (external_id) where external_id is not null;
 grant select on public.listings to anon;
 grant select, insert, update, delete on public.listings to authenticated;
 grant all on public.listings to service_role;
