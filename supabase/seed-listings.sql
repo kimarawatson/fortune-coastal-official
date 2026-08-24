@@ -2,6 +2,12 @@
 -- Idempotent: safe to re-run.
 begin;
 
+-- ensure required columns exist (for databases created with an older schema.sql)
+alter table public.listings add column if not exists source_url text;
+alter table public.listings add column if not exists external_id text;
+alter table public.listings alter column seller_id drop not null;
+create unique index if not exists listings_external_id_key on public.listings (external_id) where external_id is not null;
+
 insert into public.categories (slug, name, sort_order) values
   ('real-estate','Real Estate',1),('cars','Cars',2),('yachts','Yachts',3),('jets','Private Jets',4),('experiences','Experiences',5)
 on conflict (slug) do update set name = excluded.name, sort_order = excluded.sort_order;
