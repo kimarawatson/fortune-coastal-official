@@ -133,14 +133,16 @@ export default function ProductsPanel() {
 
   async function runFlag(key: string, id: string, field: "featured" | "verified", value: boolean, fn: () => Promise<unknown>, message: string) {
     setPending(key);
+    const previous = qc.getQueriesData({ queryKey: ["admin-catalog"] });
+    qc.setQueriesData({ queryKey: ["admin-catalog"] }, (current: unknown) =>
+      Array.isArray(current) ? current.map((row: Row) => row.id === id ? { ...row, [field]: value } : row) : current,
+    );
     try {
       await fn();
-      qc.setQueriesData({ queryKey: ["admin-catalog"] }, (current: unknown) =>
-        Array.isArray(current) ? current.map((row: Row) => row.id === id ? { ...row, [field]: value } : row) : current,
-      );
       await refresh();
       toast.success(message);
     } catch (err: any) {
+      previous.forEach(([queryKey, data]) => qc.setQueryData(queryKey, data));
       toast.error(err?.message ?? "Update failed");
     } finally {
       setPending(null);
