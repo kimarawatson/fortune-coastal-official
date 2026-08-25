@@ -225,6 +225,63 @@ function AssetDetail() {
           </div>
         </div>
       </section>
+
+      {viewerOpen && gallery[index] && (
+        <div
+          className="fixed inset-0 z-[100] bg-black/95 backdrop-blur-sm flex items-center justify-center p-4 overflow-hidden"
+          role="dialog"
+          aria-modal="true"
+          aria-label={`${a.title} full screen gallery`}
+          onClick={() => setViewerOpen(false)}
+        >
+          <div className="absolute top-6 left-6 z-10 text-[11px] tracking-[0.35em] uppercase text-gold-soft">
+            {a.title} — {index + 1} / {gallery.length}
+          </div>
+
+          <div className="absolute top-6 right-6 z-10 flex items-center gap-2" onClick={(e) => e.stopPropagation()}>
+            <div className="flex items-center gap-1 border border-gold/30 rounded-full bg-black/60 backdrop-blur-sm px-1.5 py-1">
+              <button type="button" onClick={() => setZoom((z) => Math.max(z - 0.25, 0.5))} className="p-2 text-gold hover:text-gold-soft" aria-label="Zoom out"><ZoomOut size={16} /></button>
+              <div className="text-[10px] tracking-luxury uppercase text-gold-soft w-12 text-center tabular-nums">{Math.round(zoom * 100)}%</div>
+              <button type="button" onClick={() => setZoom((z) => Math.min(z + 0.25, 5))} className="p-2 text-gold hover:text-gold-soft" aria-label="Zoom in"><ZoomIn size={16} /></button>
+              <button type="button" onClick={() => setZoom(1)} className="p-2 text-gold hover:text-gold-soft" aria-label="Reset zoom"><RotateCcw size={14} /></button>
+            </div>
+            <button type="button" onClick={() => setViewerOpen(false)} className="inline-flex items-center gap-2 text-[11px] tracking-luxury uppercase text-gold hover:text-gold-soft border border-gold/30 rounded-full px-4 py-2 bg-black/60 backdrop-blur-sm" aria-label="Close viewer">
+              <X size={16} /> Close
+            </button>
+          </div>
+
+          {gallery.length > 1 && (
+            <>
+              <button type="button" onClick={(e) => { e.stopPropagation(); setZoom(1); step(-1); }} aria-label="Previous image"
+                className="absolute left-6 top-1/2 -translate-y-1/2 z-10 inline-flex h-12 w-12 items-center justify-center rounded-full border border-gold/30 bg-black/60 backdrop-blur-sm text-gold hover:text-gold-soft">
+                <ChevronLeft size={20} />
+              </button>
+              <button type="button" onClick={(e) => { e.stopPropagation(); setZoom(1); step(1); }} aria-label="Next image"
+                className="absolute right-6 top-1/2 -translate-y-1/2 z-10 inline-flex h-12 w-12 items-center justify-center rounded-full border border-gold/30 bg-black/60 backdrop-blur-sm text-gold hover:text-gold-soft">
+                <ChevronRight size={20} />
+              </button>
+            </>
+          )}
+
+          <div
+            className="w-full h-full flex items-center justify-center overflow-auto"
+            onClick={(e) => e.stopPropagation()}
+            onWheel={(e) => {
+              const dy = e.deltaY * (e.deltaMode === 1 ? 16 : e.deltaMode === 2 ? 100 : 1);
+              setZoom((z) => Math.min(5, Math.max(0.5, z * Math.exp(-dy * 0.0015))));
+            }}
+          >
+            <img
+              src={hiRes(gallery[index])}
+              onError={(e) => { (e.currentTarget as HTMLImageElement).src = gallery[index]; }}
+              alt={a.title}
+              draggable={false}
+              style={{ transform: `scale(${zoom})`, transformOrigin: "center center", transition: "transform 200ms ease-out" }}
+              className="max-h-[92vh] max-w-[96vw] object-contain select-none"
+            />
+          </div>
+        </div>
+      )}
     </SiteLayout>
   );
 }
