@@ -131,10 +131,13 @@ export default function ProductsPanel() {
       qc.invalidateQueries({ queryKey: ["home-featured"] }),
     ]);
 
-  async function runFlag(key: string, fn: () => Promise<unknown>, message: string) {
+  async function runFlag(key: string, id: string, field: "featured" | "verified", value: boolean, fn: () => Promise<unknown>, message: string) {
     setPending(key);
     try {
       await fn();
+      qc.setQueriesData({ queryKey: ["admin-catalog"] }, (current: unknown) =>
+        Array.isArray(current) ? current.map((row: Row) => row.id === id ? { ...row, [field]: value } : row) : current,
+      );
       await refresh();
       toast.success(message);
     } catch (err: any) {
@@ -350,7 +353,7 @@ export default function ProductsPanel() {
                       type="checkbox"
                       checked={!!l.featured}
                       disabled={pending === `f-${l.id}`}
-                      onChange={(e) => runFlag(`f-${l.id}`, () => featFn({ data: { id: l.id, featured: e.target.checked } }), e.target.checked ? "Marked as featured" : "Removed from featured")}
+                      onChange={(e) => runFlag(`f-${l.id}`, l.id, "featured", e.target.checked, () => featFn({ data: { id: l.id, featured: e.target.checked } }), e.target.checked ? "Marked as featured" : "Removed from featured")}
                       className="accent-[var(--gold)]"
                     /> Featured
                   </label>
@@ -359,7 +362,7 @@ export default function ProductsPanel() {
                       type="checkbox"
                       checked={!!l.verified}
                       disabled={pending === `v-${l.id}`}
-                      onChange={(e) => runFlag(`v-${l.id}`, () => verFn({ data: { id: l.id, verified: e.target.checked } }), e.target.checked ? "Marked verified" : "Verification removed")}
+                      onChange={(e) => runFlag(`v-${l.id}`, l.id, "verified", e.target.checked, () => verFn({ data: { id: l.id, verified: e.target.checked } }), e.target.checked ? "Marked verified" : "Verification removed")}
                       className="accent-[var(--gold)]"
                     /> Verified
                   </label>
@@ -382,7 +385,7 @@ export default function ProductsPanel() {
           categories={(catsQ.data ?? []) as Row[]}
           onClose={() => setEditing(null)}
           onView={(images, index) => setViewer({ images, index })}
-          onSaved={() => { setEditing(null); refresh(); }}
+          onSaved={async () => { await refresh(); setEditing(null); }}
         />
       )}
       {viewer && <Fullscreen images={viewer.images} index={viewer.index} onIndex={(i) => setViewer({ images: viewer.images, index: i })} onClose={() => setViewer(null)} />}
@@ -396,7 +399,7 @@ function ProductForm({
   value: FormState;
   categories: Row[];
   onClose: () => void;
-  onSaved: () => void;
+  onSaved: () => Promise<void>;
   onView: (images: string[], index: number) => void;
 }) {
   const save = useServerFn(adminSaveListing);
@@ -431,8 +434,8 @@ function ProductForm({
           images,
         },
       });
-      toast.success("Saved.");
-      onSaved();
+      await onSaved();
+      toast.success("Product saved.");
     } catch (err: any) {
       toast.error(err?.message ?? "Save failed");
     } finally {
