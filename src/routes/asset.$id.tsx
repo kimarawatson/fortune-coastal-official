@@ -51,6 +51,11 @@ function AssetDetail() {
     };
   }, [viewerOpen]);
 
+  useEffect(() => {
+    const el = thumbsRef.current?.querySelector<HTMLElement>(`[data-thumb="${active}"]`);
+    el?.scrollIntoView({ behavior: "smooth", inline: "center", block: "nearest" });
+  }, [active]);
+
   if (q.isLoading) return <SiteLayout><div className="py-32 text-center text-muted-foreground">Loading…</div></SiteLayout>;
   if (!q.data) return (
     <SiteLayout>
@@ -70,8 +75,6 @@ function AssetDetail() {
   const index = Math.min(active, Math.max(0, gallery.length - 1));
   const step = (dir: number) =>
     setActive((i) => (gallery.length ? (i + dir + gallery.length) % gallery.length : 0));
-  const scrollThumbs = (dir: number) =>
-    thumbsRef.current?.scrollBy({ left: dir * 320, behavior: "smooth" });
 
   const usd = Number(a.price_usd);
   const btcAmount = a.price_btc != null ? Number(a.price_btc) : btc ? usd / btc.price : null;
