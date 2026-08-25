@@ -16,8 +16,28 @@ import { formatUsd } from "@/lib/format";
 
 type Row = Record<string, any>;
 
-const EMPTY = {
-  id: null as string | null,
+type FormState = {
+  id: string | null;
+  category_slug: string;
+  title: string;
+  subtitle: string | null;
+  description: string | null;
+  location: string | null;
+  country: string | null;
+  city: string | null;
+  price_usd: number | string;
+  accepts_btc: boolean;
+  cover_image: string | null;
+  source_url: string | null;
+  external_id: string | null;
+  status: "draft" | "pending" | "approved" | "rejected";
+  featured: boolean;
+  verified: boolean;
+  images: string[];
+};
+
+const EMPTY: FormState = {
+  id: null,
   category_slug: "real-estate",
   title: "",
   subtitle: "",
@@ -30,10 +50,10 @@ const EMPTY = {
   cover_image: "",
   source_url: "",
   external_id: "",
-  status: "approved" as "draft" | "pending" | "approved" | "rejected",
+  status: "approved",
   featured: false,
   verified: true,
-  images: [] as string[],
+  images: [],
 };
 
 function download(name: string, content: string, type: string) {
@@ -72,7 +92,7 @@ export default function ProductsPanel() {
   const qc = useQueryClient();
   const [category, setCategory] = useState("");
   const [search, setSearch] = useState("");
-  const [editing, setEditing] = useState<typeof EMPTY | null>(null);
+  const [editing, setEditing] = useState<FormState | null>(null);
   const [viewer, setViewer] = useState<{ images: string[]; index: number } | null>(null);
 
   const listFn = useServerFn(adminListCatalog);
@@ -101,7 +121,7 @@ export default function ProductsPanel() {
   async function openEdit(id: string) {
     const d = await detailFn({ data: { id } });
     if (!d.listing) return;
-    setEditing({ ...EMPTY, ...d.listing, images: d.images, subtitle: d.listing.subtitle ?? "", description: d.listing.description ?? "" });
+    setEditing({ ...EMPTY, ...(d.listing as Partial<FormState>), images: d.images });
   }
 
   async function openGallery(id: string, cover: string | null) {
@@ -294,7 +314,7 @@ export default function ProductsPanel() {
 function ProductForm({
   value, categories, onClose, onSaved, onView,
 }: {
-  value: typeof EMPTY;
+  value: FormState;
   categories: Row[];
   onClose: () => void;
   onSaved: () => void;
