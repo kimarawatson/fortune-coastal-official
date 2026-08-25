@@ -62,8 +62,19 @@ function AssetDetail() {
   );
 
   const { listing: a, images, sellerName } = q.data;
-  const gallery = [a.cover_image, ...images.map((i: any) => i.image_url)].filter(Boolean) as string[];
-  if (!gallery.length && a.cover_image) gallery.push(a.cover_image);
+  const gallery = Array.from(
+    new Set(
+      [a.cover_image, ...images.map((i: any) => i.image_url)].filter(Boolean) as string[],
+    ),
+  );
+  const index = Math.min(active, Math.max(0, gallery.length - 1));
+  const step = (dir: number) =>
+    setActive((i) => (gallery.length ? (i + dir + gallery.length) % gallery.length : 0));
+  const scrollThumbs = (dir: number) =>
+    thumbsRef.current?.scrollBy({ left: dir * 320, behavior: "smooth" });
+
+  const usd = Number(a.price_usd);
+  const btcAmount = a.price_btc != null ? Number(a.price_btc) : btc ? usd / btc.price : null;
 
   async function send() {
     if (!session) { navigate({ to: "/auth" }); return; }
