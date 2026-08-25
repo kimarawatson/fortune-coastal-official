@@ -22,6 +22,7 @@ import {
 } from "@/lib/listings.functions";
 import { getAdminStatus, lockAdmin, unlockAdmin } from "@/lib/admin-gate.functions";
 import { formatUsd } from "@/lib/format";
+import ProductsPanel from "@/components/admin/ProductsPanel";
 
 export const Route = createFileRoute("/admin")({
   head: () => ({ meta: [{ title: "Admin — FCG" }, { name: "robots", content: "noindex" }] }),
@@ -126,7 +127,7 @@ function Console() {
 
   const nav: { key: Section; label: string; icon: any }[] = [
     { key: "overview", label: "Overview", icon: Home },
-    { key: "listings", label: "Listings", icon: Box },
+    { key: "listings", label: "Products", icon: Box },
     { key: "applications", label: "Seller Apps", icon: UserPlus },
     { key: "users", label: "Users", icon: Users },
     { key: "homepage", label: "Homepage", icon: FileImage },
@@ -171,7 +172,7 @@ function Console() {
 
       <main className="p-8 lg:p-12">
         {section === "overview" && <Overview />}
-        {section === "listings" && <Listings />}
+        {section === "listings" && <ProductsPanel />}
         {section === "applications" && <Applications />}
         {section === "users" && <UsersPanel />}
         {section === "homepage" && <HomepageCMS />}
@@ -210,62 +211,6 @@ function Overview() {
             <div className="mt-2 font-serif text-3xl gradient-gold-text">{String(v)}</div>
           </div>
         ))}
-      </div>
-    </>
-  );
-}
-
-function Listings() {
-  const list = useServerFn(adminListAllListings);
-  const setStatus = useServerFn(adminSetListingStatus);
-  const togFeatured = useServerFn(adminToggleFeatured);
-  const togVerified = useServerFn(adminToggleVerified);
-  const del = useServerFn(adminDeleteListing);
-  const qc = useQueryClient();
-  const q = useQuery({ queryKey: ["admin-listings"], queryFn: () => list() });
-  const refresh = () => { qc.invalidateQueries({ queryKey: ["admin-listings"] }); qc.invalidateQueries({ queryKey: ["admin-stats"] }); };
-
-  return (
-    <>
-      <PageHead eyebrow="Manage" title="Listings" />
-      <div className="border border-border/40 overflow-x-auto">
-        <table className="w-full text-sm">
-          <thead className="text-[10px] tracking-luxury uppercase text-muted-foreground">
-            <tr className="border-b border-border/40">
-              <th className="text-left p-4">Asset</th>
-              <th className="text-left p-4">Seller</th>
-              <th className="text-left p-4">Status</th>
-              <th className="text-left p-4">Flags</th>
-              <th className="text-left p-4">Actions</th>
-            </tr>
-          </thead>
-          <tbody>
-            {(q.data ?? []).map((l: any) => (
-              <tr key={l.id} className="border-b border-border/40 last:border-0">
-                <td className="p-4">
-                  <div className="flex items-center gap-3">
-                    {l.cover_image && <img src={l.cover_image} alt="" className="h-12 w-16 object-cover" />}
-                    <div>
-                      <div className="text-foreground">{l.title}</div>
-                      <div className="text-xs text-muted-foreground">{l.category_slug} · {formatUsd(Number(l.price_usd))}</div>
-                    </div>
-                  </div>
-                </td>
-                <td className="p-4 text-xs text-muted-foreground">{l.profiles?.full_name ?? l.profiles?.email ?? "—"}</td>
-                <td className="p-4"><StatusPill status={l.status} /></td>
-                <td className="p-4 space-x-3 text-xs">
-                  <label className="inline-flex items-center gap-1"><input type="checkbox" checked={l.featured} onChange={(e) => togFeatured({ data: { id: l.id, featured: e.target.checked } }).then(refresh)} className="accent-[var(--gold)]" /> Featured</label>
-                  <label className="inline-flex items-center gap-1"><input type="checkbox" checked={l.verified} onChange={(e) => togVerified({ data: { id: l.id, verified: e.target.checked } }).then(refresh)} className="accent-[var(--gold)]" /> Verified</label>
-                </td>
-                <td className="p-4 space-x-2 text-xs tracking-luxury uppercase">
-                  {l.status !== "approved" && <button onClick={() => setStatus({ data: { id: l.id, status: "approved" } }).then(() => { toast.success("Approved"); refresh(); })} className="text-emerald-400 hover:underline">Approve</button>}
-                  {l.status !== "rejected" && <button onClick={() => setStatus({ data: { id: l.id, status: "rejected" } }).then(() => { toast.success("Rejected"); refresh(); })} className="text-destructive hover:underline">Reject</button>}
-                  <button onClick={() => { if (confirm("Delete listing?")) del({ data: { id: l.id } }).then(() => { toast.success("Deleted"); refresh(); }); }} className="text-muted-foreground hover:text-destructive hover:underline">Remove</button>
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
       </div>
     </>
   );

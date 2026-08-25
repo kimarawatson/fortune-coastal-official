@@ -291,9 +291,10 @@ insert into public.categories (slug, name, sort_order) values
   ('real-estate', 'Real Estate', 1),
   ('cars',        'Cars',        2),
   ('yachts',      'Yachts',      3),
-  ('jets',        'Private Jets',4),
-  ('concierge',   'Concierge',   5)
-on conflict (slug) do nothing;
+  ('jets',        'Jets',        4),
+  ('motorcycles', 'Motorcycles', 5),
+  ('jewelry',     'Jewelry',     6)
+on conflict (slug) do update set name = excluded.name, sort_order = excluded.sort_order;
 
 insert into public.homepage_content (id) values (1)
 on conflict (id) do nothing;
