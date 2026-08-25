@@ -1,13 +1,22 @@
 import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { useServerFn } from "@tanstack/react-start";
 import { toast } from "sonner";
-import { ArrowLeft, BadgeCheck, Bitcoin, MapPin } from "lucide-react";
+import {
+  ArrowLeft, BadgeCheck, Bitcoin, MapPin, ChevronLeft, ChevronRight,
+  Maximize2, X, ZoomIn, ZoomOut, RotateCcw,
+} from "lucide-react";
 import { SiteLayout } from "@/components/SiteLayout";
 import { getPublicListing, submitInquiry } from "@/lib/listings.functions";
 import { formatBtc, formatUsd } from "@/lib/format";
 import { useAuth } from "@/hooks/use-auth";
+import { useBtcPrice } from "@/hooks/use-btc-price";
+
+/** Upgrade JamesEdition thumbnails to their 2x rendition for crisp full-screen viewing. */
+function hiRes(url: string) {
+  return url.replace("/556x342xcxm.", "/1112x684xcxm.");
+}
 
 export const Route = createFileRoute("/asset/$id")({
   component: AssetDetail,
