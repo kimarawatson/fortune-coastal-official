@@ -26,8 +26,9 @@ export const adminListCatalog = createServerFn({ method: "GET" })
   .middleware([requireAdminUnlocked])
   .inputValidator((d: unknown) => z.object({ category: z.string().nullish() }).parse(d ?? {}))
   .handler(async ({ data }) => {
-    const { supabaseAdmin } = await import("@/integrations/supabase/client.server");
-    let q = supabaseAdmin
+    const { getReadDb, categoryRank } = await import("@/lib/catalog-db.server");
+    const db = await getReadDb();
+    let q = db
       .from("listings")
       .select("id, category_slug, title, subtitle, location, country, city, price_usd, accepts_btc, cover_image, status, featured, verified, external_id, source_url, created_at")
       .order("created_at", { ascending: false })
@@ -35,19 +36,23 @@ export const adminListCatalog = createServerFn({ method: "GET" })
     if (data.category) q = q.eq("category_slug", data.category);
     const { data: rows, error } = await q;
     if (error) throw new Error(error.message);
-    return rows ?? [];
+    const list = (rows ?? []) as { category_slug: string }[];
+    if (data.category) return list;
+    return list.slice().sort((a, b) => categoryRank(a.category_slug) - categoryRank(b.category_slug));
   });
 
 export const adminGetListingDetail = createServerFn({ method: "GET" })
   .middleware([requireAdminUnlocked])
   .inputValidator((d: unknown) => z.object({ id: z.string() }).parse(d))
   .handler(async ({ data }) => {
-    const { supabaseAdmin } = await import("@/integrations/supabase/client.server");
-    const { data: listing } = await supabaseAdmin.from("listings").select("*").eq("id", data.id).maybeSingle();
-    const { data: images } = await supabaseAdmin
+    const { getReadDb } = await import("@/lib/catalog-db.server");
+    const db = await getReadDb();
+    const { data: listing } = await db.from("listings").select("*").eq("id", data.id).maybeSingle();
+    const { data: images } = await db
       .from("listing_images").select("image_url, sort_order").eq("listing_id", data.id).order("sort_order");
     return { listing, images: (images ?? []).map((i: { image_url: string }) => i.image_url) };
   });
+
 
 export const adminSaveListing = createServerFn({ method: "POST" })
   .middleware([requireAdminUnlocked])
