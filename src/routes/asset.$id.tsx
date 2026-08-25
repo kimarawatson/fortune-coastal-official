@@ -100,7 +100,7 @@ function AssetDetail() {
       </div>
 
       <section className="mx-auto max-w-[1700px] px-4 lg:px-8 mt-8 grid lg:grid-cols-[1fr_1.2fr] gap-8">
-        <div className="max-w-[1050px]">
+        <div className="max-w-[900px]">
           <div className="group relative aspect-[4/3] overflow-hidden bg-charcoal">
             {gallery[index] && (
               <img
