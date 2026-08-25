@@ -47,7 +47,12 @@ export const listPublicListings = createServerFn({ method: "GET" })
       "jewelry": 6,
     };
 
-    let q = supabasePublic.from("listings").select("*").eq("status", "approved").order("created_at", { ascending: false });
+    let q = supabasePublic
+      .from("listings")
+      .select("*")
+      .eq("status", "approved")
+      .order("created_at", { ascending: false })
+      .order("id", { ascending: true });
     if (data.category) q = q.eq("category_slug", data.category);
     if (data.country) q = q.eq("country", data.country);
     if (data.btcOnly) q = q.eq("accepts_btc", true);

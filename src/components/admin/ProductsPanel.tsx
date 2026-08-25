@@ -94,6 +94,7 @@ export default function ProductsPanel() {
   const [search, setSearch] = useState("");
   const [editing, setEditing] = useState<FormState | null>(null);
   const [viewer, setViewer] = useState<{ images: string[]; index: number } | null>(null);
+  const [pending, setPending] = useState<string | null>(null);
 
   const listFn = useServerFn(adminListCatalog);
   const detailFn = useServerFn(adminGetListingDetail);
@@ -116,7 +117,24 @@ export default function ProductsPanel() {
     return term ? all.filter((r) => `${r.title} ${r.location} ${r.external_id ?? ""}`.toLowerCase().includes(term)) : all;
   }, [q.data, search]);
 
-  const refresh = () => qc.invalidateQueries({ queryKey: ["admin-catalog"] });
+  const refresh = () =>
+    Promise.all([
+      qc.invalidateQueries({ queryKey: ["admin-catalog"] }),
+      qc.invalidateQueries({ queryKey: ["home-featured"] }),
+    ]);
+
+  async function runFlag(key: string, fn: () => Promise<unknown>, message: string) {
+    setPending(key);
+    try {
+      await fn();
+      await refresh();
+      toast.success(message);
+    } catch (err: any) {
+      toast.error(err?.message ?? "Update failed");
+    } finally {
+      setPending(null);
+    }
+  }
 
   async function openEdit(id: string) {
     const d = await detailFn({ data: { id } });
@@ -290,8 +308,24 @@ export default function ProductsPanel() {
                 <td className="p-4 text-foreground">{formatUsd(Number(l.price_usd))}</td>
                 <td className="p-4 text-xs uppercase tracking-luxury text-gold">{l.status}</td>
                 <td className="p-4 space-x-3 text-xs whitespace-nowrap">
-                  <label className="inline-flex items-center gap-1"><input type="checkbox" checked={!!l.featured} onChange={(e) => featFn({ data: { id: l.id, featured: e.target.checked } }).then(refresh)} className="accent-[var(--gold)]" /> Featured</label>
-                  <label className="inline-flex items-center gap-1"><input type="checkbox" checked={!!l.verified} onChange={(e) => verFn({ data: { id: l.id, verified: e.target.checked } }).then(refresh)} className="accent-[var(--gold)]" /> Verified</label>
+                  <label className="inline-flex items-center gap-1">
+                    <input
+                      type="checkbox"
+                      checked={!!l.featured}
+                      disabled={pending === `f-${l.id}`}
+                      onChange={(e) => runFlag(`f-${l.id}`, () => featFn({ data: { id: l.id, featured: e.target.checked } }), e.target.checked ? "Marked as featured" : "Removed from featured")}
+                      className="accent-[var(--gold)]"
+                    /> Featured
+                  </label>
+                  <label className="inline-flex items-center gap-1">
+                    <input
+                      type="checkbox"
+                      checked={!!l.verified}
+                      disabled={pending === `v-${l.id}`}
+                      onChange={(e) => runFlag(`v-${l.id}`, () => verFn({ data: { id: l.id, verified: e.target.checked } }), e.target.checked ? "Marked verified" : "Verification removed")}
+                      className="accent-[var(--gold)]"
+                    /> Verified
+                  </label>
                 </td>
                 <td className="p-4 space-x-3 text-xs tracking-luxury uppercase whitespace-nowrap">
                   <button onClick={() => openEdit(l.id)} className="text-gold hover:underline">Edit</button>
