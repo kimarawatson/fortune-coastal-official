@@ -32,6 +32,7 @@ export const adminListCatalog = createServerFn({ method: "GET" })
       .from("listings")
       .select("id, category_slug, title, subtitle, location, country, city, price_usd, accepts_btc, cover_image, status, featured, verified, external_id, source_url, created_at")
       .order("created_at", { ascending: false })
+      .order("id", { ascending: true })
       .limit(2000);
     if (data.category) q = q.eq("category_slug", data.category);
     const { data: rows, error } = await q;
