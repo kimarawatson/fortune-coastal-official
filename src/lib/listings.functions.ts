@@ -47,12 +47,8 @@ export const listPublicListings = createServerFn({ method: "GET" })
       "jewelry": 6,
     };
 
-    let q = supabasePublic.from("listings").select("*, categories!inner(sort_order)").eq("status", "approved");
-    if (data.category) {
-      q = q.eq("category_slug", data.category).order("created_at", { ascending: false });
-    } else {
-      q = q.order("categories.sort_order", { ascending: true }).order("created_at", { ascending: false });
-    }
+    let q = supabasePublic.from("listings").select("*").eq("status", "approved").order("created_at", { ascending: false });
+    if (data.category) q = q.eq("category_slug", data.category);
     if (data.country) q = q.eq("country", data.country);
     if (data.btcOnly) q = q.eq("accepts_btc", true);
     if (data.featuredOnly) q = q.eq("featured", true);
@@ -60,7 +56,13 @@ export const listPublicListings = createServerFn({ method: "GET" })
     if (typeof data.maxPrice === "number") q = q.lte("price_usd", data.maxPrice);
     const { data: rows, error } = await q;
     if (error) throw new Error(error.message);
-    if ((rows?.length ?? 0) > 0) return rows ?? [];
+    if ((rows?.length ?? 0) > 0) {
+      if (data.category) return rows ?? [];
+      return (rows ?? []).slice().sort(
+        (a: any, b: any) => (orderMap[a.category_slug] ?? 99) - (orderMap[b.category_slug] ?? 99),
+      );
+    }
+
 
     return mockListings
       .filter((l) => (data.category ? l.category_slug === data.category : true))
