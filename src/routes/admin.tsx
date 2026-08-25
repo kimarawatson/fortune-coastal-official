@@ -22,6 +22,7 @@ import {
 } from "@/lib/listings.functions";
 import { getAdminStatus, lockAdmin, unlockAdmin } from "@/lib/admin-gate.functions";
 import { formatUsd } from "@/lib/format";
+import ProductsPanel from "@/components/admin/ProductsPanel";
 
 export const Route = createFileRoute("/admin")({
   head: () => ({ meta: [{ title: "Admin — FCG" }, { name: "robots", content: "noindex" }] }),
@@ -126,7 +127,7 @@ function Console() {
 
   const nav: { key: Section; label: string; icon: any }[] = [
     { key: "overview", label: "Overview", icon: Home },
-    { key: "listings", label: "Listings", icon: Box },
+    { key: "listings", label: "Products", icon: Box },
     { key: "applications", label: "Seller Apps", icon: UserPlus },
     { key: "users", label: "Users", icon: Users },
     { key: "homepage", label: "Homepage", icon: FileImage },
@@ -171,7 +172,7 @@ function Console() {
 
       <main className="p-8 lg:p-12">
         {section === "overview" && <Overview />}
-        {section === "listings" && <Listings />}
+        {section === "listings" && <ProductsPanel />}
         {section === "applications" && <Applications />}
         {section === "users" && <UsersPanel />}
         {section === "homepage" && <HomepageCMS />}
