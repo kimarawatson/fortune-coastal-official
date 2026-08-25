@@ -2,26 +2,6 @@ import { createServerFn } from "@tanstack/react-start";
 import { z } from "zod";
 import { requireAdminUnlocked } from "@/lib/admin-gate.functions";
 
-const listingInput = z.object({
-  id: z.string().uuid().nullish(),
-  category_slug: z.string().min(1),
-  title: z.string().min(1).max(240),
-  subtitle: z.string().max(300).nullish(),
-  description: z.string().max(6000).nullish(),
-  location: z.string().max(200).nullish(),
-  country: z.string().max(120).nullish(),
-  city: z.string().max(120).nullish(),
-  price_usd: z.number().min(0),
-  accepts_btc: z.boolean().default(true),
-  cover_image: z.string().max(1000).nullish(),
-  source_url: z.string().max(1000).nullish(),
-  external_id: z.string().max(200).nullish(),
-  status: z.enum(["draft", "pending", "approved", "rejected"]).default("approved"),
-  featured: z.boolean().default(false),
-  verified: z.boolean().default(true),
-  images: z.array(z.string().max(1000)).max(60).default([]),
-});
-
 export const adminListCatalog = createServerFn({ method: "GET" })
   .middleware([requireAdminUnlocked])
   .inputValidator((d: unknown) => z.object({ category: z.string().nullish() }).parse(d ?? {}))
@@ -57,9 +37,28 @@ export const adminGetListingDetail = createServerFn({ method: "GET" })
 
 export const adminSaveListing = createServerFn({ method: "POST" })
   .middleware([requireAdminUnlocked])
-  .inputValidator((d: unknown) => listingInput.parse(d))
+  .inputValidator((d: unknown) => z.object({
+    id: z.string().uuid().nullish(),
+    category_slug: z.string().min(1),
+    title: z.string().min(1).max(240),
+    subtitle: z.string().max(300).nullish(),
+    description: z.string().max(6000).nullish(),
+    location: z.string().max(200).nullish(),
+    country: z.string().max(120).nullish(),
+    city: z.string().max(120).nullish(),
+    price_usd: z.number().min(0),
+    accepts_btc: z.boolean().default(true),
+    cover_image: z.string().max(1000).nullish(),
+    source_url: z.string().max(1000).nullish(),
+    external_id: z.string().max(200).nullish(),
+    status: z.enum(["draft", "pending", "approved", "rejected"]).default("approved"),
+    featured: z.boolean().default(false),
+    verified: z.boolean().default(true),
+    images: z.array(z.string().max(1000)).max(60).default([]),
+  }).parse(d))
   .handler(async ({ data }) => {
-    const { supabaseAdmin } = await import("@/integrations/supabase/client.server");
+    const { getWriteDb } = await import("@/lib/catalog-db.server");
+    const db = await getWriteDb();
     const { images, id, ...fields } = data;
     const payload = {
       ...fields,
@@ -68,25 +67,85 @@ export const adminSaveListing = createServerFn({ method: "POST" })
     };
     let listingId = id ?? null;
     if (listingId) {
-      const { error } = await supabaseAdmin.from("listings").update(payload).eq("id", listingId);
+      const { data: updated, error } = await db.from("listings").update(payload).eq("id", listingId).select("id").maybeSingle();
       if (error) throw new Error(error.message);
+      if (!updated) throw new Error("Product was not found or could not be updated.");
     } else {
-      const { data: row, error } = await supabaseAdmin.from("listings").insert(payload).select("id").single();
+      const { data: row, error } = await db.from("listings").insert(payload).select("id").single();
       if (error) throw new Error(error.message);
       listingId = row.id as string;
     }
-    await supabaseAdmin.from("listing_images").delete().eq("listing_id", listingId);
+    if (!listingId) throw new Error("Product ID was not returned after saving.");
+    const { error: deleteImagesError } = await db.from("listing_images").delete().eq("listing_id", listingId);
+    if (deleteImagesError) throw new Error(deleteImagesError.message);
     if (images.length) {
-      await supabaseAdmin.from("listing_images").insert(
-        images.map((image_url, sort_order) => ({ listing_id: listingId!, image_url, sort_order })),
+      const { error: insertImagesError } = await db.from("listing_images").insert(
+        images.map((image_url, sort_order) => ({ listing_id: listingId, image_url, sort_order })),
       );
+      if (insertImagesError) throw new Error(insertImagesError.message);
     }
     return { ok: true, id: listingId };
   });
 
+export const adminSetCatalogFeatured = createServerFn({ method: "POST" })
+  .middleware([requireAdminUnlocked])
+  .inputValidator((d: unknown) => z.object({ id: z.string().uuid(), featured: z.boolean() }).parse(d))
+  .handler(async ({ data }) => {
+    const { getWriteDb } = await import("@/lib/catalog-db.server");
+    const db = await getWriteDb();
+    const { data: updated, error } = await db.from("listings").update({ featured: data.featured }).eq("id", data.id).select("id").maybeSingle();
+    if (error) throw new Error(error.message);
+    if (!updated) throw new Error("Product was not found or could not be updated.");
+    return { ok: true };
+  });
+
+export const adminSetCatalogVerified = createServerFn({ method: "POST" })
+  .middleware([requireAdminUnlocked])
+  .inputValidator((d: unknown) => z.object({ id: z.string().uuid(), verified: z.boolean() }).parse(d))
+  .handler(async ({ data }) => {
+    const { getWriteDb } = await import("@/lib/catalog-db.server");
+    const db = await getWriteDb();
+    const { data: updated, error } = await db.from("listings").update({ verified: data.verified }).eq("id", data.id).select("id").maybeSingle();
+    if (error) throw new Error(error.message);
+    if (!updated) throw new Error("Product was not found or could not be updated.");
+    return { ok: true };
+  });
+
+export const adminSetCatalogStatus = createServerFn({ method: "POST" })
+  .middleware([requireAdminUnlocked])
+  .inputValidator((d: unknown) => z.object({ id: z.string().uuid(), status: z.enum(["draft", "pending", "approved", "rejected"]) }).parse(d))
+  .handler(async ({ data }) => {
+    const { getWriteDb } = await import("@/lib/catalog-db.server");
+    const db = await getWriteDb();
+    const { data: updated, error } = await db.from("listings").update({ status: data.status }).eq("id", data.id).select("id").maybeSingle();
+    if (error) throw new Error(error.message);
+    if (!updated) throw new Error("Product was not found or could not be updated.");
+    return { ok: true };
+  });
+
+export const adminDeleteCatalogListing = createServerFn({ method: "POST" })
+  .middleware([requireAdminUnlocked])
+  .inputValidator((d: unknown) => z.object({ id: z.string().uuid() }).parse(d))
+  .handler(async ({ data }) => {
+    const { getWriteDb } = await import("@/lib/catalog-db.server");
+    const db = await getWriteDb();
+    const { error } = await db.from("listings").delete().eq("id", data.id);
+    if (error) throw new Error(error.message);
+    return { ok: true };
+  });
+
 export const adminImportListings = createServerFn({ method: "POST" })
   .middleware([requireAdminUnlocked])
-  .inputValidator((d: unknown) => z.object({ rows: z.array(listingInput).max(1000) }).parse(d))
+  .inputValidator((d: unknown) => z.object({ rows: z.array(z.object({
+    id: z.string().uuid().nullish(), category_slug: z.string().min(1), title: z.string().min(1).max(240),
+    subtitle: z.string().max(300).nullish(), description: z.string().max(6000).nullish(),
+    location: z.string().max(200).nullish(), country: z.string().max(120).nullish(), city: z.string().max(120).nullish(),
+    price_usd: z.number().min(0), accepts_btc: z.boolean().default(true), cover_image: z.string().max(1000).nullish(),
+    source_url: z.string().max(1000).nullish(), external_id: z.string().max(200).nullish(),
+    status: z.enum(["draft", "pending", "approved", "rejected"]).default("approved"),
+    featured: z.boolean().default(false), verified: z.boolean().default(true),
+    images: z.array(z.string().max(1000)).max(60).default([]),
+  })).max(1000) }).parse(d))
   .handler(async ({ data }) => {
     const { supabaseAdmin } = await import("@/integrations/supabase/client.server");
     let created = 0;
