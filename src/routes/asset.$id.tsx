@@ -157,10 +157,6 @@ function AssetDetail() {
                   </button>
                 ))}
               </div>
-              <button type="button" onClick={() => scrollThumbs(1)} aria-label="Scroll thumbnails right"
-                className="absolute -right-2 top-1/2 -translate-y-1/2 z-10 inline-flex h-9 w-9 items-center justify-center rounded-full border border-gold/40 bg-background/80 backdrop-blur-md text-gold hover:bg-gold hover:text-primary-foreground transition-colors">
-                <ChevronRight size={16} />
-              </button>
             </div>
           )}
         </div>
@@ -277,7 +273,7 @@ function AssetDetail() {
               alt={a.title}
               draggable={false}
               style={{ transform: `scale(${zoom})`, transformOrigin: "center center", transition: "transform 200ms ease-out" }}
-              className="max-h-[92vh] max-w-[96vw] object-contain select-none"
+              className="max-h-[55vh] max-w-[60vw] object-contain select-none"
             />
           </div>
         </div>
