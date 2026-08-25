@@ -31,9 +31,30 @@ export function createPublicDb(): SupabaseClient<Database> {
   });
 }
 
+function createKeyFetch(key: string): typeof fetch {
+  return (input, init) => {
+    const headers = new Headers(
+      typeof Request !== "undefined" && input instanceof Request ? input.headers : undefined,
+    );
+    if (init?.headers) {
+      new Headers(init.headers).forEach((value, name) => headers.set(name, value));
+    }
+    if (key.startsWith("sb_") && headers.get("Authorization") === `Bearer ${key}`) {
+      headers.delete("Authorization");
+    }
+    headers.set("apikey", key);
+    return fetch(input, { ...init, headers });
+  };
+}
+
 export async function getWriteDb(): Promise<SupabaseClient<Database>> {
-  const { supabaseAdmin } = await import("@/integrations/supabase/client.server");
-  return supabaseAdmin as unknown as SupabaseClient<Database>;
+  const url = process.env["SUPABASE_URL"];
+  const key = process.env["SUPABASE_SERVICE_ROLE_KEY"];
+  if (!url || !key) throw new Error("Database URL / service key are not configured on the server.");
+  return createClient<Database>(url, key, {
+    global: { fetch: createKeyFetch(key) },
+    auth: { storage: undefined, persistSession: false, autoRefreshToken: false },
+  });
 }
 
 /** Service-role client when usable, otherwise the anon client. */
