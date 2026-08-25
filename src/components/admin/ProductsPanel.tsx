@@ -261,7 +261,14 @@ export default function ProductsPanel() {
           </thead>
           <tbody>
             {q.isLoading && <tr><td colSpan={6} className="p-8 text-center text-muted-foreground">Loading…</td></tr>}
-            {!q.isLoading && !rows.length && <tr><td colSpan={6} className="p-8 text-center text-muted-foreground">No products.</td></tr>}
+            {!q.isLoading && q.isError && (
+              <tr><td colSpan={6} className="p-8 text-center text-destructive text-xs">
+                Could not load products: {(q.error as any)?.message ?? "unknown error"}
+                <button onClick={() => q.refetch()} className="ml-3 text-gold hover:underline uppercase tracking-luxury">Retry</button>
+              </td></tr>
+            )}
+            {!q.isLoading && !q.isError && !rows.length && <tr><td colSpan={6} className="p-8 text-center text-muted-foreground">No products.</td></tr>}
+
             {rows.map((l) => (
               <tr key={l.id} className="border-b border-border/40 last:border-0 align-top">
                 <td className="p-4">
