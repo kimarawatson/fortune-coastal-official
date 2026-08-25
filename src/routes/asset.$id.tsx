@@ -31,8 +31,25 @@ function AssetDetail() {
   const [active, setActive] = useState(0);
   const [msg, setMsg] = useState("");
   const [sending, setSending] = useState(false);
+  const [viewerOpen, setViewerOpen] = useState(false);
+  const [zoom, setZoom] = useState(1);
+  const thumbsRef = useRef<HTMLDivElement>(null);
+  const btc = useBtcPrice();
 
   const q = useQuery({ queryKey: ["public-listing", id], queryFn: () => get({ data: { id } }) });
+
+  useEffect(() => {
+    if (!viewerOpen) return;
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") setViewerOpen(false);
+    };
+    window.addEventListener("keydown", onKey);
+    document.body.style.overflow = "hidden";
+    return () => {
+      window.removeEventListener("keydown", onKey);
+      document.body.style.overflow = "";
+    };
+  }, [viewerOpen]);
 
   if (q.isLoading) return <SiteLayout><div className="py-32 text-center text-muted-foreground">Loading…</div></SiteLayout>;
   if (!q.data) return (
