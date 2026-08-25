@@ -96,7 +96,8 @@ function Home() {
     },
   });
 
-  const featured = featuredQ.data?.length === 3 ? featuredQ.data : staticFeatured;
+  const live = featuredQ.data ?? [];
+  const featured: FeaturedItem[] = [...live, ...staticFeatured].slice(0, 3);
 
   const intel = useQuery({
     queryKey: ["home-intel"],
