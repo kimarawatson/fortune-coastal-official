@@ -178,11 +178,23 @@ function AssetDetail() {
           <div className="flex items-end justify-between">
             <div>
               <div className="text-[10px] tracking-luxury uppercase text-muted-foreground">Price (USD)</div>
-              <div className="font-serif text-4xl text-foreground">{formatUsd(Number(a.price_usd))}</div>
+              <div className="font-serif text-4xl text-foreground">{formatUsd(usd)}</div>
             </div>
             <div className="text-right">
               <div className="text-[10px] tracking-luxury uppercase text-muted-foreground">Bitcoin</div>
-              <div className="text-lg text-gold font-medium">{formatBtc(a.price_btc)}</div>
+              <div className="text-lg text-gold font-medium tabular-nums">
+                {btcAmount != null
+                  ? `₿ ${btcAmount.toLocaleString("en-US", { maximumFractionDigits: btcAmount < 10 ? 4 : 2 })}`
+                  : formatBtc(null)}
+              </div>
+              {btc && (
+                <div className="mt-1 text-[10px] tracking-luxury uppercase text-muted-foreground tabular-nums">
+                  Live BTC ${btc.price.toLocaleString("en-US", { maximumFractionDigits: 0 })}
+                  <span className={btc.change24h >= 0 ? " text-emerald-400" : " text-destructive"}>
+                    {" "}{btc.change24h >= 0 ? "+" : ""}{btc.change24h.toFixed(2)}%
+                  </span>
+                </div>
+              )}
             </div>
           </div>
 
