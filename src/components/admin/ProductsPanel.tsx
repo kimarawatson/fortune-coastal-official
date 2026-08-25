@@ -387,7 +387,17 @@ export default function ProductsPanel() {
           categories={(catsQ.data ?? []) as Row[]}
           onClose={() => setEditing(null)}
           onView={(images, index) => setViewer({ images, index })}
-          onSaved={async () => { await refresh(); setEditing(null); }}
+          onSaved={async (saved) => {
+            qc.setQueriesData({ queryKey: ["admin-catalog"] }, (current: unknown) => {
+              if (!Array.isArray(current)) return current;
+              const exists = current.some((row: Row) => row.id === saved.id);
+              return exists
+                ? current.map((row: Row) => row.id === saved.id ? { ...row, ...saved } : row)
+                : [saved, ...current];
+            });
+            await refresh();
+            setEditing(null);
+          }}
         />
       )}
       {viewer && <Fullscreen images={viewer.images} index={viewer.index} onIndex={(i) => setViewer({ images: viewer.images, index: i })} onClose={() => setViewer(null)} />}
@@ -401,7 +411,7 @@ function ProductForm({
   value: FormState;
   categories: Row[];
   onClose: () => void;
-  onSaved: () => Promise<void>;
+  onSaved: (saved: Row) => Promise<void>;
   onView: (images: string[], index: number) => void;
 }) {
   const save = useServerFn(adminSaveListing);
@@ -415,7 +425,7 @@ function ProductForm({
     e.preventDefault();
     setBusy(true);
     try {
-      await save({
+      const result = await save({
         data: {
           id: form.id || null,
           category_slug: form.category_slug,
@@ -436,7 +446,8 @@ function ProductForm({
           images,
         },
       });
-      await onSaved();
+      if (!result.listing) throw new Error("The database did not return the saved product.");
+      await onSaved(result.listing as Row);
       toast.success("Product saved.");
     } catch (err: any) {
       toast.error(err?.message ?? "Save failed");

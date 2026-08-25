@@ -66,14 +66,17 @@ export const adminSaveListing = createServerFn({ method: "POST" })
       updated_at: new Date().toISOString(),
     };
     let listingId = id ?? null;
+    let savedListing: Record<string, unknown> | null = null;
     if (listingId) {
-      const { data: updated, error } = await db.from("listings").update(payload).eq("id", listingId).select("id").maybeSingle();
+      const { data: updated, error } = await db.from("listings").update(payload).eq("id", listingId).select("*").maybeSingle();
       if (error) throw new Error(error.message);
       if (!updated) throw new Error("Product was not found or could not be updated.");
+      savedListing = updated as Record<string, unknown>;
     } else {
-      const { data: row, error } = await db.from("listings").insert(payload).select("id").single();
+      const { data: row, error } = await db.from("listings").insert(payload).select("*").single();
       if (error) throw new Error(error.message);
       listingId = row.id as string;
+      savedListing = row as Record<string, unknown>;
     }
     if (!listingId) throw new Error("Product ID was not returned after saving.");
     const { error: deleteImagesError } = await db.from("listing_images").delete().eq("listing_id", listingId);
@@ -84,7 +87,7 @@ export const adminSaveListing = createServerFn({ method: "POST" })
       );
       if (insertImagesError) throw new Error(insertImagesError.message);
     }
-    return { ok: true, id: listingId };
+    return { ok: true, id: listingId, listing: savedListing };
   });
 
 export const adminSetCatalogFeatured = createServerFn({ method: "POST" })
