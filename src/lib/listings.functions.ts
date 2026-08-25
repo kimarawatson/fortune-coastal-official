@@ -38,8 +38,21 @@ export const listPublicListings = createServerFn({ method: "GET" })
   )
   .handler(async ({ data }) => {
     const supabasePublic = createPublicClient();
-    let q = supabasePublic.from("listings").select("*").eq("status", "approved").order("created_at", { ascending: false });
-    if (data.category) q = q.eq("category_slug", data.category);
+    const orderMap: Record<string, number> = {
+      "real-estate": 1,
+      "cars": 2,
+      "yachts": 3,
+      "jets": 4,
+      "motorcycles": 5,
+      "jewelry": 6,
+    };
+
+    let q = supabasePublic.from("listings").select("*, categories!inner(sort_order)").eq("status", "approved");
+    if (data.category) {
+      q = q.eq("category_slug", data.category).order("created_at", { ascending: false });
+    } else {
+      q = q.order("categories.sort_order", { ascending: true }).order("created_at", { ascending: false });
+    }
     if (data.country) q = q.eq("country", data.country);
     if (data.btcOnly) q = q.eq("accepts_btc", true);
     if (data.featuredOnly) q = q.eq("featured", true);
@@ -56,6 +69,7 @@ export const listPublicListings = createServerFn({ method: "GET" })
       .filter((l) => (data.featuredOnly ? l.featured : true))
       .filter((l) => (typeof data.minPrice === "number" ? l.price_usd >= data.minPrice : true))
       .filter((l) => (typeof data.maxPrice === "number" ? l.price_usd <= data.maxPrice : true))
+      .sort((a, b) => (orderMap[a.category_slug] ?? 99) - (orderMap[b.category_slug] ?? 99))
       .map((l, i) => ({ id: `demo-${i}`, ...l, status: "approved", seller_id: null }));
   });
 
