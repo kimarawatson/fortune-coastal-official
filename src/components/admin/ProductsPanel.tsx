@@ -116,7 +116,24 @@ export default function ProductsPanel() {
     return term ? all.filter((r) => `${r.title} ${r.location} ${r.external_id ?? ""}`.toLowerCase().includes(term)) : all;
   }, [q.data, search]);
 
-  const refresh = () => qc.invalidateQueries({ queryKey: ["admin-catalog"] });
+  const refresh = () =>
+    Promise.all([
+      qc.invalidateQueries({ queryKey: ["admin-catalog"] }),
+      qc.invalidateQueries({ queryKey: ["home-featured"] }),
+    ]);
+
+  async function runFlag(key: string, fn: () => Promise<unknown>, message: string) {
+    setPending(key);
+    try {
+      await fn();
+      await refresh();
+      toast.success(message);
+    } catch (err: any) {
+      toast.error(err?.message ?? "Update failed");
+    } finally {
+      setPending(null);
+    }
+  }
 
   async function openEdit(id: string) {
     const d = await detailFn({ data: { id } });
