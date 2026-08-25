@@ -290,8 +290,24 @@ export default function ProductsPanel() {
                 <td className="p-4 text-foreground">{formatUsd(Number(l.price_usd))}</td>
                 <td className="p-4 text-xs uppercase tracking-luxury text-gold">{l.status}</td>
                 <td className="p-4 space-x-3 text-xs whitespace-nowrap">
-                  <label className="inline-flex items-center gap-1"><input type="checkbox" checked={!!l.featured} onChange={(e) => featFn({ data: { id: l.id, featured: e.target.checked } }).then(refresh)} className="accent-[var(--gold)]" /> Featured</label>
-                  <label className="inline-flex items-center gap-1"><input type="checkbox" checked={!!l.verified} onChange={(e) => verFn({ data: { id: l.id, verified: e.target.checked } }).then(refresh)} className="accent-[var(--gold)]" /> Verified</label>
+                  <label className="inline-flex items-center gap-1">
+                    <input
+                      type="checkbox"
+                      checked={!!l.featured}
+                      disabled={pending === `f-${l.id}`}
+                      onChange={(e) => runFlag(`f-${l.id}`, () => featFn({ data: { id: l.id, featured: e.target.checked } }), e.target.checked ? "Marked as featured" : "Removed from featured")}
+                      className="accent-[var(--gold)]"
+                    /> Featured
+                  </label>
+                  <label className="inline-flex items-center gap-1">
+                    <input
+                      type="checkbox"
+                      checked={!!l.verified}
+                      disabled={pending === `v-${l.id}`}
+                      onChange={(e) => runFlag(`v-${l.id}`, () => verFn({ data: { id: l.id, verified: e.target.checked } }), e.target.checked ? "Marked verified" : "Verification removed")}
+                      className="accent-[var(--gold)]"
+                    /> Verified
+                  </label>
                 </td>
                 <td className="p-4 space-x-3 text-xs tracking-luxury uppercase whitespace-nowrap">
                   <button onClick={() => openEdit(l.id)} className="text-gold hover:underline">Edit</button>
