@@ -2,16 +2,19 @@ import { useMemo, useState } from "react";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { useServerFn } from "@tanstack/react-start";
 import { toast } from "sonner";
-import { ChevronLeft, ChevronRight, Download, Plus, Upload, X, ZoomIn, ZoomOut } from "lucide-react";
+import { ChevronLeft, ChevronRight, Download, Image as ImageIcon, Plus, Search, Upload, X, ZoomIn, ZoomOut } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import {
   adminExportCatalog,
+  adminDeleteCatalogListing,
   adminGetListingDetail,
   adminImportListings,
   adminListCatalog,
   adminSaveListing,
+  adminSetCatalogFeatured,
+  adminSetCatalogStatus,
+  adminSetCatalogVerified,
 } from "@/lib/catalog-admin.functions";
-import { adminDeleteListing, adminSetListingStatus, adminToggleFeatured, adminToggleVerified } from "@/lib/listings.functions";
 import { formatUsd } from "@/lib/format";
 
 type Row = Record<string, any>;
@@ -92,6 +95,8 @@ export default function ProductsPanel() {
   const qc = useQueryClient();
   const [category, setCategory] = useState("");
   const [search, setSearch] = useState("");
+  const [statusFilter, setStatusFilter] = useState("");
+  const [featuredOnly, setFeaturedOnly] = useState(false);
   const [editing, setEditing] = useState<FormState | null>(null);
   const [viewer, setViewer] = useState<{ images: string[]; index: number } | null>(null);
   const [pending, setPending] = useState<string | null>(null);
@@ -100,10 +105,10 @@ export default function ProductsPanel() {
   const detailFn = useServerFn(adminGetListingDetail);
   const exportFn = useServerFn(adminExportCatalog);
   const importFn = useServerFn(adminImportListings);
-  const delFn = useServerFn(adminDeleteListing);
-  const statusFn = useServerFn(adminSetListingStatus);
-  const featFn = useServerFn(adminToggleFeatured);
-  const verFn = useServerFn(adminToggleVerified);
+  const delFn = useServerFn(adminDeleteCatalogListing);
+  const statusFn = useServerFn(adminSetCatalogStatus);
+  const featFn = useServerFn(adminSetCatalogFeatured);
+  const verFn = useServerFn(adminSetCatalogVerified);
 
   const catsQ = useQuery({
     queryKey: ["categories"],
@@ -114,8 +119,11 @@ export default function ProductsPanel() {
   const rows: Row[] = useMemo(() => {
     const all = (q.data ?? []) as Row[];
     const term = search.trim().toLowerCase();
-    return term ? all.filter((r) => `${r.title} ${r.location} ${r.external_id ?? ""}`.toLowerCase().includes(term)) : all;
-  }, [q.data, search]);
+    return all.filter((r) => {
+      const haystack = `${r.title ?? ""} ${r.subtitle ?? ""} ${r.location ?? ""} ${r.city ?? ""} ${r.country ?? ""} ${r.external_id ?? ""}`.toLowerCase();
+      return (!term || haystack.includes(term)) && (!statusFilter || r.status === statusFilter) && (!featuredOnly || r.featured);
+    });
+  }, [q.data, search, statusFilter, featuredOnly]);
 
   const refresh = () =>
     Promise.all([
@@ -123,13 +131,18 @@ export default function ProductsPanel() {
       qc.invalidateQueries({ queryKey: ["home-featured"] }),
     ]);
 
-  async function runFlag(key: string, fn: () => Promise<unknown>, message: string) {
+  async function runFlag(key: string, id: string, field: "featured" | "verified", value: boolean, fn: () => Promise<unknown>, message: string) {
     setPending(key);
+    const previous = qc.getQueriesData({ queryKey: ["admin-catalog"] });
+    qc.setQueriesData({ queryKey: ["admin-catalog"] }, (current: unknown) =>
+      Array.isArray(current) ? current.map((row: Row) => row.id === id ? { ...row, [field]: value } : row) : current,
+    );
     try {
       await fn();
       await refresh();
       toast.success(message);
     } catch (err: any) {
+      previous.forEach(([queryKey, data]) => qc.setQueryData(queryKey, data));
       toast.error(err?.message ?? "Update failed");
     } finally {
       setPending(null);
@@ -137,15 +150,24 @@ export default function ProductsPanel() {
   }
 
   async function openEdit(id: string) {
-    const d = await detailFn({ data: { id } });
-    if (!d.listing) return;
-    setEditing({ ...EMPTY, ...(d.listing as Partial<FormState>), images: d.images });
+    try {
+      const d = await detailFn({ data: { id } });
+      if (!d.listing) throw new Error("Product details were not found.");
+      setEditing({ ...EMPTY, ...(d.listing as Partial<FormState>), images: d.images });
+    } catch (err: any) {
+      toast.error(err?.message ?? "Could not load product details");
+    }
   }
 
   async function openGallery(id: string, cover: string | null) {
-    const d = await detailFn({ data: { id } });
-    const imgs = d.images.length ? d.images : cover ? [cover] : [];
-    if (imgs.length) setViewer({ images: imgs, index: 0 });
+    try {
+      const d = await detailFn({ data: { id } });
+      const imgs = Array.from(new Set([cover, ...d.images].filter((image): image is string => Boolean(image))));
+      if (!imgs.length) throw new Error("This product has no images.");
+      setViewer({ images: imgs, index: 0 });
+    } catch (err: any) {
+      toast.error(err?.message ?? "Could not load product images");
+    }
   }
 
   async function exportCsv() {
@@ -247,7 +269,8 @@ export default function ProductsPanel() {
         </div>
       </div>
 
-      <div className="mb-6 flex flex-wrap items-center gap-2">
+      <div className="mb-6 space-y-4">
+        <div className="flex flex-wrap items-center gap-2">
         {[{ slug: "", name: "All" }, ...((catsQ.data ?? []) as Row[])].map((c) => (
           <button
             key={c.slug || "all"}
@@ -257,12 +280,30 @@ export default function ProductsPanel() {
             {c.name}
           </button>
         ))}
-        <input
-          value={search}
-          onChange={(e) => setSearch(e.target.value)}
-          placeholder="Search title, location…"
-          className="ml-auto bg-transparent border border-border/40 px-4 py-2 text-sm text-foreground placeholder:text-muted-foreground/60 focus:outline-none focus:border-gold/50 min-w-[240px]"
-        />
+        </div>
+        <div className="flex flex-wrap items-center gap-3">
+          <label className="relative min-w-[280px] flex-1">
+            <Search size={15} className="absolute left-4 top-1/2 -translate-y-1/2 text-muted-foreground" />
+            <input
+              value={search}
+              onChange={(e) => setSearch(e.target.value)}
+              placeholder="Search title, city, location, country or ID"
+              className="w-full bg-transparent border border-border/40 py-3 pl-11 pr-10 text-sm text-foreground placeholder:text-muted-foreground/60 focus:outline-none focus:border-gold/50"
+            />
+            {search && <button type="button" onClick={() => setSearch("")} title="Clear search" className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground"><X size={15} /></button>}
+          </label>
+          <select value={statusFilter} onChange={(e) => setStatusFilter(e.target.value)} className="bg-background border border-border/40 px-4 py-3 text-xs uppercase tracking-luxury text-foreground focus:outline-none focus:border-gold/50">
+            <option value="">All statuses</option>
+            <option value="approved">Approved</option>
+            <option value="pending">Pending</option>
+            <option value="draft">Draft</option>
+            <option value="rejected">Rejected</option>
+          </select>
+          <label className="inline-flex items-center gap-2 border border-border/40 px-4 py-3 text-xs uppercase tracking-luxury text-muted-foreground">
+            <input type="checkbox" checked={featuredOnly} onChange={(e) => setFeaturedOnly(e.target.checked)} className="accent-[var(--gold)]" /> Featured only
+          </label>
+          <span className="text-xs text-muted-foreground">{rows.length} products</span>
+        </div>
       </div>
 
       <div className="border border-border/40 overflow-x-auto">
@@ -292,8 +333,9 @@ export default function ProductsPanel() {
                 <td className="p-4">
                   <div className="flex items-center gap-3">
                     {l.cover_image ? (
-                      <button onClick={() => openGallery(l.id, l.cover_image)} title="View images">
+                      <button onClick={() => openGallery(l.id, l.cover_image)} title="View all product images" className="group relative">
                         <img src={l.cover_image} alt={l.title} loading="lazy" className="h-14 w-20 object-cover border border-border/40 hover:border-gold/60 transition-colors" />
+                        <span className="absolute inset-0 grid place-items-center bg-background/55 opacity-0 group-hover:opacity-100 transition-opacity text-gold"><ImageIcon size={17} /></span>
                       </button>
                     ) : (
                       <div className="h-14 w-20 border border-border/40 grid place-items-center text-[9px] text-muted-foreground">No image</div>
@@ -313,7 +355,7 @@ export default function ProductsPanel() {
                       type="checkbox"
                       checked={!!l.featured}
                       disabled={pending === `f-${l.id}`}
-                      onChange={(e) => runFlag(`f-${l.id}`, () => featFn({ data: { id: l.id, featured: e.target.checked } }), e.target.checked ? "Marked as featured" : "Removed from featured")}
+                      onChange={(e) => runFlag(`f-${l.id}`, l.id, "featured", e.target.checked, () => featFn({ data: { id: l.id, featured: e.target.checked } }), e.target.checked ? "Marked as featured" : "Removed from featured")}
                       className="accent-[var(--gold)]"
                     /> Featured
                   </label>
@@ -322,13 +364,14 @@ export default function ProductsPanel() {
                       type="checkbox"
                       checked={!!l.verified}
                       disabled={pending === `v-${l.id}`}
-                      onChange={(e) => runFlag(`v-${l.id}`, () => verFn({ data: { id: l.id, verified: e.target.checked } }), e.target.checked ? "Marked verified" : "Verification removed")}
+                      onChange={(e) => runFlag(`v-${l.id}`, l.id, "verified", e.target.checked, () => verFn({ data: { id: l.id, verified: e.target.checked } }), e.target.checked ? "Marked verified" : "Verification removed")}
                       className="accent-[var(--gold)]"
                     /> Verified
                   </label>
                 </td>
                 <td className="p-4 space-x-3 text-xs tracking-luxury uppercase whitespace-nowrap">
-                  <button onClick={() => openEdit(l.id)} className="text-gold hover:underline">Edit</button>
+                   <button onClick={() => openGallery(l.id, l.cover_image)} className="text-foreground hover:text-gold">Images</button>
+                   <button onClick={() => openEdit(l.id)} className="text-gold hover:underline">Edit</button>
                   {l.status !== "approved" && <button onClick={() => statusFn({ data: { id: l.id, status: "approved" } }).then(() => { toast.success("Approved"); refresh(); })} className="text-emerald-400 hover:underline">Approve</button>}
                   <button onClick={() => { if (confirm("Delete this product?")) delFn({ data: { id: l.id } }).then(() => { toast.success("Deleted"); refresh(); }); }} className="text-muted-foreground hover:text-destructive hover:underline">Remove</button>
                 </td>
@@ -344,7 +387,7 @@ export default function ProductsPanel() {
           categories={(catsQ.data ?? []) as Row[]}
           onClose={() => setEditing(null)}
           onView={(images, index) => setViewer({ images, index })}
-          onSaved={() => { setEditing(null); refresh(); }}
+          onSaved={async () => { await refresh(); setEditing(null); }}
         />
       )}
       {viewer && <Fullscreen images={viewer.images} index={viewer.index} onIndex={(i) => setViewer({ images: viewer.images, index: i })} onClose={() => setViewer(null)} />}
@@ -358,7 +401,7 @@ function ProductForm({
   value: FormState;
   categories: Row[];
   onClose: () => void;
-  onSaved: () => void;
+  onSaved: () => Promise<void>;
   onView: (images: string[], index: number) => void;
 }) {
   const save = useServerFn(adminSaveListing);
@@ -393,8 +436,8 @@ function ProductForm({
           images,
         },
       });
-      toast.success("Saved.");
-      onSaved();
+      await onSaved();
+      toast.success("Product saved.");
     } catch (err: any) {
       toast.error(err?.message ?? "Save failed");
     } finally {
@@ -474,7 +517,7 @@ function L({ label, children }: { label: string; children: React.ReactNode }) {
 
 function Fullscreen({ images, index, onIndex, onClose }: { images: string[]; index: number; onIndex: (i: number) => void; onClose: () => void }) {
   const [zoom, setZoom] = useState(1);
-  const src = images[index]?.replace(/\/\d+x\d+x[a-z]+\.jpg$/i, "/1600x1000xcxm.jpg") ?? images[index];
+  const src = images[index];
   return (
     <div className="fixed inset-0 z-[60] bg-black/95 flex flex-col">
       <div className="flex items-center justify-between p-4 text-gold">
