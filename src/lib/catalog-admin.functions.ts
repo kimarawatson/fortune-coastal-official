@@ -122,7 +122,8 @@ export const adminExportCatalog = createServerFn({ method: "GET" })
   .middleware([requireAdminUnlocked])
   .inputValidator((d: unknown) => z.object({ category: z.string().nullish() }).parse(d ?? {}))
   .handler(async ({ data }) => {
-    const { supabaseAdmin } = await import("@/integrations/supabase/client.server");
+    const { getReadDb } = await import("@/lib/catalog-db.server");
+    const supabaseAdmin = await getReadDb();
     let q = supabaseAdmin.from("listings").select("*").order("category_slug").limit(5000);
     if (data.category) q = q.eq("category_slug", data.category);
     const { data: listings, error } = await q;
