@@ -10,6 +10,7 @@ import { BtcTicker } from "@/components/BtcTicker";
 import { Reveal } from "@/components/Reveal";
 import { MembershipForm } from "@/components/MembershipForm";
 import { getHomeIntel } from "@/lib/home.functions";
+import { listPublicListings } from "@/lib/listings.functions";
 import { fallbackMarkers, fallbackMetrics, fallbackSales } from "@/data/home-content";
 import { assets, formatUsd } from "@/data/mock";
 import hero from "@/assets/hero-villa.jpg";
@@ -53,11 +54,48 @@ const developments = [
 
 function Home() {
   const re = assets.filter((a) => a.category === "Real Estate");
-  const featured = [
+  const staticFeatured: FeaturedItem[] = [
     re.find((a) => a.id === "manhattan-skyline-penthouse")!,
     re.find((a) => a.id === "palm-beach-oceanfront-villa")!,
     re.find((a) => a.id === "aspen-mountain-chalet")!,
-  ];
+  ].map((a) => ({
+    id: a.id,
+    title: a.title,
+    location: a.location,
+    category: a.category,
+    priceUsd: a.priceUsd,
+    priceBtc: a.priceBtc,
+    btcAccepted: a.btcAccepted,
+    verified: a.verified,
+    image: a.id === "manhattan-skyline-penthouse" ? penthouse : a.id === "aspen-mountain-chalet" ? aspen : villa,
+  }));
+
+  const featuredQ = useQuery({
+    queryKey: ["home-featured"],
+    staleTime: 5 * 60_000,
+    queryFn: async () => {
+      const picked = await listPublicListings({ data: { featuredOnly: true } });
+      let rows: any[] = (picked ?? []).filter((l: any) => l.cover_image);
+      if (rows.length < 3) {
+        const estates = await listPublicListings({ data: { category: "real-estate" } });
+        const pool = (estates ?? []).filter((l: any) => l.cover_image && !rows.some((r) => r.id === l.id));
+        rows = [...rows, ...pool.sort(() => Math.random() - 0.5)];
+      }
+      return rows.slice(0, 3).map((l: any): FeaturedItem => ({
+        id: l.id,
+        title: l.title,
+        location: l.location ?? l.city ?? "United States",
+        category: String(l.category_slug ?? "real-estate").replace(/-/g, " "),
+        priceUsd: Number(l.price_usd ?? 0),
+        priceBtc: Number(l.price_btc ?? 0),
+        btcAccepted: !!l.accepts_btc,
+        verified: !!l.verified,
+        image: l.cover_image as string,
+      }));
+    },
+  });
+
+  const featured = featuredQ.data?.length === 3 ? featuredQ.data : staticFeatured;
 
   const intel = useQuery({
     queryKey: ["home-intel"],
@@ -384,8 +422,13 @@ function Home() {
   );
 }
 
-function FeaturedCard({ asset, large = false }: { asset: typeof assets[number]; large?: boolean }) {
-  const img = asset.id === "manhattan-skyline-penthouse" ? penthouse : asset.id === "aspen-mountain-chalet" ? aspen : villa;
+type FeaturedItem = {
+  id: string; title: string; location: string; category: string;
+  priceUsd: number; priceBtc: number; btcAccepted: boolean; verified: boolean; image: string;
+};
+
+function FeaturedCard({ asset, large = false }: { asset: FeaturedItem; large?: boolean }) {
+  const img = asset.image;
   return (
     <Link
       to="/asset/$id"

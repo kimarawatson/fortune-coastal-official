@@ -51,6 +51,11 @@ function AssetDetail() {
     };
   }, [viewerOpen]);
 
+  useEffect(() => {
+    const el = thumbsRef.current?.querySelector<HTMLElement>(`[data-thumb="${active}"]`);
+    el?.scrollIntoView({ behavior: "smooth", inline: "center", block: "nearest" });
+  }, [active]);
+
   if (q.isLoading) return <SiteLayout><div className="py-32 text-center text-muted-foreground">Loading…</div></SiteLayout>;
   if (!q.data) return (
     <SiteLayout>
@@ -70,8 +75,6 @@ function AssetDetail() {
   const index = Math.min(active, Math.max(0, gallery.length - 1));
   const step = (dir: number) =>
     setActive((i) => (gallery.length ? (i + dir + gallery.length) % gallery.length : 0));
-  const scrollThumbs = (dir: number) =>
-    thumbsRef.current?.scrollBy({ left: dir * 320, behavior: "smooth" });
 
   const usd = Number(a.price_usd);
   const btcAmount = a.price_btc != null ? Number(a.price_btc) : btc ? usd / btc.price : null;
@@ -142,14 +145,11 @@ function AssetDetail() {
 
           {gallery.length > 1 && (
             <div className="relative mt-4">
-              <button type="button" onClick={() => scrollThumbs(-1)} aria-label="Scroll thumbnails left"
-                className="absolute -left-2 top-1/2 -translate-y-1/2 z-10 inline-flex h-9 w-9 items-center justify-center rounded-full border border-gold/40 bg-background/80 backdrop-blur-md text-gold hover:bg-gold hover:text-primary-foreground transition-colors">
-                <ChevronLeft size={16} />
-              </button>
-              <div ref={thumbsRef} className="flex gap-3 overflow-x-auto scroll-smooth px-8 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+              <div ref={thumbsRef} className="flex gap-3 overflow-x-auto scroll-smooth [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
                 {gallery.map((g, i) => (
                   <button
                     key={g}
+                    data-thumb={i}
                     onClick={() => setActive(i)}
                     className={`shrink-0 w-36 aspect-[4/3] overflow-hidden border transition-colors ${i === index ? "border-gold" : "border-border/40 hover:border-gold/50"}`}
                   >
