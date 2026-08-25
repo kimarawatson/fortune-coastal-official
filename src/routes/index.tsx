@@ -72,13 +72,14 @@ function Home() {
 
   const featuredQ = useQuery({
     queryKey: ["home-featured"],
-    staleTime: 5 * 60_000,
+    staleTime: 60_000,
     queryFn: async () => {
+      const real = (r: any) => r?.cover_image && !String(r.id).startsWith("demo-");
       const picked = await listPublicListings({ data: { featuredOnly: true } });
-      let rows: any[] = (picked ?? []).filter((l: any) => l.cover_image);
+      let rows: any[] = (picked ?? []).filter(real);
       if (rows.length < 3) {
         const estates = await listPublicListings({ data: { category: "real-estate" } });
-        const pool = (estates ?? []).filter((l: any) => l.cover_image && !rows.some((r) => r.id === l.id));
+        const pool = (estates ?? []).filter((l: any) => real(l) && !rows.some((r) => r.id === l.id));
         rows = [...rows, ...pool.sort(() => Math.random() - 0.5)];
       }
       return rows.slice(0, 3).map((l: any): FeaturedItem => ({
