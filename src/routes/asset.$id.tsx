@@ -101,21 +101,66 @@ function AssetDetail() {
 
       <section className="mx-auto max-w-[1700px] px-4 lg:px-8 mt-8 grid lg:grid-cols-[1.4fr_1fr] gap-12">
         <div>
-          <div className="relative aspect-[4/3] overflow-hidden bg-charcoal">
-            {gallery[active] && <img src={gallery[active]} alt={a.title} className="h-full w-full object-cover" />}
+          <div className="group relative aspect-[4/3] overflow-hidden bg-charcoal">
+            {gallery[index] && (
+              <img
+                src={hiRes(gallery[index])}
+                onError={(e) => { (e.currentTarget as HTMLImageElement).src = gallery[index]; }}
+                alt={a.title}
+                className="h-full w-full object-cover cursor-zoom-in"
+                onClick={() => { setZoom(1); setViewerOpen(true); }}
+              />
+            )}
             {a.verified && (
               <div className="absolute top-4 left-4 flex items-center gap-1.5 bg-background/70 backdrop-blur-md border border-gold/30 px-2.5 py-1 text-[10px] tracking-luxury uppercase text-gold">
                 <BadgeCheck size={12} /> Verified
               </div>
             )}
-          </div>
-          {gallery.length > 1 && (
-            <div className="mt-4 grid grid-cols-4 gap-3">
-              {gallery.map((g, i) => (
-                <button key={i} onClick={() => setActive(i)} className={`aspect-[4/3] overflow-hidden border ${i === active ? "border-gold" : "border-border/40"}`}>
-                  <img src={g} alt="" className="h-full w-full object-cover" />
+            <button
+              type="button"
+              onClick={() => { setZoom(1); setViewerOpen(true); }}
+              className="absolute top-4 right-4 inline-flex items-center gap-2 rounded-full border border-gold/40 bg-background/70 backdrop-blur-md px-4 py-2 text-[10px] tracking-luxury uppercase text-gold hover:bg-gold hover:text-primary-foreground transition-colors"
+            >
+              <Maximize2 size={13} /> Full Screen
+            </button>
+            {gallery.length > 1 && (
+              <>
+                <button type="button" onClick={() => step(-1)} aria-label="Previous image"
+                  className="absolute left-3 top-1/2 -translate-y-1/2 inline-flex h-11 w-11 items-center justify-center rounded-full border border-gold/40 bg-background/60 backdrop-blur-md text-gold hover:bg-gold hover:text-primary-foreground transition-colors">
+                  <ChevronLeft size={18} />
                 </button>
-              ))}
+                <button type="button" onClick={() => step(1)} aria-label="Next image"
+                  className="absolute right-3 top-1/2 -translate-y-1/2 inline-flex h-11 w-11 items-center justify-center rounded-full border border-gold/40 bg-background/60 backdrop-blur-md text-gold hover:bg-gold hover:text-primary-foreground transition-colors">
+                  <ChevronRight size={18} />
+                </button>
+                <div className="absolute bottom-4 right-4 rounded-full bg-background/70 backdrop-blur-md border border-gold/25 px-3 py-1 text-[10px] tracking-luxury text-gold tabular-nums">
+                  {index + 1} / {gallery.length}
+                </div>
+              </>
+            )}
+          </div>
+
+          {gallery.length > 1 && (
+            <div className="relative mt-4">
+              <button type="button" onClick={() => scrollThumbs(-1)} aria-label="Scroll thumbnails left"
+                className="absolute -left-2 top-1/2 -translate-y-1/2 z-10 inline-flex h-9 w-9 items-center justify-center rounded-full border border-gold/40 bg-background/80 backdrop-blur-md text-gold hover:bg-gold hover:text-primary-foreground transition-colors">
+                <ChevronLeft size={16} />
+              </button>
+              <div ref={thumbsRef} className="flex gap-3 overflow-x-auto scroll-smooth px-8 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+                {gallery.map((g, i) => (
+                  <button
+                    key={g}
+                    onClick={() => setActive(i)}
+                    className={`shrink-0 w-36 aspect-[4/3] overflow-hidden border transition-colors ${i === index ? "border-gold" : "border-border/40 hover:border-gold/50"}`}
+                  >
+                    <img src={g} alt="" loading="lazy" className="h-full w-full object-cover" />
+                  </button>
+                ))}
+              </div>
+              <button type="button" onClick={() => scrollThumbs(1)} aria-label="Scroll thumbnails right"
+                className="absolute -right-2 top-1/2 -translate-y-1/2 z-10 inline-flex h-9 w-9 items-center justify-center rounded-full border border-gold/40 bg-background/80 backdrop-blur-md text-gold hover:bg-gold hover:text-primary-foreground transition-colors">
+                <ChevronRight size={16} />
+              </button>
             </div>
           )}
         </div>
