@@ -2,6 +2,25 @@ import { createServerFn } from "@tanstack/react-start";
 import { z } from "zod";
 import { requireAdminUnlocked } from "@/lib/admin-gate.functions";
 
+type SavedListing = {
+  id: string;
+  category_slug: string;
+  title: string;
+  subtitle: string | null;
+  location: string | null;
+  country: string | null;
+  city: string | null;
+  price_usd: number;
+  accepts_btc: boolean;
+  cover_image: string | null;
+  status: "draft" | "pending" | "approved" | "rejected";
+  featured: boolean;
+  verified: boolean;
+  external_id: string | null;
+  source_url: string | null;
+  created_at: string;
+};
+
 export const adminListCatalog = createServerFn({ method: "GET" })
   .middleware([requireAdminUnlocked])
   .inputValidator((d: unknown) => z.object({ category: z.string().nullish() }).parse(d ?? {}))
@@ -66,17 +85,17 @@ export const adminSaveListing = createServerFn({ method: "POST" })
       updated_at: new Date().toISOString(),
     };
     let listingId = id ?? null;
-    let savedListing: Record<string, unknown> | null = null;
+    let savedListing: SavedListing | null = null;
     if (listingId) {
-      const { data: updated, error } = await db.from("listings").update(payload).eq("id", listingId).select("*").maybeSingle();
+      const { data: updated, error } = await db.from("listings").update(payload).eq("id", listingId).select("id, category_slug, title, subtitle, location, country, city, price_usd, accepts_btc, cover_image, status, featured, verified, external_id, source_url, created_at").maybeSingle();
       if (error) throw new Error(error.message);
       if (!updated) throw new Error("Product was not found or could not be updated.");
-      savedListing = updated as Record<string, unknown>;
+      savedListing = updated as SavedListing;
     } else {
-      const { data: row, error } = await db.from("listings").insert(payload).select("*").single();
+      const { data: row, error } = await db.from("listings").insert(payload).select("id, category_slug, title, subtitle, location, country, city, price_usd, accepts_btc, cover_image, status, featured, verified, external_id, source_url, created_at").single();
       if (error) throw new Error(error.message);
       listingId = row.id as string;
-      savedListing = row as Record<string, unknown>;
+      savedListing = row as SavedListing;
     }
     if (!listingId) throw new Error("Product ID was not returned after saving.");
     const { error: deleteImagesError } = await db.from("listing_images").delete().eq("listing_id", listingId);

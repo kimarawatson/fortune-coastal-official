@@ -446,8 +446,9 @@ function ProductForm({
           images,
         },
       });
-      if (!result.listing) throw new Error("The database did not return the saved product.");
-      await onSaved(result.listing as Row);
+      const savedResult = result as { listing: Row | null };
+      if (!savedResult.listing) throw new Error("The database did not return the saved product.");
+      await onSaved(savedResult.listing);
       toast.success("Product saved.");
     } catch (err: any) {
       toast.error(err?.message ?? "Save failed");
