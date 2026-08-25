@@ -169,7 +169,8 @@ export const adminImportListings = createServerFn({ method: "POST" })
     images: z.array(z.string().max(1000)).max(60).default([]),
   })).max(1000) }).parse(d))
   .handler(async ({ data }) => {
-    const { supabaseAdmin } = await import("@/integrations/supabase/client.server");
+    const { getWriteDb } = await import("@/lib/catalog-db.server");
+    const supabaseAdmin = await getWriteDb();
     let created = 0;
     let updated = 0;
     for (const row of data.rows) {
