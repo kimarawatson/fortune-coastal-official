@@ -94,6 +94,7 @@ export default function ProductsPanel() {
   const [search, setSearch] = useState("");
   const [editing, setEditing] = useState<FormState | null>(null);
   const [viewer, setViewer] = useState<{ images: string[]; index: number } | null>(null);
+  const [pending, setPending] = useState<string | null>(null);
 
   const listFn = useServerFn(adminListCatalog);
   const detailFn = useServerFn(adminGetListingDetail);
